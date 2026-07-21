@@ -46,8 +46,8 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                \App\Filament\Pages\HomePage::class,
-                \App\Filament\Pages\BackupManager::class,
+                \App\Filament\Pages\EmailInbox::class,
+                \App\Filament\Pages\SearchAnalytics::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -56,6 +56,9 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\AttendanceToday::class,
                 \App\Filament\Widgets\PendingApprovals::class,
                 \App\Filament\Widgets\RevenueChart::class,
+                \App\Filament\Widgets\MeetingStatsOverview::class,
+                \App\Filament\Widgets\BpmnStatsOverview::class,
+                \App\Filament\Widgets\BlockchainStatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -90,7 +93,8 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Logistik')->collapsed(true),
                 NavigationGroup::make('E-Commerce')->collapsed(true),
                 NavigationGroup::make('Laporan')->collapsed(true),
-                NavigationGroup::make('Integrasi')->collapsed(true),
+                NavigationGroup::make('Hub Integrasi')->collapsed(true),
+                NavigationGroup::make('ESG')->collapsed(false),
                 NavigationGroup::make('Core')->collapsed(true),
                 NavigationGroup::make('Manufaktur')->collapsed(true),
                 NavigationGroup::make('🏗️ Konstruksi')->collapsed(true),
@@ -99,7 +103,13 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Platform')->collapsed(false),
                 NavigationGroup::make('Kepatuhan')->collapsed(true),
                 NavigationGroup::make('Sistem')->collapsed(true),
+                NavigationGroup::make('Field Service')->collapsed(false),
                 NavigationGroup::make('Kepatuhan')->collapsed(false),
+                NavigationGroup::make('Gamifikasi')->collapsed(false),
+                NavigationGroup::make('IoT & Sensor')->collapsed(false),
+                NavigationGroup::make('Treasury')->collapsed(false),
+                NavigationGroup::make('BPMN')->collapsed(true),
+                NavigationGroup::make('Blockchain')->collapsed(true),
             ])
             ->renderHook(
                 'panels::topbar.start',

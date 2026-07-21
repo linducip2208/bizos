@@ -128,6 +128,61 @@ class Company extends Model
         return $this->hasMany(TenantUsageLog::class);
     }
 
+    public function wasteRecords()
+    {
+        return $this->hasMany(WasteRecord::class);
+    }
+
+    public function waterUsages()
+    {
+        return $this->hasMany(WaterUsage::class);
+    }
+
+    public function esgTargets()
+    {
+        return $this->hasMany(EsgTarget::class);
+    }
+
+    public function esgReports()
+    {
+        return $this->hasMany(EsgReport::class);
+    }
+
+    public function carbonCalculations()
+    {
+        return $this->hasMany(CarbonCalculation::class);
+    }
+
+    public function integrationConnectors()
+    {
+        return $this->hasMany(IntegrationConnector::class);
+    }
+
+    public function virtualAccounts()
+    {
+        return $this->hasMany(VirtualAccount::class);
+    }
+
+    public function djpTokens()
+    {
+        return $this->hasMany(DjpToken::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function energyMeters()
+    {
+        return $this->hasMany(EnergyMeter::class);
+    }
+
+    public function energyReadings()
+    {
+        return $this->hasMany(EnergyReading::class);
+    }
+
     public function isSuspended(): bool
     {
         return $this->is_suspended;

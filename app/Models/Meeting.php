@@ -17,11 +17,26 @@ class Meeting extends Model
         'meeting_link',
         'meeting_type',
         'status',
+        'provider',
+        'provider_meeting_id',
+        'meeting_url',
+        'passcode',
+        'dial_in',
+        'recording_path',
+        'transcript_text',
+        'ai_summary',
+        'is_recurring',
+        'recurrence_frequency',
+        'recurrence_until',
+        'linked_project_id',
     ];
 
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'ai_summary' => 'json',
+        'is_recurring' => 'boolean',
+        'recurrence_until' => 'datetime',
     ];
 
     public function company()
@@ -52,5 +67,25 @@ class Meeting extends Model
     public function actionItems()
     {
         return $this->hasMany(MeetingActionItem::class);
+    }
+
+    public function recordings()
+    {
+        return $this->hasMany(MeetingRecording::class);
+    }
+
+    public function transcripts()
+    {
+        return $this->hasMany(MeetingTranscript::class);
+    }
+
+    public function attendanceLogs()
+    {
+        return $this->hasMany(MeetingAttendanceLog::class);
+    }
+
+    public function linkedProject()
+    {
+        return $this->belongsTo(Project::class, 'linked_project_id');
     }
 }

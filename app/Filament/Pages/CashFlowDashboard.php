@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Services\CashFlowForecastService;
+use App\Services\TreasuryService;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
@@ -36,6 +37,8 @@ class CashFlowDashboard extends Page implements HasForms
     public ?array $forecast = [];
     public ?array $alerts = [];
     public ?array $scenario = [];
+    public ?array $liquidityRatios = [];
+    public ?array $treasuryDailyPositions = [];
     public int $horizonDays = 30;
     public int $companyId;
     public string $mode = 'baseline';
@@ -84,6 +87,10 @@ class CashFlowDashboard extends Page implements HasForms
         $this->alerts = $service->getCashShortageAlerts($this->companyId);
         $this->scenario = [];
         $this->mode = 'baseline';
+
+        $treasury = app(TreasuryService::class);
+        $this->liquidityRatios = $treasury->getLiquidityRatios($this->companyId);
+        $this->treasuryDailyPositions = $treasury->getDailyCashPosition($this->companyId, $this->horizonDays);
     }
 
     public function runScenario(): void

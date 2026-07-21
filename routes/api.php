@@ -116,6 +116,17 @@ Route::prefix('v1/mobile')->group(function () {
         Route::get('/ptt/channels', [App\Http\Controllers\Api\VoiceNoteController::class, 'getUserChannels']);
         Route::post('/ptt/channel/{id}/broadcast', [App\Http\Controllers\Api\VoiceNoteController::class, 'broadcastChannel'])->whereNumber('id');
         Route::delete('/ptt/channel/{id}/leave', [App\Http\Controllers\Api\VoiceNoteController::class, 'leaveChannel'])->whereNumber('id');
+
+        // Field Service
+        Route::prefix('mobile/fieldservice')->group(function () {
+            Route::post('/checkin', [\App\Http\Controllers\Api\FieldServiceController::class, 'checkin']);
+            Route::post('/checkout', [\App\Http\Controllers\Api\FieldServiceController::class, 'checkout']);
+            Route::post('/complete', [\App\Http\Controllers\Api\FieldServiceController::class, 'complete']);
+            Route::get('/my-orders', [\App\Http\Controllers\Api\FieldServiceController::class, 'myOrders']);
+            Route::get('/van-stock', [\App\Http\Controllers\Api\FieldServiceController::class, 'vanStock']);
+            Route::post('/use-part', [\App\Http\Controllers\Api\FieldServiceController::class, 'usePart']);
+            Route::post('/update-location', [\App\Http\Controllers\Api\FieldServiceController::class, 'updateLocation']);
+        });
     });
 });
 
