@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Filament\Resources\Workflows;
+
+use App\Filament\Resources\Workflows\Pages\CreateWorkflow;
+use App\Filament\Resources\Workflows\Pages\EditWorkflow;
+use App\Filament\Resources\Workflows\Pages\ListWorkflows;
+use App\Filament\Resources\Workflows\Schemas\WorkflowForm;
+use App\Filament\Resources\Workflows\Tables\WorkflowsTable;
+use App\Models\Workflow;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+use App\Filament\Concerns\HasPermissionAccess;
+
+class WorkflowResource extends Resource
+{
+    use HasPermissionAccess;
+
+    protected static ?string $model = Workflow::class;
+
+    protected static ?string $label = 'Otomasi Workflow';
+
+    protected static ?string $pluralLabel = 'Otomasi Workflow';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
+
+    protected static ?int $navigationSort = 3;
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'Integrasi';
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return WorkflowForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return WorkflowsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListWorkflows::route('/'),
+            'create' => CreateWorkflow::route('/create'),
+            'edit' => EditWorkflow::route('/{record}/edit'),
+        ];
+    }
+}

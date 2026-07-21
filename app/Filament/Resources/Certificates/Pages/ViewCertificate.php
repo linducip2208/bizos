@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Certificates\Pages;
 
 use App\Filament\Resources\Certificates\CertificateResource;
 use Filament\Actions\Action;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Schema;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,10 +14,10 @@ class ViewCertificate extends ViewRecord
 {
     protected static string $resource = CertificateResource::class;
 
-    public function infolist(Infolist $infolist): Infolist
+    public function infolist(Schema $schema): Schema
     {
-        return $infolist
-            ->schema([
+        return $schema
+            ->components([
                 Section::make('Informasi Sertifikat')
                     ->schema([
                         TextEntry::make('certificate_number')
@@ -52,12 +52,12 @@ class ViewCertificate extends ViewRecord
                 ->color('success')
                 ->action(function () {
                     $record = $this->getRecord();
-                    if ($record->pdf_path && Storage::exists($record->pdf_path)) {
-                        return Storage::download($record->pdf_path);
+                    if ($record->pdf_path && Storage::disk('public')->exists($record->pdf_path)) {
+                        return Storage::disk('public')->download($record->pdf_path);
                     }
                     return null;
                 })
-                ->visible(fn () => $this->getRecord()->pdf_path && Storage::exists($this->getRecord()->pdf_path)),
+                ->visible(fn () => $this->getRecord()->pdf_path && Storage::disk('public')->exists($this->getRecord()->pdf_path)),
 
             Action::make('verify')
                 ->label('Verifikasi')

@@ -67,10 +67,35 @@ class CompanyForm
                         Toggle::make('is_active')
                             ->label('Aktif')
                             ->default(true),
+                        Toggle::make('is_suspended')
+                            ->label('Suspend')
+                            ->default(false)
+                            ->visible(fn ($record) => $record !== null)
+                            ->helperText('Suspend akan menonaktifkan semua akses pengguna'),
                         DatePicker::make('subscription_start')
                             ->label('Tanggal Mulai Langganan'),
                         DatePicker::make('subscription_end')
                             ->label('Tanggal Akhir Langganan'),
+                    ]),
+                Section::make('Pengaturan Suspensi')
+                    ->columns(1)
+                    ->visible(fn ($record) => $record && $record->is_suspended)
+                    ->schema([
+                        Textarea::make('suspended_reason')
+                            ->label('Alasan Suspend')
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('suspended_at')
+                            ->label('Tanggal Suspend')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->formatStateUsing(fn ($state) => $state ? \Carbon\Carbon::parse($state)->format('d M Y H:i') : '-'),
+                        TextInput::make('data_retention_days')
+                            ->label('Retensi Data (hari)')
+                            ->numeric()
+                            ->minValue(1)
+                            ->maxValue(365)
+                            ->helperText('Data akan dihapus setelah masa retensi berakhir sejak tanggal suspend'),
                     ]),
             ]);
     }

@@ -18,3 +18,7 @@ Schedule::command('billing:check-expired')->daily();
 Schedule::command('helpdesk:check-sla')->everyFifteenMinutes();
 Schedule::command('marketing:send-scheduled')->everyMinute();
 Schedule::command('bizos:scan-anomalies --send-wa')->dailyAt('07:00');
+Schedule::command('webhook:retry-failed')->everyFiveMinutes();
+Schedule::command('tenant:enforce-limits')->dailyAt('03:00');
+Schedule::command('tenant:record-usage')->hourly();
+Schedule::command('wa:sync-templates')->hourly();

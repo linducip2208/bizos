@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class BackupDatabase extends Command
 {
-    protected $signature = 'db:backup {--keep=7 : Number of days to keep backups}';
+    protected $signature = 'db:backup {--keep=7 : Number of days to keep backups} {--type=auto : Backup type (auto/manual)}';
 
     protected $description = 'Backup database via mysqldump and store to storage/app/backups/.';
 
@@ -42,14 +42,16 @@ class BackupDatabase extends Command
 
         if ($exitCode !== 0) {
             $this->error('Backup failed with exit code: ' . $exitCode);
-            $this->logBackup($filename, 'failed', implode("\n", $output));
+        $type = $this->option('type') ?? 'auto';
+            $this->logBackup($filename, 'failed', implode("\n", $output), null, $type);
 
             return self::FAILURE;
         }
 
         $size = filesize($filepath);
+        $type = $this->option('type') ?? 'auto';
         $this->info("Backup created: {$filename} (" . $this->formatBytes($size) . ")");
-        $this->logBackup($filename, 'success', null, $size);
+        $this->logBackup($filename, 'success', null, $size, $type);
 
         $this->cleanupOldBackups($backupDir, $keepDays);
 
@@ -75,11 +77,12 @@ class BackupDatabase extends Command
         }
     }
 
-    protected function logBackup(string $filename, string $status, ?string $error = null, ?int $size = null): void
+    protected function logBackup(string $filename, string $status, ?string $error = null, ?int $size = null, string $type = 'auto'): void
     {
         DB::table('backup_logs')->insert([
             'filename' => $filename,
             'file_size' => $size,
+            'type' => $type,
             'status' => $status,
             'error_message' => $error,
             'created_at' => now(),

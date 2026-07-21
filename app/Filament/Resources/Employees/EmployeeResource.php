@@ -9,6 +9,8 @@ use App\Filament\Resources\Employees\RelationManagers\AttendancesRelationManager
 use App\Filament\Resources\Employees\RelationManagers\EmployeeDocumentsRelationManager;
 use App\Filament\Resources\Employees\RelationManagers\FamilyMembersRelationManager;
 use App\Filament\Resources\Employees\RelationManagers\LeavesRelationManager;
+use App\Filament\Resources\Employees\RelationManagers\OffboardingProgressRelationManager;
+use App\Filament\Resources\Employees\RelationManagers\OnboardingProgressRelationManager;
 use App\Filament\Resources\Employees\RelationManagers\OvertimesRelationManager;
 use App\Filament\Resources\Employees\RelationManagers\ReimbursementsRelationManager;
 use App\Filament\Resources\Employees\Schemas\EmployeeForm;
@@ -63,6 +65,8 @@ class EmployeeResource extends Resource
             ReimbursementsRelationManager::class,
             FamilyMembersRelationManager::class,
             EmployeeDocumentsRelationManager::class,
+            OnboardingProgressRelationManager::class,
+            OffboardingProgressRelationManager::class,
         ];
     }
 

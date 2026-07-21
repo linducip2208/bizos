@@ -47,6 +47,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 \App\Filament\Pages\HomePage::class,
+                \App\Filament\Pages\BackupManager::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -91,6 +92,10 @@ class AdminPanelProvider extends PanelProvider
             ->renderHook(
                 'panels::topbar.start',
                 fn (): string => view('filament.hooks.app-switcher-trigger')->render(),
+            )
+            ->renderHook(
+                'panels::user-menu.before',
+                fn (): string => view('filament.hooks.sandbox-badge')->render(),
             )
             ->renderHook(
                 'panels::body.end',

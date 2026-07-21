@@ -22,16 +22,19 @@ class WaTemplatesTable
                     ->label('Kategori')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'marketing' => 'info',
-                        'transaksional' => 'success',
-                        'layanan' => 'warning',
-                        'pengingat' => 'gray',
+                        'marketing', 'MARKETING' => 'info',
+                        'transaksional', 'TRANSACTIONAL' => 'success',
+                        'layanan', 'SERVICE' => 'warning',
+                        'pengingat', 'REMINDER' => 'gray',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn (string $state): string => match (strtolower($state)) {
                         'marketing' => 'Marketing',
+                        'transactional' => 'Transaksional',
                         'transaksional' => 'Transaksional',
+                        'service' => 'Layanan',
                         'layanan' => 'Layanan',
+                        'reminder' => 'Pengingat',
                         'pengingat' => 'Pengingat',
                         default => $state,
                     }),
@@ -43,21 +46,31 @@ class WaTemplatesTable
                         'en' => 'Inggris',
                         default => $state,
                     }),
-                TextColumn::make('status')
-                    ->label('Status')
+                TextColumn::make('meta_template_status')
+                    ->label('Status Meta')
+                    ->badge()
+                    ->color(fn ($record) => $record->status_color)
+                    ->formatStateUsing(fn ($record) => $record->status_label)
+                    ->placeholder('Draft'),
+                TextColumn::make('meta_template_id')
+                    ->label('Meta ID')
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('quality_score')
+                    ->label('Skor')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'draft' => 'gray',
-                        'aktif' => 'success',
-                        'ditolak' => 'danger',
+                        'GREEN' => 'success',
+                        'YELLOW' => 'warning',
+                        'RED' => 'danger',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'draft' => 'Draft',
-                        'aktif' => 'Aktif',
-                        'ditolak' => 'Ditolak',
-                        default => $state,
-                    }),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('meta_rejection_reason')
+                    ->label('Alasan Ditolak')
+                    ->limit(40)
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->color('danger'),
             ])
             ->recordActions([
                 EditAction::make(),

@@ -20,7 +20,8 @@ class WaTemplateForm
                         TextInput::make('name')
                             ->label('Nama Template')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->helperText('Nama unik template WA (gunakan underscore, huruf kecil)'),
                         Select::make('category')
                             ->label('Kategori')
                             ->required()
@@ -39,20 +40,40 @@ class WaTemplateForm
                                 'id' => 'Indonesia',
                                 'en' => 'Inggris',
                             ]),
-                        Select::make('status')
-                            ->label('Status')
-                            ->required()
-                            ->default('draft')
-                            ->options([
-                                'draft' => 'Draft',
-                                'aktif' => 'Aktif',
-                                'ditolak' => 'Ditolak',
-                            ]),
                         Textarea::make('content')
                             ->label('Isi Pesan')
                             ->rows(6)
                             ->required()
-                            ->helperText('Gunakan {nama} untuk placeholder nama penerima'),
+                            ->helperText('Gunakan {{1}} untuk parameter. Contoh: Halo {{1}}, pesanan Anda #{{2}} sedang diproses.'),
+                    ]),
+                Section::make('Status Meta')
+                    ->columns(1)
+                    ->visible(fn ($record) => $record && !empty($record->meta_template_id))
+                    ->schema([
+                        TextInput::make('meta_template_id')
+                            ->label('Meta Template ID')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Select::make('meta_template_status')
+                            ->label('Status di Meta')
+                            ->options([
+                                'draft' => 'Draft',
+                                'pending_approval' => 'Menunggu Persetujuan',
+                                'approved' => 'Disetujui',
+                                'rejected' => 'Ditolak',
+                                'paused' => 'Dinonaktifkan',
+                            ])
+                            ->disabled()
+                            ->dehydrated(false),
+                        Textarea::make('meta_rejection_reason')
+                            ->label('Alasan Penolakan Meta')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->visible(fn ($record) => $record && $record->meta_template_status === 'rejected'),
+                        TextInput::make('quality_score')
+                            ->label('Skor Kualitas')
+                            ->disabled()
+                            ->dehydrated(false),
                     ]),
             ]);
     }

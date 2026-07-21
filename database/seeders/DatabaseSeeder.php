@@ -100,6 +100,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BpjsConfigSeeder::class);
         $this->call(DemoDataSeeder::class);
         $this->call(SystemReportSeeder::class);
+        $this->call(DocumentTemplateSeeder::class);
 
         $this->command->info('');
         $this->command->info('=== Seeding Complete! ===');

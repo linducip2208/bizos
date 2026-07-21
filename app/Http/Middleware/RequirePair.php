@@ -54,6 +54,9 @@ class RequirePair
         if (str_starts_with($path, '/best-')) return true;
         if (str_starts_with($path, '/compare/')) return true;
 
+        // Webhook endpoints — harus selalu bisa diakses
+        if (str_starts_with($path, '/webhooks/')) return true;
+
         // Localhost dev bypass
         if (config('license.dev_bypass') && app()->environment('local')) {
             $host = $request->getHost();

@@ -6,6 +6,7 @@ use App\Filament\Concerns\HasBulkActions;
 use App\Filament\Concerns\HasExcelExport;
 use App\Filament\Resources\LoyaltyTransactions\LoyaltyTransactionResource;
 use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
 
 class ListLoyaltyTransactions extends ListRecords
 {

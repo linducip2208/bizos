@@ -8,6 +8,7 @@ class FeedbackCycle extends Model
 {
     protected $fillable = [
         'company_id',
+        'performance_review_id',
         'name',
         'start_date',
         'end_date',
@@ -28,6 +29,11 @@ class FeedbackCycle extends Model
     public function feedbackQuestions()
     {
         return $this->hasMany(FeedbackQuestion::class, 'cycle_id');
+    }
+
+    public function performanceReview()
+    {
+        return $this->belongsTo(PerformanceReview::class);
     }
 
     public function feedbackReviewers()

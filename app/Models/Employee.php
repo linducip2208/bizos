@@ -197,4 +197,24 @@ class Employee extends Model
     {
         return $this->hasMany(Attendance::class, 'approved_by');
     }
+
+    public function onboardingProgress()
+    {
+        return $this->hasMany(OnboardingProgress::class);
+    }
+
+    public function offboardingProgress()
+    {
+        return $this->hasMany(OffboardingProgress::class);
+    }
+
+    public function performanceReviews()
+    {
+        return $this->hasMany(PerformanceReview::class);
+    }
+
+    public function reviewedPerformance()
+    {
+        return $this->hasMany(PerformanceReview::class, 'reviewer_id');
+    }
 }
