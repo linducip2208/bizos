@@ -23,7 +23,7 @@ class InterviewResultResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? HR & Payroll';
+        return '👥 Human Capital';
     }
 
     protected static ?string $label = 'Hasil Interview';

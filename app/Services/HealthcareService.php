@@ -6,11 +6,13 @@ use App\Models\Appointment;
 use App\Models\BpjsClaim;
 use App\Models\Doctor;
 use App\Models\Employee;
+use App\Models\Insurance;
 use App\Models\LabOrder;
 use App\Models\LabResult;
 use App\Models\MedicalRecord;
 use App\Models\Patient;
 use App\Models\Prescription;
+use App\Models\Radiology;
 use App\Models\StockBalance;
 use App\Models\StockMovement;
 use Carbon\Carbon;
@@ -305,6 +307,101 @@ class HealthcareService
         }
 
         return false;
+    }
+
+    public function orderRadiology(array $data): Radiology
+    {
+        $data['status'] = 'ordered';
+        return Radiology::create($data);
+    }
+
+    public function completeRadiology(Radiology $radiology, string $findings, string $impression): void
+    {
+        $radiology->update([
+            'findings' => $findings,
+            'impression' => $impression,
+            'status' => 'completed',
+            'completed_at' => now(),
+        ]);
+    }
+
+    public function getPatientRadiologyHistory(Patient $patient): Collection
+    {
+        return Radiology::where('patient_id', $patient->id)
+            ->with(['doctor'])
+            ->orderBy('order_date', 'desc')
+            ->get();
+    }
+
+    public function getRadiologyByType(string $radiologyType, ?string $date = null): Collection
+    {
+        $query = Radiology::where('radiology_type', $radiologyType)
+            ->with(['patient', 'doctor']);
+
+        if ($date) {
+            $query->whereDate('order_date', $date);
+        }
+
+        return $query->orderBy('order_date', 'desc')->get();
+    }
+
+    public function addInsurance(array $data): Insurance
+    {
+        return Insurance::create($data);
+    }
+
+    public function verifyInsuranceCoverage(Insurance $insurance, float $amount): array
+    {
+        $isExpired = $insurance->expiry_date && $insurance->expiry_date->isPast();
+        $isInactive = !$insurance->is_active;
+        $exceedsLimit = $insurance->coverage_limit > 0 && $amount > $insurance->coverage_limit;
+
+        return [
+            'insurance_id' => $insurance->id,
+            'provider' => $insurance->insurance_provider,
+            'policy_number' => $insurance->policy_number,
+            'is_active' => !$isExpired && !$isInactive,
+            'coverage_limit' => $insurance->coverage_limit,
+            'amount_claimed' => $amount,
+            'is_covered' => !$isExpired && !$isInactive && !$exceedsLimit,
+            'expiry_date' => $insurance->expiry_date?->format('Y-m-d'),
+            'issues' => array_filter([
+                $isExpired ? 'Polis sudah kadaluarsa' : null,
+                $isInactive ? 'Polis tidak aktif' : null,
+                $exceedsLimit ? 'Biaya melebihi batas pertanggungan' : null,
+            ]),
+        ];
+    }
+
+    public function getPatientInsurances(Patient $patient): Collection
+    {
+        return Insurance::where('patient_id', $patient->id)
+            ->orderBy('expiry_date', 'desc')
+            ->get();
+    }
+
+    public function getExpiringInsurances(int $daysThreshold = 30): Collection
+    {
+        $threshold = now()->addDays($daysThreshold);
+
+        return Insurance::where('is_active', true)
+            ->whereNotNull('expiry_date')
+            ->where('expiry_date', '<=', $threshold)
+            ->where('expiry_date', '>=', now())
+            ->with(['patient'])
+            ->orderBy('expiry_date')
+            ->get();
+    }
+
+    public function estimateRadiologyCost(string $radiologyType, ?string $bodyPart = null): float
+    {
+        return match ($radiologyType) {
+            'xray' => $bodyPart === 'thorax' ? 150000 : 120000,
+            'ct' => $bodyPart === 'head' ? 2500000 : 2000000,
+            'mri' => 3500000,
+            'ultrasound' => $bodyPart === 'abdomen' ? 350000 : 300000,
+            default => 250000,
+        };
     }
 
     public function sendAppointmentReminder(Appointment $appointment): void

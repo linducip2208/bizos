@@ -183,6 +183,121 @@ class Company extends Model
         return $this->hasMany(EnergyReading::class);
     }
 
+    public function aiAgents()
+    {
+        return $this->hasMany(AiAgent::class);
+    }
+
+    public function aiWorkflows()
+    {
+        return $this->hasMany(AiWorkflow::class);
+    }
+
+    public function aiPrompts()
+    {
+        return $this->hasMany(AiPrompt::class);
+    }
+
+    public function speechTranscripts()
+    {
+        return $this->hasMany(SpeechTranscript::class);
+    }
+
+    public function visionAnalyses()
+    {
+        return $this->hasMany(VisionAnalysis::class);
+    }
+
+    public function kpiDefinitions()
+    {
+        return $this->hasMany(KpiDefinition::class);
+    }
+
+    public function oauthProviders()
+    {
+        return $this->hasMany(OauthProvider::class);
+    }
+
+    public function ssoConfigs()
+    {
+        return $this->hasMany(SsoConfig::class);
+    }
+
+    public function shippingProviders()
+    {
+        return $this->hasMany(ShippingProvider::class);
+    }
+
+    public function erpConnectors()
+    {
+        return $this->hasMany(ErpConnector::class);
+    }
+
+    public function plugins()
+    {
+        return $this->hasMany(Plugin::class);
+    }
+
+    public function featureFlags()
+    {
+        return $this->hasMany(FeatureFlag::class);
+    }
+
+    public function jobMonitors()
+    {
+        return $this->hasMany(JobMonitor::class);
+    }
+
+    public function queueMonitors()
+    {
+        return $this->hasMany(QueueMonitor::class);
+    }
+
+    public function systemHealthChecks()
+    {
+        return $this->hasMany(SystemHealthCheck::class);
+    }
+
+    public function systemLogs()
+    {
+        return $this->hasMany(SystemLog::class);
+    }
+
+    public function businessUnits()
+    {
+        return $this->hasMany(BusinessUnit::class);
+    }
+
+    public function divisions()
+    {
+        return $this->hasMany(Division::class);
+    }
+
+    public function employmentTypes()
+    {
+        return $this->hasMany(EmploymentType::class);
+    }
+
+    public function holidays()
+    {
+        return $this->hasMany(Holiday::class);
+    }
+
+    public function workCalendars()
+    {
+        return $this->hasMany(WorkCalendar::class);
+    }
+
+    public function licenses()
+    {
+        return $this->hasMany(License::class);
+    }
+
+    public function activityTimeline()
+    {
+        return $this->hasMany(ActivityTimeline::class);
+    }
+
     public function isSuspended(): bool
     {
         return $this->is_suspended;

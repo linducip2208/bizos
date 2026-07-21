@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BackupLog extends Model
 {
-    protected $fillable = ['filename', 'file_size', 'type', 'status', 'error_message'];
+    protected $fillable = ['filename', 'file_size', 'type', 'status', 'error_message', 'storage_path', 'schedule_name'];
 
     public $timestamps = false;
 

@@ -19,6 +19,8 @@ class Coa extends Model
         'opening_balance',
         'balance_type',
         'is_active',
+        'cost_center_id',
+        'profit_center_id',
     ];
 
     protected $casts = [
@@ -60,5 +62,25 @@ class Coa extends Model
     public function budgetItems()
     {
         return $this->hasMany(BudgetItem::class);
+    }
+
+    public function costCenter()
+    {
+        return $this->belongsTo(CostCenter::class);
+    }
+
+    public function profitCenter()
+    {
+        return $this->belongsTo(ProfitCenter::class);
+    }
+
+    public function openingBalances()
+    {
+        return $this->hasMany(OpeningBalance::class);
+    }
+
+    public function trialBalances()
+    {
+        return $this->hasMany(TrialBalance::class);
     }
 }

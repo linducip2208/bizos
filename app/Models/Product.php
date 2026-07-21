@@ -12,6 +12,8 @@ class Product extends Model
     protected $fillable = [
         'company_id',
         'category_id',
+        'brand_id',
+        'unit_id',
         'code',
         'name',
         'description',
@@ -25,6 +27,8 @@ class Product extends Model
         'is_taxable',
         'tax_rate',
         'is_active',
+        'has_batch',
+        'has_serial',
         'is_medicine',
         'active_ingredient',
         'dosage_form',
@@ -44,6 +48,8 @@ class Product extends Model
         'is_taxable' => 'boolean',
         'tax_rate' => 'decimal:2',
         'is_active' => 'boolean',
+        'has_batch' => 'boolean',
+        'has_serial' => 'boolean',
         'is_medicine' => 'boolean',
         'requires_prescription' => 'boolean',
     ];
@@ -71,5 +77,40 @@ class Product extends Model
     public function prescriptionItems()
     {
         return $this->hasMany(PrescriptionItem::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function productUnit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function barcodes()
+    {
+        return $this->hasMany(ProductBarcode::class, 'product_id');
+    }
+
+    public function batches()
+    {
+        return $this->hasMany(Batch::class);
+    }
+
+    public function serialNumbers()
+    {
+        return $this->hasMany(SerialNumber::class);
+    }
+
+    public function bom()
+    {
+        return $this->hasOne(BillOfMaterial::class, 'product_id')->where('is_active', true);
+    }
+
+    public function productionOrders()
+    {
+        return $this->hasMany(ProductionOrder::class);
     }
 }

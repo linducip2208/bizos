@@ -13,6 +13,9 @@ use App\Models\InvoiceItem;
 use App\Models\Employee;
 use App\Models\ServiceChecklist;
 use App\Models\ServiceChecklistItem;
+use App\Models\ServiceReport;
+use App\Models\ServiceSchedule;
+use App\Models\ServiceScheduleItem;
 use App\Models\WorkOrderChecklistItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -479,6 +482,184 @@ class FieldServiceService
         }
 
         return $optimized;
+    }
+
+    public function createServiceReport(array $data): ServiceReport
+    {
+        return ServiceReport::create($data);
+    }
+
+    public function submitReportWithSignature(WorkOrder $wo, int $technicianId, array $data): ServiceReport
+    {
+        $report = ServiceReport::create([
+            'work_order_id' => $wo->id,
+            'technician_id' => $technicianId,
+            'report_date' => now()->toDateString(),
+            'findings' => $data['findings'] ?? null,
+            'work_performed' => $data['work_performed'] ?? null,
+            'recommendations' => $data['recommendations'] ?? null,
+            'customer_signature' => $data['customer_signature'] ?? null,
+            'customer_feedback' => $data['customer_feedback'] ?? null,
+        ]);
+
+        return $report;
+    }
+
+    public function getServiceReports(int $technicianId, ?string $dateFrom = null, ?string $dateTo = null): Collection
+    {
+        $query = ServiceReport::where('technician_id', $technicianId)
+            ->with(['workOrder.client', 'workOrder.equipment']);
+
+        if ($dateFrom) {
+            $query->whereDate('report_date', '>=', $dateFrom);
+        }
+
+        if ($dateTo) {
+            $query->whereDate('report_date', '<=', $dateTo);
+        }
+
+        return $query->orderBy('report_date', 'desc')->get();
+    }
+
+    public function getWorkOrderReport(WorkOrder $wo): ?ServiceReport
+    {
+        return ServiceReport::where('work_order_id', $wo->id)
+            ->with(['technician'])
+            ->latest()
+            ->first();
+    }
+
+    public function createTechnicianSchedule(int $companyId, int $technicianId, string $date, string $shift = 'morning'): ServiceSchedule
+    {
+        return ServiceSchedule::firstOrCreate(
+            [
+                'technician_id' => $technicianId,
+                'date' => $date,
+                'shift' => $shift,
+            ],
+            [
+                'company_id' => $companyId,
+                'technician_id' => $technicianId,
+                'date' => $date,
+                'shift' => $shift,
+            ]
+        );
+    }
+
+    public function assignWorkOrderToSchedule(int $scheduleId, int $workOrderId, ?string $startTime = null, ?string $endTime = null): ServiceScheduleItem
+    {
+        return ServiceScheduleItem::create([
+            'service_schedule_id' => $scheduleId,
+            'work_order_id' => $workOrderId,
+            'start_time' => $startTime,
+            'end_time' => $endTime,
+            'status' => 'scheduled',
+        ]);
+    }
+
+    public function updateScheduleItemStatus(ServiceScheduleItem $item, string $status): void
+    {
+        $item->update(['status' => $status]);
+    }
+
+    public function getDailyTechnicianSchedule(int $technicianId, string $date): array
+    {
+        $schedule = ServiceSchedule::where('technician_id', $technicianId)
+            ->where('date', $date)
+            ->with(['items.workOrder.client', 'items.workOrder.equipment'])
+            ->get();
+
+        $allItems = [];
+        foreach ($schedule as $sched) {
+            foreach ($sched->items as $item) {
+                $wo = $item->workOrder;
+                $allItems[] = [
+                    'schedule_item_id' => $item->id,
+                    'shift' => $sched->shift,
+                    'start_time' => $item->start_time,
+                    'end_time' => $item->end_time,
+                    'status' => $item->status,
+                    'wo_number' => $wo?->wo_number,
+                    'client' => $wo?->client?->name,
+                    'service_type' => $wo?->service_type,
+                    'priority' => $wo?->priority,
+                    'description' => $wo?->description,
+                ];
+            }
+        }
+
+        usort($allItems, fn($a, $b) => ($a['shift'] <=> $b['shift']) ?: ($a['start_time'] <=> $b['start_time']));
+
+        return [
+            'technician_id' => $technicianId,
+            'date' => $date,
+            'total_items' => count($allItems),
+            'items' => $allItems,
+        ];
+    }
+
+    public function getWeeklySchedule(int $technicianId, ?string $weekStart = null): array
+    {
+        $start = $weekStart ? Carbon::parse($weekStart)->startOfWeek() : now()->startOfWeek();
+        $end = $start->copy()->endOfWeek();
+
+        $schedules = ServiceSchedule::where('technician_id', $technicianId)
+            ->whereBetween('date', [$start->toDateString(), $end->toDateString()])
+            ->withCount('items')
+            ->orderBy('date')
+            ->get()
+            ->groupBy('date');
+
+        $result = [];
+        for ($d = $start->copy(); $d->lte($end); $d->addDay()) {
+            $dateStr = $d->toDateString();
+            $daySchedules = $schedules->get($dateStr, collect());
+            $result[] = [
+                'date' => $dateStr,
+                'day_name' => $d->translatedFormat('l'),
+                'morning' => $daySchedules->where('shift', 'morning')->first()?->items_count ?? 0,
+                'afternoon' => $daySchedules->where('shift', 'afternoon')->first()?->items_count ?? 0,
+                'evening' => $daySchedules->where('shift', 'evening')->first()?->items_count ?? 0,
+                'total' => $daySchedules->sum('items_count'),
+            ];
+        }
+
+        return [
+            'technician_id' => $technicianId,
+            'week_start' => $start->toDateString(),
+            'week_end' => $end->toDateString(),
+            'days' => $result,
+        ];
+    }
+
+    public function bulkScheduleTechnicians(array $assignments): array
+    {
+        $results = ['created' => 0, 'errors' => 0];
+
+        foreach ($assignments as $assignment) {
+            try {
+                $schedule = $this->createTechnicianSchedule(
+                    $assignment['company_id'],
+                    $assignment['technician_id'],
+                    $assignment['date'],
+                    $assignment['shift'] ?? 'morning'
+                );
+
+                $this->assignWorkOrderToSchedule(
+                    $schedule->id,
+                    $assignment['work_order_id'],
+                    $assignment['start_time'] ?? null,
+                    $assignment['end_time'] ?? null
+                );
+
+                $results['created']++;
+            } catch (\Throwable $e) {
+                Log::error("Gagal schedule technician: {$e->getMessage()}");
+                $results['errors']++;
+            }
+        }
+
+        return $results;
     }
 
     public function attachChecklistToWorkOrder(WorkOrder $wo, int $companyId): void

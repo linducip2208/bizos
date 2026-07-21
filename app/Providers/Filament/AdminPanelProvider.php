@@ -52,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\SalesStatsOverview::class,
                 \App\Filament\Widgets\RecentEmployees::class,
                 \App\Filament\Widgets\AttendanceToday::class,
                 \App\Filament\Widgets\PendingApprovals::class,
@@ -74,8 +75,10 @@ class AdminPanelProvider extends PanelProvider
                 \App\Http\Middleware\ThemeMiddleware::class,
             ])
             ->navigationGroups([
-                NavigationGroup::make('🏢 Master Data')->collapsed(false),
-                NavigationGroup::make('👥 HR & Payroll')->collapsed(false),
+                NavigationGroup::make('🏠 Dashboard')->collapsed(false),
+                NavigationGroup::make('🏢 Organisasi')->collapsed(false),
+                NavigationGroup::make('👥 Human Capital')->collapsed(false),
+                NavigationGroup::make('💰 Payroll')->collapsed(false),
                 NavigationGroup::make('📊 Finance & Accounting')->collapsed(false),
                 NavigationGroup::make('📦 Procurement')->collapsed(true),
                 NavigationGroup::make('📈 Sales & CRM')->collapsed(true),
@@ -88,6 +91,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('🏭 Industri')->collapsed(true),
                 NavigationGroup::make('🛡️ Compliance')->collapsed(true),
                 NavigationGroup::make('🧩 Extras')->collapsed(true),
+                NavigationGroup::make('⚙ Administrasi')->collapsed(true),
                 NavigationGroup::make('⚙️ Sistem')->collapsed(true),
             ])
             ->renderHook(

@@ -4,12 +4,17 @@ namespace App\Services;
 
 use App\Models\ColdChainLog;
 use App\Models\DeliveryOrder;
+use App\Models\DeliveryRoute;
 use App\Models\DeliveryStop;
+use App\Models\Driver;
 use App\Models\Employee;
 use App\Models\FleetGpsTrack;
 use App\Models\Invoice;
 use App\Models\PosTransaction;
 use App\Models\Product;
+use App\Models\RouteStop;
+use App\Models\Shipment;
+use App\Models\ShipmentItem;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -66,170 +71,6 @@ class LogisticsService
 
             return $delivery;
         });
-    }
-
-    public function optimizeRoute(array $deliveryOrderIds): array
-    {
-        $orders = DeliveryOrder::with('stops')
-            ->whereIn('id', $deliveryOrderIds)
-            ->where('status', 'pending')
-            ->get();
-
-        if ($orders->isEmpty()) {
-            return [];
-        }
-
-        $allStops = [];
-        foreach ($orders as $order) {
-            $stops = $order->stops;
-            if ($stops->isEmpty()) {
-                $allStops[] = [
-                    'delivery_order_id' => $order->id,
-                    'stop_id' => null,
-                    'address' => $order->delivery_address,
-                    'contact_name' => $order->customer_name,
-                    'gps_lat' => $order->gps_lat,
-                    'gps_lng' => $order->gps_lng,
-                ];
-            } else {
-                foreach ($stops as $stop) {
-                    $allStops[] = [
-                        'delivery_order_id' => $order->id,
-                        'stop_id' => $stop->id,
-                        'address' => $stop->address,
-                        'contact_name' => $stop->contact_name,
-                        'gps_lat' => $stop->gps_lat,
-                        'gps_lng' => $stop->gps_lng,
-                    ];
-                }
-            }
-        }
-
-        $validStops = array_filter($allStops, fn($s) => $s['gps_lat'] && $s['gps_lng']);
-        $noCoordsStops = array_filter($allStops, fn($s) => !$s['gps_lat'] || !$s['gps_lng']);
-
-        $optimized = $this->nearestNeighbor($validStops);
-
-        $result = [];
-        $sequence = 1;
-
-        foreach ($optimized as $stop) {
-            $delivery = $orders->firstWhere('id', $stop['delivery_order_id']);
-            $travelTime = 0;
-            $eta = null;
-
-            if ($sequence > 1 && isset($result[$sequence - 2])) {
-                $prev = $result[$sequence - 2];
-                $distance = $this->haversineDistance(
-                    $prev['gps_lat'],
-                    $prev['gps_lng'],
-                    $stop['gps_lat'],
-                    $stop['gps_lng']
-                );
-                $travelTime = (int) ceil($distance / 30 * 60);
-                $eta = Carbon::parse($prev['estimated_arrival'] ?? now())->addMinutes($travelTime);
-            } else {
-                $eta = now()->addMinutes(15);
-            }
-
-            $result[] = [
-                'sequence' => $sequence,
-                'delivery_order_id' => $stop['delivery_order_id'],
-                'do_number' => $delivery?->do_number,
-                'stop_id' => $stop['stop_id'],
-                'address' => $stop['address'],
-                'contact_name' => $stop['contact_name'],
-                'gps_lat' => $stop['gps_lat'],
-                'gps_lng' => $stop['gps_lng'],
-                'estimated_arrival' => $eta?->format('Y-m-d H:i:s'),
-                'estimated_travel_minutes' => $travelTime,
-            ];
-
-            $sequence++;
-        }
-
-        foreach ($noCoordsStops as $stop) {
-            $delivery = $orders->firstWhere('id', $stop['delivery_order_id']);
-            $result[] = [
-                'sequence' => $sequence,
-                'delivery_order_id' => $stop['delivery_order_id'],
-                'do_number' => $delivery?->do_number,
-                'stop_id' => $stop['stop_id'],
-                'address' => $stop['address'],
-                'contact_name' => $stop['contact_name'],
-                'gps_lat' => null,
-                'gps_lng' => null,
-                'estimated_arrival' => now()->addMinutes($sequence * 30)->format('Y-m-d H:i:s'),
-                'estimated_travel_minutes' => 30,
-            ];
-            $sequence++;
-        }
-
-        foreach ($result as $item) {
-            if ($item['stop_id']) {
-                DeliveryStop::where('id', $item['stop_id'])->update([
-                    'stop_sequence' => $item['sequence'],
-                    'planned_arrival' => $item['estimated_arrival'],
-                ]);
-            } elseif (!$item['stop_id']) {
-                $order = $orders->firstWhere('id', $item['delivery_order_id']);
-                if ($order) {
-                    $order->stops()->updateOrCreate(
-                        ['delivery_order_id' => $order->id],
-                        [
-                            'stop_sequence' => $item['sequence'],
-                            'address' => $item['address'],
-                            'contact_name' => $item['contact_name'],
-                            'planned_arrival' => $item['estimated_arrival'],
-                        ]
-                    );
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    private function nearestNeighbor(array $stops): array
-    {
-        if (empty($stops)) {
-            return [];
-        }
-
-        $unvisited = $stops;
-        $ordered = [];
-        $startIndex = 0;
-
-        $ordered[] = $unvisited[$startIndex];
-        unset($unvisited[$startIndex]);
-        $unvisited = array_values($unvisited);
-
-        $current = $ordered[0];
-
-        while (!empty($unvisited)) {
-            $nearestIdx = 0;
-            $nearestDist = PHP_FLOAT_MAX;
-
-            foreach ($unvisited as $idx => $stop) {
-                $dist = $this->haversineDistance(
-                    $current['gps_lat'],
-                    $current['gps_lng'],
-                    $stop['gps_lat'],
-                    $stop['gps_lng']
-                );
-                if ($dist < $nearestDist) {
-                    $nearestDist = $dist;
-                    $nearestIdx = $idx;
-                }
-            }
-
-            $current = $unvisited[$nearestIdx];
-            $ordered[] = $current;
-            unset($unvisited[$nearestIdx]);
-            $unvisited = array_values($unvisited);
-        }
-
-        return $ordered;
     }
 
     private function haversineDistance(float $lat1, float $lng1, float $lat2, float $lng2): float
@@ -412,5 +253,193 @@ class LogisticsService
             'avg_rating' => 4.5,
             'distance_km' => round($totalDistance, 1),
         ];
+    }
+
+    public function optimizeRoute(array $deliveryOrders, int $driverId, int $vehicleId): DeliveryRoute
+    {
+        return DB::transaction(function () use ($deliveryOrders, $driverId, $vehicleId) {
+            $orders = DeliveryOrder::with('stops')
+                ->whereIn('id', $deliveryOrders)
+                ->where('status', 'pending')
+                ->get();
+
+            if ($orders->isEmpty()) {
+                throw new \Exception('Tidak ada delivery order yang valid untuk di-routing.');
+            }
+
+            $driver = Driver::findOrFail($driverId);
+            $vehicle = Vehicle::findOrFail($vehicleId);
+
+            $route = DeliveryRoute::create([
+                'company_id' => $driver->company_id,
+                'name' => 'Rute ' . $driver->name . ' - ' . now()->format('d M Y'),
+                'driver_id' => $driverId,
+                'vehicle_id' => $vehicleId,
+                'date' => now()->toDateString(),
+                'status' => 'planned',
+            ]);
+
+            $allStops = [];
+            foreach ($orders as $order) {
+                $stops = $order->stops;
+                if ($stops->isEmpty()) {
+                    $allStops[] = [
+                        'delivery_order_id' => $order->id,
+                        'address' => $order->delivery_address,
+                        'lat' => $order->gps_lat,
+                        'lng' => $order->gps_lng,
+                    ];
+                } else {
+                    foreach ($stops as $stop) {
+                        $allStops[] = [
+                            'delivery_order_id' => $order->id,
+                            'address' => $stop->address,
+                            'lat' => $stop->gps_lat,
+                            'lng' => $stop->gps_lng,
+                        ];
+                    }
+                }
+            }
+
+            $stopsWithCoords = array_filter($allStops, fn($s) => $s['lat'] && $s['lng']);
+            $stopsWithoutCoords = array_filter($allStops, fn($s) => !$s['lat'] || !$s['lng']);
+
+            $optimized = $stopsWithCoords;
+            if (count($stopsWithCoords) > 1) {
+                $optimized = $this->nearestNeighborRoute($stopsWithCoords);
+            }
+
+            $sequence = 1;
+            $current = null;
+            $totalDistance = 0;
+
+            foreach (array_merge(array_values($optimized), array_values($stopsWithoutCoords)) as $stop) {
+                $travelTime = 0;
+                $eta = null;
+
+                if ($current && $stop['lat'] && $stop['lng'] && $current['lat'] && $current['lng']) {
+                    $distance = $this->haversineDistance(
+                        $current['lat'], $current['lng'],
+                        $stop['lat'], $stop['lng']
+                    );
+                    $totalDistance += $distance;
+                    $travelTime = (int) ceil($distance / 30 * 60);
+                }
+
+                $eta = $sequence === 1
+                    ? now()->addMinutes(15)
+                    : Carbon::parse($eta ?? now())->addMinutes($travelTime);
+
+                RouteStop::create([
+                    'route_id' => $route->id,
+                    'delivery_order_id' => $stop['delivery_order_id'],
+                    'stop_sequence' => $sequence,
+                    'address' => $stop['address'],
+                    'lat' => $stop['lat'] ?? null,
+                    'lng' => $stop['lng'] ?? null,
+                    'planned_arrival' => $eta,
+                    'status' => 'pending',
+                ]);
+
+                $current = $stop;
+                $sequence++;
+            }
+
+            $route->update([
+                'total_distance' => round($totalDistance, 2),
+                'total_time' => $sequence > 1 ? ($sequence - 1) * 30 : 0,
+            ]);
+
+            $driver->update(['status' => 'on_delivery']);
+
+            return $route->fresh('stops');
+        });
+    }
+
+    public function calculateRouteDistance(DeliveryRoute $route): float
+    {
+        $stops = $route->stops()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        if ($stops->count() < 2) {
+            return 0;
+        }
+
+        $totalDistance = 0;
+        $previous = null;
+
+        foreach ($stops as $stop) {
+            if ($previous) {
+                $totalDistance += $this->haversineDistance(
+                    $previous->lat, $previous->lng,
+                    $stop->lat, $stop->lng
+                );
+            }
+            $previous = $stop;
+        }
+
+        return round($totalDistance, 2);
+    }
+
+    public function trackShipment(string $trackingNumber, string $carrier): array
+    {
+        $shipment = Shipment::where('tracking_number', $trackingNumber)->first();
+
+        $statusMap = [
+            'pending' => 'Menunggu pengiriman',
+            'in_transit' => 'Dalam perjalanan',
+            'delivered' => 'Terkirim',
+            'returned' => 'Dikembalikan',
+        ];
+
+        return [
+            'tracking_number' => $trackingNumber,
+            'carrier' => $carrier,
+            'status' => $shipment?->status ?? 'unknown',
+            'status_label' => $statusMap[$shipment?->status] ?? 'Tidak diketahui',
+            'shipment_date' => $shipment?->shipment_date?->format('Y-m-d'),
+            'estimated_delivery' => $shipment?->estimated_delivery?->format('Y-m-d'),
+            'actual_delivery' => $shipment?->actual_delivery?->format('Y-m-d'),
+            'items_count' => $shipment?->items?->count() ?? 0,
+        ];
+    }
+
+    private function nearestNeighborRoute(array $stops): array
+    {
+        if (empty($stops)) {
+            return [];
+        }
+
+        $unvisited = $stops;
+        $ordered = [];
+        $startIndex = 0;
+
+        $ordered[] = $unvisited[$startIndex];
+        unset($unvisited[$startIndex]);
+        $unvisited = array_values($unvisited);
+
+        $current = $ordered[0];
+
+        while (!empty($unvisited)) {
+            $nearestIdx = 0;
+            $nearestDist = PHP_FLOAT_MAX;
+
+            foreach ($unvisited as $idx => $stop) {
+                $dist = $this->haversineDistance(
+                    $current['lat'], $current['lng'],
+                    $stop['lat'], $stop['lng']
+                );
+                if ($dist < $nearestDist) {
+                    $nearestDist = $dist;
+                    $nearestIdx = $idx;
+                }
+            }
+
+            $current = $unvisited[$nearestIdx];
+            $ordered[] = $current;
+            unset($unvisited[$nearestIdx]);
+            $unvisited = array_values($unvisited);
+        }
+
+        return $ordered;
     }
 }

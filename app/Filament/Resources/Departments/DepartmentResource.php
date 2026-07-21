@@ -14,7 +14,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-
 use App\Filament\Concerns\HasPermissionAccess;
 class DepartmentResource extends Resource
 {
@@ -23,7 +22,7 @@ class DepartmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Master Data';
+        return '🏢 Organisasi';
     }
 
     protected static ?string $label = 'Departemen';

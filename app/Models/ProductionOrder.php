@@ -14,6 +14,8 @@ class ProductionOrder extends Model
         'product_id',
         'bom_id',
         'work_center_id',
+        'machine_id',
+        'production_plan_id',
         'planned_quantity',
         'produced_quantity',
         'rejected_quantity',
@@ -85,5 +87,20 @@ class ProductionOrder extends Model
     {
         return $this->hasMany(StockMovement::class, 'reference_id')
             ->where('reference_type', 'production_order');
+    }
+
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class);
+    }
+
+    public function productionPlan()
+    {
+        return $this->belongsTo(ProductionPlan::class, 'production_plan_id');
+    }
+
+    public function finishedGoods()
+    {
+        return $this->hasMany(FinishedGood::class);
     }
 }

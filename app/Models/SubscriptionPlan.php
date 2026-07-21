@@ -16,6 +16,8 @@ class SubscriptionPlan extends Model
         'max_companies',
         'max_branches',
         'features',
+        'module_access',
+        'white_label',
         'tier',
         'is_active',
         'sort_order',
@@ -28,6 +30,8 @@ class SubscriptionPlan extends Model
         'max_companies' => 'integer',
         'max_branches' => 'integer',
         'features' => 'json',
+        'module_access' => 'json',
+        'white_label' => 'boolean',
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
@@ -55,5 +59,15 @@ class SubscriptionPlan extends Model
     public function hasFeature(string $feature): bool
     {
         return in_array($feature, $this->getFeatureList());
+    }
+
+    public function getModuleAccess(): array
+    {
+        return $this->module_access ?? [];
+    }
+
+    public function hasModuleAccess(string $module): bool
+    {
+        return in_array($module, $this->getModuleAccess());
     }
 }

@@ -2,31 +2,52 @@
 
 namespace App\Providers;
 
+use App\Models\Asset;
+use App\Models\Budget;
+use App\Models\Department;
+use App\Models\Employee;
 use App\Models\Invoice;
 use App\Models\Leave;
 use App\Models\Overtime;
+use App\Models\Product;
+use App\Models\Project;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequisition;
 use App\Models\Reimbursement;
+use App\Models\Task;
 use App\Models\Ticket;
+use App\Services\ActivityService;
 use App\Services\NotificationTriggerService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+    protected array $activityLoggableModels = [
+        Employee::class,
+        Department::class,
+        Leave::class,
+        Reimbursement::class,
+        Overtime::class,
+        PurchaseRequisition::class,
+        PurchaseOrder::class,
+        Invoice::class,
+        Ticket::class,
+        Task::class,
+        Project::class,
+        Budget::class,
+        Asset::class,
+        Product::class,
+    ];
+
     public function register(): void
     {
         $this->app->singleton(\App\Services\LicenseClient::class);
         $this->app->singleton(NotificationTriggerService::class, fn () => new NotificationTriggerService());
+        $this->app->singleton(ActivityService::class, fn () => new ActivityService());
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Relation::morphMap([
@@ -36,9 +57,49 @@ class AppServiceProvider extends ServiceProvider
             'purchase_requisition' => \App\Models\PurchaseRequisition::class,
             'purchase_order' => \App\Models\PurchaseOrder::class,
             'budget' => \App\Models\Budget::class,
+            'employee' => \App\Models\Employee::class,
+            'department' => \App\Models\Department::class,
+            'invoice' => \App\Models\Invoice::class,
+            'ticket' => \App\Models\Ticket::class,
+            'task' => \App\Models\Task::class,
+            'project' => \App\Models\Project::class,
+            'asset' => \App\Models\Asset::class,
+            'product' => \App\Models\Product::class,
         ]);
 
+        $this->registerActivityLogging();
         $this->registerModelEventListeners();
+    }
+
+    protected function registerActivityLogging(): void
+    {
+        foreach ($this->activityLoggableModels as $modelClass) {
+            $modelClass::created(function (Model $model) {
+                ActivityService::log('created', $model);
+            });
+
+            $modelClass::updated(function (Model $model) {
+                $changes = $model->getChanges();
+                $unset = ['updated_at'];
+                foreach ($unset as $key) {
+                    unset($changes[$key]);
+                }
+                if (!empty($changes)) {
+                    if (isset($changes['status'])) {
+                        ActivityService::log('status_changed', $model, null, [
+                            'from' => $model->getOriginal('status') ?? null,
+                            'to' => $changes['status'],
+                        ]);
+                    } else {
+                        ActivityService::log('updated', $model);
+                    }
+                }
+            });
+
+            $modelClass::deleted(function (Model $model) {
+                ActivityService::log('deleted', $model);
+            });
+        }
     }
 
     protected function registerModelEventListeners(): void

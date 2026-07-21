@@ -19,7 +19,7 @@ class VehicleAssignmentResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = VehicleAssignment::class;
-    public static function getNavigationGroup(): string|null { return '?? Master Data'; }
+    public static function getNavigationGroup(): string|null { return '?? Organisasi'; }
     protected static ?string $label = 'Penugasan Kendaraan';
     protected static ?string $pluralLabel = 'Penugasan Kendaraan';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;

@@ -68,4 +68,9 @@ class Deal extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
+    public function salesOrder()
+    {
+        return $this->hasOne(SalesOrder::class);
+    }
 }

@@ -29,7 +29,7 @@ class PayrollItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? HR & Payroll';
+        return '💰 Payroll';
     }
 
     protected static ?string $label = 'Item Penggajian';

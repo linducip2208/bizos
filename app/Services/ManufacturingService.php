@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Models\BillOfMaterial;
 use App\Models\BomItem;
+use App\Models\Machine;
 use App\Models\ProductionOrder;
 use App\Models\ProductionOrderMaterial;
 use App\Models\ProductionOrderOperation;
+use App\Models\ProductionPlan;
 use App\Models\ProductionQcCheck;
 use App\Models\RoutingOperation;
 use App\Models\StockBalance;
@@ -712,5 +714,140 @@ class ManufacturingService
                 ? round(($actualHours / $capacityHours) * 100, 2)
                 : 0,
         ];
+    }
+
+    /**
+     * Buat Production Order dari Production Plan.
+     */
+    public function createProductionOrderFromPlan(ProductionPlan $plan): ProductionOrder
+    {
+        return DB::transaction(function () use ($plan) {
+            if (!in_array($plan->status, ['confirmed', 'in_progress'])) {
+                throw new \InvalidArgumentException(
+                    'Hanya production plan dengan status "confirmed" atau "in_progress" yang dapat dibuatkan PO.'
+                );
+            }
+
+            $bom = BillOfMaterial::where('product_id', $plan->product_id)
+                ->where('is_active', true)
+                ->first();
+
+            $poNumber = $this->generatePoNumber($plan->company_id);
+
+            $productionOrder = ProductionOrder::create([
+                'company_id' => $plan->company_id,
+                'po_number' => $poNumber,
+                'product_id' => $plan->product_id,
+                'bom_id' => $bom?->id,
+                'production_plan_id' => $plan->id,
+                'planned_quantity' => $plan->planned_quantity,
+                'planned_start' => $plan->start_date,
+                'planned_end' => $plan->end_date,
+                'status' => 'draft',
+                'notes' => $plan->notes ?? 'Auto-generated dari Production Plan #' . $plan->id,
+                'created_by' => auth()->user()?->employee_id,
+            ]);
+
+            $plan->update(['status' => 'in_progress']);
+
+            if ($bom) {
+                $this->generateProductionMaterials($productionOrder);
+            }
+
+            return $productionOrder;
+        });
+    }
+
+    /**
+     * Hitung kapasitas Work Center untuk periode tertentu.
+     */
+    public function calculateCapacity(WorkCenter $wc, string $period = 'weekly'): array
+    {
+        $dates = match ($period) {
+            'daily' => [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()],
+            'weekly' => [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()],
+            'monthly' => [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()],
+            default => [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()],
+        };
+
+        [$from, $to] = $dates;
+        $workDays = max(1, $from->diffInWeekdays($to));
+        $totalCapacityHours = $workDays * (float) $wc->capacity_per_day;
+
+        $machines = Machine::where('work_center_id', $wc->id)
+            ->where('status', 'active')
+            ->get();
+
+        $machineCapacityHours = $machines->sum(function ($machine) use ($workDays) {
+            return $workDays * 8 * ((float) $machine->capacity_per_hour / 100);
+        });
+
+        $plannedOps = ProductionOrderOperation::where('work_center_id', $wc->id)
+            ->whereBetween('planned_start', [$from, $to])
+            ->orWhereBetween('planned_end', [$from, $to])
+            ->get();
+
+        $plannedHours = $plannedOps->sum(function ($op) {
+            if ($op->planned_start && $op->planned_end) {
+                return Carbon::parse($op->planned_start)->diffInMinutes(Carbon::parse($op->planned_end)) / 60;
+            }
+            return 0;
+        });
+
+        $remainingCapacity = max(0, $totalCapacityHours - $plannedHours);
+
+        return [
+            'work_center' => $wc->name,
+            'period' => $period,
+            'from' => $from->format('Y-m-d'),
+            'to' => $to->format('Y-m-d'),
+            'work_days' => $workDays,
+            'total_capacity_hours' => round($totalCapacityHours, 1),
+            'machine_count' => $machines->count(),
+            'machine_capacity_hours' => round($machineCapacityHours, 1),
+            'planned_hours' => round($plannedHours, 1),
+            'remaining_capacity_hours' => round($remainingCapacity, 1),
+            'utilization_percent' => $totalCapacityHours > 0
+                ? round(($plannedHours / $totalCapacityHours) * 100, 2)
+                : 0,
+        ];
+    }
+
+    /**
+     * Hitung efisiensi mesin berdasarkan jam operasi aktual vs kapasitas.
+     */
+    public function getMachineEfficiency(Machine $machine): float
+    {
+        $orders = ProductionOrder::where('machine_id', $machine->id)
+            ->whereIn('status', ['completed', 'in_progress'])
+            ->whereNotNull('actual_start')
+            ->whereNotNull('actual_end')
+            ->get();
+
+        if ($orders->isEmpty()) {
+            return 0;
+        }
+
+        $totalPlannedHours = 0;
+        $totalActualHours = 0;
+
+        foreach ($orders as $order) {
+            if ($order->planned_start && $order->planned_end) {
+                $totalPlannedHours += Carbon::parse($order->planned_start)
+                    ->diffInMinutes(Carbon::parse($order->planned_end)) / 60;
+            }
+            if ($order->actual_start && $order->actual_end) {
+                $totalActualHours += Carbon::parse($order->actual_start)
+                    ->diffInMinutes(Carbon::parse($order->actual_end)) / 60;
+            }
+        }
+
+        if ($totalPlannedHours <= 0) {
+            return 0;
+        }
+
+        $efficiency = ($totalPlannedHours / max($totalActualHours, 1)) * 100;
+
+        return round(min(100, $efficiency), 2);
     }
 }

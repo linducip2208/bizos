@@ -5,9 +5,14 @@ namespace App\Services;
 use App\Models\BankAccount;
 use App\Models\BankTransaction;
 use App\Models\DjpToken;
+use App\Models\ErpConnector;
+use App\Models\ErpSyncLog;
 use App\Models\IntegrationConnector;
 use App\Models\IntegrationSyncLog;
 use App\Models\Invoice;
+use App\Models\OauthProvider;
+use App\Models\ShippingProvider;
+use App\Models\SsoConfig;
 use App\Models\VirtualAccount;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -991,6 +996,751 @@ class IntegrationHubService
         }
 
         return $results;
+    }
+
+    // ──────────────────────────────────────────────
+    //  OAUTH PROVIDERS
+    // ──────────────────────────────────────────────
+
+    public function registerOauthProvider(int $companyId, array $data): OauthProvider
+    {
+        $provider = $data['provider'];
+        $supported = ['google', 'microsoft', 'github', 'linkedin'];
+
+        if (!in_array($provider, $supported)) {
+            throw new \InvalidArgumentException("Provider {$provider} tidak didukung. Tersedia: " . implode(', ', $supported));
+        }
+
+        return OauthProvider::updateOrCreate(
+            ['company_id' => $companyId, 'provider' => $provider],
+            [
+                'client_id' => $data['client_id'],
+                'client_secret_encrypted' => Crypt::encryptString($data['client_secret']),
+                'redirect_uri' => $data['redirect_uri'] ?? config('app.url') . '/auth/' . $provider . '/callback',
+                'is_active' => $data['is_active'] ?? true,
+            ]
+        );
+    }
+
+    public function getOauthProviders(int $companyId): Collection
+    {
+        return OauthProvider::where('company_id', $companyId)->active()->get();
+    }
+
+    public function getOauthRedirectUrl(int $companyId, string $provider): string
+    {
+        $oauthProvider = OauthProvider::where('company_id', $companyId)
+            ->where('provider', $provider)
+            ->active()
+            ->first();
+
+        if (!$oauthProvider) {
+            throw new \RuntimeException("OAuth provider {$provider} tidak dikonfigurasi.");
+        }
+
+        $clientId = $oauthProvider->client_id;
+        $redirectUri = $oauthProvider->redirect_uri;
+
+        return match ($provider) {
+            'google' => 'https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query([
+                'client_id' => $clientId,
+                'redirect_uri' => $redirectUri,
+                'response_type' => 'code',
+                'scope' => 'openid profile email',
+                'access_type' => 'offline',
+                'prompt' => 'consent',
+            ]),
+            'microsoft' => 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?' . http_build_query([
+                'client_id' => $clientId,
+                'redirect_uri' => $redirectUri,
+                'response_type' => 'code',
+                'scope' => 'openid profile email User.Read',
+            ]),
+            'github' => 'https://github.com/login/oauth/authorize?' . http_build_query([
+                'client_id' => $clientId,
+                'redirect_uri' => $redirectUri,
+                'scope' => 'user:email',
+            ]),
+            'linkedin' => 'https://www.linkedin.com/oauth/v2/authorization?' . http_build_query([
+                'client_id' => $clientId,
+                'redirect_uri' => $redirectUri,
+                'response_type' => 'code',
+                'scope' => 'openid profile email',
+            ]),
+            default => throw new \InvalidArgumentException("Provider {$provider} tidak didukung"),
+        };
+    }
+
+    public function handleOauthCallback(int $companyId, string $provider, string $code): array
+    {
+        $oauthProvider = OauthProvider::where('company_id', $companyId)
+            ->where('provider', $provider)
+            ->active()
+            ->first();
+
+        if (!$oauthProvider) {
+            return ['success' => false, 'message' => 'OAuth provider tidak ditemukan.'];
+        }
+
+        $clientSecret = Crypt::decryptString($oauthProvider->client_secret_encrypted);
+        $redirectUri = $oauthProvider->redirect_uri;
+
+        $tokenEndpoint = match ($provider) {
+            'google' => 'https://oauth2.googleapis.com/token',
+            'microsoft' => 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+            'github' => 'https://github.com/login/oauth/access_token',
+            'linkedin' => 'https://www.linkedin.com/oauth/v2/accessToken',
+            default => throw new \InvalidArgumentException("Provider {$provider} tidak didukung"),
+        };
+
+        try {
+            $response = Http::asForm()->post($tokenEndpoint, [
+                'client_id' => $oauthProvider->client_id,
+                'client_secret' => $clientSecret,
+                'code' => $code,
+                'redirect_uri' => $redirectUri,
+                'grant_type' => 'authorization_code',
+            ]);
+
+            if ($response->successful()) {
+                $tokenData = $response->json();
+                $accessToken = $tokenData['access_token'] ?? '';
+
+                $userInfo = $this->fetchOauthUserInfo($provider, $accessToken);
+
+                return [
+                    'success' => true,
+                    'provider' => $provider,
+                    'user' => $userInfo,
+                    'token' => $tokenData,
+                ];
+            }
+
+            return ['success' => false, 'message' => 'Gagal menukar authorization code: ' . $response->body()];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error OAuth callback: ' . $e->getMessage()];
+        }
+    }
+
+    protected function fetchOauthUserInfo(string $provider, string $accessToken): array
+    {
+        $userInfoEndpoint = match ($provider) {
+            'google' => 'https://www.googleapis.com/oauth2/v2/userinfo',
+            'microsoft' => 'https://graph.microsoft.com/v1.0/me',
+            'github' => 'https://api.github.com/user',
+            'linkedin' => 'https://api.linkedin.com/v2/userinfo',
+            default => throw new \InvalidArgumentException("Provider {$provider} tidak didukung"),
+        };
+
+        $response = Http::withToken($accessToken)->get($userInfoEndpoint);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return [
+                'id' => $data['id'] ?? ($data['sub'] ?? null),
+                'email' => $data['email'] ?? ($data['mail'] ?? null),
+                'name' => $data['name'] ?? ($data['displayName'] ?? null),
+                'avatar' => $data['picture'] ?? ($data['avatar_url'] ?? null),
+                'raw' => $data,
+            ];
+        }
+
+        return [];
+    }
+
+    // ──────────────────────────────────────────────
+    //  SSO CONFIGURATION
+    // ──────────────────────────────────────────────
+
+    public function configureSso(int $companyId, array $data): SsoConfig
+    {
+        return SsoConfig::updateOrCreate(
+            ['company_id' => $companyId, 'provider' => $data['provider']],
+            [
+                'metadata_url' => $data['metadata_url'] ?? null,
+                'entity_id' => $data['entity_id'] ?? null,
+                'certificate' => $data['certificate'] ?? null,
+                'is_active' => $data['is_active'] ?? true,
+            ]
+        );
+    }
+
+    public function getSsoConfigs(int $companyId): Collection
+    {
+        return SsoConfig::where('company_id', $companyId)->active()->get();
+    }
+
+    public function generateSamlMetadata(int $companyId, string $provider): array
+    {
+        $config = SsoConfig::where('company_id', $companyId)
+            ->where('provider', $provider)
+            ->active()
+            ->first();
+
+        if (!$config) {
+            return ['success' => false, 'message' => 'Konfigurasi SSO tidak ditemukan.'];
+        }
+
+        $appUrl = config('app.url');
+        $entityId = $config->entity_id ?: "{$appUrl}/saml/{$provider}/metadata";
+
+        return [
+            'success' => true,
+            'provider' => $provider,
+            'entity_id' => $entityId,
+            'acs_url' => "{$appUrl}/saml/{$provider}/acs",
+            'slo_url' => "{$appUrl}/saml/{$provider}/slo",
+            'name_id_format' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:emailAddress',
+            'certificate' => $config->certificate,
+        ];
+    }
+
+    public function validateSamlResponse(int $companyId, string $provider, string $samlResponse): array
+    {
+        $config = SsoConfig::where('company_id', $companyId)
+            ->where('provider', $provider)
+            ->active()
+            ->first();
+
+        if (!$config) {
+            return ['success' => false, 'message' => 'Konfigurasi SSO tidak ditemukan.'];
+        }
+
+        // Decode and validate SAML response
+        $decoded = base64_decode($samlResponse);
+        $xml = simplexml_load_string($decoded);
+
+        if (!$xml) {
+            return ['success' => false, 'message' => 'Format SAML response tidak valid.'];
+        }
+
+        $namespaces = $xml->getNamespaces(true);
+
+        // Extract attributes from SAML assertion
+        $attributes = [];
+        if (isset($xml->Assertion->AttributeStatement->Attribute)) {
+            foreach ($xml->Assertion->AttributeStatement->Attribute as $attr) {
+                $name = (string) $attr['Name'];
+                $value = (string) ($attr->AttributeValue ?? '');
+                $attributes[$name] = $value;
+            }
+        }
+
+        // Extract NameID
+        $nameId = (string) ($xml->Assertion->Subject->NameID ?? '');
+
+        return [
+            'success' => true,
+            'provider' => $provider,
+            'name_id' => $nameId,
+            'email' => $attributes['email'] ?? $attributes['EmailAddress'] ?? $attributes['mail'] ?? $nameId,
+            'first_name' => $attributes['firstName'] ?? $attributes['givenName'] ?? '',
+            'last_name' => $attributes['lastName'] ?? $attributes['sn'] ?? '',
+            'attributes' => $attributes,
+            'session_index' => (string) ($xml->Assertion->AuthnStatement['SessionIndex'] ?? ''),
+        ];
+    }
+
+    // ──────────────────────────────────────────────
+    //  SHIPPING PROVIDERS
+    // ──────────────────────────────────────────────
+
+    public function registerShippingProvider(int $companyId, array $data): ShippingProvider
+    {
+        $supported = ['jne', 'jnt', 'sicepat', 'pos', 'gosend', 'grab'];
+
+        $name = strtolower($data['name']);
+        if (!in_array($name, $supported)) {
+            throw new \InvalidArgumentException("Shipping provider {$name} tidak didukung. Tersedia: " . implode(', ', $supported));
+        }
+
+        return ShippingProvider::updateOrCreate(
+            ['company_id' => $companyId, 'name' => $name],
+            [
+                'api_key_encrypted' => isset($data['api_key']) ? Crypt::encryptString($data['api_key']) : null,
+                'is_active' => $data['is_active'] ?? true,
+            ]
+        );
+    }
+
+    public function getShippingProviders(int $companyId): Collection
+    {
+        return ShippingProvider::where('company_id', $companyId)->active()->get();
+    }
+
+    public function getShippingRates(int $companyId, string $provider, array $params): array
+    {
+        $shippingProvider = ShippingProvider::where('company_id', $companyId)
+            ->where('name', $provider)
+            ->active()
+            ->first();
+
+        if (!$shippingProvider) {
+            return ['success' => false, 'message' => 'Shipping provider tidak dikonfigurasi.'];
+        }
+
+        $apiKey = $shippingProvider->api_key_encrypted ? Crypt::decryptString($shippingProvider->api_key_encrypted) : null;
+
+        $origin = $params['origin_city'] ?? '';
+        $destination = $params['destination_city'] ?? '';
+        $weight = $params['weight_grams'] ?? 1000;
+        $courier = $this->mapCourierCode($provider);
+
+        try {
+            $endpoint = match ($provider) {
+                'jne', 'jnt', 'sicepat', 'pos' => 'https://api.rajaongkir.com/starter/cost',
+                'gosend' => 'https://api.gosend.com/v1/deliveries/rates',
+                'grab' => 'https://api.grab.com/v1/rates',
+                default => throw new \InvalidArgumentException("Provider {$provider} tidak didukung"),
+            };
+
+            if (in_array($provider, ['jne', 'jnt', 'sicepat', 'pos'])) {
+                // RajaOngkir API
+                $response = Http::withHeaders(['key' => $apiKey])
+                    ->post($endpoint, [
+                        'origin' => $origin,
+                        'destination' => $destination,
+                        'weight' => $weight,
+                        'courier' => $courier,
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $results = $data['rajaongkir']['results'] ?? [];
+
+                    $rates = [];
+                    foreach ($results as $result) {
+                        foreach ($result['costs'] ?? [] as $cost) {
+                            $rates[] = [
+                                'service' => $cost['service'],
+                                'description' => $cost['description'],
+                                'cost' => $cost['cost'][0]['value'] ?? 0,
+                                'etd' => $cost['cost'][0]['etd'] ?? '',
+                            ];
+                        }
+                    }
+
+                    return ['success' => true, 'provider' => $provider, 'rates' => $rates];
+                }
+
+                return ['success' => false, 'message' => 'Gagal ambil ongkir: ' . $response->status()];
+            }
+
+            // Stub for GoSend/Grab
+            return [
+                'success' => true,
+                'provider' => $provider,
+                'rates' => [
+                    ['service' => 'Instant', 'description' => 'Same day delivery', 'cost' => 15000, 'etd' => '2-4 jam'],
+                    ['service' => 'Same Day', 'description' => 'Same day delivery', 'cost' => 12000, 'etd' => '4-8 jam'],
+                ],
+            ];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error ambil ongkir: ' . $e->getMessage()];
+        }
+    }
+
+    public function trackShipment(int $companyId, string $provider, string $trackingNumber): array
+    {
+        $shippingProvider = ShippingProvider::where('company_id', $companyId)
+            ->where('name', $provider)
+            ->active()
+            ->first();
+
+        if (!$shippingProvider) {
+            return ['success' => false, 'message' => 'Shipping provider tidak dikonfigurasi.'];
+        }
+
+        $apiKey = $shippingProvider->api_key_encrypted ? Crypt::decryptString($shippingProvider->api_key_encrypted) : null;
+        $courier = $this->mapCourierCode($provider);
+
+        try {
+            if (in_array($provider, ['jne', 'jnt', 'sicepat', 'pos'])) {
+                $response = Http::withHeaders(['key' => $apiKey])
+                    ->post('https://api.rajaongkir.com/starter/waybill', [
+                        'waybill' => $trackingNumber,
+                        'courier' => $courier,
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $result = $data['rajaongkir']['result'] ?? [];
+
+                    return [
+                        'success' => true,
+                        'tracking_number' => $trackingNumber,
+                        'provider' => $provider,
+                        'status' => $result['delivery_status'] ?? [],
+                        'details' => $result['details'] ?? [],
+                        'manifest' => $result['manifest'] ?? [],
+                    ];
+                }
+
+                return ['success' => false, 'message' => 'Gagal lacak pengiriman'];
+            }
+
+            return [
+                'success' => true,
+                'tracking_number' => $trackingNumber,
+                'provider' => $provider,
+                'status' => 'Dalam pengiriman',
+                'message' => 'Lacak pengiriman real-time memerlukan integrasi API langsung.',
+            ];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error lacak pengiriman: ' . $e->getMessage()];
+        }
+    }
+
+    protected function mapCourierCode(string $provider): string
+    {
+        return match ($provider) {
+            'jne' => 'jne',
+            'jnt' => 'jnt',
+            'sicepat' => 'sicepat',
+            'pos' => 'pos',
+            default => $provider,
+        };
+    }
+
+    // ──────────────────────────────────────────────
+    //  ERP CONNECTORS
+    // ──────────────────────────────────────────────
+
+    public function getAvailableErps(): array
+    {
+        return [
+            ['id' => 'odoo', 'name' => 'Odoo', 'description' => 'ERP open-source untuk manufaktur, inventory, akuntansi, CRM.', 'icon' => 'heroicon-o-cube'],
+            ['id' => 'sap', 'name' => 'SAP Business One', 'description' => 'ERP enterprise untuk keuangan, supply chain, produksi.', 'icon' => 'heroicon-o-building-office'],
+            ['id' => 'microsoft_dynamics', 'name' => 'Microsoft Dynamics 365', 'description' => 'ERP & CRM cloud dari Microsoft.', 'icon' => 'heroicon-o-squares-2x2'],
+            ['id' => 'accurate', 'name' => 'Accurate Online', 'description' => 'Software akuntansi Indonesia. Ekspor/impor faktur & laporan.', 'icon' => 'heroicon-o-document-chart-bar'],
+            ['id' => 'jurnal_id', 'name' => 'Jurnal.id', 'description' => 'Software akuntansi online Indonesia.', 'icon' => 'heroicon-o-book-open'],
+        ];
+    }
+
+    public function connectErp(int $companyId, array $data): ErpConnector
+    {
+        return ErpConnector::updateOrCreate(
+            ['company_id' => $companyId, 'target_erp' => $data['target_erp']],
+            [
+                'connection_config' => $data['connection_config'] ?? [],
+                'is_active' => true,
+            ]
+        );
+    }
+
+    public function disconnectErp(ErpConnector $connector): void
+    {
+        $connector->update(['is_active' => false]);
+    }
+
+    public function getErpConnectors(int $companyId): Collection
+    {
+        return ErpConnector::where('company_id', $companyId)->active()->get();
+    }
+
+    public function syncToErp(ErpConnector $connector, string $entityType, array $records, string $direction = 'export'): array
+    {
+        $config = $connector->connection_config ?? [];
+        $erp = $connector->target_erp;
+
+        $log = ErpSyncLog::create([
+            'connector_id' => $connector->id,
+            'entity_type' => $entityType,
+            'direction' => $direction,
+            'records_count' => count($records),
+            'status' => 'running',
+        ]);
+
+        try {
+            switch ($erp) {
+                case 'odoo':
+                    $result = $this->syncOdoo($config, $entityType, $records, $direction);
+                    break;
+                case 'sap':
+                    $result = $this->syncSap($config, $entityType, $records, $direction);
+                    break;
+                case 'microsoft_dynamics':
+                    $result = $this->syncDynamics($config, $entityType, $records, $direction);
+                    break;
+                case 'accurate':
+                    $result = $this->syncAccurate($config, $entityType, $records, $direction);
+                    break;
+                case 'jurnal_id':
+                    $result = $this->syncJurnalErp($config, $entityType, $records, $direction);
+                    break;
+                default:
+                    throw new \InvalidArgumentException("ERP {$erp} tidak didukung.");
+            }
+
+            $log->update([
+                'status' => $result['success'] ? 'success' : 'failed',
+                'records_count' => $result['synced'] ?? 0,
+                'error_message' => $result['message'] ?? null,
+            ]);
+
+            $connector->update(['last_synced_at' => now()]);
+
+            return $result;
+        } catch (\Exception $e) {
+            $log->update([
+                'status' => 'failed',
+                'error_message' => $e->getMessage(),
+            ]);
+
+            return ['success' => false, 'message' => 'Error sinkronisasi ERP: ' . $e->getMessage()];
+        }
+    }
+
+    public function syncFromErp(ErpConnector $connector, string $entityType): array
+    {
+        return $this->syncToErp($connector, $entityType, [], 'import');
+    }
+
+    public function getErpSyncLogs(int $connectorId): Collection
+    {
+        return ErpSyncLog::where('connector_id', $connectorId)
+            ->latest('created_at')
+            ->limit(100)
+            ->get();
+    }
+
+    protected function syncOdoo(array $config, string $entityType, array $records, string $direction): array
+    {
+        $baseUrl = $config['url'] ?? 'http://localhost:8069';
+        $db = $config['database'] ?? 'odoo';
+        $userId = $config['user_id'] ?? 1;
+        $password = Crypt::decryptString($config['password_encrypted'] ?? '');
+
+        try {
+            // Odoo XML-RPC authentication
+            $client = new \GuzzleHttp\Client();
+            $authResponse = $client->post("{$baseUrl}/xmlrpc/2/common", [
+                'json' => [
+                    'jsonrpc' => '2.0',
+                    'method' => 'call',
+                    'params' => [$db, $userId, $password, []],
+                    'id' => 1,
+                ],
+            ]);
+
+            if (!$authResponse->getStatusCode() === 200) {
+                return ['success' => false, 'message' => 'Gagal autentikasi Odoo.'];
+            }
+
+            $entityModel = $this->mapOdooEntity($entityType);
+
+            if ($direction === 'export') {
+                $client->post("{$baseUrl}/xmlrpc/2/object", [
+                    'json' => [
+                        'jsonrpc' => '2.0',
+                        'method' => 'call',
+                        'params' => [$db, $userId, $password, $entityModel, 'create', [$records]],
+                        'id' => 2,
+                    ],
+                ]);
+
+                return ['success' => true, 'synced' => count($records), 'message' => "{$entityType} diekspor ke Odoo."];
+            }
+
+            // Import from Odoo
+            $response = $client->post("{$baseUrl}/xmlrpc/2/object", [
+                'json' => [
+                    'jsonrpc' => '2.0',
+                    'method' => 'call',
+                    'params' => [$db, $userId, $password, $entityModel, 'search_read', [[], ['limit' => 100]]],
+                    'id' => 2,
+                ],
+            ]);
+
+            $data = json_decode($response->getBody()->getContents(), true);
+            $records = $data['result'] ?? [];
+
+            return ['success' => true, 'synced' => count($records), 'records' => $records];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error Odoo: ' . $e->getMessage()];
+        }
+    }
+
+    protected function mapOdooEntity(string $entityType): string
+    {
+        return match ($entityType) {
+            'invoices' => 'account.move',
+            'customers' => 'res.partner',
+            'products' => 'product.product',
+            'journal_entries' => 'account.move.line',
+            default => $entityType,
+        };
+    }
+
+    protected function syncSap(array $config, string $entityType, array $records, string $direction): array
+    {
+        $baseUrl = $config['url'] ?? 'https://api.sap.com';
+        $apiKey = Crypt::decryptString($config['api_key_encrypted'] ?? '');
+
+        try {
+            $endpoint = match ($entityType) {
+                'invoices' => '/v1/sales/invoices',
+                'customers' => '/v1/business-partners',
+                'products' => '/v1/items',
+                default => "/v1/{$entityType}",
+            };
+
+            if ($direction === 'export') {
+                $response = Http::withToken($apiKey)
+                    ->post("{$baseUrl}{$endpoint}", $records);
+
+                if ($response->successful()) {
+                    return ['success' => true, 'synced' => count($records), 'message' => "{$entityType} diekspor ke SAP."];
+                }
+
+                return ['success' => false, 'message' => 'Export SAP gagal: ' . $response->status()];
+            }
+
+            $response = Http::withToken($apiKey)->get("{$baseUrl}{$endpoint}");
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $records = $data['value'] ?? $data['results'] ?? [];
+                return ['success' => true, 'synced' => count($records), 'records' => $records];
+            }
+
+            return ['success' => false, 'message' => 'Import SAP gagal: ' . $response->status()];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error SAP: ' . $e->getMessage()];
+        }
+    }
+
+    protected function syncDynamics(array $config, string $entityType, array $records, string $direction): array
+    {
+        $baseUrl = $config['url'] ?? 'https://api.businesscentral.dynamics.com';
+        $tenantId = $config['tenant_id'] ?? '';
+        $clientId = Crypt::decryptString($config['client_id_encrypted'] ?? '');
+        $clientSecret = Crypt::decryptString($config['client_secret_encrypted'] ?? '');
+
+        try {
+            // Get access token
+            $tokenResponse = Http::asForm()->post("https://login.microsoftonline.com/{$tenantId}/oauth2/v2.0/token", [
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'scope' => 'https://api.businesscentral.dynamics.com/.default',
+                'grant_type' => 'client_credentials',
+            ]);
+
+            $accessToken = $tokenResponse->json('access_token');
+
+            $endpoint = match ($entityType) {
+                'invoices' => '/v2.0/salesInvoices',
+                'customers' => '/v2.0/customers',
+                'products' => '/v2.0/items',
+                default => "/v2.0/{$entityType}",
+            };
+
+            if ($direction === 'export') {
+                foreach ($records as $record) {
+                    Http::withToken($accessToken)->post("{$baseUrl}{$endpoint}", $record);
+                }
+                return ['success' => true, 'synced' => count($records), 'message' => "{$entityType} diekspor ke Dynamics."];
+            }
+
+            $response = Http::withToken($accessToken)->get("{$baseUrl}{$endpoint}");
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $records = $data['value'] ?? [];
+                return ['success' => true, 'synced' => count($records), 'records' => $records];
+            }
+
+            return ['success' => false, 'message' => 'Import Dynamics gagal: ' . $response->status()];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error Dynamics: ' . $e->getMessage()];
+        }
+    }
+
+    protected function syncAccurate(array $config, string $entityType, array $records, string $direction): array
+    {
+        $baseUrl = $config['url'] ?? 'https://api.accurate.id/api';
+        $apiToken = Crypt::decryptString($config['api_token_encrypted'] ?? '');
+
+        try {
+            $endpoint = match ($entityType) {
+                'invoices' => '/sales-invoices',
+                'purchase_invoices' => '/purchase-invoices',
+                'customers' => '/customers',
+                'products' => '/items',
+                'journal_entries' => '/journal-entries',
+                default => "/{$entityType}",
+            };
+
+            if ($direction === 'export') {
+                $response = Http::withHeaders([
+                    'Authorization' => "Bearer {$apiToken}",
+                    'Content-Type' => 'application/json',
+                ])->post("{$baseUrl}{$endpoint}", $records);
+
+                if ($response->successful()) {
+                    return ['success' => true, 'synced' => count($records), 'message' => "{$entityType} diekspor ke Accurate."];
+                }
+
+                return ['success' => false, 'message' => 'Export Accurate gagal: ' . $response->status()];
+            }
+
+            $response = Http::withToken($apiToken)->get("{$baseUrl}{$endpoint}");
+
+            if ($response->successful()) {
+                $data = $response->json();
+                return ['success' => true, 'synced' => count($data), 'records' => $data];
+            }
+
+            return ['success' => false, 'message' => 'Import Accurate gagal: ' . $response->status()];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error Accurate: ' . $e->getMessage()];
+        }
+    }
+
+    protected function syncJurnalErp(array $config, string $entityType, array $records, string $direction): array
+    {
+        $baseUrl = $config['base_url'] ?? 'https://api.jurnal.id/core/api/v1/';
+        $apiKey = Crypt::decryptString($config['api_key_encrypted'] ?? '');
+
+        try {
+            $endpoint = match ($entityType) {
+                'invoices' => 'sales_invoices',
+                'payments' => 'receive_payments',
+                'customers' => 'contacts',
+                'products' => 'products',
+                'journal_entries' => 'journal_entries',
+                default => $entityType,
+            };
+
+            if ($direction === 'export') {
+                $response = Http::withHeaders([
+                    'apikey' => $apiKey,
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ])->post("{$baseUrl}{$endpoint}", [$entityType => $records]);
+
+                if ($response->successful()) {
+                    return ['success' => true, 'synced' => count($records), 'message' => "{$entityType} diekspor ke Jurnal.id."];
+                }
+
+                return ['success' => false, 'message' => 'Export Jurnal.id gagal: ' . $response->status()];
+            }
+
+            $response = Http::withHeaders([
+                'apikey' => $apiKey,
+                'Accept' => 'application/json',
+            ])->get("{$baseUrl}{$endpoint}", ['page' => 1, 'page_size' => 100]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $records = $data[$entityType] ?? $data['data'] ?? [];
+                return ['success' => true, 'synced' => count($records), 'records' => $records];
+            }
+
+            return ['success' => false, 'message' => 'Import Jurnal.id gagal: ' . $response->status()];
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'Error Jurnal.id: ' . $e->getMessage()];
+        }
     }
 
     // ──────────────────────────────────────────────

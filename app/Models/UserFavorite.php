@@ -15,10 +15,14 @@ class UserFavorite extends Model
         'resource_url',
         'resource_icon',
         'sort_order',
+        'pin_order',
+        'section',
+        'color',
     ];
 
     protected $casts = [
         'sort_order' => 'integer',
+        'pin_order' => 'integer',
     ];
 
     public function user()

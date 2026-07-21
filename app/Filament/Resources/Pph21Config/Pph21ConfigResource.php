@@ -29,7 +29,7 @@ class Pph21ConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? HR & Payroll';
+        return '💰 Payroll';
     }
 
     protected static ?string $label = 'Konfigurasi PPh 21';

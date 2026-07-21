@@ -244,4 +244,24 @@ class Employee extends Model
     {
         return $this->hasMany(LabOrder::class, 'doctor_id');
     }
+
+    public function managedBusinessUnits()
+    {
+        return $this->hasMany(BusinessUnit::class, 'manager_id');
+    }
+
+    public function managedDivisions()
+    {
+        return $this->hasMany(Division::class, 'manager_id');
+    }
+
+    public function managedSections()
+    {
+        return $this->hasMany(Section::class, 'manager_id');
+    }
+
+    public function activityTimeline()
+    {
+        return $this->hasMany(ActivityTimeline::class, 'user_id', 'id');
+    }
 }

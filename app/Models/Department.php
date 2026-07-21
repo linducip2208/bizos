@@ -13,6 +13,8 @@ class Department extends Model
     protected $fillable = [
         'company_id',
         'parent_id',
+        'section_id',
+        'business_unit_id',
         'code',
         'name',
         'description',
@@ -48,5 +50,20 @@ class Department extends Model
     public function employees()
     {
         return $this->hasMany(Employee::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
+    public function businessUnit()
+    {
+        return $this->belongsTo(BusinessUnit::class);
+    }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
     }
 }

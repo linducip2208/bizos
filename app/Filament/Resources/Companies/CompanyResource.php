@@ -28,7 +28,7 @@ class CompanyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Master Data';
+        return '?? Organisasi';
     }
 
     protected static ?string $label = 'Perusahaan';

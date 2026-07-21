@@ -6,10 +6,10 @@ use App\Filament\Resources\Webhooks\WebhookResource;
 use App\Models\WebhookDelivery;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\Action;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Infolist;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\RepeatableEntry;
+use Filament\Schemas\Schema;
 use Filament\Resources\Pages\EditRecord;
 use App\Services\WebhookService;
 
@@ -46,10 +46,10 @@ class EditWebhook extends EditRecord
         ];
     }
 
-    public function infolist(Infolist $infolist): Infolist
+    public function infolist(Schema $schema): Schema
     {
-        return $infolist
-            ->schema([
+        return $schema
+            ->components([
                 Section::make('Riwayat Delivery')
                     ->schema([
                         RepeatableEntry::make('deliveries')

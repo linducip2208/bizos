@@ -63,4 +63,19 @@ class Client extends Model
             ->withPivot('added_at')
             ->withTimestamps();
     }
+
+    public function quotations()
+    {
+        return $this->hasMany(Quotation::class);
+    }
+
+    public function salesOrders()
+    {
+        return $this->hasMany(SalesOrder::class);
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(Referral::class, 'referrer_client_id');
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Assignment;
+use App\Models\AssignmentSubmission;
 use App\Models\Certificate;
 use App\Models\Competency;
 use App\Models\Course;
@@ -10,6 +12,8 @@ use App\Models\Employee;
 use App\Models\EmployeeCompetency;
 use App\Models\EmployeeDocument;
 use App\Models\PositionCompetency;
+use App\Models\Student;
+use App\Models\StudentEnrollment;
 use Illuminate\Support\Facades\DB;
 
 class LmsEmployeeService
@@ -323,6 +327,247 @@ class LmsEmployeeService
         });
 
         return $skills;
+    }
+
+    /**
+     * Registrasi student eksternal (non-employee).
+     */
+    public function registerStudent(array $data): Student
+    {
+        return Student::create($data);
+    }
+
+    /**
+     * Enroll student ke kursus.
+     */
+    public function enrollStudent(int $studentId, int $courseId): StudentEnrollment
+    {
+        return StudentEnrollment::firstOrCreate(
+            ['student_id' => $studentId, 'course_id' => $courseId],
+            [
+                'student_id' => $studentId,
+                'course_id' => $courseId,
+                'enrolled_at' => now(),
+                'status' => 'enrolled',
+            ]
+        );
+    }
+
+    /**
+     * Selesaikan enrollment student.
+     */
+    public function completeStudentCourse(StudentEnrollment $enrollment): void
+    {
+        $enrollment->update([
+            'status' => 'completed',
+            'completed_at' => now(),
+        ]);
+    }
+
+    /**
+     * Dapatkan semua kursus student.
+     */
+    public function getStudentCourses(Student $student): array
+    {
+        $enrollments = StudentEnrollment::where('student_id', $student->id)
+            ->with('course')
+            ->get();
+
+        return $enrollments->map(fn($e) => [
+            'enrollment_id' => $e->id,
+            'course_id' => $e->course_id,
+            'course_title' => $e->course->title ?? '-',
+            'status' => $e->status,
+            'enrolled_at' => $e->enrolled_at?->format('Y-m-d'),
+            'completed_at' => $e->completed_at?->format('Y-m-d'),
+        ])->toArray();
+    }
+
+    /**
+     * Statistik enrollment student.
+     */
+    public function getStudentStats(Student $student): array
+    {
+        $total = StudentEnrollment::where('student_id', $student->id)->count();
+        $completed = StudentEnrollment::where('student_id', $student->id)
+            ->where('status', 'completed')->count();
+        $active = StudentEnrollment::where('student_id', $student->id)
+            ->where('status', 'enrolled')->count();
+
+        return [
+            'student_id' => $student->id,
+            'total_courses' => $total,
+            'completed' => $completed,
+            'active' => $active,
+            'completion_rate' => $total > 0 ? round(($completed / $total) * 100, 1) : 0,
+        ];
+    }
+
+    /**
+     * Buat assignment untuk kursus.
+     */
+    public function createAssignment(array $data): Assignment
+    {
+        return Assignment::create($data);
+    }
+
+    /**
+     * Submit jawaban assignment oleh student.
+     */
+    public function submitAssignment(int $assignmentId, int $studentId, array $data): AssignmentSubmission
+    {
+        return AssignmentSubmission::create([
+            'assignment_id' => $assignmentId,
+            'student_id' => $studentId,
+            'content' => $data['content'] ?? null,
+            'file_path' => $data['file_path'] ?? null,
+            'submitted_at' => now(),
+            'status' => 'submitted',
+        ]);
+    }
+
+    /**
+     * Grading assignment submission.
+     */
+    public function gradeSubmission(AssignmentSubmission $submission, float $score, ?string $feedback = null): void
+    {
+        $assignment = $submission->assignment;
+        $passed = $score >= ($assignment->passing_score ?? 60);
+
+        $submission->update([
+            'score' => $score,
+            'feedback' => $feedback,
+            'graded_at' => now(),
+            'status' => $passed ? 'passed' : 'failed',
+        ]);
+    }
+
+    /**
+     * Dapatkan assignment per kursus.
+     */
+    public function getCourseAssignments(Course $course): Collection
+    {
+        return Assignment::where('course_id', $course->id)
+            ->where('is_active', true)
+            ->withCount('submissions')
+            ->orderBy('due_date')
+            ->get();
+    }
+
+    /**
+     * Nilai rata-rata assignment student.
+     */
+    public function getStudentAssignmentAverage(Student $student, ?int $courseId = null): array
+    {
+        $query = AssignmentSubmission::where('student_id', $student->id)
+            ->whereNotNull('score')
+            ->with('assignment.course');
+
+        if ($courseId) {
+            $query->whereHas('assignment', fn($q) => $q->where('course_id', $courseId));
+        }
+
+        $submissions = $query->get();
+
+        $total = $submissions->count();
+        $avgScore = $total > 0 ? round($submissions->avg('score'), 1) : 0;
+        $passed = $submissions->where('status', 'passed')->count();
+
+        return [
+            'student_id' => $student->id,
+            'total_submissions' => $total,
+            'average_score' => $avgScore,
+            'passed_count' => $passed,
+            'failed_count' => $total - $passed,
+            'pass_rate' => $total > 0 ? round(($passed / $total) * 100, 1) : 0,
+        ];
+    }
+
+    /**
+     * Cek assignment yang sudah lewat deadline.
+     */
+    public function getOverdueAssignments(int $studentId): Collection
+    {
+        return Assignment::where('is_active', true)
+            ->where('due_date', '<', now())
+            ->whereDoesntHave('submissions', fn($q) => $q->where('student_id', $studentId))
+            ->with('course')
+            ->get()
+            ->map(fn($a) => [
+                'assignment_id' => $a->id,
+                'title' => $a->title,
+                'course' => $a->course->title ?? '-',
+                'due_date' => $a->due_date?->format('Y-m-d H:i'),
+                'max_score' => $a->max_score,
+                'days_overdue' => $a->due_date ? now()->diffInDays($a->due_date) : 0,
+            ]);
+    }
+
+    /**
+     * Dapatkan semua student aktif.
+     */
+    public function getActiveStudents(int $companyId): Collection
+    {
+        return Student::where('company_id', $companyId)
+            ->where('status', 'active')
+            ->withCount(['enrollments', 'submissions'])
+            ->orderBy('name')
+            ->get();
+    }
+
+    /**
+     * Progress board: ringkasan progres semua student dalam kursus.
+     */
+    public function getCourseProgressBoard(int $courseId): array
+    {
+        $enrollments = StudentEnrollment::where('course_id', $courseId)
+            ->with('student')
+            ->get();
+
+        $assignmentCount = Assignment::where('course_id', $courseId)
+            ->where('is_active', true)
+            ->count();
+
+        $board = [];
+        foreach ($enrollments as $enrollment) {
+            $submittedCount = AssignmentSubmission::whereHas('assignment', fn($q) => $q->where('course_id', $courseId))
+                ->where('student_id', $enrollment->student_id)
+                ->count();
+
+            $gradedCount = AssignmentSubmission::whereHas('assignment', fn($q) => $q->where('course_id', $courseId))
+                ->where('student_id', $enrollment->student_id)
+                ->whereNotNull('score')
+                ->count();
+
+            $avgScore = AssignmentSubmission::whereHas('assignment', fn($q) => $q->where('course_id', $courseId))
+                ->where('student_id', $enrollment->student_id)
+                ->whereNotNull('score')
+                ->avg('score');
+
+            $board[] = [
+                'student_id' => $enrollment->student_id,
+                'student_name' => $enrollment->student->name ?? '-',
+                'status' => $enrollment->status,
+                'assignments_submitted' => $submittedCount,
+                'assignments_graded' => $gradedCount,
+                'total_assignments' => $assignmentCount,
+                'progress_percent' => $assignmentCount > 0
+                    ? round(($gradedCount / $assignmentCount) * 100, 1)
+                    : 0,
+                'average_score' => $avgScore ? round((float) $avgScore, 1) : null,
+                'enrolled_at' => $enrollment->enrolled_at?->format('Y-m-d'),
+                'completed_at' => $enrollment->completed_at?->format('Y-m-d'),
+            ];
+        }
+
+        usort($board, fn($a, $b) => $b['progress_percent'] <=> $a['progress_percent']);
+
+        return [
+            'course_id' => $courseId,
+            'total_students' => count($board),
+            'total_assignments' => $assignmentCount,
+            'students' => $board,
+        ];
     }
 
     protected function assessCompetencyLevel(CourseEnrollment $enrollment): int

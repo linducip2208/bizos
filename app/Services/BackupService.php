@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\BackupLog;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BackupService
@@ -135,12 +136,76 @@ class BackupService
         }
 
         $disk = config('filesystems.backup_disk', 's3');
-        \Illuminate\Support\Facades\Storage::disk($disk)->put(
-            'backups/' . $filename,
+        $cloudPath = 'backups/' . $filename;
+
+        Storage::disk($disk)->put(
+            $cloudPath,
             fopen($filepath, 'r')
         );
 
-        return \Illuminate\Support\Facades\Storage::disk($disk)->url('backups/' . $filename);
+        BackupLog::where('filename', $filename)->update(['storage_path' => $cloudPath]);
+
+        return Storage::disk($disk)->url($cloudPath);
+    }
+
+    public function restoreFromCloud(string $filename, ?string $storagePath = null): void
+    {
+        $disk = config('filesystems.backup_disk', 's3');
+        $cloudPath = $storagePath ?? 'backups/' . $filename;
+
+        if (!Storage::disk($disk)->exists($cloudPath)) {
+            throw new \RuntimeException('File tidak ditemukan di cloud storage: ' . $cloudPath);
+        }
+
+        $localPath = $this->backupDir() . DIRECTORY_SEPARATOR . $filename;
+
+        $stream = Storage::disk($disk)->readStream($cloudPath);
+        file_put_contents($localPath, stream_get_contents($stream));
+        if (is_resource($stream)) {
+            fclose($stream);
+        }
+
+        $this->restoreBackup($filename);
+    }
+
+    public function listSchedules(): array
+    {
+        $schedules = [];
+        $settings = \App\Models\SystemSetting::class;
+
+        $backupLogs = BackupLog::whereNotNull('schedule_name')
+            ->orderByDesc('created_at')
+            ->take(20)
+            ->get();
+
+        foreach ($backupLogs as $log) {
+            $schedules[] = [
+                'name' => $log->schedule_name,
+                'last_run' => $log->created_at?->format('Y-m-d H:i:s'),
+                'status' => $log->status,
+                'filename' => $log->filename,
+                'type' => $log->type,
+            ];
+        }
+
+        if (empty($schedules)) {
+            $schedules[] = [
+                'name' => 'backup_harian',
+                'last_run' => BackupLog::where('type', 'auto')->latest('created_at')->value('created_at'),
+                'status' => 'active',
+                'filename' => null,
+                'type' => 'auto',
+            ];
+            $schedules[] = [
+                'name' => 'backup_mingguan',
+                'last_run' => null,
+                'status' => 'active',
+                'filename' => null,
+                'type' => 'auto',
+            ];
+        }
+
+        return $schedules;
     }
 
     public function scheduleAutoBackup(string $frequency = 'daily'): void
