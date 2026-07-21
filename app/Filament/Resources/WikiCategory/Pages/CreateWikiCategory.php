@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Filament\Resources\WikiCategory\Pages;
+
+use App\Filament\Resources\WikiCategory\WikiCategoryResource;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreateWikiCategory extends CreateRecord
+{
+    protected static string $resource = WikiCategoryResource::class;
+    protected function getRedirectUrl(): string { return $this->getResource()::getUrl('index'); }
+}
