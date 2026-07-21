@@ -63,18 +63,18 @@ class TrackRecentlyViewed
                 continue;
             }
 
-            $expectedRoute = 'filament.admin.resources.' . $resource::getSlug() . '.index';
-            $editRoute = 'filament.admin.resources.' . $resource::getSlug() . '.edit';
-            $createRoute = 'filament.admin.resources.' . $resource::getSlug() . '.create';
+            $slug = '';
+            try { $slug = $resource::getSlug(); } catch (\Throwable $e) { continue; }
+            $expectedRoute = 'filament.admin.resources.' . $slug . '.index';
+            $editRoute = 'filament.admin.resources.' . $slug . '.edit';
+            $createRoute = 'filament.admin.resources.' . $slug . '.create';
 
             if ($routeName === $expectedRoute || $routeName === $editRoute || $routeName === $createRoute) {
-                $label = method_exists($resource, 'getPluralModelLabel')
-                    ? $resource::getPluralModelLabel()
-                    : (method_exists($resource, 'getModelLabel') ? $resource::getModelLabel() : class_basename($resource));
-
-                $icon = method_exists($resource, 'getNavigationIcon')
-                    ? $this->resolveIconName($resource::getNavigationIcon())
-                    : 'heroicon-o-rectangle-stack';
+                $label = class_basename($resource);
+                try { $label = $resource::getPluralModelLabel(); } catch (\Throwable $e) {}
+                try { if (!$label) $label = $resource::getModelLabel(); } catch (\Throwable $e) {}
+                $icon = 'heroicon-o-rectangle-stack';
+                try { $icon = $this->resolveIconName($resource::getNavigationIcon()); } catch (\Throwable $e) {}
 
                 return [
                     'type' => $resource::getSlug(),
@@ -98,10 +98,10 @@ class TrackRecentlyViewed
             $expectedRoute = 'filament.admin.pages.' . $page::getSlug();
 
             if ($routeName === $expectedRoute) {
-                $label = method_exists($page, 'getTitle') ? $page::getTitle() : class_basename($page);
-                $icon = method_exists($page, 'getNavigationIcon')
-                    ? $this->resolveIconName($page::getNavigationIcon())
-                    : 'heroicon-o-document';
+                $label = class_basename($page);
+                try { $label = $page::getTitle(); } catch (\Throwable $e) {}
+                $icon = 'heroicon-o-document';
+                try { $icon = $this->resolveIconName($page::getNavigationIcon()); } catch (\Throwable $e) {}
 
                 return [
                     'type' => $page::getSlug(),
