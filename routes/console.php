@@ -10,4 +10,10 @@ Artisan::command('inspire', function () {
 
 Schedule::command('invoices:check-overdue')->hourly();
 Schedule::command('notifications:send-pending')->everyFiveMinutes();
+Schedule::command('approval:check-sla')->hourly();
 Schedule::command('db:backup')->dailyAt('02:00');
+Schedule::command('report:send-scheduled')->everyFiveMinutes();
+Schedule::command('billing:generate-invoices')->daily();
+Schedule::command('billing:check-expired')->daily();
+Schedule::command('helpdesk:check-sla')->everyFifteenMinutes();
+Schedule::command('marketing:send-scheduled')->everyMinute();

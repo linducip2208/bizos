@@ -38,7 +38,7 @@ class InvoicePaymentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
 
-    protected static ?int $navigationSort = 313;
+    protected static ?int $navigationSort = 319;
 
     protected static ?string $recordTitleAttribute = 'id';
 

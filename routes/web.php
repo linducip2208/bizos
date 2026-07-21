@@ -33,7 +33,16 @@ Route::prefix('portal')->group(function () {
         Route::get('/', [App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('portal.dashboard');
         Route::get('/invoices', [App\Http\Controllers\Portal\DashboardController::class, 'invoices'])->name('portal.invoices');
         Route::get('/invoices/{id}', [App\Http\Controllers\Portal\DashboardController::class, 'invoiceDetail'])->name('portal.invoice-detail');
+        Route::get('/tickets', [App\Http\Controllers\Portal\TicketController::class, 'index'])->name('portal.tickets.index');
+        Route::get('/tickets/create', [App\Http\Controllers\Portal\TicketController::class, 'create'])->name('portal.tickets.create');
+        Route::post('/tickets', [App\Http\Controllers\Portal\TicketController::class, 'store'])->name('portal.tickets.store');
+        Route::get('/tickets/{id}', [App\Http\Controllers\Portal\TicketController::class, 'show'])->name('portal.tickets.show');
+        Route::post('/tickets/{id}/reply', [App\Http\Controllers\Portal\TicketController::class, 'reply'])->name('portal.tickets.reply');
     });
 });
+
+Route::get('/landing/{slug}', [App\Http\Controllers\LandingPageController::class, 'show'])->name('landing-page.show');
+Route::get('/email/track/open/{token}', [App\Http\Controllers\EmailTrackingController::class, 'open']);
+Route::get('/email/track/click/{token}', [App\Http\Controllers\EmailTrackingController::class, 'click']);
 
 require base_path('routes/pair-routes.php');

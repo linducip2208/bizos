@@ -32,6 +32,7 @@
                 <div class="flex items-center space-x-4">
                     <a href="{{ route('portal.dashboard') }}" class="text-sm text-gray-600 hover:text-indigo-600 transition">Dashboard</a>
                     <a href="{{ route('portal.invoices') }}" class="text-sm text-gray-600 hover:text-indigo-600 transition">Invoice</a>
+                    <a href="{{ route('portal.tickets.index') }}" class="text-sm text-gray-600 hover:text-indigo-600 transition">Tiket</a>
                     <span class="text-sm text-gray-400">{{ Auth::user()->email }}</span>
                     <form action="{{ route('portal.logout') }}" method="POST" class="inline">
                         @csrf

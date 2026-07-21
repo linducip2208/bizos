@@ -2,18 +2,13 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Attendance;
-use App\Models\Employee;
-use App\Models\Leave;
-use App\Models\Overtime;
-use App\Models\Project;
-use App\Models\Timesheet;
+use App\Models\ReportTemplate;
+use App\Services\ReportBuilderService;
 use Filament\Pages\Page;
-use Illuminate\Support\Facades\DB;
 
 class LaporanOperasional extends Page
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?int $navigationSort = 1103;
 
@@ -27,65 +22,96 @@ class LaporanOperasional extends Page
     }
 
     public array $cards = [];
-
     public array $attendanceLabels = [];
-
     public array $attendanceData = [];
-
     public array $projectStatusLabels = [];
-
     public array $projectStatusData = [];
-
     public array $topPerformers = [];
-
     public string $dateFrom;
-
     public string $dateTo;
+    public ?ReportTemplate $activeTemplate = null;
+    public array $availableTemplates = [];
 
     public function mount(): void
     {
         $this->dateFrom = request('date_from', now()->startOfMonth()->format('Y-m-d'));
         $this->dateTo = request('date_to', now()->format('Y-m-d'));
 
-        $this->loadData();
+        $this->availableTemplates = ReportTemplate::where('category', 'hrm')
+            ->where(function ($q) {
+                $q->where('is_public', true)
+                    ->orWhere('company_id', auth()->user()->company_id);
+            })
+            ->orderBy('is_system', 'desc')
+            ->orderBy('name')
+            ->get()
+            ->toArray();
+
+        $this->activeTemplate = request('template_id')
+            ? ReportTemplate::find(request('template_id'))
+            : ReportTemplate::where('slug', 'attendance-summary')->first();
+
+        if ($this->activeTemplate) {
+            $this->loadFromTemplate();
+        } else {
+            $this->loadLegacyData();
+        }
     }
 
-    protected function loadData(): void
+    protected function loadFromTemplate(): void
     {
-        $totalEmployees = Employee::where('status', 'active')->count();
+        $service = app(ReportBuilderService::class);
 
+        try {
+            $params = ['date_from' => $this->dateFrom, 'date_to' => $this->dateTo];
+            $data = $service->execute($this->activeTemplate, $params);
+            $chartData = $service->generateChartData($this->activeTemplate, $params);
+
+            $this->cards = [];
+            foreach ($data as $row) {
+                $row = (array) $row;
+                foreach ($row as $key => $value) {
+                    if (is_numeric($value)) {
+                        $this->cards[$key] = round((float) ($this->cards[$key] ?? 0) + (float) $value, 1);
+                    }
+                }
+            }
+
+            $this->attendanceLabels = $chartData['labels'] ?? [];
+            $this->attendanceData = ($chartData['datasets'][0]['data'] ?? []);
+            $this->topPerformers = $data->toArray();
+
+            $this->projectStatusLabels = [];
+            $this->projectStatusData = [];
+        } catch (\Exception $e) {
+            $this->loadLegacyData();
+        }
+    }
+
+    protected function loadLegacyData(): void
+    {
+        $totalEmployees = \App\Models\Employee::where('status', 'active')->count();
         $workingDays = $this->calculateWorkingDays($this->dateFrom, $this->dateTo);
         $totalPossibleAttendance = $totalEmployees * $workingDays;
 
-        $actualAttendance = Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
-            ->whereNotNull('clock_in')
-            ->count();
+        $actualAttendance = \App\Models\Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
+            ->whereNotNull('clock_in')->count();
 
         $kehadiranRate = $totalPossibleAttendance > 0
-            ? ($actualAttendance / $totalPossibleAttendance) * 100
-            : 0;
+            ? ($actualAttendance / $totalPossibleAttendance) * 100 : 0;
 
-        $overtimeMinutes = Overtime::whereBetween('date', [$this->dateFrom, $this->dateTo])
-            ->where('status', 'approved')
-            ->sum('duration_minutes');
+        $overtimeMinutes = \App\Models\Overtime::whereBetween('date', [$this->dateFrom, $this->dateTo])
+            ->where('status', 'approved')->sum('duration_minutes');
+        $overtimeCount = \App\Models\Overtime::whereBetween('date', [$this->dateFrom, $this->dateTo])
+            ->where('status', 'approved')->count();
+        $rataOvertime = $overtimeCount > 0 ? ($overtimeMinutes / $overtimeCount) / 60 : 0;
 
-        $overtimeCount = Overtime::whereBetween('date', [$this->dateFrom, $this->dateTo])
-            ->where('status', 'approved')
-            ->count();
+        $cutiTerpakai = \App\Models\Leave::whereBetween('start_date', [$this->dateFrom, $this->dateTo])
+            ->where('status', 'approved')->sum('total_days');
 
-        $rataOvertime = $overtimeCount > 0
-            ? ($overtimeMinutes / $overtimeCount) / 60
-            : 0;
-
-        $cutiTerpakai = Leave::whereBetween('start_date', [$this->dateFrom, $this->dateTo])
-            ->where('status', 'approved')
-            ->sum('total_days');
-
-        $totalProjects = Project::count();
-        $completedProjects = Project::where('status', 'completed')->count();
-        $completionRate = $totalProjects > 0
-            ? ($completedProjects / $totalProjects) * 100
-            : 0;
+        $totalProjects = \App\Models\Project::count();
+        $completedProjects = \App\Models\Project::where('status', 'completed')->count();
+        $completionRate = $totalProjects > 0 ? ($completedProjects / $totalProjects) * 100 : 0;
 
         $this->cards = [
             'kehadiran_rate' => round($kehadiranRate, 1),
@@ -104,65 +130,51 @@ class LaporanOperasional extends Page
         $start = \Carbon\Carbon::parse($from);
         $end = \Carbon\Carbon::parse($to);
         $days = 0;
-
         while ($start->lte($end)) {
-            if (!$start->isWeekend()) {
-                $days++;
-            }
+            if (!$start->isWeekend()) $days++;
             $start->addDay();
         }
-
         return max($days, 1);
     }
 
     protected function loadAttendanceTrend(): void
     {
-        $records = Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
+        $records = \App\Models\Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
             ->selectRaw("DATE_FORMAT(date, '%Y-%m-%d') as day, COUNT(*) as count")
             ->whereNotNull('clock_in')
-            ->groupBy('day')
-            ->orderBy('day')
-            ->get();
+            ->groupBy('day')->orderBy('day')->get();
 
         $this->attendanceLabels = $records->pluck('day')->toArray();
-        $this->attendanceData = $records->pluck('count')->map(fn ($v) => (int) $v)->toArray();
+        $this->attendanceData = $records->pluck('count')->map(fn($v) => (int) $v)->toArray();
     }
 
     protected function loadProjectStatusChart(): void
     {
-        $statuses = Project::selectRaw('status, COUNT(*) as count')
-            ->groupBy('status')
-            ->get();
+        $statuses = \App\Models\Project::selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')->get();
 
         $labels = [];
         $data = [];
-
         foreach ($statuses as $s) {
             $label = match ($s->status) {
-                'active' => 'Aktif',
-                'completed' => 'Selesai',
-                'on_hold' => 'Ditunda',
-                'cancelled' => 'Dibatalkan',
+                'active' => 'Aktif', 'completed' => 'Selesai',
+                'on_hold' => 'Ditunda', 'cancelled' => 'Dibatalkan',
                 default => ucfirst($s->status ?? 'Draft'),
             };
             $labels[] = $label;
             $data[] = (int) $s->count;
         }
-
         $this->projectStatusLabels = $labels;
         $this->projectStatusData = $data;
     }
 
     protected function loadTopPerformers(): void
     {
-        $performers = Timesheet::whereBetween('date', [$this->dateFrom, $this->dateTo])
+        $performers = \App\Models\Timesheet::whereBetween('date', [$this->dateFrom, $this->dateTo])
             ->where('status', 'approved')
             ->selectRaw('employee_id, SUM(total_hours) as total_jam')
-            ->groupBy('employee_id')
-            ->orderByDesc('total_jam')
-            ->limit(10)
-            ->with('employee')
-            ->get();
+            ->groupBy('employee_id')->orderByDesc('total_jam')->limit(10)
+            ->with('employee')->get();
 
         $this->topPerformers = $performers->map(function ($ts) {
             return [

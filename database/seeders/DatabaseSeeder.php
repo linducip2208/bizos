@@ -97,6 +97,7 @@ class DatabaseSeeder extends Seeder
         $this->enableForeignKeys();
 
         $this->call(DemoDataSeeder::class);
+        $this->call(SystemReportSeeder::class);
 
         $this->command->info('');
         $this->command->info('=== Seeding Complete! ===');

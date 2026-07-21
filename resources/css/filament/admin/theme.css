@@ -61,6 +61,10 @@
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
+.fi-sidebar-group button span {
+    position: relative;
+}
+
 .dark .fi-sidebar {
     background: linear-gradient(180deg, #0f0a2e 0%, #1e1b4b 100%) !important;
 }
@@ -126,6 +130,31 @@
     background: rgba(99, 102, 241, 0.5);
 }
 
+/* === APP SWITCHER TRIGGER === */
+.app-switcher-trigger {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+}
+
+/* === HOME PAGE STATS CARDS === */
+.home-stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.home-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* === COMMAND PALETTE === */
+.cmd-palette-backdrop {
+    animation: cmd-fade-in 0.15s ease-out;
+}
+@keyframes cmd-fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* === PRINT === */
 @media print {
     .fi-sidebar, .fi-topbar, .fi-header-actions {
@@ -139,6 +168,10 @@
         box-shadow: none !important;
         border: 1px solid #e2e8f0 !important;
         break-inside: avoid !important;
+    }
+    .app-switcher-trigger,
+    .cmd-palette-overlay {
+        display: none !important;
     }
 }
 

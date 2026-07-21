@@ -30,4 +30,9 @@ class FormSubmission extends Model
     {
         return $this->belongsTo(Employee::class, 'submitted_by');
     }
+
+    public function values()
+    {
+        return $this->hasMany(FormFieldValue::class, 'submission_id');
+    }
 }

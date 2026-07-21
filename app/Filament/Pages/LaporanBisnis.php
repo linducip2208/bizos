@@ -2,19 +2,13 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Client;
-use App\Models\Invoice;
-use App\Models\Payment;
-use App\Models\PosMember;
-use App\Models\PosPayment;
-use App\Models\PosTransaction;
+use App\Models\ReportTemplate;
+use App\Services\ReportBuilderService;
 use Filament\Pages\Page;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class LaporanBisnis extends Page
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-chart-bar';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static ?int $navigationSort = 1101;
 
@@ -28,22 +22,16 @@ class LaporanBisnis extends Page
     }
 
     public array $summaryCards = [];
-
     public array $chartLabels = [];
-
     public array $chartData = [];
-
     public array $paymentMethodLabels = [];
-
     public array $paymentMethodData = [];
-
     public array $detailTable = [];
-
     public string $dateFrom;
-
     public string $dateTo;
-
     public string $groupBy = 'bulanan';
+    public ?ReportTemplate $activeTemplate = null;
+    public array $availableTemplates = [];
 
     public function mount(): void
     {
@@ -51,26 +39,80 @@ class LaporanBisnis extends Page
         $this->dateTo = request('date_to', now()->format('Y-m-d'));
         $this->groupBy = request('group_by', 'bulanan');
 
-        $this->loadData();
+        $this->availableTemplates = ReportTemplate::where('category', 'sales')
+            ->where(function ($q) {
+                $q->where('is_public', true)
+                    ->orWhere('company_id', auth()->user()->company_id);
+            })
+            ->orderBy('is_system', 'desc')
+            ->orderBy('name')
+            ->get()
+            ->toArray();
+
+        $this->activeTemplate = request('template_id')
+            ? ReportTemplate::find(request('template_id'))
+            : ReportTemplate::where('slug', 'revenue-summary')->first();
+
+        if ($this->activeTemplate) {
+            $this->loadFromTemplate();
+        } else {
+            $this->loadLegacyData();
+        }
     }
 
-    protected function loadData(): void
+    protected function loadFromTemplate(): void
     {
-        $invoiceRevenue = Invoice::where('status', 'paid')
+        $service = app(ReportBuilderService::class);
+
+        try {
+            $params = [
+                'date_from' => $this->dateFrom,
+                'date_to' => $this->dateTo,
+                'group_by' => $this->groupBy,
+            ];
+
+            $data = $service->execute($this->activeTemplate, $params);
+            $chartData = $service->generateChartData($this->activeTemplate, $params);
+
+            $this->chartLabels = $chartData['labels'] ?? [];
+            $this->chartData = ($chartData['datasets'][0]['data'] ?? []);
+
+            $summary = [];
+            foreach ($data as $row) {
+                $row = (array) $row;
+                foreach ($row as $key => $value) {
+                    if (is_numeric($value)) {
+                        $summary[$key] = ($summary[$key] ?? 0) + (float) $value;
+                    }
+                }
+            }
+            $this->summaryCards = $summary;
+
+            $this->detailTable = $data->toArray();
+            $this->paymentMethodLabels = [];
+            $this->paymentMethodData = [];
+        } catch (\Exception $e) {
+            $this->loadLegacyData();
+        }
+    }
+
+    protected function loadLegacyData(): void
+    {
+        $invoiceRevenue = \App\Models\Invoice::where('status', 'paid')
             ->whereBetween('invoice_date', [$this->dateFrom, $this->dateTo])
             ->sum('total');
 
-        $posRevenue = PosTransaction::where('payment_status', 'paid')
+        $posRevenue = \App\Models\PosTransaction::where('payment_status', 'paid')
             ->whereBetween('transaction_date', [$this->dateFrom, $this->dateTo])
             ->sum('grand_total');
 
         $totalRevenue = $invoiceRevenue + $posRevenue;
 
-        $invoiceCount = Invoice::where('status', 'paid')
+        $invoiceCount = \App\Models\Invoice::where('status', 'paid')
             ->whereBetween('invoice_date', [$this->dateFrom, $this->dateTo])
             ->count();
 
-        $posCount = PosTransaction::where('payment_status', 'paid')
+        $posCount = \App\Models\PosTransaction::where('payment_status', 'paid')
             ->whereBetween('transaction_date', [$this->dateFrom, $this->dateTo])
             ->count();
 
@@ -78,8 +120,8 @@ class LaporanBisnis extends Page
 
         $avgPerTransaksi = $totalTransaksi > 0 ? $totalRevenue / $totalTransaksi : 0;
 
-        $clientCount = Client::count();
-        $memberCount = PosMember::count();
+        $clientCount = \App\Models\Client::count();
+        $memberCount = \App\Models\PosMember::count();
         $totalPelanggan = $clientCount + $memberCount;
 
         $this->summaryCards = [
@@ -102,20 +144,14 @@ class LaporanBisnis extends Page
             default => '%Y-%m',
         };
 
-        $labelFormat = match ($this->groupBy) {
-            'harian' => 'Y-m-d',
-            'mingguan' => '\\M\\i\\n\\g\\g\\u \\k\\e-W, Y',
-            default => 'M Y',
-        };
-
-        $invoiceData = Invoice::where('status', 'paid')
+        $invoiceData = \App\Models\Invoice::where('status', 'paid')
             ->whereBetween('invoice_date', [$this->dateFrom, $this->dateTo])
             ->selectRaw("DATE_FORMAT(invoice_date, '{$groupFormat}') as period, SUM(total) as revenue")
             ->groupBy('period')
             ->orderBy('period')
             ->get();
 
-        $posData = PosTransaction::where('payment_status', 'paid')
+        $posData = \App\Models\PosTransaction::where('payment_status', 'paid')
             ->whereBetween('transaction_date', [$this->dateFrom, $this->dateTo])
             ->selectRaw("DATE_FORMAT(transaction_date, '{$groupFormat}') as period, SUM(grand_total) as revenue")
             ->groupBy('period')
@@ -123,58 +159,51 @@ class LaporanBisnis extends Page
             ->get();
 
         $merged = collect();
-
         foreach ($invoiceData as $row) {
             $period = $row->period;
             if ($this->groupBy !== 'harian') {
-                $period = $this->formatPeriodLabel($row->period, $labelFormat);
+                $period = $this->formatPeriodLabel($row->period);
             }
             $merged->put($period, $merged->get($period, 0) + (float) $row->revenue);
         }
-
         foreach ($posData as $row) {
             $period = $row->period;
             if ($this->groupBy !== 'harian') {
-                $period = $this->formatPeriodLabel($row->period, $labelFormat);
+                $period = $this->formatPeriodLabel($row->period);
             }
             $merged->put($period, $merged->get($period, 0) + (float) $row->revenue);
         }
-
         $merged = $merged->sortKeys();
 
         $this->chartLabels = $merged->keys()->toArray();
         $this->chartData = $merged->values()->toArray();
     }
 
-    protected function formatPeriodLabel(string $period, string $format): string
+    protected function formatPeriodLabel(string $period): string
     {
         if ($this->groupBy === 'bulanan') {
             $date = \Carbon\Carbon::createFromFormat('Y-m', $period);
             return $date->translatedFormat('M Y');
         }
-
         if ($this->groupBy === 'mingguan') {
             $parts = explode('-', $period);
             $year = $parts[0];
             $week = (int) ($parts[1] ?? 1);
-            $date = \Carbon\Carbon::now()->setISODate((int) $year, $week);
-
             return 'Mgg ke-' . $week . ', ' . $year;
         }
-
         return $period;
     }
 
     protected function loadPaymentMethodChart(): void
     {
-        $paymentMethods = Payment::whereBetween('payment_date', [$this->dateFrom, $this->dateTo])
+        $paymentMethods = \App\Models\Payment::whereBetween('payment_date', [$this->dateFrom, $this->dateTo])
             ->selectRaw('payment_method_id, SUM(amount) as total')
             ->where('status', 'confirmed')
             ->groupBy('payment_method_id')
             ->with('paymentMethod')
             ->get();
 
-        $posPayments = PosPayment::whereHas('transaction', function ($q) {
+        $posPayments = \App\Models\PosPayment::whereHas('transaction', function ($q) {
             $q->whereBetween('transaction_date', [$this->dateFrom, $this->dateTo])
                 ->where('payment_status', 'paid');
         })
@@ -184,13 +213,11 @@ class LaporanBisnis extends Page
 
         $labels = [];
         $data = [];
-
         foreach ($paymentMethods as $pm) {
             $name = $pm->paymentMethod?->name ?? 'Unknown';
             $labels[] = $name;
             $data[] = (float) $pm->total;
         }
-
         foreach ($posPayments as $pp) {
             $labels[] = $pp->payment_method;
             $data[] = (float) $pp->total;
@@ -202,30 +229,17 @@ class LaporanBisnis extends Page
 
     protected function loadDetailTable(): void
     {
-        $invoiceData = Invoice::where('status', 'paid')
+        $invoiceData = \App\Models\Invoice::where('status', 'paid')
             ->whereBetween('invoice_date', [$this->dateFrom, $this->dateTo])
-            ->selectRaw("
-                DATE_FORMAT(invoice_date, '%Y-%m-%d') as date,
-                'Invoice' as source_type,
-                invoice_number as reference,
-                total,
-                'paid' as item_status
-            ")
+            ->selectRaw("DATE_FORMAT(invoice_date, '%Y-%m-%d') as date, 'Invoice' as source_type, invoice_number as reference, total, 'paid' as item_status")
             ->get();
 
-        $posData = PosTransaction::where('payment_status', 'paid')
+        $posData = \App\Models\PosTransaction::where('payment_status', 'paid')
             ->whereBetween('transaction_date', [$this->dateFrom, $this->dateTo])
-            ->selectRaw("
-                DATE_FORMAT(transaction_date, '%Y-%m-%d') as date,
-                'POS' as source_type,
-                receipt_number as reference,
-                grand_total as total,
-                'paid' as item_status
-            ")
+            ->selectRaw("DATE_FORMAT(transaction_date, '%Y-%m-%d') as date, 'POS' as source_type, receipt_number as reference, grand_total as total, 'paid' as item_status")
             ->get();
 
         $combined = $invoiceData->concat($posData)->sortByDesc('date');
-
         $this->detailTable = $combined->toArray();
     }
 }

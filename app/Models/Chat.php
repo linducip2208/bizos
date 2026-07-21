@@ -29,4 +29,19 @@ class Chat extends Model
     {
         return $this->belongsTo(Employee::class, 'created_by');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(ChatMessage::class);
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(ChatParticipant::class);
+    }
+
+    public function lastMessage()
+    {
+        return $this->hasOne(ChatMessage::class)->latestOfMany();
+    }
 }
