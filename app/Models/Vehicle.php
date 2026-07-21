@@ -53,4 +53,9 @@ class Vehicle extends Model
             ->whereNull('vehicle_assignments.returned_at')
             ->latest('vehicle_assignments.assigned_at');
     }
+
+    public function gpsTracks()
+    {
+        return $this->hasMany(FleetGpsTrack::class);
+    }
 }

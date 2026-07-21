@@ -26,6 +26,17 @@
             <link rel="icon" href="{{ $favicon }}" />
         @endif
 
+        {{-- PWA Meta Tags --}}
+        <link rel="manifest" href="{{ asset('manifest.json') }}" />
+        <meta name="theme-color" content="#4f46e5" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="{{ config('app.name', 'BizOS') }}" />
+        <meta name="application-name" content="{{ config('app.name', 'BizOS') }}" />
+        <meta name="msapplication-TileColor" content="#4f46e5" />
+        <meta name="msapplication-config" content="none" />
+
         @php
             $title = trim(strip_tags($livewire?->getTitle() ?? ''));
             $brandName = trim(strip_tags(filament()->getBrandName()));
@@ -163,5 +174,25 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SCRIPTS_AFTER, scopes: $renderHookScopes) }}
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::BODY_END, scopes: $renderHookScopes) }}
+
+        {{-- PWA Registration --}}
+        <script src="{{ asset('pwa-register.js') }}"></script>
+
+        {{-- PWA Install Banner (hidden by default) --}}
+        <div id="pwa-install-banner"
+             style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+                    background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:14px 22px;
+                    border-radius:14px;box-shadow:0 8px 32px rgba(79,70,229,.35);z-index:99998;
+                    cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:14px;font-weight:500;
+                    align-items:center;gap:12px;white-space:nowrap;"
+             onclick="window.BizOS?.installApp()">
+            <span>📱</span>
+            <span>Instal aplikasi untuk akses lebih cepat</span>
+            <button style="background:white;color:#4f46e5;border:none;padding:6px 14px;border-radius:8px;
+                           font-weight:600;font-size:13px;cursor:pointer;"
+                    onclick="event.stopPropagation();window.BizOS?.installApp()">
+                Instal
+            </button>
+        </div>
     </body>
 </html>

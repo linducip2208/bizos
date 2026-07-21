@@ -164,4 +164,12 @@ Route::prefix('webhooks/wa')->group(function () {
     Route::post('/', [App\Http\Controllers\Api\WhatsAppWebhookController::class, 'receive']);
 });
 
+// No-Code Automation Studio
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/admin/studio/{workflowId?}', \App\Http\Livewire\StudioBuilder::class)->name('studio.builder');
+});
+
+// BI Embed Route
+Route::get('/api/bi/embed/{token}', fn(string $token) => response()->json(app(\App\Services\AdvancedBiService::class)->getEmbedData($token)));
+
 require base_path('routes/pair-routes.php');

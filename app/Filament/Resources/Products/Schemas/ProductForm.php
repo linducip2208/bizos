@@ -89,6 +89,59 @@ class ProductForm
                             ->label('Aktif')
                             ->default(true),
                     ]),
+                Section::make('Informasi Obat')
+                    ->columns(3)
+                    ->schema([
+                        Toggle::make('is_medicine')
+                            ->label('Produk Obat')
+                            ->default(false)
+                            ->live(),
+                        TextInput::make('active_ingredient')
+                            ->label('Zat Aktif')
+                            ->maxLength(255)
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        Select::make('dosage_form')
+                            ->label('Bentuk Sediaan')
+                            ->options([
+                                'tablet' => 'Tablet',
+                                'capsule' => 'Kapsul',
+                                'syrup' => 'Sirup',
+                                'injection' => 'Injeksi',
+                                'ointment' => 'Salep',
+                                'drop' => 'Tetes',
+                                'inhaler' => 'Inhaler',
+                                'powder' => 'Serbuk',
+                            ])
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        TextInput::make('strength')
+                            ->label('Kekuatan')
+                            ->maxLength(100)
+                            ->placeholder('500mg, 10mg/ml')
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        TextInput::make('registration_number')
+                            ->label('No. BPOM')
+                            ->maxLength(100)
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        Toggle::make('requires_prescription')
+                            ->label('Perlu Resep')
+                            ->default(false)
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        Select::make('drug_category')
+                            ->label('Golongan Obat')
+                            ->options([
+                                'obat_bebas' => 'Obat Bebas',
+                                'obat_bebas_terbatas' => 'Obat Bebas Terbatas',
+                                'obat_keras' => 'Obat Keras',
+                                'narkotika' => 'Narkotika',
+                                'psikotropika' => 'Psikotropika',
+                            ])
+                            ->visible(fn ($get) => $get('is_medicine')),
+                        TextInput::make('storage_requirement')
+                            ->label('Penyimpanan')
+                            ->maxLength(255)
+                            ->placeholder('Sejuk 15-25°C')
+                            ->visible(fn ($get) => $get('is_medicine')),
+                    ]),
             ]);
     }
 }

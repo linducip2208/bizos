@@ -74,6 +74,48 @@ Route::prefix('v1/mobile')->group(function () {
         Route::post('/profile/photo', [App\Http\Controllers\Api\ProfileController::class, 'uploadPhoto']);
         Route::get('/payslips', [App\Http\Controllers\Api\ProfileController::class, 'payslips']);
         Route::get('/payslips/{id}/pdf', [App\Http\Controllers\Api\ProfileController::class, 'payslipPdf']);
+
+        // Mobile Home — complete home screen data in one call
+        Route::get('/home', [App\Http\Controllers\Api\DashboardController::class, 'home']);
+
+        // Offline Mode
+        Route::post('/sync', [App\Http\Controllers\Api\OfflineController::class, 'sync']);
+        Route::get('/offline-data', [App\Http\Controllers\Api\OfflineController::class, 'offlineData']);
+        Route::get('/check-updates', [App\Http\Controllers\Api\OfflineController::class, 'checkUpdates']);
+        Route::get('/pending-actions', [App\Http\Controllers\Api\OfflineController::class, 'pendingActions']);
+        Route::post('/resolve-conflict', [App\Http\Controllers\Api\OfflineController::class, 'resolveConflict']);
+
+        // Biometric Auth
+        Route::post('/biometric/register', [App\Http\Controllers\Api\BiometricController::class, 'register']);
+        Route::post('/biometric/verify', [App\Http\Controllers\Api\BiometricController::class, 'verify']);
+        Route::post('/biometric/challenge', [App\Http\Controllers\Api\BiometricController::class, 'getChallenge']);
+        Route::delete('/biometric/revoke', [App\Http\Controllers\Api\BiometricController::class, 'revoke']);
+        Route::get('/biometric/status', [App\Http\Controllers\Api\BiometricController::class, 'status']);
+        Route::get('/biometric/devices', [App\Http\Controllers\Api\BiometricController::class, 'devices']);
+
+        // Barcode Scanner
+        Route::get('/scan/{barcode}', [App\Http\Controllers\Api\BarcodeController::class, 'lookup']);
+        Route::post('/scan/receive', [App\Http\Controllers\Api\BarcodeController::class, 'receive']);
+        Route::post('/scan/pick', [App\Http\Controllers\Api\BarcodeController::class, 'pick']);
+        Route::post('/scan/opname', [App\Http\Controllers\Api\BarcodeController::class, 'opname']);
+        Route::get('/scan/label/{product_id}', [App\Http\Controllers\Api\BarcodeController::class, 'label'])->whereNumber('product_id');
+        Route::post('/scan/labels', [App\Http\Controllers\Api\BarcodeController::class, 'labels']);
+
+        // Voice Notes
+        Route::post('/voice-note', [App\Http\Controllers\Api\VoiceNoteController::class, 'upload']);
+        Route::get('/voice-notes', [App\Http\Controllers\Api\VoiceNoteController::class, 'index']);
+        Route::get('/voice-notes/{id}/audio', [App\Http\Controllers\Api\VoiceNoteController::class, 'audio'])
+            ->whereNumber('id')
+            ->name('api.mobile.voice-note.audio');
+        Route::post('/voice-notes/{id}/played', [App\Http\Controllers\Api\VoiceNoteController::class, 'markPlayed'])->whereNumber('id');
+        Route::post('/voice-notes/{id}/transcribe', [App\Http\Controllers\Api\VoiceNoteController::class, 'transcribe'])->whereNumber('id');
+        Route::get('/voice-notes/unplayed-count', [App\Http\Controllers\Api\VoiceNoteController::class, 'unplayedCount']);
+
+        // Push-to-Talk Channels
+        Route::post('/ptt/channel', [App\Http\Controllers\Api\VoiceNoteController::class, 'createChannel']);
+        Route::get('/ptt/channels', [App\Http\Controllers\Api\VoiceNoteController::class, 'getUserChannels']);
+        Route::post('/ptt/channel/{id}/broadcast', [App\Http\Controllers\Api\VoiceNoteController::class, 'broadcastChannel'])->whereNumber('id');
+        Route::delete('/ptt/channel/{id}/leave', [App\Http\Controllers\Api\VoiceNoteController::class, 'leaveChannel'])->whereNumber('id');
     });
 });
 

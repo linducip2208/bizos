@@ -68,6 +68,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 \App\Http\Middleware\TrackRecentlyViewed::class,
+                \App\Http\Middleware\ThemeMiddleware::class,
             ])
             ->navigationGroups([
                 NavigationGroup::make('Master Data')->collapsed(false),
@@ -77,6 +78,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Finance')->collapsed(false),
                 NavigationGroup::make('Procurement & Inventory')->collapsed(true),
                 NavigationGroup::make('CRM')->collapsed(true),
+                NavigationGroup::make('Kesehatan')->collapsed(false),
                 NavigationGroup::make('Marketing')->collapsed(true),
                 NavigationGroup::make('Project')->collapsed(true),
                 NavigationGroup::make('Kolaborasi')->collapsed(true),
@@ -84,10 +86,20 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('POS')->collapsed(true),
                 NavigationGroup::make('LMS')->collapsed(true),
                 NavigationGroup::make('AI Assistant')->collapsed(true),
+                NavigationGroup::make('AI Analytics')->collapsed(false),
+                NavigationGroup::make('Logistik')->collapsed(true),
+                NavigationGroup::make('E-Commerce')->collapsed(true),
                 NavigationGroup::make('Laporan')->collapsed(true),
                 NavigationGroup::make('Integrasi')->collapsed(true),
                 NavigationGroup::make('Core')->collapsed(true),
+                NavigationGroup::make('Manufaktur')->collapsed(true),
+                NavigationGroup::make('🏗️ Konstruksi')->collapsed(true),
+                NavigationGroup::make('🏨 Perhotelan')->collapsed(true),
+                NavigationGroup::make('🏠 Properti')->collapsed(true),
+                NavigationGroup::make('Platform')->collapsed(false),
+                NavigationGroup::make('Kepatuhan')->collapsed(true),
                 NavigationGroup::make('Sistem')->collapsed(true),
+                NavigationGroup::make('Kepatuhan')->collapsed(false),
             ])
             ->renderHook(
                 'panels::topbar.start',

@@ -25,6 +25,14 @@ class Product extends Model
         'is_taxable',
         'tax_rate',
         'is_active',
+        'is_medicine',
+        'active_ingredient',
+        'dosage_form',
+        'strength',
+        'registration_number',
+        'requires_prescription',
+        'drug_category',
+        'storage_requirement',
     ];
 
     protected $casts = [
@@ -36,6 +44,8 @@ class Product extends Model
         'is_taxable' => 'boolean',
         'tax_rate' => 'decimal:2',
         'is_active' => 'boolean',
+        'is_medicine' => 'boolean',
+        'requires_prescription' => 'boolean',
     ];
 
     public function company()
@@ -56,5 +66,10 @@ class Product extends Model
     public function transactionItems()
     {
         return $this->hasMany(PosTransactionItem::class);
+    }
+
+    public function prescriptionItems()
+    {
+        return $this->hasMany(PrescriptionItem::class);
     }
 }

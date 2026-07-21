@@ -53,6 +53,11 @@ class Employee extends Model
         'basic_salary',
         'hourly_rate',
         'overtime_rate',
+        'specialization',
+        'sip_number',
+        'str_number',
+        'consultation_fee',
+        'is_doctor',
         'bank_name',
         'bank_account_number',
         'bank_account_name',
@@ -71,6 +76,8 @@ class Employee extends Model
         'basic_salary' => 'decimal:2',
         'hourly_rate' => 'decimal:2',
         'overtime_rate' => 'decimal:2',
+        'consultation_fee' => 'decimal:2',
+        'is_doctor' => 'boolean',
     ];
 
     public function company()
@@ -216,5 +223,25 @@ class Employee extends Model
     public function reviewedPerformance()
     {
         return $this->hasMany(PerformanceReview::class, 'reviewer_id');
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class, 'doctor_id');
+    }
+
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class, 'doctor_id');
+    }
+
+    public function labOrders()
+    {
+        return $this->hasMany(LabOrder::class, 'doctor_id');
     }
 }

@@ -54,6 +54,35 @@ class ProductTable
                     ->label('Aktif')
                     ->boolean()
                     ->sortable(),
+                IconColumn::make('is_medicine')
+                    ->label('Obat')
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('drug_category')
+                    ->label('Golongan')
+                    ->badge()
+                    ->formatStateUsing(fn (?string $state): string => match ($state) {
+                        'obat_bebas' => 'Bebas',
+                        'obat_bebas_terbatas' => 'Terbatas',
+                        'obat_keras' => 'Keras',
+                        'narkotika' => 'Narkotika',
+                        'psikotropika' => 'Psikotropika',
+                        default => '-',
+                    })
+                    ->color(fn (?string $state): string => match ($state) {
+                        'obat_bebas' => 'success',
+                        'obat_bebas_terbatas' => 'info',
+                        'obat_keras' => 'danger',
+                        'narkotika' => 'danger',
+                        'psikotropika' => 'danger',
+                        default => 'gray',
+                    })
+                    ->toggleable(),
+                IconColumn::make('requires_prescription')
+                    ->label('Resep')
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 TrashedFilter::make(),
