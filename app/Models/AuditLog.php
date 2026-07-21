@@ -14,18 +14,23 @@ class AuditLog extends Model
         'user_id',
         'company_id',
         'action',
+        'action_type',
         'entity_type',
         'entity_id',
         'old_values',
         'new_values',
         'ip_address',
         'user_agent',
+        'restorable',
+        'metadata',
         'created_at',
     ];
 
     protected $casts = [
         'old_values' => 'array',
         'new_values' => 'array',
+        'metadata' => 'array',
+        'restorable' => 'boolean',
         'created_at' => 'datetime',
     ];
 

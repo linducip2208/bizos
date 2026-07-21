@@ -2,18 +2,13 @@
 
 namespace App\Filament\Resources\Tasks\Pages;
 
+use App\Filament\Concerns\HasExcelExport;
 use App\Filament\Resources\Tasks\TaskResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTasks extends ListRecords
 {
-    protected static string $resource = TaskResource::class;
+    use HasExcelExport;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    protected static string $resource = TaskResource::class;
 }

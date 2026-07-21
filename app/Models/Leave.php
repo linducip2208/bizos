@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Concerns\HasBranchScope;
+
 class Leave extends Model
 {
+    use HasBranchScope;
+
     protected $fillable = [
         'employee_id',
         'leave_type_id',

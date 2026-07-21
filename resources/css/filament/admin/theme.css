@@ -260,4 +260,128 @@
     .fi-login-form {
         padding: 1.5rem;
     }
+    .fi-ta-cell {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    .fi-btn {
+        min-height: 44px;
+    }
+    .fi-input {
+        min-height: 44px;
+    }
+    .fi-page-header-heading {
+        font-size: 20px;
+    }
+    .fi-ac-action {
+        width: 100%;
+        justify-content: center;
+    }
+    .fi-ta-header-cell {
+        font-size: 0.65rem;
+        padding: 8px 10px;
+    }
+    .fi-section {
+        border-radius: 8px;
+    }
+    .fi-section-content {
+        padding: 12px;
+    }
+    .fi-wi-stats-overview-stat {
+        border-radius: 10px;
+    }
+    .fi-wi-stats-overview-stat-value {
+        font-size: 22px;
+    }
+    .fi-ta-ctn {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .fi-fo-field-wrp {
+        width: 100%;
+    }
+    .fi-fo-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .fi-fo-actions .fi-btn {
+        width: 100%;
+    }
+    .fi-modal {
+        margin: 0.5rem;
+        max-width: calc(100vw - 1rem);
+    }
+    .fi-dropdown-panel {
+        max-width: calc(100vw - 2rem);
+    }
+}
+
+/* === RESPONSIVE: Very Small Mobile === */
+@media (max-width: 400px) {
+    .fi-section-content {
+        padding: 8px;
+    }
+    .fi-btn {
+        min-height: 40px;
+        font-size: 13px;
+    }
+    .fi-ta-cell {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+    .fi-page-header-heading {
+        font-size: 18px;
+    }
+}
+
+/* === RESPONSIVE: Print === */
+@media print {
+    .fi-sidebar,
+    .fi-topbar,
+    .fi-header-actions,
+    .fi-ta-actions,
+    .fi-btn {
+        display: none !important;
+    }
+    .fi-main {
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+    }
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* === TOUCH TARGET ENHANCEMENT === */
+@media (pointer: coarse) {
+    .fi-btn {
+        min-height: 44px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .fi-link {
+        padding: 8px 0;
+    }
+    .fi-checkbox,
+    .fi-radio {
+        width: 20px;
+        height: 20px;
+    }
+    .fi-close-btn {
+        width: 44px;
+        height: 44px;
+    }
+    .fi-dropdown-trigger {
+        min-height: 44px;
+    }
+    .fi-icon-btn {
+        width: 44px;
+        height: 44px;
+    }
+    .fi-pagination-item button,
+    .fi-pagination-item a {
+        min-width: 44px;
+        min-height: 44px;
+    }
 }

@@ -17,3 +17,4 @@ Schedule::command('billing:generate-invoices')->daily();
 Schedule::command('billing:check-expired')->daily();
 Schedule::command('helpdesk:check-sla')->everyFifteenMinutes();
 Schedule::command('marketing:send-scheduled')->everyMinute();
+Schedule::command('bizos:scan-anomalies --send-wa')->dailyAt('07:00');

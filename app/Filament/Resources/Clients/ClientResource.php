@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Clients;
 use App\Filament\Resources\Clients\Pages\CreateClient;
 use App\Filament\Resources\Clients\Pages\EditClient;
 use App\Filament\Resources\Clients\Pages\ListClients;
+use App\Filament\Resources\Clients\Pages\ViewClient360;
 use App\Filament\Resources\Clients\RelationManagers\ClientContactsRelationManager;
 use App\Filament\Resources\Clients\Schemas\ClientForm;
 use App\Filament\Resources\Clients\Tables\ClientsTable;
@@ -60,6 +61,7 @@ class ClientResource extends Resource
             'index' => ListClients::route('/'),
             'create' => CreateClient::route('/create'),
             'edit' => EditClient::route('/{record}/edit'),
+            'view-360' => ViewClient360::route('/{record}/360'),
         ];
     }
 }

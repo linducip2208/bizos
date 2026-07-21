@@ -16,6 +16,9 @@ class QuizAttempt extends Model
         'earned_points',
         'is_passed',
         'attempt_number',
+        'violation_count',
+        'violation_log',
+        'is_auto_submitted',
     ];
 
     protected $casts = [
@@ -26,6 +29,9 @@ class QuizAttempt extends Model
         'earned_points' => 'integer',
         'is_passed' => 'boolean',
         'attempt_number' => 'integer',
+        'violation_count' => 'integer',
+        'violation_log' => 'array',
+        'is_auto_submitted' => 'boolean',
     ];
 
     public function quiz()

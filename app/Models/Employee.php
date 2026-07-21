@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasBranchScope;
 use Database\Factories\EmployeeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Employee extends Model
 {
     /** @use HasFactory<EmployeeFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasBranchScope, SoftDeletes;
 
     protected $fillable = [
         'company_id',
@@ -32,8 +33,11 @@ class Employee extends Model
         'nationality',
         'id_number',
         'tax_number',
+        'ptkp_code',
         'bpjs_kesehatan',
+        'bpjs_kes_tier',
         'bpjs_ketenagakerjaan',
+        'bpjs_tk_risk_grade',
         'address',
         'city',
         'province',

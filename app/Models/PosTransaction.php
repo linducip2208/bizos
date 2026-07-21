@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Concerns\HasBranchScope;
+
 class PosTransaction extends Model
 {
+    use HasBranchScope;
+
     protected $fillable = [
         'company_id',
         'shift_id',

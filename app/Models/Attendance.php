@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasBranchScope;
 use Database\Factories\AttendanceFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attendance extends Model
 {
     /** @use HasFactory<AttendanceFactory> */
-    use HasFactory;
+    use HasBranchScope, HasFactory;
     protected $fillable = [
         'employee_id',
         'shift_id',

@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\ReportTemplate;
 use App\Services\ReportBuilderService;
+use App\Services\ReportNlgService;
 use Filament\Pages\Page;
 
 class LaporanBisnis extends Page
@@ -32,6 +33,8 @@ class LaporanBisnis extends Page
     public string $groupBy = 'bulanan';
     public ?ReportTemplate $activeTemplate = null;
     public array $availableTemplates = [];
+    public string $nlgSummary = '';
+    public string $chartInsight = '';
 
     public function mount(): void
     {
@@ -58,6 +61,8 @@ class LaporanBisnis extends Page
         } else {
             $this->loadLegacyData();
         }
+
+        $this->generateNlgSummary();
     }
 
     protected function loadFromTemplate(): void
@@ -241,5 +246,36 @@ class LaporanBisnis extends Page
 
         $combined = $invoiceData->concat($posData)->sortByDesc('date');
         $this->detailTable = $combined->toArray();
+    }
+
+    protected function generateNlgSummary(): void
+    {
+        try {
+            $nlg = app(ReportNlgService::class);
+
+            $reportData = [
+                'module' => 'Bisnis',
+                'periode' => "{$this->dateFrom} s/d {$this->dateTo}",
+                'group_by' => $this->groupBy,
+                'summary' => $this->summaryCards,
+            ];
+
+            $this->nlgSummary = $nlg->generateExecutiveSummary($reportData, 'bisnis');
+
+            if (!empty($this->chartData) && !empty($this->chartLabels)) {
+                $chartData = [
+                    'labels' => $this->chartLabels,
+                    'data' => $this->chartData,
+                ];
+                $comparison = [
+                    'type' => 'revenue',
+                    'period' => $this->groupBy,
+                ];
+                $this->chartInsight = $nlg->chartInsight('line', $chartData, $comparison);
+            }
+        } catch (\Exception $e) {
+            $this->nlgSummary = 'Ringkasan AI tidak tersedia. Menampilkan data numerik.';
+            $this->chartInsight = '';
+        }
     }
 }

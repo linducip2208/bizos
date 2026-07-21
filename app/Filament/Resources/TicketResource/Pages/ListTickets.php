@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TicketResource\Pages;
 
+use App\Filament\Concerns\HasExcelExport;
 use App\Filament\Resources\TicketResource\TicketResource;
 use App\Models\Ticket;
 use App\Services\HelpdeskService;
@@ -15,9 +16,11 @@ use Filament\Support\Enums\MaxWidth;
 
 class ListTickets extends ListRecords
 {
+    use HasExcelExport;
+
     protected static string $resource = TicketResource::class;
 
-    protected function getHeaderActions(): array
+    protected function getCustomHeaderActions(): array
     {
         return [
             CreateAction::make(),

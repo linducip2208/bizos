@@ -6,6 +6,7 @@ use App\Filament\Resources\TicketResource\TicketResource;
 use App\Models\Employee;
 use App\Models\TicketActivity;
 use App\Services\HelpdeskService;
+use App\Services\TicketTriageService;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\RichEditor;
@@ -111,6 +112,67 @@ class EditTicket extends EditRecord
                     $service->escalate($this->record);
                     Notification::make()->title('Tiket dieskalasi')->success()->send();
                     redirect(request()->header('Referer'));
+                }),
+            Action::make('suggest_kb')
+                ->label('Saran Artikel KB')
+                ->icon('heroicon-o-book-open')
+                ->color('violet')
+                ->action(function (TicketTriageService $triage): void {
+                    $articles = $triage->suggestKbArticle($this->record, 3);
+                    if (empty($articles)) {
+                        Notification::make()->title('Tidak ada artikel yang relevan')->warning()->send();
+                        return;
+                    }
+                    $message = "Artikel Knowledge Base Relevan:\n\n";
+                    foreach ($articles as $i => $article) {
+                        $message .= ($i + 1) . ". **{$article['title']}** (Skor: {$article['score']})\n{$article['excerpt']}\n\n";
+                    }
+                    Notification::make()
+                        ->title('Ditemukan ' . count($articles) . ' artikel relevan')
+                        ->body($message)
+                        ->success()
+                        ->send();
+                }),
+            Action::make('suggest_reply')
+                ->label('Saran Balasan AI')
+                ->icon('heroicon-o-sparkles')
+                ->color('indigo')
+                ->action(function (TicketTriageService $triage): void {
+                    try {
+                        $reply = $triage->suggestReply($this->record);
+                        Notification::make()
+                            ->title('Saran Balasan')
+                            ->body($reply)
+                            ->success()
+                            ->send();
+                    } catch (\Exception $e) {
+                        Notification::make()->title('Gagal generate balasan: ' . $e->getMessage())->danger()->send();
+                    }
+                }),
+            Action::make('find_similar')
+                ->label('Tiket Serupa')
+                ->icon('heroicon-o-magnifying-glass')
+                ->color('gray')
+                ->action(function (TicketTriageService $triage): void {
+                    $similar = $triage->findSimilarResolved($this->record, 5);
+                    if (empty($similar)) {
+                        Notification::make()->title('Tidak ada tiket serupa yang resolved')->warning()->send();
+                        return;
+                    }
+                    $message = "Tiket Resolved Serupa:\n\n";
+                    foreach ($similar as $i => $t) {
+                        $message .= ($i + 1) . ". **#{$t['ticket_number']}** - {$t['subject']} (Prioritas: {$t['priority']})\n";
+                        $lastReply = \App\Models\Ticket::find($t['id'])?->replies()->where('is_internal', false)->latest()->first();
+                        if ($lastReply) {
+                            $message .= "   Solusi: " . \Illuminate\Support\Str::limit($lastReply->message, 150) . "\n";
+                        }
+                        $message .= "\n";
+                    }
+                    Notification::make()
+                        ->title('Ditemukan ' . count($similar) . ' tiket serupa')
+                        ->body($message)
+                        ->success()
+                        ->send();
                 }),
         ];
     }

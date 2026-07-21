@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Concerns\HasBranchScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use SoftDeletes;
+    use HasBranchScope, SoftDeletes;
 
     protected $fillable = [
         'project_id',

@@ -96,6 +96,8 @@ class DatabaseSeeder extends Seeder
 
         $this->enableForeignKeys();
 
+        $this->call(Pph21ConfigSeeder::class);
+        $this->call(BpjsConfigSeeder::class);
         $this->call(DemoDataSeeder::class);
         $this->call(SystemReportSeeder::class);
 
@@ -422,9 +424,26 @@ class DatabaseSeeder extends Seeder
                 'employee_type' => $s['type'],
                 'status' => 'active',
                 'basic_salary' => $s['salary'],
-                'bank_name' => collect(['BCA', 'Mandiri', 'BNI', 'BRI'])->random(),
-                'bank_account_number' => rand(1000000000, 9999999999),
-                'bank_account_name' => $s['first_name'] . ' ' . $s['last_name'],
+            'bank_name' => collect(['BCA', 'Mandiri', 'BNI', 'BRI'])->random(),
+            'bank_account_number' => rand(1000000000, 9999999999),
+            'bank_account_name' => $s['first_name'] . ' ' . $s['last_name'],
+            'ptkp_code' => match ($s['first_name']) {
+                'Budi', 'Ahmad' => 'K/2',
+                'Siti', 'Donni', 'Andi' => 'K/1',
+                'Fitriani', 'Citra' => 'TK/0',
+                default => 'TK/1',
+            },
+            'bpjs_kes_tier' => match (true) {
+                $s['salary'] >= 8000000 => 'I',
+                $s['salary'] >= 4000000 => 'II',
+                default => 'III',
+            },
+            'bpjs_tk_risk_grade' => match ($s['dept']) {
+                'DIR' => 'very_low',
+                'IT' => 'low',
+                'OPS', 'PRD' => 'high',
+                default => 'medium',
+            },
             ]);
             $this->employees[$s['first_name']] = $emp->id;
             $this->jobTitleMap[$s['first_name']] = $s['pos'];

@@ -51,4 +51,9 @@ class Deal extends Model
     {
         return $this->belongsTo(Employee::class, 'assigned_to');
     }
+
+    public function commissions()
+    {
+        return $this->hasMany(DealCommission::class);
+    }
 }

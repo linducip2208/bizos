@@ -23,4 +23,9 @@ class PosPayment extends Model
     {
         return $this->belongsTo(PosTransaction::class, 'transaction_id');
     }
+
+    public function paymentLines()
+    {
+        return $this->hasMany(PosPaymentLine::class);
+    }
 }

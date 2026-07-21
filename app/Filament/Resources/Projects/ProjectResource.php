@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Projects;
 use App\Filament\Resources\Projects\Pages\CreateProject;
 use App\Filament\Resources\Projects\Pages\EditProject;
 use App\Filament\Resources\Projects\Pages\ListProjects;
+use App\Filament\Resources\Projects\Pages\ViewProjectGantt;
+use App\Filament\Resources\Projects\Pages\ViewProjectSprints;
 use App\Filament\Resources\Projects\RelationManagers\MilestonesRelationManager;
 use App\Filament\Resources\Projects\RelationManagers\ProjectMembersRelationManager;
 use App\Filament\Resources\Projects\RelationManagers\TasksRelationManager;
@@ -66,6 +68,8 @@ class ProjectResource extends Resource
             'index' => ListProjects::route('/'),
             'create' => CreateProject::route('/create'),
             'edit' => EditProject::route('/{record}/edit'),
+            'gantt' => ViewProjectGantt::route('/{record}/gantt'),
+            'sprints' => ViewProjectSprints::route('/{record}/sprints'),
         ];
     }
 

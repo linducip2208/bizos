@@ -19,6 +19,11 @@ class Pph21Config extends Model
         'rate_top',
         'effective_year',
         'is_active',
+        'ptkp_values_json',
+        'ter_category_a_rates_json',
+        'ter_category_b_rates_json',
+        'ter_category_c_rates_json',
+        'ter_year',
     ];
 
     protected $casts = [
@@ -32,6 +37,11 @@ class Pph21Config extends Model
         'rate_top' => 'decimal:4',
         'effective_year' => 'integer',
         'is_active' => 'boolean',
+        'ptkp_values_json' => 'array',
+        'ter_category_a_rates_json' => 'array',
+        'ter_category_b_rates_json' => 'array',
+        'ter_category_c_rates_json' => 'array',
+        'ter_year' => 'integer',
     ];
 
     public function company()

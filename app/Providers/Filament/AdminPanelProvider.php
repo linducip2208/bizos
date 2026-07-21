@@ -72,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Master Data')->collapsed(false),
                 NavigationGroup::make('HRM')->collapsed(true),
                 NavigationGroup::make('Payroll')->collapsed(true),
+                NavigationGroup::make('Alat Hitung')->collapsed(false),
                 NavigationGroup::make('Finance')->collapsed(false),
                 NavigationGroup::make('Procurement & Inventory')->collapsed(true),
                 NavigationGroup::make('CRM')->collapsed(true),

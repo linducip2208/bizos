@@ -13,12 +13,15 @@ class AiKnowledgeBase extends Model
         'title',
         'content',
         'source_type',
+        'source_path',
+        'chunks_json',
         'embedding_vector',
         'is_active',
     ];
 
     protected $casts = [
         'embedding_vector' => 'array',
+        'chunks_json' => 'array',
         'is_active' => 'boolean',
     ];
 

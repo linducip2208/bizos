@@ -2,18 +2,13 @@
 
 namespace App\Filament\Resources\PosTransactions\Pages;
 
+use App\Filament\Concerns\HasExcelExport;
 use App\Filament\Resources\PosTransactions\PosTransactionResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPosTransactions extends ListRecords
 {
-    protected static string $resource = PosTransactionResource::class;
+    use HasExcelExport;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    protected static string $resource = PosTransactionResource::class;
 }

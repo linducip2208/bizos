@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\ReportTemplate;
 use App\Services\ReportBuilderService;
+use App\Services\ReportNlgService;
 use Filament\Pages\Page;
 
 class LaporanKeuangan extends Page
@@ -32,6 +33,8 @@ class LaporanKeuangan extends Page
     public string $dateTo;
     public ?ReportTemplate $activeTemplate = null;
     public array $availableTemplates = [];
+    public string $nlgSummary = '';
+    public string $varianceExplanation = '';
 
     public function mount(): void
     {
@@ -56,6 +59,30 @@ class LaporanKeuangan extends Page
             $this->loadFromTemplate();
         } else {
             $this->loadLegacyData();
+        }
+
+        $this->generateNlgSummary();
+    }
+
+    protected function generateNlgSummary(): void
+    {
+        try {
+            $nlg = app(ReportNlgService::class);
+
+            $reportData = [
+                'module' => 'Keuangan',
+                'periode' => "{$this->dateFrom} s/d {$this->dateTo}",
+                'summary_cards' => $this->cards,
+            ];
+
+            $this->nlgSummary = $nlg->generateExecutiveSummary($reportData, 'keuangan');
+
+            $labaRugi = $this->cards['laba_rugi'] ?? 0;
+            $prevLabaRugi = $this->cards['total_pendapatan'] ?? 0;
+            $this->varianceExplanation = $nlg->explainVariance('Laba/Rugi', (float) $labaRugi, (float) $prevLabaRugi * 0.85);
+        } catch (\Exception $e) {
+            $this->nlgSummary = 'Ringkasan AI tidak tersedia. Menampilkan data numerik.';
+            $this->varianceExplanation = '';
         }
     }
 

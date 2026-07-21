@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Concerns\HasBranchScope;
+
 class Reimbursement extends Model
 {
+    use HasBranchScope;
+
     protected $fillable = [
         'employee_id',
         'category_id',

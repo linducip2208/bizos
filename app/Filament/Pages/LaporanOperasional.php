@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\ReportTemplate;
 use App\Services\ReportBuilderService;
+use App\Services\ReportNlgService;
 use Filament\Pages\Page;
 
 class LaporanOperasional extends Page
@@ -31,6 +32,7 @@ class LaporanOperasional extends Page
     public string $dateTo;
     public ?ReportTemplate $activeTemplate = null;
     public array $availableTemplates = [];
+    public string $nlgSummary = '';
 
     public function mount(): void
     {
@@ -55,6 +57,26 @@ class LaporanOperasional extends Page
             $this->loadFromTemplate();
         } else {
             $this->loadLegacyData();
+        }
+
+        $this->generateNlgSummary();
+    }
+
+    protected function generateNlgSummary(): void
+    {
+        try {
+            $nlg = app(ReportNlgService::class);
+
+            $reportData = [
+                'module' => 'Operasional',
+                'periode' => "{$this->dateFrom} s/d {$this->dateTo}",
+                'summary_cards' => $this->cards,
+                'top_performers' => array_slice($this->topPerformers, 0, 5),
+            ];
+
+            $this->nlgSummary = $nlg->generateExecutiveSummary($reportData, 'operasional');
+        } catch (\Exception $e) {
+            $this->nlgSummary = 'Ringkasan AI tidak tersedia. Menampilkan data numerik.';
         }
     }
 

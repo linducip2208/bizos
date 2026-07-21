@@ -54,6 +54,22 @@
             </div>
         </div>
 
+        {{-- NLG Summary Card --}}
+        @if($nlgSummary)
+        <div class="fi-section rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-indigo-200 dark:border-indigo-800 p-5 shadow-sm">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-lg">&#10024;</span>
+                <h3 class="text-sm font-bold text-indigo-800 dark:text-indigo-300">Ringkasan AI</h3>
+            </div>
+            <div class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">{!! nl2br(e($nlgSummary)) !!}</div>
+            @if($varianceExplanation)
+            <div class="mt-3 pt-3 border-t border-indigo-200 dark:border-indigo-800 text-xs text-gray-500 dark:text-gray-400">
+                <strong>Analisis Varians:</strong> {!! nl2br(e($varianceExplanation)) !!}
+            </div>
+            @endif
+        </div>
+        @endif
+
         {{-- Charts Row --}}
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div class="fi-section rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-800 dark:ring-white/10 lg:col-span-2">

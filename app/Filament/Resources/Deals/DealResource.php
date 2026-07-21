@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Deals;
 use App\Filament\Resources\Deals\Pages\CreateDeal;
 use App\Filament\Resources\Deals\Pages\EditDeal;
 use App\Filament\Resources\Deals\Pages\ListDeals;
+use App\Filament\Resources\Deals\Pages\ViewDealKanban;
 use App\Filament\Resources\Deals\Schemas\DealForm;
 use App\Filament\Resources\Deals\Tables\DealsTable;
 use App\Models\Deal;
@@ -59,6 +60,7 @@ class DealResource extends Resource
             'index' => ListDeals::route('/'),
             'create' => CreateDeal::route('/create'),
             'edit' => EditDeal::route('/{record}/edit'),
+            'kanban' => ViewDealKanban::route('/kanban'),
         ];
     }
 }
