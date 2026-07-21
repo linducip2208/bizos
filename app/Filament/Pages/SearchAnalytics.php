@@ -37,13 +37,14 @@ class SearchAnalytics extends Page
     public function loadAnalytics(): void
     {
         $service = app(EnterpriseSearchService::class);
-        $this->analytics = $service->getAnalytics($this->period);
-        $this->topQueries = $service->getTopQueries($this->period, 20);
-        $this->zeroResultQueries = $service->getZeroResultQueries($this->period, 20);
-        $this->dailyTrend = $service->getDailyTrend($this->period);
-        $this->totalSearches = $service->getTotalSearches($this->period);
-        $this->uniqueSearchers = $service->getUniqueSearchers($this->period);
-        $this->avgResults = $service->getAvgResults($this->period);
-        $this->avgTime = $service->getAvgTime($this->period);
+        $analytics = $service->getSearchAnalytics($this->period);
+        $this->analytics = $analytics;
+        $this->topQueries = $service->getPopularSearches(20);
+        $this->zeroResultQueries = $service->getZeroResultSearches(20);
+        $this->dailyTrend = $analytics['trend'] ?? [];
+        $this->totalSearches = $analytics['total_searches'] ?? 0;
+        $this->uniqueSearchers = $analytics['unique_users'] ?? 0;
+        $this->avgResults = $analytics['avg_results_per_search'] ?? 0;
+        $this->avgTime = $analytics['avg_time_ms'] ?? 0;
     }
 }

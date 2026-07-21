@@ -121,7 +121,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->renderHook(
                 'panels::body.end',
-                fn (): string => view('filament.hooks.body-end')->render(),
+                fn (): string => '',
             )
             ->authMiddleware([
                 Authenticate::class,
