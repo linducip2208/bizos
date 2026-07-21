@@ -24,7 +24,7 @@ class PurchaseOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Procurement';
+        return '📦 Product & Inventory';
     }
 
     protected static ?string $label = 'Pesanan Pembelian';

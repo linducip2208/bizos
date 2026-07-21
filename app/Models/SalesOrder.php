@@ -66,6 +66,11 @@ class SalesOrder extends Model
         return $this->hasOne(SalesInvoice::class);
     }
 
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
     protected static function booted(): void
     {
         static::creating(function (SalesOrder $model) {

@@ -11,6 +11,7 @@ class PosPayment extends Model
         'payment_method',
         'amount',
         'reference_number',
+        'payment_id',
         'paid_at',
     ];
 
@@ -22,6 +23,11 @@ class PosPayment extends Model
     public function transaction()
     {
         return $this->belongsTo(PosTransaction::class, 'transaction_id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
     }
 
     public function paymentLines()

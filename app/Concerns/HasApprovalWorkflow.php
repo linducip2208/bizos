@@ -5,7 +5,9 @@ namespace App\Concerns;
 use App\Models\ApprovalAction;
 use App\Models\ApprovalRequest;
 use App\Models\ApprovalWorkflow;
+use App\Models\Workflow;
 use App\Services\ApprovalWorkflowService;
+use App\Services\UnifiedWorkflowService;
 
 trait HasApprovalWorkflow
 {
@@ -14,27 +16,70 @@ trait HasApprovalWorkflow
         return $this->morphOne(ApprovalRequest::class, 'module', 'module', 'module_id');
     }
 
-    public function submitForApproval(?string $notes = null): ApprovalRequest
+    protected function findApprovalWorkflow(): ?Workflow
     {
-        $workflow = ApprovalWorkflow::active()
+        $unified = Workflow::active()
+            ->ofType(Workflow::TYPE_APPROVAL)
             ->forModule($this->getApprovalModule())
             ->where('company_id', $this->company_id ?? 1)
             ->first();
 
-        if (!$workflow) {
-            throw new \RuntimeException("No active approval workflow found for module: {$this->getApprovalModule()}");
+        if ($unified) {
+            return $unified;
         }
 
-        /** @var ApprovalWorkflowService $service */
+        return null;
+    }
+
+    protected function findLegacyApprovalWorkflow(): ?ApprovalWorkflow
+    {
+        return ApprovalWorkflow::active()
+            ->forModule($this->getApprovalModule())
+            ->where('company_id', $this->company_id ?? 1)
+            ->first();
+    }
+
+    public function submitForApproval(?string $notes = null): ApprovalRequest
+    {
+        $unified = $this->findApprovalWorkflow();
+
+        if ($unified) {
+            $service = app(UnifiedWorkflowService::class);
+
+            $title = $this->getApprovalTitle();
+            $requesterId = $this->getApprovalRequesterId();
+            $module = $this->getApprovalModule();
+
+            if (method_exists($this, 'getApprovalWorkflowName')) {
+                $title = $this->getApprovalWorkflowName() . ' ' . ($this->name ?? '#' . $this->id);
+            }
+
+            return $service->submitForApproval(
+                workflow: $unified,
+                module: $module,
+                moduleId: $this->id,
+                title: $title,
+                requesterId: $requesterId,
+                notes: $notes,
+            );
+        }
+
+        $legacy = $this->findLegacyApprovalWorkflow();
+
+        if (!$legacy) {
+            $module = $this->getApprovalModule();
+            throw new \RuntimeException("Tidak ada workflow approval aktif untuk modul: {$module}");
+        }
+
         $service = app(ApprovalWorkflowService::class);
 
         return $service->submit(
-            workflow: $workflow,
+            workflow: $legacy,
             module: $this->getApprovalModule(),
             moduleId: $this->id,
             title: $this->getApprovalTitle(),
             requesterId: $this->getApprovalRequesterId(),
-            notes: $notes ?? null,
+            notes: $notes,
         );
     }
 
@@ -43,10 +88,9 @@ trait HasApprovalWorkflow
         $request = $this->approvalRequest;
 
         if (!$request) {
-            throw new \RuntimeException('No active approval request for this record.');
+            throw new \RuntimeException('Tidak ada approval request aktif untuk record ini.');
         }
 
-        /** @var ApprovalWorkflowService $service */
         $service = app(ApprovalWorkflowService::class);
 
         return $service->approve($request, $approverId, $comment);
@@ -57,10 +101,9 @@ trait HasApprovalWorkflow
         $request = $this->approvalRequest;
 
         if (!$request) {
-            throw new \RuntimeException('No active approval request for this record.');
+            throw new \RuntimeException('Tidak ada approval request aktif untuk record ini.');
         }
 
-        /** @var ApprovalWorkflowService $service */
         $service = app(ApprovalWorkflowService::class);
 
         return $service->reject($request, $approverId, $comment);

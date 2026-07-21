@@ -19,6 +19,10 @@ use App\Filament\Concerns\HasPermissionAccess;
 class IntegrationResource extends Resource
 {
     use HasPermissionAccess;
+
+    // Gunakan grup Integrasi yang sudah ada — resource ini duplikat di grup Sistem.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Integration::class;
 
     protected static ?string $label = 'Integrasi';
@@ -31,7 +35,7 @@ class IntegrationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Sistem';
+        return '🔗 Integrations';
     }
 
     public static function form(Schema $schema): Schema

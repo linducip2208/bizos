@@ -8,8 +8,8 @@ class WasteRecord extends Model
 {
     protected $fillable = [
         'company_id', 'branch_id', 'record_date', 'waste_type',
-        'waste_subtype', 'quantity_kg', 'source', 'disposal_method',
-        'disposal_vendor', 'disposal_cost', 'is_hazardous',
+        'waste_subtype', 'quantity_kg', 'source', 'production_waste_log_id',
+        'disposal_method', 'disposal_vendor', 'disposal_cost', 'is_hazardous',
         'manifest_number', 'notes',
     ];
 
@@ -23,6 +23,11 @@ class WasteRecord extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function productionWasteLog()
+    {
+        return $this->belongsTo(WasteLog::class, 'production_waste_log_id');
     }
 
     public function branch()

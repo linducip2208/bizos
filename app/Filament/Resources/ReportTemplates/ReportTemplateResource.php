@@ -30,7 +30,7 @@ class ReportTemplateResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? AI & Analytics';
+        return '🏠 Dashboard & Reporting';
     }
 
     public static function form(Schema $schema): Schema

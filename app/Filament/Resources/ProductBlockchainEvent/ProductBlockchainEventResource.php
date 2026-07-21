@@ -30,7 +30,7 @@ class ProductBlockchainEventResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Extras';
+        return '🔷 Blockchain';
     }
 
     public static function form(Schema $schema): Schema

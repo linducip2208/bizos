@@ -24,7 +24,7 @@ class CommissionSlabResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Sales & CRM';
+        return '📈 Sales & CRM';
     }
 
     protected static ?string $label = 'Komisi Slab';

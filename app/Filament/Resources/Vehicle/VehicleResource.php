@@ -23,7 +23,7 @@ class VehicleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Organisasi';
+        return '🏢 Organisasi';
     }
 
     protected static ?string $label = 'Kendaraan';

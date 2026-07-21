@@ -19,11 +19,15 @@ use App\Filament\Concerns\HasPermissionAccess;
 class DesignationResource extends Resource
 {
     use HasPermissionAccess;
+
+    // Gunakan Position sebagai gantinya — Designation dan Position memodelkan konsep yang sama (jabatan).
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Designation::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Organisasi';
+        return '🏢 Organisasi';
     }
 
     protected static ?string $label = 'Penunjukan';

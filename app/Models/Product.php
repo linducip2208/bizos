@@ -16,6 +16,7 @@ class Product extends Model
         'unit_id',
         'code',
         'name',
+        'product_type',
         'description',
         'unit',
         'purchase_price',

@@ -28,7 +28,7 @@ class MarketplaceInstallResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Extras';
+        return '🧩 Platform';
     }
 
     public static function table(Table $table): Table

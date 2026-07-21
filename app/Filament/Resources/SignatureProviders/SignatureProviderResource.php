@@ -28,7 +28,7 @@ class SignatureProviderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Integrasi';
+        return '🔗 Integrations';
     }
 
     public static function getPages(): array

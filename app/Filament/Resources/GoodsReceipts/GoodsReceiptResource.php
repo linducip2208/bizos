@@ -24,7 +24,7 @@ class GoodsReceiptResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Procurement';
+        return '📦 Product & Inventory';
     }
 
     protected static ?string $label = 'Penerimaan Barang';

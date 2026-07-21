@@ -19,7 +19,7 @@ class BatchResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventori';
+        return '📦 Product & Inventory';
     }
 
     protected static ?string $label = 'Batch';

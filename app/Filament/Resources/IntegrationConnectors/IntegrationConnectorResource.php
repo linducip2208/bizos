@@ -23,7 +23,7 @@ class IntegrationConnectorResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Integrasi';
+        return '🔗 Integrations';
     }
 
     protected static ?string $label = 'Konektor';

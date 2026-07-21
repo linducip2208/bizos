@@ -29,7 +29,7 @@ class AdvancedReportResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? AI & Analytics';
+        return '🏠 Dashboard & Reporting';
     }
 
     public static function table(Table $table): Table

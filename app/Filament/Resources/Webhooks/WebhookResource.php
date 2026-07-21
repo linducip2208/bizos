@@ -32,7 +32,7 @@ class WebhookResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Integrasi';
+        return '🔗 Integrations';
     }
 
     public static function form(Schema $schema): Schema

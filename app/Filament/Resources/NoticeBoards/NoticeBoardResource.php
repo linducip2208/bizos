@@ -19,7 +19,7 @@ class NoticeBoardResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = NoticeBoardPost::class;
-    public static function getNavigationGroup(): string|null { return '?? Project & Work'; }
+    public static function getNavigationGroup(): string|null { return '💬 Collaboration'; }
     protected static ?string $label = 'Papan Pengumuman';
     protected static ?string $pluralLabel = 'Papan Pengumuman';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;

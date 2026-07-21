@@ -23,7 +23,7 @@ class WasteRecordResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '??? Compliance';
+        return '🌱 ESG & Sustainability';
     }
 
     protected static ?string $label = 'Limbah';

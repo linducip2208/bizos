@@ -19,7 +19,7 @@ class GamificationBadgeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Learning';
+        return '🏆 Gamification';
     }
 
     protected static ?string $label = 'Badge';

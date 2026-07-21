@@ -23,7 +23,7 @@ class StockMovementResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Procurement';
+        return '📦 Product & Inventory';
     }
 
     protected static ?string $label = 'Pergerakan Stok';

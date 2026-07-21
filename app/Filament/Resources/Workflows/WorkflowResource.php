@@ -22,17 +22,17 @@ class WorkflowResource extends Resource
 
     protected static ?string $model = Workflow::class;
 
-    protected static ?string $label = 'Otomasi Workflow';
+    protected static ?string $label = 'Workflow';
 
-    protected static ?string $pluralLabel = 'Otomasi Workflow';
+    protected static ?string $pluralLabel = 'Workflow';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Integrasi';
+        return '⚡ Automation & Workflow';
     }
 
     public static function form(Schema $schema): Schema

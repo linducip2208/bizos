@@ -20,6 +20,10 @@ use App\Filament\Concerns\HasPermissionAccess;
 class DeductionResource extends Resource
 {
     use HasPermissionAccess;
+
+    // Gunakan SalaryComponent dengan component_category = 'deduction'.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Deduction::class;
 
     public static function getSlug(?Panel $panel = null): string

@@ -11,6 +11,7 @@ class Position extends Model
         'department_id',
         'code',
         'name',
+        'formal_title',
         'description',
         'sort_order',
         'is_active',

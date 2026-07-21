@@ -15,11 +15,14 @@ class WasteLogResource extends Resource
 {
     use HasPermissionAccess;
 
+    // WasteLog produksi sudah terhubung ke ESG WasteRecord via production_waste_log_id.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = WasteLog::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Industri';
+        return '🏭 Industry';
     }
 
     protected static ?string $label = 'Waste Log';

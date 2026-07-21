@@ -26,7 +26,7 @@ class EnergyReadingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Extras';
+        return '🌱 ESG & Sustainability';
     }
 
     protected static ?string $label = 'Pembacaan Energi';

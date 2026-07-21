@@ -19,7 +19,7 @@ class SmsGatewayResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = SmsGateway::class;
-    public static function getNavigationGroup(): string|null { return '?? Integrasi'; }
+    public static function getNavigationGroup(): string|null { return '🔗 Integrations'; }
     protected static ?string $label = 'SMS Gateway';
     protected static ?string $pluralLabel = 'SMS Gateway';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;

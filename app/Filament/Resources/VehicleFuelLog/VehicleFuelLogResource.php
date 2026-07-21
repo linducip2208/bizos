@@ -21,7 +21,7 @@ class VehicleFuelLogResource extends Resource
 
     protected static ?string $model = VehicleFuelLog::class;
 
-    public static function getNavigationGroup(): string|null { return '?? Organisasi'; }
+    public static function getNavigationGroup(): string|null { return '🏢 Organisasi'; }
 
     protected static ?string $label = 'Log BBM';
 

@@ -20,6 +20,10 @@ use App\Filament\Concerns\HasPermissionAccess;
 class AllowanceResource extends Resource
 {
     use HasPermissionAccess;
+
+    // Gunakan SalaryComponent dengan component_category = 'allowance'.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Allowance::class;
 
     public static function getSlug(?Panel $panel = null): string

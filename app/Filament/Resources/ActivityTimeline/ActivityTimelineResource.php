@@ -19,7 +19,7 @@ class ActivityTimelineResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏠 Dashboard';
+        return '🏠 Dashboard & Reporting';
     }
 
     protected static ?string $label = 'Aktivitas';

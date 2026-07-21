@@ -20,6 +20,9 @@ class SalesInvoiceResource extends Resource
 {
     use HasPermissionAccess;
 
+    // Gunakan Invoice (Finance) untuk semua billing — SalesInvoice sudah dinormalisasi ke Invoice.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = SalesInvoice::class;
 
     public static function getNavigationGroup(): string|null

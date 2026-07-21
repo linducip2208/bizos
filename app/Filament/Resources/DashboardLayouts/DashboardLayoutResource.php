@@ -16,6 +16,9 @@ use Filament\Tables\Table;
 
 class DashboardLayoutResource extends Resource
 {
+    // DashboardLayout dikonsolidasi dengan DashboardBuilder — gunakan sistem yang satu.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = DashboardLayout::class;
 
     protected static ?string $label = 'Dashboard Layout';
@@ -30,7 +33,7 @@ class DashboardLayoutResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? AI & Analytics';
+        return '🏠 Dashboard & Reporting';
     }
 
     public static function form(Schema $schema): Schema

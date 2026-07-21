@@ -15,11 +15,14 @@ class FinishedGoodResource extends Resource
 {
     use HasPermissionAccess;
 
+    // Gunakan Product dengan product_type = 'finished' — FinishedGood = Product.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = FinishedGood::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Manufaktur';
+        return '🏭 Industry';
     }
 
     protected static ?string $label = 'Barang Jadi';

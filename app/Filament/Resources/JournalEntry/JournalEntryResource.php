@@ -29,7 +29,7 @@ class JournalEntryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Finance & Accounting';
+        return '💵 Finance & Accounting';
     }
 
     protected static ?string $label = 'Entri Jurnal';

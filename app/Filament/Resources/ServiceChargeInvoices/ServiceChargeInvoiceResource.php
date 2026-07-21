@@ -23,7 +23,7 @@ class ServiceChargeInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Industri';
+        return '🏭 Industry';
     }
 
     protected static ?string $label = 'Tagihan IPL';

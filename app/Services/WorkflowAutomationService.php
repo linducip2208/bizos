@@ -115,7 +115,7 @@ class WorkflowAutomationService
         }
     }
 
-    protected function executeAction(array $action, array $context): array
+    public function executeAction(array $action, array $context): array
     {
         $type = $action['type'] ?? null;
         $config = $action['config'] ?? [];

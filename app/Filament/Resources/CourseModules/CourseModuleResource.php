@@ -23,7 +23,7 @@ class CourseModuleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Learning';
+        return '🎓 Learning';
     }
 
     protected static ?string $label = 'Modul Kursus';

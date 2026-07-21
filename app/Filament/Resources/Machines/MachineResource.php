@@ -19,7 +19,7 @@ class MachineResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Manufaktur';
+        return '🏭 Industry';
     }
 
     protected static ?string $label = 'Mesin';

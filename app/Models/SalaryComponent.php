@@ -10,6 +10,7 @@ class SalaryComponent extends Model
         'company_id',
         'code',
         'name',
+        'component_category',
         'type',
         'calculation_type',
         'amount',

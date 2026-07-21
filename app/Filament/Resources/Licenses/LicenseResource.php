@@ -23,7 +23,7 @@ class LicenseResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙ Administrasi';
+        return '💳 Billing & Licensing';
     }
 
     protected static ?string $label = 'Lisensi';

@@ -31,7 +31,7 @@ class MarketplaceAppResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Extras';
+        return '🧩 Platform';
     }
 
     public static function form(Schema $schema): Schema

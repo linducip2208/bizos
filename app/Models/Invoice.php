@@ -18,6 +18,7 @@ class Invoice extends Model
         'due_date',
         'reference_entity',
         'reference_id',
+        'sales_order_id',
         'subtotal',
         'discount_amount',
         'tax_amount',
@@ -59,6 +60,11 @@ class Invoice extends Model
         return $this->belongsToMany(Payment::class, 'invoice_payments')
             ->withPivot('amount')
             ->withTimestamps();
+    }
+
+    public function salesOrder()
+    {
+        return $this->belongsTo(SalesOrder::class);
     }
 
     public function assets()

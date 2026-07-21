@@ -19,7 +19,7 @@ class WikiCategoryResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = WikiCategory::class;
-    public static function getNavigationGroup(): string|null { return '?? Project & Work'; }
+    public static function getNavigationGroup(): string|null { return '💬 Collaboration'; }
     protected static ?string $label = 'Kategori Wiki';
     protected static ?string $pluralLabel = 'Kategori Wiki';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;

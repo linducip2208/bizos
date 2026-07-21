@@ -23,7 +23,7 @@ class WaTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Sales & CRM';
+        return '📈 Sales & CRM';
     }
 
     protected static ?string $label = 'Template WA';

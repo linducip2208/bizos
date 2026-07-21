@@ -20,6 +20,10 @@ use App\Filament\Concerns\HasPermissionAccess;
 class PayrollApprovalResource extends Resource
 {
     use HasPermissionAccess;
+
+    // Gunakan ApprovalWorkflow engine untuk persetujuan payroll.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = PayrollApproval::class;
 
     public static function getSlug(?Panel $panel = null): string

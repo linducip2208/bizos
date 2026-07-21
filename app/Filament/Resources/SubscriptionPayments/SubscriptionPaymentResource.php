@@ -23,7 +23,7 @@ class SubscriptionPaymentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? Sistem';
+        return '💳 Billing & Licensing';
     }
 
     protected static ?string $label = 'Pembayaran Langganan';

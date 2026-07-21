@@ -24,7 +24,7 @@ class LoyaltyConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '?? POS & Retail';
+        return '🛒 POS & Retail';
     }
 
     protected static ?string $label = 'Konfigurasi Loyalitas';
