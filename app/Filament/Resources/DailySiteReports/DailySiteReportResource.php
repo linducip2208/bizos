@@ -23,7 +23,7 @@ class DailySiteReportResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏗️ Konstruksi';
+        return 'Konstruksi';
     }
 
     protected static ?string $label = 'Laporan Harian';

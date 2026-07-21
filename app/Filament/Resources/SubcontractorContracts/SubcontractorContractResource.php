@@ -23,7 +23,7 @@ class SubcontractorContractResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏗️ Konstruksi';
+        return 'Konstruksi';
     }
 
     protected static ?string $label = 'Kontrak Subkon';

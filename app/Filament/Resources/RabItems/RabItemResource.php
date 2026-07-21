@@ -23,7 +23,7 @@ class RabItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏗️ Konstruksi';
+        return 'Konstruksi';
     }
 
     protected static ?string $label = 'Item RAB';
