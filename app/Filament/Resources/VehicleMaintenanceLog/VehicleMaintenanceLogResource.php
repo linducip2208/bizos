@@ -19,7 +19,7 @@ class VehicleMaintenanceLogResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = VehicleMaintenanceLog::class;
-    public static function getNavigationGroup(): string|null { return 'Master Data'; }
+    public static function getNavigationGroup(): string|null { return '?? Master Data'; }
     protected static ?string $label = 'Log Perawatan';
     protected static ?string $pluralLabel = 'Log Perawatan';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;

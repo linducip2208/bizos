@@ -26,7 +26,7 @@ class IotReadingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'IoT & Sensor';
+        return '?? Extras';
     }
 
     protected static ?string $label = 'Pembacaan Sensor';

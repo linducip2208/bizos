@@ -31,7 +31,7 @@ class CalendarResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kolaborasi';
+        return '?? Project & Work';
     }
 
     public static function form(Schema $schema): Schema

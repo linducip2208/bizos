@@ -32,7 +32,7 @@ class WorkflowResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Integrasi';
+        return '?? Integrasi';
     }
 
     public static function form(Schema $schema): Schema

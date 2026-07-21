@@ -23,7 +23,7 @@ class TaskCommentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Project';
+        return '?? Project & Work';
     }
 
     protected static ?string $label = 'Komentar Tugas';

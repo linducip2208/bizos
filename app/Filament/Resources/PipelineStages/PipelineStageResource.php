@@ -23,7 +23,7 @@ class PipelineStageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'CRM';
+        return '?? Sales & CRM';
     }
 
     protected static ?string $label = 'Tahap Pipeline';

@@ -30,7 +30,7 @@ class DashboardLayoutResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Laporan';
+        return '?? AI & Analytics';
     }
 
     public static function form(Schema $schema): Schema

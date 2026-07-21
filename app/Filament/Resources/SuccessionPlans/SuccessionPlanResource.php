@@ -19,7 +19,7 @@ class SuccessionPlanResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = SuccessionPlan::class;
-    public static function getNavigationGroup(): string|null { return 'HRM'; }
+    public static function getNavigationGroup(): string|null { return '?? HR & Payroll'; }
     protected static ?string $label = 'Rencana Suksesi';
     protected static ?string $pluralLabel = 'Rencana Suksesi';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;

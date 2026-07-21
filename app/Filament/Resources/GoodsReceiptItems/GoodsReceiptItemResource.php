@@ -23,7 +23,7 @@ class GoodsReceiptItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Procurement & Inventory';
+        return '?? Procurement';
     }
 
     protected static ?string $label = 'Item Penerimaan';

@@ -29,7 +29,7 @@ class BankFacilityResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Treasury';
+        return '?? Finance & Accounting';
     }
 
     protected static ?string $label = 'Fasilitas Bank';

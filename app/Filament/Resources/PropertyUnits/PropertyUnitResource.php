@@ -23,7 +23,7 @@ class PropertyUnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Properti';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Unit Properti';

@@ -23,7 +23,7 @@ class TicketCategoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Helpdesk';
+        return '?? Support';
     }
 
     protected static ?string $label = 'Kategori Tiket';

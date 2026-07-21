@@ -23,7 +23,7 @@ class ProductCategoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'POS';
+        return '?? POS & Retail';
     }
 
     protected static ?string $label = 'Kategori Produk';

@@ -29,7 +29,7 @@ class EnergyMeterResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'IoT & Sensor';
+        return '?? Extras';
     }
 
     protected static ?string $label = 'Meter Energi';

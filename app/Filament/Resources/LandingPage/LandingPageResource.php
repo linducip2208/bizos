@@ -24,7 +24,7 @@ class LandingPageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Marketing';
+        return '?? Sales & CRM';
     }
 
     protected static ?string $label = 'Landing Page';

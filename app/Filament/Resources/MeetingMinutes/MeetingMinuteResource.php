@@ -23,7 +23,7 @@ class MeetingMinuteResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kolaborasi';
+        return '?? Project & Work';
     }
 
     protected static ?string $label = 'Notula Rapat';

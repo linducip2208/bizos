@@ -29,7 +29,7 @@ class BpjsConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Payroll';
+        return '?? HR & Payroll';
     }
 
     protected static ?string $label = 'Konfigurasi BPJS';

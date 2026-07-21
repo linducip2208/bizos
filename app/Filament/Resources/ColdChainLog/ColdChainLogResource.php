@@ -23,7 +23,7 @@ class ColdChainLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Logistik';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Cold Chain Log';

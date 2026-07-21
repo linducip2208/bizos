@@ -19,7 +19,7 @@ class RewardResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Gamifikasi';
+        return '?? Learning';
     }
 
     protected static ?string $label = 'Reward';

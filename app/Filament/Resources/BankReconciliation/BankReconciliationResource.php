@@ -30,7 +30,7 @@ class BankReconciliationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Finance';
+        return '?? Finance & Accounting';
     }
 
     protected static ?string $label = 'Rekonsiliasi Bank';

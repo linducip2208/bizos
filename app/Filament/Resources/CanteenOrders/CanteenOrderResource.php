@@ -23,7 +23,7 @@ class CanteenOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'HRM';
+        return '?? HR & Payroll';
     }
 
     protected static ?string $label = 'Pesanan Kantin';

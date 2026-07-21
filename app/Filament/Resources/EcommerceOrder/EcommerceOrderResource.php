@@ -23,7 +23,7 @@ class EcommerceOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'E-Commerce';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Pesanan';

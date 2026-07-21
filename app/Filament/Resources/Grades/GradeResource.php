@@ -23,7 +23,7 @@ class GradeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Master Data';
+        return '?? Master Data';
     }
 
     protected static ?string $label = 'Grade';

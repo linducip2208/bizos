@@ -25,7 +25,7 @@ class MedicalRecordResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kesehatan';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Rekam Medis';

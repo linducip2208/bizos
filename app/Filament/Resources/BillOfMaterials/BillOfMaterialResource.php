@@ -19,7 +19,7 @@ class BillOfMaterialResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Manufaktur';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Bill of Material';

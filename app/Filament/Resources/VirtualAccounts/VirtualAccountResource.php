@@ -23,7 +23,7 @@ class VirtualAccountResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Hub Integrasi';
+        return '?? Integrasi';
     }
 
     protected static ?string $label = 'Virtual Account';

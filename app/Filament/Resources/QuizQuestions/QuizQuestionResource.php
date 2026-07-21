@@ -23,7 +23,7 @@ class QuizQuestionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'LMS';
+        return '?? Learning';
     }
 
     protected static ?string $label = 'Soal Kuis';

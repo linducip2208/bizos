@@ -31,7 +31,7 @@ class QuizResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'LMS';
+        return '?? Learning';
     }
 
     public static function form(Schema $schema): Schema

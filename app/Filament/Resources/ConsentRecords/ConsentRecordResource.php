@@ -29,7 +29,7 @@ class ConsentRecordResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kepatuhan';
+        return '??? Compliance';
     }
 
     public static function getPages(): array

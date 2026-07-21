@@ -23,7 +23,7 @@ class NotificationTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Sistem';
+        return '?? Sistem';
     }
 
     protected static ?string $label = 'Template Notifikasi';

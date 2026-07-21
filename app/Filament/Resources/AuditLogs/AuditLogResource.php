@@ -22,7 +22,7 @@ class AuditLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Sistem';
+        return '?? Sistem';
     }
 
     protected static ?string $label = 'Audit Log';

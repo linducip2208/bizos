@@ -23,7 +23,7 @@ class FleetGpsTrackResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Logistik';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'GPS Tracking';

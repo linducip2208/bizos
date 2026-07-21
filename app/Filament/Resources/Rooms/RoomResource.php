@@ -23,7 +23,7 @@ class RoomResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Perhotelan';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Kamar';

@@ -23,7 +23,7 @@ class ChatResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kolaborasi';
+        return '?? Project & Work';
     }
 
     protected static ?string $label = 'Obrolan';

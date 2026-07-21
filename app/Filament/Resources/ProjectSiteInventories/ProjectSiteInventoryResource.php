@@ -23,7 +23,7 @@ class ProjectSiteInventoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Konstruksi';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Inventaris Site';

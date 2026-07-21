@@ -23,7 +23,7 @@ class FormSubmissionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Kolaborasi';
+        return '?? Project & Work';
     }
 
     protected static ?string $label = 'Submit Formulir';

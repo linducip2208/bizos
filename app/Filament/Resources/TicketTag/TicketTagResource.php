@@ -23,7 +23,7 @@ class TicketTagResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Helpdesk';
+        return '?? Support';
     }
 
     protected static ?string $label = 'Label Tiket';

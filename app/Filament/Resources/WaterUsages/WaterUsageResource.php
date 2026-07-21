@@ -23,7 +23,7 @@ class WaterUsageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'ESG';
+        return '??? Compliance';
     }
 
     protected static ?string $label = 'Air';

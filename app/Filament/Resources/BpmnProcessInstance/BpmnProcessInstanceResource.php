@@ -32,7 +32,7 @@ class BpmnProcessInstanceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'BPMN';
+        return '?? Extras';
     }
 
     public static function form(Schema $schema): Schema

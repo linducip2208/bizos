@@ -23,7 +23,7 @@ class SubscriptionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Core';
+        return '?? Sistem';
     }
 
     protected static ?string $label = 'Langganan';

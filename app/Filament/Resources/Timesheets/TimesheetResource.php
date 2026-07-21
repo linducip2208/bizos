@@ -23,7 +23,7 @@ class TimesheetResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Project';
+        return '?? Project & Work';
     }
 
     protected static ?string $label = 'Timesheet';

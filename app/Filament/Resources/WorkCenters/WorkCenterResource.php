@@ -19,7 +19,7 @@ class WorkCenterResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Manufaktur';
+        return '?? Industri';
     }
 
     protected static ?string $label = 'Work Center';
