@@ -1,6 +1,4 @@
-@extends('filament::layouts.base')
-
-@section('content')
+<x-filament-panels::page>
 <div x-data="{ activeTab: 'overview' }" class="p-6 space-y-6">
 
     {{-- Header --}}
@@ -239,4 +237,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endif
-@endsection
+</x-filament-panels::page>

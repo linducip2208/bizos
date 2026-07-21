@@ -1,6 +1,4 @@
-@extends('filament::layouts.base')
-@section('content')
-<div class="fi-page">
+<x-filament-panels::page>
     <div class="px-6 py-6 max-w-3xl mx-auto">
         <h1 class="text-2xl font-bold mb-2">Generator Laporan ESG</h1>
         <p class="text-stone-500 mb-8">Generate laporan ESG sesuai kerangka standar: GRI, POJK 51, IFRS S1-S2, atau SASB.</p>
@@ -66,5 +64,4 @@
             </ul>
         </div>
     </div>
-</div>
-@endsection
+</x-filament-panels::page>

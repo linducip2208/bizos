@@ -1,7 +1,6 @@
-@extends('filament::layouts.base')
-@section('content')
-<div class="fi-page esg-dashboard" x-data="esgDashboard">
-    <div class="px-6 py-4">
+<x-filament-panels::page>
+<div class="space-y-6">
+    <div class="px-0 py-0">
         {{-- ESG Score Card --}}
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div class="fi-section rounded-xl p-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
@@ -233,4 +232,4 @@
         @endif
     </div>
 </div>
-@endsection
+</x-filament-panels::page>

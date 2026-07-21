@@ -1,6 +1,5 @@
-@extends('filament::layouts.base')
-@section('content')
-<div class="fi-page">
+<x-filament-panels::page>
+<div class="space-y-6">
     <div class="px-6 py-4">
         <h1 class="text-2xl font-bold mb-6">Hub Integrasi</h1>
 
@@ -138,5 +137,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-filament-panels::page>
