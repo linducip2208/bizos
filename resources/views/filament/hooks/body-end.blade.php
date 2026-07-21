@@ -1,9 +1,3 @@
-{{-- Command Palette (persistent) --}}
-<livewire:command-palette />
-
-{{-- Global Enterprise Search (persistent, ctrl+k) --}}
-<livewire:global-search-bar />
-
 {{-- Sidebar Group Emoji Injection --}}
 <script>
 (function() {

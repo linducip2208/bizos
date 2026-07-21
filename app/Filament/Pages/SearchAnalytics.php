@@ -28,6 +28,7 @@ class SearchAnalytics extends Page
     public int $uniqueSearchers = 0;
     public float $avgResults = 0;
     public float $avgTime = 0;
+    public float $ctr = 0;
 
     public function mount(): void
     {
@@ -41,10 +42,17 @@ class SearchAnalytics extends Page
         $this->analytics = $analytics;
         $this->topQueries = $service->getPopularSearches(20);
         $this->zeroResultQueries = $service->getZeroResultSearches(20);
-        $this->dailyTrend = $analytics['trend'] ?? [];
+        $this->dailyTrend = $analytics['daily_trend'] ?? [];
         $this->totalSearches = $analytics['total_searches'] ?? 0;
-        $this->uniqueSearchers = $analytics['unique_users'] ?? 0;
+        $this->uniqueSearchers = $analytics['unique_searchers'] ?? 0;
         $this->avgResults = $analytics['avg_results_per_search'] ?? 0;
-        $this->avgTime = $analytics['avg_time_ms'] ?? 0;
+        $this->avgTime = $analytics['avg_search_time_ms'] ?? 0;
+        $this->ctr = (float) ($analytics['click_through_rate_pct'] ?? 0);
+    }
+
+    public function setPeriod(string $period): void
+    {
+        $this->period = $period;
+        $this->loadAnalytics();
     }
 }

@@ -101,10 +101,9 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('🏨 Perhotelan')->collapsed(true),
                 NavigationGroup::make('🏠 Properti')->collapsed(true),
                 NavigationGroup::make('Platform')->collapsed(false),
-                NavigationGroup::make('Kepatuhan')->collapsed(true),
+                NavigationGroup::make('Kepatuhan')->collapsed(false),
                 NavigationGroup::make('Sistem')->collapsed(true),
                 NavigationGroup::make('Field Service')->collapsed(false),
-                NavigationGroup::make('Kepatuhan')->collapsed(false),
                 NavigationGroup::make('Gamifikasi')->collapsed(false),
                 NavigationGroup::make('IoT & Sensor')->collapsed(false),
                 NavigationGroup::make('Treasury')->collapsed(false),
@@ -121,7 +120,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->renderHook(
                 'panels::body.end',
-                fn (): string => '',
+                fn (): string => view('filament.hooks.body-end')->render(),
             )
             ->authMiddleware([
                 Authenticate::class,
