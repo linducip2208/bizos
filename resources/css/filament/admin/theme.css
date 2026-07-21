@@ -1,0 +1,230 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+@source '../../../../app/Filament';
+@source '../../../../resources/views/filament';
+@source '../../../../vendor/filament/**/*.blade.php';
+
+/* === SIDEBAR === */
+.fi-sidebar {
+    background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%) !important;
+}
+
+.fi-sidebar-header {
+    padding: 1.5rem 1.25rem 0.75rem !important;
+}
+
+.fi-sidebar-item-btn {
+    border-radius: 10px !important;
+    margin: 2px 8px !important;
+    transition: all 0.2s ease !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.fi-sidebar-item-btn:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: translateX(2px);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-left: 3px solid rgba(255, 255, 255, 0.8) !important;
+    color: #ffffff !important;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+    color: rgb(199, 210, 254) !important;
+}
+
+.fi-sidebar-item-btn > .fi-icon {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.fi-sidebar-item-btn .fi-sidebar-item-label {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 0.875rem !important;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-label {
+    color: #ffffff !important;
+}
+
+.fi-sidebar-group button {
+    border-radius: 10px !important;
+    margin: 2px 8px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+}
+
+.fi-sidebar-group button:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark .fi-sidebar {
+    background: linear-gradient(180deg, #0f0a2e 0%, #1e1b4b 100%) !important;
+}
+
+/* === TOPBAR === */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
+
+.dark .fi-topbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5) !important;
+}
+
+/* === CARDS & SECTIONS === */
+.fi-section {
+    border-radius: 14px !important;
+    border: 1px solid rgba(226, 232, 240, 0.6) !important;
+}
+
+.fi-section-header {
+    padding: 1.25rem 1.5rem 0.5rem !important;
+}
+
+.fi-section-content {
+    padding: 1rem 1.5rem 1.5rem !important;
+}
+
+/* === STATS WIDGETS === */
+.fi-wi-stats-overview-stat {
+    border-radius: 14px !important;
+}
+
+/* === TABLES === */
+.fi-ta-header-cell {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+}
+
+.fi-ta-cell {
+    padding: 14px 16px !important;
+}
+
+/* === SCROLLBARS === */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+/* === PRINT === */
+@media print {
+    .fi-sidebar, .fi-topbar, .fi-header-actions {
+        display: none !important;
+    }
+    .fi-main {
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+    }
+    .fi-section {
+        box-shadow: none !important;
+        border: 1px solid #e2e8f0 !important;
+        break-inside: avoid !important;
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* === LOGIN PAGE === */
+.fi-login-clean {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    padding: 2rem;
+}
+
+.fi-login-clean-inner {
+    width: 100%;
+    max-width: 420px;
+}
+
+.fi-login-logo {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.fi-login-logo svg {
+    margin: 0 auto;
+    width: 52px;
+    height: 52px;
+    color: #4f46e5;
+}
+
+.fi-login-form {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .fi-login-clean {
+    background: #0f172a;
+}
+
+.dark .fi-login-form {
+    background: #1e293b;
+    border-color: rgba(51, 65, 85, 0.5);
+}
+
+/* === RESPONSIVE: Tablet === */
+@media (max-width: 1023px) {
+    .fi-section {
+        border-radius: 10px;
+    }
+    .fi-section-content {
+        padding: 14px;
+    }
+    .fi-section-header {
+        padding: 14px 14px 4px;
+    }
+    .fi-ta-cell {
+        padding: 10px 12px;
+        font-size: 12.5px;
+    }
+}
+
+/* === RESPONSIVE: Mobile === */
+@media (max-width: 640px) {
+    .fi-topbar {
+        padding: 10px 12px;
+    }
+    .fi-sidebar {
+        width: 280px;
+    }
+    .fi-login-clean {
+        padding: 1rem;
+    }
+    .fi-login-form {
+        padding: 1.5rem;
+    }
+}

@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Filament\Resources\Chats;
+
+use App\Filament\Resources\Chats\Pages\CreateChat;
+use App\Filament\Resources\Chats\Pages\EditChat;
+use App\Filament\Resources\Chats\Pages\ListChats;
+use App\Filament\Resources\Chats\Schemas\ChatForm;
+use App\Filament\Resources\Chats\Tables\ChatsTable;
+use App\Models\Chat;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+
+use App\Filament\Concerns\HasPermissionAccess;
+class ChatResource extends Resource
+{
+    use HasPermissionAccess;
+    protected static ?string $model = Chat::class;
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'Kolaborasi';
+    }
+
+    protected static ?string $label = 'Obrolan';
+
+    protected static ?string $pluralLabel = 'Obrolan';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
+
+    protected static ?int $navigationSort = 704;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function form(Schema $schema): Schema
+    {
+        return ChatForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return ChatsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListChats::route('/'),
+            'create' => CreateChat::route('/create'),
+            'edit' => EditChat::route('/{record}/edit'),
+        ];
+    }
+}
