@@ -19,6 +19,7 @@ class MaintenanceRequest extends Model
         'completed_at',
         'cost',
         'notes',
+        'work_order_id',
     ];
 
     protected $casts = [
@@ -44,5 +45,10 @@ class MaintenanceRequest extends Model
     public function assignedTo()
     {
         return $this->belongsTo(Employee::class, 'assigned_to');
+    }
+
+    public function workOrder()
+    {
+        return $this->belongsTo(WorkOrder::class, 'work_order_id');
     }
 }

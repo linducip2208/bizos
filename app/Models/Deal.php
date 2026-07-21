@@ -10,6 +10,7 @@ class Deal extends Model
         'company_id',
         'lead_id',
         'client_id',
+        'project_id',
         'stage_id',
         'assigned_to',
         'title',
@@ -19,6 +20,7 @@ class Deal extends Model
         'status',
         'lost_reason',
         'notes',
+        'invoice_id',
     ];
 
     protected $casts = [
@@ -55,5 +57,15 @@ class Deal extends Model
     public function commissions()
     {
         return $this->hasMany(DealCommission::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

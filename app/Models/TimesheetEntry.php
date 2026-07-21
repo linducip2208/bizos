@@ -14,11 +14,14 @@ class TimesheetEntry extends Model
         'hours',
         'description',
         'is_billable',
+        'invoice_id',
+        'is_billed',
     ];
 
     protected $casts = [
         'hours' => 'decimal:2',
         'is_billable' => 'boolean',
+        'is_billed' => 'boolean',
     ];
 
     public function timesheet()
@@ -29,5 +32,10 @@ class TimesheetEntry extends Model
     public function task()
     {
         return $this->belongsTo(Task::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

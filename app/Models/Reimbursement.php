@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
+use App\Concerns\HasApprovalWorkflow;
+use App\Concerns\HasBranchScope;
+use App\Contracts\Approvalable;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Concerns\HasBranchScope;
-
-class Reimbursement extends Model
+class Reimbursement extends Model implements Approvalable
 {
-    use HasBranchScope;
+    use HasBranchScope, HasApprovalWorkflow;
+
+    public function getApprovalModule(): string { return 'reimbursement'; }
+    public function getApprovalTitle(): string { $emp = $this->employee; $cat = $this->category; return "Reimbursement: " . ($emp ? trim($emp->first_name . ' ' . $emp->last_name) : 'Unknown') . ' — ' . ($cat?->name ?? 'Tanpa Kategori'); }
+    public function getApprovalRequesterId(): int { return $this->employee_id ?? 0; }
+    public function getApprovalWorkflowName(): string { return 'Reimbursement'; }
+    public function onApproved(): void { $this->update(['status' => 'approved']); }
+    public function onRejected(string $reason): void { $this->update(['status' => 'rejected', 'rejection_reason' => $reason]); }
 
     protected $fillable = [
         'employee_id',

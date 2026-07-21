@@ -24,12 +24,14 @@ class CertificateTable
                     ->label('Kursus')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('enrollment.employee.first_name')
-                    ->label('Peserta')
+                TextColumn::make('employee.first_name')
+                    ->label('Karyawan')
                     ->searchable()
-                    ->formatStateUsing(fn ($record) => $record->enrollment?->employee
-                        ? $record->enrollment->employee->first_name . ' ' . $record->enrollment->employee->last_name
-                        : '-')
+                    ->formatStateUsing(fn ($record) => $record->employee
+                        ? $record->employee->first_name . ' ' . $record->employee->last_name
+                        : ($record->enrollment?->employee
+                            ? $record->enrollment->employee->first_name . ' ' . $record->enrollment->employee->last_name
+                            : '-'))
                     ->sortable(),
                 TextColumn::make('uuid')
                     ->label('UUID')

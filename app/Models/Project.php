@@ -14,6 +14,7 @@ class Project extends Model
         'company_id',
         'department_id',
         'client_id',
+        'deal_id',
         'manager_id',
         'code',
         'name',
@@ -74,5 +75,10 @@ class Project extends Model
     public function milestones()
     {
         return $this->hasMany(Milestone::class);
+    }
+
+    public function deal()
+    {
+        return $this->belongsTo(Deal::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Concerns;
 
+use App\Models\ApprovalAction;
 use App\Models\ApprovalRequest;
 use App\Models\ApprovalWorkflow;
 use App\Services\ApprovalWorkflowService;
@@ -13,7 +14,7 @@ trait HasApprovalWorkflow
         return $this->morphOne(ApprovalRequest::class, 'module', 'module', 'module_id');
     }
 
-    public function submitForApproval(): ?ApprovalRequest
+    public function submitForApproval(?string $notes = null): ApprovalRequest
     {
         $workflow = ApprovalWorkflow::active()
             ->forModule($this->getApprovalModule())
@@ -24,14 +25,45 @@ trait HasApprovalWorkflow
             throw new \RuntimeException("No active approval workflow found for module: {$this->getApprovalModule()}");
         }
 
-        return app(ApprovalWorkflowService::class)->submit(
+        /** @var ApprovalWorkflowService $service */
+        $service = app(ApprovalWorkflowService::class);
+
+        return $service->submit(
             workflow: $workflow,
             module: $this->getApprovalModule(),
             moduleId: $this->id,
             title: $this->getApprovalTitle(),
             requesterId: $this->getApprovalRequesterId(),
-            notes: $this->notes ?? null,
+            notes: $notes ?? null,
         );
+    }
+
+    public function approve(int $approverId, ?string $comment = null): ApprovalRequest
+    {
+        $request = $this->approvalRequest;
+
+        if (!$request) {
+            throw new \RuntimeException('No active approval request for this record.');
+        }
+
+        /** @var ApprovalWorkflowService $service */
+        $service = app(ApprovalWorkflowService::class);
+
+        return $service->approve($request, $approverId, $comment);
+    }
+
+    public function reject(int $approverId, ?string $comment = null): ApprovalRequest
+    {
+        $request = $this->approvalRequest;
+
+        if (!$request) {
+            throw new \RuntimeException('No active approval request for this record.');
+        }
+
+        /** @var ApprovalWorkflowService $service */
+        $service = app(ApprovalWorkflowService::class);
+
+        return $service->reject($request, $approverId, $comment);
     }
 
     public function getApprovalStatus(): string

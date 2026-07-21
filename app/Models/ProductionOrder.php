@@ -80,4 +80,10 @@ class ProductionOrder extends Model
     {
         return $this->belongsTo(Employee::class, 'created_by');
     }
+
+    public function stockMovements()
+    {
+        return $this->hasMany(StockMovement::class, 'reference_id')
+            ->where('reference_type', 'production_order');
+    }
 }

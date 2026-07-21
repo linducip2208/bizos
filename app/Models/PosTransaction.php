@@ -23,6 +23,7 @@ class PosTransaction extends Model
         'grand_total',
         'payment_status',
         'notes',
+        'journal_id',
     ];
 
     protected $casts = [
@@ -66,5 +67,10 @@ class PosTransaction extends Model
     public function refunds()
     {
         return $this->hasMany(PosRefund::class, 'transaction_id');
+    }
+
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class);
     }
 }

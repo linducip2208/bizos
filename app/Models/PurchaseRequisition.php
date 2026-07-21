@@ -2,12 +2,21 @@
 
 namespace App\Models;
 
+use App\Concerns\HasApprovalWorkflow;
+use App\Contracts\Approvalable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PurchaseRequisition extends Model
+class PurchaseRequisition extends Model implements Approvalable
 {
-    use SoftDeletes;
+    use SoftDeletes, HasApprovalWorkflow;
+
+    public function getApprovalModule(): string { return 'purchase_requisition'; }
+    public function getApprovalTitle(): string { return 'PR #' . ($this->pr_number ?? $this->id) . ' — ' . ($this->department?->name ?? 'Tanpa Dept'); }
+    public function getApprovalRequesterId(): int { return $this->requested_by ?? 0; }
+    public function getApprovalWorkflowName(): string { return 'Permintaan Pembelian'; }
+    public function onApproved(): void { $this->update(['status' => 'approved', 'approved_at' => now()]); }
+    public function onRejected(string $reason): void { $this->update(['status' => 'rejected', 'rejection_reason' => $reason]); }
 
     protected $fillable = [
         'company_id',

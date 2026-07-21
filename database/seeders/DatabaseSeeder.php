@@ -96,11 +96,13 @@ class DatabaseSeeder extends Seeder
 
         $this->enableForeignKeys();
 
+        $this->call(GamificationSeeder::class);
         $this->call(Pph21ConfigSeeder::class);
         $this->call(BpjsConfigSeeder::class);
         $this->call(DemoDataSeeder::class);
         $this->call(SystemReportSeeder::class);
         $this->call(DocumentTemplateSeeder::class);
+        $this->call(NotificationTemplateSeeder::class);
 
         $this->command->info('');
         $this->command->info('=== Seeding Complete! ===');

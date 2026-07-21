@@ -17,6 +17,8 @@ class GuestFolio extends Model
         'balance_due',
         'payment_status',
         'settled_at',
+        'invoice_id',
+        'payment_id',
     ];
 
     protected $casts = [
@@ -37,5 +39,15 @@ class GuestFolio extends Model
     public function folioItems()
     {
         return $this->hasMany(FolioItem::class, 'folio_id');
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
     }
 }

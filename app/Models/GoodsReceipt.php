@@ -21,6 +21,7 @@ class GoodsReceipt extends Model
         'notes',
         'status',
         'posted_at',
+        'invoice_id',
     ];
 
     protected $casts = [
@@ -51,5 +52,10 @@ class GoodsReceipt extends Model
     public function items()
     {
         return $this->hasMany(GoodsReceiptItem::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

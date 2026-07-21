@@ -16,6 +16,8 @@ class FamilyMember extends Model
         'phone',
         'is_emergency_contact',
         'is_dependent',
+        'nik',
+        'kk_number',
     ];
 
     protected $casts = [

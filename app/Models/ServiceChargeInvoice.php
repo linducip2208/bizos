@@ -22,6 +22,7 @@ class ServiceChargeInvoice extends Model
         'total_amount',
         'due_date',
         'status',
+        'finance_invoice_id',
     ];
 
     protected $casts = [
@@ -50,5 +51,10 @@ class ServiceChargeInvoice extends Model
     public function tenancyContract()
     {
         return $this->belongsTo(TenancyContract::class);
+    }
+
+    public function financeInvoice()
+    {
+        return $this->belongsTo(Invoice::class, 'finance_invoice_id');
     }
 }

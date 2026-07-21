@@ -14,6 +14,7 @@ class Attendance extends Model
     protected $fillable = [
         'employee_id',
         'shift_id',
+        'payroll_period_id',
         'date',
         'clock_in',
         'clock_out',
@@ -69,5 +70,10 @@ class Attendance extends Model
     public function approvedBy()
     {
         return $this->belongsTo(Employee::class, 'approved_by');
+    }
+
+    public function payrollPeriod()
+    {
+        return $this->belongsTo(PayrollPeriod::class);
     }
 }

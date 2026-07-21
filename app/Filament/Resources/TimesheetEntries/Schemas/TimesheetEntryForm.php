@@ -44,6 +44,15 @@ class TimesheetEntryForm
                         Toggle::make('is_billable')
                             ->label('Ditagihkan')
                             ->default(true),
+                        Toggle::make('is_billed')
+                            ->label('Sudah Ditagih')
+                            ->default(false),
+                        Select::make('invoice_id')
+                            ->label('Invoice')
+                            ->relationship('invoice', 'invoice_number')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->rows(3)

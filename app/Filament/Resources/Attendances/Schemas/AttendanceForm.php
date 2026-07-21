@@ -68,6 +68,12 @@ class AttendanceForm
                                 'field' => 'Lapangan',
                             ])
                             ->default('wfo'),
+                        Select::make('payroll_period_id')
+                            ->label('Periode Gaji')
+                            ->relationship('payrollPeriod', 'period_code')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Textarea::make('notes')
                             ->label('Catatan')
                             ->rows(3)

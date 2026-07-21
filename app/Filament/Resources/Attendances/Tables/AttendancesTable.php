@@ -71,6 +71,10 @@ class AttendancesTable
                         'field' => 'Lapangan',
                         default => $state,
                     }),
+                TextColumn::make('payrollPeriod.period_code')
+                    ->label('Periode Gaji')
+                    ->searchable()
+                    ->placeholder('-'),
             ])
             ->defaultSort('date', 'desc')
             ->recordActions([

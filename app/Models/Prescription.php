@@ -15,6 +15,7 @@ class Prescription extends Model
         'doctor_id',
         'prescription_date',
         'status',
+        'pos_transaction_id',
         'notes',
     ];
 
@@ -40,5 +41,10 @@ class Prescription extends Model
     public function items()
     {
         return $this->hasMany(PrescriptionItem::class);
+    }
+
+    public function posTransaction()
+    {
+        return $this->belongsTo(PosTransaction::class);
     }
 }

@@ -13,6 +13,7 @@ class Milestone extends Model
         'target_date',
         'completed_date',
         'status',
+        'invoice_id',
         'sort_order',
     ];
 
@@ -30,5 +31,10 @@ class Milestone extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

@@ -25,6 +25,11 @@ class TimesheetEntriesTable
                     ->searchable()
                     ->sortable()
                     ->placeholder('-'),
+                TextColumn::make('task.project.name')
+                    ->label('Project')
+                    ->searchable()
+                    ->sortable()
+                    ->placeholder('-'),
                 TextColumn::make('start_time')
                     ->label('Mulai')
                     ->dateTime('d M Y H:i')
@@ -41,6 +46,13 @@ class TimesheetEntriesTable
                 IconColumn::make('is_billable')
                     ->label('Ditagihkan')
                     ->boolean(),
+                IconColumn::make('is_billed')
+                    ->label('Sudah Invoice')
+                    ->boolean(),
+                TextColumn::make('invoice.invoice_number')
+                    ->label('No. Invoice')
+                    ->searchable()
+                    ->placeholder('-'),
             ])
             ->recordActions([
                 EditAction::make(),

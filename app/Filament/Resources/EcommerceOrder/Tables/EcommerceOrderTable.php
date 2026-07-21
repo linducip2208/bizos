@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources\EcommerceOrder\Tables;
 
+use App\Services\EcommercePosBridgeService;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -80,12 +84,85 @@ class EcommerceOrderTable
                         'failed' => 'danger',
                         default => 'gray',
                     }),
-                TextColumn::make('shipping_method')
+                    TextColumn::make('shipping_method')
                     ->label('Kurir')
+                    ->sortable(),
+                TextColumn::make('posTransaction.receipt_number')
+                    ->label('Transaksi POS')
+                    ->placeholder('-')
                     ->sortable(),
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('sync_to_pos')
+                    ->label('Sinkron ke POS')
+                    ->icon(Heroicon::OutlinedArrowsRightLeft)
+                    ->color('primary')
+                    ->visible(fn($record) => !$record->pos_transaction_id || $record->sync_status !== 'synced')
+                    ->action(function ($record) {
+                        try {
+                            $posTx = app(EcommercePosBridgeService::class)->syncOrderToPos($record);
+                            Notification::make()
+                                ->title('Berhasil Sinkron ke POS')
+                                ->body('Transaksi POS #' . $posTx->receipt_number . ' dibuat.')
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Gagal Sinkron')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
+                Action::make('sync_inventory')
+                    ->label('Update Stok')
+                    ->icon(Heroicon::OutlinedCubeTransparent)
+                    ->color('warning')
+                    ->visible(fn($record) => $record->sync_status === 'synced')
+                    ->action(function ($record) {
+                        try {
+                            app(EcommercePosBridgeService::class)->syncInventoryAfterOrder($record);
+                            Notification::make()
+                                ->title('Stok Diperbarui')
+                                ->body('Stok dikurangi sesuai pesanan e-commerce.')
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Gagal')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading('Update Stok')
+                    ->modalDescription('Kurangi stok produk sesuai pesanan ini?'),
+                Action::make('refund')
+                    ->label('Retur / Refund')
+                    ->icon(Heroicon::OutlinedArrowUturnLeft)
+                    ->color('danger')
+                    ->visible(fn($record) => $record->sync_status === 'synced' && !$record->pos_refund_id)
+                    ->action(function ($record) {
+                        try {
+                            $refund = app(EcommercePosBridgeService::class)->syncRefund($record);
+                            Notification::make()
+                                ->title('Refund Dibuat')
+                                ->body('Refund #' . $refund->refund_number . ' dibuat. Stok dikembalikan.')
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Gagal Refund')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading('Refund Pesanan')
+                    ->modalDescription('Refund pesanan ini? Stok akan dikembalikan ke gudang.'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -17,6 +17,7 @@ class PayrollPeriod extends Model
         'total_deductions',
         'total_net',
         'total_employees',
+        'journal_id',
     ];
 
     protected $casts = [
@@ -37,5 +38,10 @@ class PayrollPeriod extends Model
     public function payrolls()
     {
         return $this->hasMany(Payroll::class, 'period_id');
+    }
+
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class);
     }
 }

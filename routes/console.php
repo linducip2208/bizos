@@ -38,3 +38,4 @@ Schedule::command('bpmn:check-sla')->everyFifteenMinutes();
 Schedule::command('fieldservice:generate-work-orders')->dailyAt('06:00');
 Schedule::command('fieldservice:check-van-stock')->dailyAt('08:00');
 Schedule::command('email:sync-accounts')->everyFiveMinutes();
+Schedule::command('bizos:notify-overdue')->dailyAt('08:00');

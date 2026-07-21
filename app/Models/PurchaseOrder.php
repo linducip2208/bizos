@@ -2,12 +2,21 @@
 
 namespace App\Models;
 
+use App\Concerns\HasApprovalWorkflow;
+use App\Contracts\Approvalable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PurchaseOrder extends Model
+class PurchaseOrder extends Model implements Approvalable
 {
-    use SoftDeletes;
+    use SoftDeletes, HasApprovalWorkflow;
+
+    public function getApprovalModule(): string { return 'purchase_order'; }
+    public function getApprovalTitle(): string { return 'PO #' . ($this->po_number ?? $this->id) . ' — ' . ($this->supplier?->name ?? 'Tanpa Supplier'); }
+    public function getApprovalRequesterId(): int { return $this->created_by ?? 0; }
+    public function getApprovalWorkflowName(): string { return 'Pesanan Pembelian'; }
+    public function onApproved(): void { $this->update(['status' => 'approved', 'approved_at' => now()]); }
+    public function onRejected(string $reason): void { $this->update(['status' => 'cancelled']); }
 
     protected $fillable = [
         'company_id',
@@ -28,6 +37,7 @@ class PurchaseOrder extends Model
         'created_by',
         'approved_by',
         'approved_at',
+        'invoice_id',
     ];
 
     protected $casts = [
@@ -79,5 +89,10 @@ class PurchaseOrder extends Model
     public function goodsReceipts()
     {
         return $this->hasMany(GoodsReceipt::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

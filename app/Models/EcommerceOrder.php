@@ -23,6 +23,7 @@ class EcommerceOrder extends Model
         'channel_status',
         'sync_status',
         'pos_transaction_id',
+        'pos_refund_id',
     ];
 
     protected $casts = [
@@ -49,5 +50,10 @@ class EcommerceOrder extends Model
     public function posTransaction()
     {
         return $this->belongsTo(PosTransaction::class, 'pos_transaction_id');
+    }
+
+    public function posRefund()
+    {
+        return $this->belongsTo(PosRefund::class, 'pos_refund_id');
     }
 }

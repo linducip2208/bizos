@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ProductionOrders\Tables;
 
 use App\Models\ProductionOrder;
 use App\Services\ManufacturingService;
+use App\Services\ProductionInventoryService;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -77,6 +78,61 @@ class ProductionOrderTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('cek_material')
+                    ->label('Cek Material')
+                    ->icon(Heroicon::OutlinedClipboardDocumentCheck)
+                    ->color('warning')
+                    ->visible(fn(ProductionOrder $record) => in_array($record->status, ['draft', 'planned']))
+                    ->action(function (ProductionOrder $record) {
+                        $result = app(ProductionInventoryService::class)->checkMaterialAvailability($record);
+
+                        $title = $result['available']
+                            ? 'Semua Material Tersedia'
+                            : 'Kekurangan Material';
+                        $body = $result['available']
+                            ? 'Semua ' . $result['total_materials'] . ' material mencukupi untuk produksi.'
+                            : $result['shortage_count'] . ' dari ' . $result['total_materials'] . ' material kurang: ' . "\n";
+
+                        foreach ($result['shortages'] as $s) {
+                            $body .= '• ' . $s['product_name'] . ' (' . $s['product_code'] . '): butuh ' . $s['required'] . ', tersedia ' . $s['available'] . ', kurang ' . $s['shortage'] . "\n";
+                        }
+
+                        \Filament\Notifications\Notification::make()
+                            ->title($title)
+                            ->body($body)
+                            ->color($result['available'] ? 'success' : 'danger')
+                            ->send();
+                    })
+                    ->successNotificationTitle('Pengecekan material selesai.'),
+                Action::make('buat_pr')
+                    ->label('Buat PR Kekurangan')
+                    ->icon(Heroicon::OutlinedShoppingCart)
+                    ->color('danger')
+                    ->visible(fn(ProductionOrder $record) => in_array($record->status, ['draft', 'planned']))
+                    ->action(function (ProductionOrder $record) {
+                        try {
+                            $pr = app(ProductionInventoryService::class)->createPurchaseRequisitionForShortages($record);
+                            if ($pr) {
+                                \Filament\Notifications\Notification::make()
+                                    ->title('Purchase Requisition Dibuat')
+                                    ->body('PR #' . $pr->pr_number . ' dibuat untuk kekurangan material.')
+                                    ->success()
+                                    ->send();
+                            } else {
+                                \Filament\Notifications\Notification::make()
+                                    ->title('Tidak Diperlukan')
+                                    ->body('Semua material mencukupi, tidak perlu purchase requisition.')
+                                    ->success()
+                                    ->send();
+                            }
+                        } catch (\Exception $e) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('Gagal Membuat PR')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
                 Action::make('mulai_produksi')
                     ->label('Mulai Produksi')
                     ->icon(Heroicon::OutlinedPlay)
