@@ -94,7 +94,14 @@ chmod -R 775 /var/www/bizos/bootstrap/cache
 php artisan make:filament-user
 ```
 
-Follow the prompts to set name, email, and password.
+## Demo Login
+
+| Role | Email | Password |
+|------|-------|----------|
+| Super Admin | `budi@maju.test` | `password` |
+| Admin HR | `siti@maju.test` | `password` |
+| Admin Finance | `ahmad@maju.test` | `password` |
+| Semua karyawan | `firstname@maju.test` | `password` |
 
 ---
 
