@@ -19,7 +19,7 @@ class SodDashboard extends Page
 
     protected static ?string $slug = 'kepatuhan/sod';
 
-    protected static string $view = 'filament.pages.kepatuhan.sod-dashboard';
+    protected string $view = 'filament.pages.kepatuhan.sod-dashboard';
 
     public array $ruleStats = [];
     public array $conflictStats = [];

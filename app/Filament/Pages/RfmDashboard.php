@@ -11,7 +11,7 @@ class RfmDashboard extends Page
 
     protected static ?int $navigationSort = 1204;
 
-    protected static string $view = 'filament.pages.rfm-dashboard';
+    protected string $view = 'filament.pages.rfm-dashboard';
 
     protected static ?string $title = 'Analisis RFM';
 

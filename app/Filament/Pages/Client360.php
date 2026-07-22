@@ -14,7 +14,7 @@ class Client360 extends Page
 
     protected static ?int $navigationSort = 804;
 
-    protected static string $view = 'filament.pages.client-360';
+    protected string $view = 'filament.pages.client-360';
 
     protected static ?string $title = 'Client 360';
 

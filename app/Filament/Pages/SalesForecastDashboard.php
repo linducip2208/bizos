@@ -24,7 +24,7 @@ class SalesForecastDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'sales-forecast';
 
-    protected static string $view = 'filament.pages.sales-forecast';
+    protected string $view = 'filament.pages.sales-forecast';
 
     public static function getNavigationGroup(): ?string
     {

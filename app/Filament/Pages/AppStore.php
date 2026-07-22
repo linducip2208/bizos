@@ -21,7 +21,7 @@ class AppStore extends Page
 
     protected static ?string $slug = 'app-store';
 
-    protected static string $view = 'filament.pages.app-store';
+    protected string $view = 'filament.pages.app-store';
 
     public string $activeTab = 'browse';
     public string $search = '';

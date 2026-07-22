@@ -17,7 +17,7 @@ class Home extends Page
 
     protected static ?string $title = 'Dashboard';
 
-    protected static string $view = 'filament.pages.home';
+    protected string $view = 'filament.pages.home';
 
     public array $stats = [];
     public array $quickActions = [];

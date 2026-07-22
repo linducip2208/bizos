@@ -14,7 +14,7 @@ class EcommerceDashboard extends Page
 
     protected static ?int $navigationSort = 950;
 
-    protected static string $view = 'filament.pages.ecommerce-dashboard';
+    protected string $view = 'filament.pages.ecommerce-dashboard';
 
     protected static ?string $title = 'Dashboard E-Commerce';
 

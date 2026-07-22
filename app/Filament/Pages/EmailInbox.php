@@ -10,7 +10,7 @@ class EmailInbox extends Page
 
     protected static ?int $navigationSort = 601;
 
-    protected static string $view = 'filament.pages.email-inbox';
+    protected string $view = 'filament.pages.email-inbox';
 
     protected static ?string $title = 'Email';
 

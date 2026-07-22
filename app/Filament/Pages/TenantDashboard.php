@@ -23,12 +23,12 @@ class TenantDashboard extends Page implements HasTable
     use InteractsWithTable;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
-    protected static ?string $navigationGroup = 'Sistem';
+    protected static string|\UnitEnum|null $navigationGroup = 'Sistem';
     protected static ?int $navigationSort = 905;
     protected static ?string $title = 'Dashboard Tenant';
     protected static ?string $navigationLabel = 'Dashboard Tenant';
     protected static ?string $slug = 'tenant-dashboard';
-    protected static string $view = 'filament.pages.tenant-dashboard';
+    protected string $view = 'filament.pages.tenant-dashboard';
 
     protected static bool $shouldRegisterNavigation = true;
 

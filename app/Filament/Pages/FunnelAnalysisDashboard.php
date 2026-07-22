@@ -11,7 +11,7 @@ class FunnelAnalysisDashboard extends Page
 
     protected static ?int $navigationSort = 1203;
 
-    protected static string $view = 'filament.pages.funnel-analysis';
+    protected string $view = 'filament.pages.funnel-analysis';
 
     protected static ?string $title = 'Analisis Funnel';
 

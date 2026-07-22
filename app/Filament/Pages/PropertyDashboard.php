@@ -14,7 +14,7 @@ class PropertyDashboard extends Page
 
     protected static ?int $navigationSort = 800;
 
-    protected static string $view = 'filament.pages.property-dashboard';
+    protected string $view = 'filament.pages.property-dashboard';
 
     protected static ?string $title = 'Dashboard Properti';
 

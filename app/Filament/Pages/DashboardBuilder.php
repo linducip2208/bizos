@@ -16,7 +16,7 @@ class DashboardBuilder extends Page
 
     protected static ?string $title = 'Dashboard Builder';
 
-    protected static string $view = 'filament.pages.dashboard-builder';
+    protected string $view = 'filament.pages.dashboard-builder';
 
     public static function getNavigationGroup(): ?string
     {

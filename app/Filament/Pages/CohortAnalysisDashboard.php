@@ -11,7 +11,7 @@ class CohortAnalysisDashboard extends Page
 
     protected static ?int $navigationSort = 1202;
 
-    protected static string $view = 'filament.pages.cohort-analysis';
+    protected string $view = 'filament.pages.cohort-analysis';
 
     protected static ?string $title = 'Analisis Kohort';
 

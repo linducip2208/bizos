@@ -14,7 +14,7 @@ class IotDashboard extends Page
 
     protected static ?int $navigationSort = 1600;
 
-    protected static string $view = 'filament.pages.iot-dashboard';
+    protected string $view = 'filament.pages.iot-dashboard';
 
     protected static ?string $title = 'Dashboard IoT';
 

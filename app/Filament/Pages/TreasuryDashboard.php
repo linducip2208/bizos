@@ -11,7 +11,7 @@ class TreasuryDashboard extends Page
 
     protected static ?int $navigationSort = 1700;
 
-    protected static string $view = 'filament.pages.treasury-dashboard';
+    protected string $view = 'filament.pages.treasury-dashboard';
 
     protected static ?string $title = 'Dashboard Treasury';
 

@@ -26,7 +26,7 @@ class TaxInvoiceManager extends Page implements HasForms
 
     protected static ?string $slug = 'tax-invoice-manager';
 
-    protected static string $view = 'filament.pages.tax-invoice-manager';
+    protected string $view = 'filament.pages.tax-invoice-manager';
 
     public static function getNavigationGroup(): ?string
     {

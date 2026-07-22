@@ -13,7 +13,7 @@ class HotelDashboard extends Page
 
     protected static ?int $navigationSort = 700;
 
-    protected static string $view = 'filament.pages.hotel-dashboard';
+    protected string $view = 'filament.pages.hotel-dashboard';
 
     protected static ?string $title = 'Dashboard Hotel';
 

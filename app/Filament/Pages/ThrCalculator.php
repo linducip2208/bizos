@@ -28,7 +28,7 @@ class ThrCalculator extends Page implements HasForms
 
     protected static ?string $slug = 'thr-calculator';
 
-    protected static string $view = 'filament.pages.thr-calculator';
+    protected string $view = 'filament.pages.thr-calculator';
 
     public static function getNavigationGroup(): ?string
     {

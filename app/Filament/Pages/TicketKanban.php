@@ -11,7 +11,7 @@ class TicketKanban extends Page
 
     protected static ?int $navigationSort = 1102;
 
-    protected static string $view = 'filament.pages.ticket-kanban';
+    protected string $view = 'filament.pages.ticket-kanban';
 
     protected static ?string $title = 'Kanban Tiket';
 

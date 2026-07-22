@@ -12,7 +12,7 @@ class DealKanban extends Page
 
     protected static ?int $navigationSort = 803;
 
-    protected static string $view = 'filament.pages.deal-kanban';
+    protected string $view = 'filament.pages.deal-kanban';
 
     protected static ?string $title = 'Kanban Deal';
 

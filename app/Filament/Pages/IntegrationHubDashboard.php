@@ -13,7 +13,7 @@ class IntegrationHubDashboard extends Page
 
     protected static ?int $navigationSort = 6;
 
-    protected static string $view = 'filament.pages.integration-hub-dashboard';
+    protected string $view = 'filament.pages.integration-hub-dashboard';
 
     protected static ?string $title = 'Hub Integrasi';
 

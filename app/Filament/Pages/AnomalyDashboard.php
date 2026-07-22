@@ -11,7 +11,7 @@ class AnomalyDashboard extends Page
 
     protected static ?int $navigationSort = 1201;
 
-    protected static string $view = 'filament.pages.anomaly-dashboard';
+    protected string $view = 'filament.pages.anomaly-dashboard';
 
     protected static ?string $title = 'Dashboard Anomali';
 

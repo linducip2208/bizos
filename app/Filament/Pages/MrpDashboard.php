@@ -21,7 +21,7 @@ class MrpDashboard extends Page
 
     protected static ?string $slug = 'mrp-dashboard';
 
-    protected static string $view = 'filament.pages.mrp-dashboard';
+    protected string $view = 'filament.pages.mrp-dashboard';
 
     public static function getNavigationGroup(): ?string
     {

@@ -13,7 +13,7 @@ class LaporanOperasional extends Page
 
     protected static ?int $navigationSort = 1103;
 
-    protected static string $view = 'filament.pages.laporan-operasional';
+    protected string $view = 'filament.pages.laporan-operasional';
 
     protected static ?string $title = 'Laporan Operasional';
 

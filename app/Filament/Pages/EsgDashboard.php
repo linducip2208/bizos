@@ -15,7 +15,7 @@ class EsgDashboard extends Page
 
     protected static ?int $navigationSort = 0;
 
-    protected static string $view = 'filament.pages.esg-dashboard';
+    protected string $view = 'filament.pages.esg-dashboard';
 
     protected static ?string $title = 'Dashboard ESG';
 

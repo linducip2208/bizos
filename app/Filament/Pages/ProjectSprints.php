@@ -14,7 +14,7 @@ class ProjectSprints extends Page
 
     protected static ?int $navigationSort = 906;
 
-    protected static string $view = 'filament.pages.project-sprints';
+    protected string $view = 'filament.pages.project-sprints';
 
     protected static ?string $title = 'Sprints';
 

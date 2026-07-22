@@ -13,7 +13,7 @@ class WhatIfSimulator extends Page
 
     protected static ?int $navigationSort = 1205;
 
-    protected static string $view = 'filament.pages.what-if-simulator';
+    protected string $view = 'filament.pages.what-if-simulator';
 
     protected static ?string $title = 'Simulasi What-If';
 
