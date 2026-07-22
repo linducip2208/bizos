@@ -19,7 +19,7 @@ class BpmnProcessDesigner extends Page
 
     protected static ?string $slug = 'bpmn-designer';
 
-    protected string $view = 'filament.pages.bpmn-designer';
+    protected static string $view = 'filament.pages.bpmn-designer';
 
     public ?BpmnProcess $process = null;
 

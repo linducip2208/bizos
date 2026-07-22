@@ -26,7 +26,7 @@ class PerformanceDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'performance-dashboard';
 
-    protected string $view = 'filament.pages.performance-dashboard';
+    protected static string $view = 'filament.pages.performance-dashboard';
 
     public static function getNavigationGroup(): ?string
     {

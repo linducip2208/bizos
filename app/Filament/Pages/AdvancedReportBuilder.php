@@ -10,7 +10,7 @@ class AdvancedReportBuilder extends Page
 
     protected static ?int $navigationSort = 1301;
 
-    protected string $view = 'filament.pages.advanced-report-builder';
+    protected static string $view = 'filament.pages.advanced-report-builder';
 
     protected static ?string $title = 'Report Builder';
 

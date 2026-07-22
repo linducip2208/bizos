@@ -13,7 +13,7 @@ class LaporanKeuangan extends Page
 
     protected static ?int $navigationSort = 1102;
 
-    protected string $view = 'filament.pages.laporan-keuangan';
+    protected static string $view = 'filament.pages.laporan-keuangan';
 
     protected static ?string $title = 'Laporan Keuangan';
 

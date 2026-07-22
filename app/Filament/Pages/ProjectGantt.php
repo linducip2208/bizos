@@ -13,7 +13,7 @@ class ProjectGantt extends Page
 
     protected static ?int $navigationSort = 905;
 
-    protected string $view = 'filament.pages.project-gantt';
+    protected static string $view = 'filament.pages.project-gantt';
 
     protected static ?string $title = 'Gantt Chart';
 

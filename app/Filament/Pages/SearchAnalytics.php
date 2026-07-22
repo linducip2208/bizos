@@ -11,7 +11,7 @@ class SearchAnalytics extends Page
 
     protected static ?int $navigationSort = 999;
 
-    protected string $view = 'filament.pages.search-analytics';
+    protected static string $view = 'filament.pages.search-analytics';
 
     protected static ?string $title = 'Analitik Pencarian';
 

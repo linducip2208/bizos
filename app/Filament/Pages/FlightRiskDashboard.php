@@ -25,7 +25,7 @@ class FlightRiskDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'flight-risk';
 
-    protected string $view = 'filament.pages.flight-risk';
+    protected static string $view = 'filament.pages.flight-risk';
 
     public static function getNavigationGroup(): ?string
     {

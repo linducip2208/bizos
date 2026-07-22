@@ -20,7 +20,7 @@ class PdpDashboard extends Page
 
     protected static ?string $slug = 'kepatuhan/pdp';
 
-    protected string $view = 'filament.pages.kepatuhan.pdp-dashboard';
+    protected static string $view = 'filament.pages.kepatuhan.pdp-dashboard';
 
     public array $complianceReport = [];
     public array $consentStats = [];

@@ -23,7 +23,7 @@ class FraudDetectionDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'fraud-detection';
 
-    protected string $view = 'filament.pages.fraud-detection';
+    protected static string $view = 'filament.pages.fraud-detection';
 
     public static function getNavigationGroup(): ?string
     {

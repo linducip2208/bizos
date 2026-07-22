@@ -15,7 +15,7 @@ class LogisticsDashboard extends Page
 
     protected static ?int $navigationSort = 900;
 
-    protected string $view = 'filament.pages.logistics-dashboard';
+    protected static string $view = 'filament.pages.logistics-dashboard';
 
     protected static ?string $title = 'Dashboard Logistik';
 

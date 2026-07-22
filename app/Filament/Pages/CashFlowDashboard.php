@@ -26,7 +26,7 @@ class CashFlowDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'cash-flow';
 
-    protected string $view = 'filament.pages.cash-flow';
+    protected static string $view = 'filament.pages.cash-flow';
 
     public static function getNavigationGroup(): ?string
     {

@@ -26,7 +26,7 @@ class Pph21Calculator extends Page implements HasForms
 
     protected static ?string $slug = 'pph21-calculator';
 
-    protected string $view = 'filament.pages.pph21-calculator';
+    protected static string $view = 'filament.pages.pph21-calculator';
 
     public static function getNavigationGroup(): ?string
     {

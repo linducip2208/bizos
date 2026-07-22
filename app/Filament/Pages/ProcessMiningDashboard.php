@@ -18,7 +18,7 @@ class ProcessMiningDashboard extends Page
 
     protected static ?string $slug = 'process-mining';
 
-    protected string $view = 'filament.pages.process-mining';
+    protected static string $view = 'filament.pages.process-mining';
 
     public ?int $selectedProcessId = null;
 

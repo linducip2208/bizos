@@ -18,7 +18,7 @@ class MarketingDashboard extends Page
 
     protected static ?string $title = 'Dashboard Marketing';
 
-    protected string $view = 'filament.pages.marketing-dashboard';
+    protected static string $view = 'filament.pages.marketing-dashboard';
 
     public static function getNavigationGroup(): ?string
     {

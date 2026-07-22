@@ -26,7 +26,7 @@ class OvertimeSimulator extends Page implements HasForms
 
     protected static ?string $slug = 'overtime-simulator';
 
-    protected string $view = 'filament.pages.overtime-simulator';
+    protected static string $view = 'filament.pages.overtime-simulator';
 
     public static function getNavigationGroup(): ?string
     {

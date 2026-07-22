@@ -45,10 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
-            ->pages([
-                \App\Filament\Pages\EmailInbox::class,
-                \App\Filament\Pages\SearchAnalytics::class,
-            ])
+            ->pages([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 \App\Filament\Widgets\StatsOverview::class,
@@ -74,30 +71,30 @@ class AdminPanelProvider extends PanelProvider
                 \App\Http\Middleware\TrackRecentlyViewed::class,
                 \App\Http\Middleware\ThemeMiddleware::class,
             ])
-                        ->navigationGroups([
-                NavigationGroup::make('🏠 Dashboard & Reporting')->collapsed(false),
-                NavigationGroup::make('🏢 Organisasi')->collapsed(false),
-                NavigationGroup::make('👥 Human Capital')->collapsed(false),
-                NavigationGroup::make('💰 Payroll')->collapsed(false),
-                NavigationGroup::make('💵 Finance & Accounting')->collapsed(false),
-                NavigationGroup::make('📦 Product & Inventory')->collapsed(false),
-                NavigationGroup::make('📈 Sales & CRM')->collapsed(true),
-                NavigationGroup::make('📋 Project Management')->collapsed(true),
-                NavigationGroup::make('💬 Collaboration')->collapsed(true),
-                NavigationGroup::make('🛒 POS & Retail')->collapsed(true),
-                NavigationGroup::make('🎓 Learning')->collapsed(true),
-                NavigationGroup::make('🏆 Gamification')->collapsed(true),
-                NavigationGroup::make('🎫 Support')->collapsed(true),
-                NavigationGroup::make('🤖 AI Assistant')->collapsed(true),
-                NavigationGroup::make('⚡ Automation & Workflow')->collapsed(true),
-                NavigationGroup::make('🔗 Integrations')->collapsed(true),
-                NavigationGroup::make('🏭 Industry')->collapsed(true),
-                NavigationGroup::make('🌱 ESG & Sustainability')->collapsed(true),
-                NavigationGroup::make('🛡️ Compliance')->collapsed(true),
-                NavigationGroup::make('🔷 Blockchain')->collapsed(true),
-                NavigationGroup::make('💳 Billing & Licensing')->collapsed(true),
-                NavigationGroup::make('🧩 Platform')->collapsed(true),
-                NavigationGroup::make('⚙️ Sistem')->collapsed(true),
+            ->navigationGroups([
+                NavigationGroup::make("\u{1F3E0} Dashboard & Reporting")->collapsed(false),
+                NavigationGroup::make("\u{1F3E2} Organisasi")->collapsed(false),
+                NavigationGroup::make("\u{1F465} Human Capital")->collapsed(false),
+                NavigationGroup::make("\u{1F4B0} Payroll")->collapsed(false),
+                NavigationGroup::make("\u{1F4B5} Finance & Accounting")->collapsed(false),
+                NavigationGroup::make("\u{1F4E6} Product & Inventory")->collapsed(false),
+                NavigationGroup::make("\u{1F4C8} Sales & CRM")->collapsed(true),
+                NavigationGroup::make("\u{1F4CB} Project Management")->collapsed(true),
+                NavigationGroup::make("\u{1F4AC} Collaboration")->collapsed(true),
+                NavigationGroup::make("\u{1F6D2} POS & Retail")->collapsed(true),
+                NavigationGroup::make("\u{1F393} Learning")->collapsed(true),
+                NavigationGroup::make("\u{1F3C6} Gamification")->collapsed(true),
+                NavigationGroup::make("\u{1F3AB} Support")->collapsed(true),
+                NavigationGroup::make("\u{1F916} AI Assistant")->collapsed(true),
+                NavigationGroup::make("\u26A1 Automation & Workflow")->collapsed(true),
+                NavigationGroup::make("\u{1F517} Integrations")->collapsed(true),
+                NavigationGroup::make("\u{1F3ED} Industry")->collapsed(true),
+                NavigationGroup::make("\u{1F331} ESG & Sustainability")->collapsed(true),
+                NavigationGroup::make("\u{1F6E1}\uFE0F Compliance")->collapsed(true),
+                NavigationGroup::make("\u{1F537} Blockchain")->collapsed(true),
+                NavigationGroup::make("\u{1F4B3} Billing & Licensing")->collapsed(true),
+                NavigationGroup::make("\u{1F9E9} Platform")->collapsed(true),
+                NavigationGroup::make("\u2699\uFE0F Sistem")->collapsed(true),
             ])
             ->renderHook(
                 'panels::topbar.start',

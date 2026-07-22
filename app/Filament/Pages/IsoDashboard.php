@@ -20,7 +20,7 @@ class IsoDashboard extends Page
 
     protected static ?string $slug = 'kepatuhan/iso';
 
-    protected string $view = 'filament.pages.kepatuhan.iso-dashboard';
+    protected static string $view = 'filament.pages.kepatuhan.iso-dashboard';
 
     public array $riskStats = [];
     public array $incidentStats = [];

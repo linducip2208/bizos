@@ -42,7 +42,7 @@ class MobileSettings extends Page implements HasTable
         return 'Sistem';
     }
 
-    protected string $view = 'filament.pages.mobile-settings';
+    protected static string $view = 'filament.pages.mobile-settings';
 
     public ?array $data = [];
     public array $offlineConfig = [];

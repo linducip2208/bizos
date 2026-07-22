@@ -18,7 +18,7 @@ class BackupManager extends Page
 
     protected static ?string $navigationLabel = 'Backup DB';
 
-    protected string $view = 'filament.pages.backup-manager';
+    protected static string $view = 'filament.pages.backup-manager';
 
     public array $backups = [];
 

@@ -30,7 +30,7 @@ class ThemeBuilder extends Page implements HasForms
 
     protected static ?string $slug = 'theme-builder';
 
-    protected string $view = 'filament.pages.theme-builder';
+    protected static string $view = 'filament.pages.theme-builder';
 
     public ?array $themeConfig = [];
 

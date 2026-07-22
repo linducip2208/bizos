@@ -24,7 +24,7 @@ class FieldServiceDashboard extends Page
 
     protected static ?string $slug = 'fieldservice-dashboard';
 
-    protected string $view = 'filament.pages.field-service-dashboard';
+    protected static string $view = 'filament.pages.field-service-dashboard';
 
     public array $stats = [];
     public array $todayOrders = [];

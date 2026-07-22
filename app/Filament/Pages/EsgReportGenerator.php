@@ -11,7 +11,7 @@ class EsgReportGenerator extends Page
 
     protected static ?int $navigationSort = 4;
 
-    protected string $view = 'filament.pages.esg-report-generator';
+    protected static string $view = 'filament.pages.esg-report-generator';
 
     protected static ?string $title = 'Generator Laporan ESG';
 

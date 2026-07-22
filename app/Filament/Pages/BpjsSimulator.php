@@ -25,7 +25,7 @@ class BpjsSimulator extends Page implements HasForms
 
     protected static ?string $slug = 'bpjs-simulator';
 
-    protected string $view = 'filament.pages.bpjs-simulator';
+    protected static string $view = 'filament.pages.bpjs-simulator';
 
     public static function getNavigationGroup(): ?string
     {

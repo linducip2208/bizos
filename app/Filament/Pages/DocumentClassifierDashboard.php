@@ -26,7 +26,7 @@ class DocumentClassifierDashboard extends Page implements HasForms
 
     protected static ?string $slug = 'document-classifier';
 
-    protected string $view = 'filament.pages.document-classifier';
+    protected static string $view = 'filament.pages.document-classifier';
 
     public static function getNavigationGroup(): ?string
     {

@@ -10,7 +10,7 @@ class BlockchainDashboard extends Page
 
     protected static ?int $navigationSort = 1401;
 
-    protected string $view = 'filament.pages.blockchain-dashboard';
+    protected static string $view = 'filament.pages.blockchain-dashboard';
 
     protected static ?string $title = 'Dashboard Blockchain';
 
