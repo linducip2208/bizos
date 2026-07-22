@@ -18,7 +18,6 @@ use Filament\Tables\Table;
 class EmailLogResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = EmailLog::class;

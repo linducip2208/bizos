@@ -18,7 +18,6 @@ use Filament\Tables\Table;
 class StockOpnameItemResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = StockOpnameItem::class;

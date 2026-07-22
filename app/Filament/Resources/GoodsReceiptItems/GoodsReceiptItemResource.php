@@ -18,7 +18,6 @@ use Filament\Tables\Table;
 class GoodsReceiptItemResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = GoodsReceiptItem::class;

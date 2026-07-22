@@ -19,7 +19,6 @@ use App\Filament\Concerns\HasPermissionAccess;
 class FormSubmissionResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
     protected static ?string $model = FormSubmission::class;
 

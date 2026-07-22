@@ -19,7 +19,6 @@ use App\Filament\Concerns\HasPermissionAccess;
 class CourseLessonResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
     protected static ?string $model = CourseLesson::class;
 

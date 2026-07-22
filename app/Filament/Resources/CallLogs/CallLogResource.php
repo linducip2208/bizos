@@ -18,7 +18,6 @@ use Filament\Tables\Table;
 class CallLogResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = CallLog::class;

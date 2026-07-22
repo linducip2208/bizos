@@ -17,7 +17,6 @@ use Filament\Panel;
 class ReconciliationItemResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = ReconciliationItem::class;

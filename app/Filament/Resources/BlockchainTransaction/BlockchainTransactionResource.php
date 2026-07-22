@@ -17,7 +17,6 @@ use App\Filament\Concerns\HasPermissionAccess;
 class BlockchainTransactionResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = BlockchainTransaction::class;

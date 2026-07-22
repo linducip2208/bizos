@@ -18,7 +18,6 @@ use App\Filament\Concerns\HasPermissionAccess;
 class DeliveryItemResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = DeliveryItem::class;

@@ -18,7 +18,6 @@ use Filament\Tables\Table;
 class PurchaseRequisitionItemResource extends Resource
 {
     protected static bool $shouldRegisterNavigation = false;
-{
     use HasPermissionAccess;
 
     protected static ?string $model = PurchaseRequisitionItem::class;
