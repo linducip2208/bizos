@@ -13,6 +13,8 @@ use Filament\Support\Icons\Heroicon;
 
 class EcommerceInventoryLogResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = EcommerceInventoryLog::class;

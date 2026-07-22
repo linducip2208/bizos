@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 
 class MarketplaceInstallResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = MarketplaceInstall::class;

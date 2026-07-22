@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class MeetingMinuteResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
     protected static ?string $model = MeetingMinute::class;
 

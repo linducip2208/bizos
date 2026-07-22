@@ -16,6 +16,8 @@ use Filament\Panel;
 
 class ExchangeRateLogResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = ExchangeRateLog::class;

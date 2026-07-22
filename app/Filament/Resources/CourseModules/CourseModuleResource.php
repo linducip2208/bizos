@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class CourseModuleResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
     protected static ?string $model = CourseModule::class;
 

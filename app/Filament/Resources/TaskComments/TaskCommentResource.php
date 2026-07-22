@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class TaskCommentResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
     protected static ?string $model = TaskComment::class;
 

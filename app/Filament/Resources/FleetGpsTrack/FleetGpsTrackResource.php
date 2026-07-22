@@ -17,6 +17,8 @@ use Filament\Tables\Table;
 
 class FleetGpsTrackResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = FleetGpsTrack::class;

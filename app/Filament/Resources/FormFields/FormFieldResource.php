@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class FormFieldResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
     protected static ?string $model = FormField::class;
 

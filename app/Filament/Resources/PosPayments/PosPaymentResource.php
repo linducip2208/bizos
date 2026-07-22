@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class PosPaymentResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
     protected static ?string $model = PosPayment::class;
 

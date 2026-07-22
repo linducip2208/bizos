@@ -15,6 +15,8 @@ use Filament\Panel;
 
 class IotReadingResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = IotReading::class;

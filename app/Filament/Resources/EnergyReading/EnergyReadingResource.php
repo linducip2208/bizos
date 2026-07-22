@@ -15,6 +15,8 @@ use Filament\Panel;
 
 class EnergyReadingResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+{
     use HasPermissionAccess;
 
     protected static ?string $model = EnergyReading::class;

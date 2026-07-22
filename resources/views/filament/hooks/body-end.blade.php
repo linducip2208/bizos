@@ -1,1 +1,1 @@
-{{-- Clean — all groups already have emoji prefix from AdminPanelProvider --}}
+{{-- Sidebar Emoji — emoji already in AdminPanelProvider NavigationGroup names, no injection needed --}}
