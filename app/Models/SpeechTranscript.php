@@ -14,6 +14,7 @@ class SpeechTranscript extends Model
         'language',
         'duration',
         'confidence',
+        'created_at',
     ];
 
     protected $casts = [

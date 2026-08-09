@@ -30,6 +30,7 @@ class LaporanOperasional extends Page
     public array $topPerformers = [];
     public string $dateFrom;
     public string $dateTo;
+    public string $groupBy = 'harian';
     public ?ReportTemplate $activeTemplate = null;
     public array $availableTemplates = [];
     public string $nlgSummary = '';
@@ -38,6 +39,7 @@ class LaporanOperasional extends Page
     {
         $this->dateFrom = request('date_from', now()->startOfMonth()->format('Y-m-d'));
         $this->dateTo = request('date_to', now()->format('Y-m-d'));
+        $this->groupBy = request('group_by', 'harian');
 
         $this->availableTemplates = ReportTemplate::where('category', 'hrm')
             ->where(function ($q) {
@@ -85,7 +87,7 @@ class LaporanOperasional extends Page
         $service = app(ReportBuilderService::class);
 
         try {
-            $params = ['date_from' => $this->dateFrom, 'date_to' => $this->dateTo];
+            $params = ['date_from' => $this->dateFrom, 'date_to' => $this->dateTo, 'group_by' => $this->groupBy];
             $data = $service->execute($this->activeTemplate, $params);
             $chartData = $service->generateChartData($this->activeTemplate, $params);
 
@@ -161,12 +163,30 @@ class LaporanOperasional extends Page
 
     protected function loadAttendanceTrend(): void
     {
-        $records = \App\Models\Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
-            ->selectRaw("DATE_FORMAT(date, '%Y-%m-%d') as day, COUNT(*) as count")
-            ->whereNotNull('clock_in')
-            ->groupBy('day')->orderBy('day')->get();
+        $groupFormat = match ($this->groupBy) {
+            'harian' => '%Y-%m-%d',
+            'mingguan' => '%Y-%u',
+            default => '%Y-%m',
+        };
 
-        $this->attendanceLabels = $records->pluck('day')->toArray();
+        $records = \App\Models\Attendance::whereBetween('date', [$this->dateFrom, $this->dateTo])
+            ->selectRaw("DATE_FORMAT(date, '{$groupFormat}') as period, COUNT(*) as count")
+            ->whereNotNull('clock_in')
+            ->groupBy('period')->orderBy('period')->get();
+
+        $this->attendanceLabels = $records->pluck('period')->map(function ($p) {
+            if ($this->groupBy === 'bulanan') {
+                $date = \Carbon\Carbon::createFromFormat('Y-m', $p);
+                return $date->translatedFormat('M Y');
+            }
+            if ($this->groupBy === 'mingguan') {
+                $parts = explode('-', $p);
+                $year = $parts[0];
+                $week = (int) ($parts[1] ?? 1);
+                return 'Mgg ke-' . $week . ', ' . $year;
+            }
+            return $p;
+        })->toArray();
         $this->attendanceData = $records->pluck('count')->map(fn($v) => (int) $v)->toArray();
     }
 
@@ -205,5 +225,62 @@ class LaporanOperasional extends Page
                 'total_jam' => (float) $ts->total_jam,
             ];
         })->toArray();
+    }
+
+    public function getExportPdfUrl(): string
+    {
+        return route('laporan.operasional.pdf', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function getExportCsvUrl(): string
+    {
+        return route('laporan.operasional.csv', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function exportPdf()
+    {
+        $this->mount();
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.laporan-operasional', [
+            'title' => 'Laporan Operasional',
+            'dateFrom' => $this->dateFrom,
+            'dateTo' => $this->dateTo,
+            'groupBy' => $this->groupBy,
+            'summaryCards' => $this->cards,
+            'topPerformers' => $this->topPerformers,
+        ]);
+
+        return $pdf->download('laporan-operasional-' . now()->format('Ymd') . '.pdf');
+    }
+
+    public function exportCsv()
+    {
+        $this->mount();
+
+        $filename = 'laporan-operasional-' . now()->format('Ymd') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['#', 'Nama', 'Department', 'Total Jam']);
+
+            $i = 1;
+            foreach ($this->topPerformers as $p) {
+                fputcsv($handle, [
+                    $i++,
+                    $p['name'] ?? '-',
+                    $p['department'] ?? '-',
+                    $p['total_jam'] ?? 0,
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

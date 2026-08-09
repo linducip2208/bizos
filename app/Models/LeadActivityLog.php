@@ -10,7 +10,9 @@ class LeadActivityLog extends Model
 
     protected $fillable = [
         'lead_id',
-        'activity_type',
+        'user_id',
+        'action',
+        'description',
         'metadata',
         'created_at',
     ];

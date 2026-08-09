@@ -12,9 +12,11 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use App\Filament\Concerns\HasPermissionAccess;
 
 class ChallengeResource extends Resource
 {
+    use HasPermissionAccess;
     protected static ?string $model = Challenge::class;
 
     public static function getNavigationGroup(): string|null

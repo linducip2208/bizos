@@ -12,6 +12,7 @@ class SystemLog extends Model
         'channel',
         'message',
         'context',
+        'created_at',
     ];
 
     public $timestamps = false;

@@ -278,4 +278,61 @@ class LaporanBisnis extends Page
             $this->chartInsight = '';
         }
     }
+
+    public function getExportPdfUrl(): string
+    {
+        return route('laporan.bisnis.pdf', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function getExportCsvUrl(): string
+    {
+        return route('laporan.bisnis.csv', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function exportPdf()
+    {
+        $this->mount();
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.laporan-bisnis', [
+            'title' => 'Laporan Bisnis',
+            'dateFrom' => $this->dateFrom,
+            'dateTo' => $this->dateTo,
+            'groupBy' => $this->groupBy,
+            'summaryCards' => $this->summaryCards,
+            'detailTable' => $this->detailTable,
+        ]);
+
+        return $pdf->download('laporan-bisnis-' . now()->format('Ymd') . '.pdf');
+    }
+
+    public function exportCsv()
+    {
+        $this->mount();
+
+        $filename = 'laporan-bisnis-' . now()->format('Ymd') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['Tanggal', 'Tipe', 'Referensi', 'Total', 'Status']);
+
+            foreach ($this->detailTable as $row) {
+                fputcsv($handle, [
+                    $row['date'] ?? '-',
+                    $row['source_type'] ?? '-',
+                    $row['reference'] ?? '-',
+                    $row['total'] ?? 0,
+                    $row['item_status'] ?? $row['status'] ?? '-',
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

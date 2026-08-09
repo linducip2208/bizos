@@ -13,9 +13,11 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Concerns\HasPermissionAccess;
 
 class DashboardLayoutResource extends Resource
 {
+    use HasPermissionAccess;
     // DashboardLayout dikonsolidasi dengan DashboardBuilder — gunakan sistem yang satu.
     protected static bool $shouldRegisterNavigation = false;
 

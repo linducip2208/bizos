@@ -5,9 +5,9 @@
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Produk</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ url('/docs') }}" class="hover:text-white transition-colors no-underline">Dokumentasi</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="hover:text-white transition-colors no-underline">Blog</a></li>
                     <li><a href="{{ url('/best-hrm-software') }}" class="hover:text-white transition-colors no-underline">Fitur HRM</a></li>
                     <li><a href="{{ url('/best-accounting-software-indonesia') }}" class="hover:text-white transition-colors no-underline">Fitur Akuntansi</a></li>
-                    <li><a href="{{ url('/compare/bizos-vs-spreadsheet') }}" class="hover:text-white transition-colors no-underline">vs Spreadsheet</a></li>
                 </ul>
             </div>
             <div>

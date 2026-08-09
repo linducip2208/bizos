@@ -13,9 +13,11 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Concerns\HasPermissionAccess;
 
 class ReportScheduleResource extends Resource
 {
+    use HasPermissionAccess;
     protected static ?string $model = ReportSchedule::class;
 
     protected static ?string $label = 'Jadwal Laporan';

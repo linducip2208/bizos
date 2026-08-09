@@ -39,7 +39,7 @@ class Home extends Page
         $this->stats = [
             'pending_approvals' => ApprovalRequest::where('status', 'pending')->count(),
             'today_tasks' => Task::where('assigned_to', $user->id)->whereDate('due_date', now())->count(),
-            'unread_notifications' => Notification::where('notifiable_id', $user->id)->whereNull('read_at')->count(),
+            'unread_notifications' => Notification::where('user_id', $user->id)->whereNull('read_at')->count(),
             'open_tickets' => Ticket::where('status', 'open')->count(),
             'today_revenue' => Invoice::whereDate('invoice_date', now())->sum('total'),
             'pending_invoices' => Invoice::whereIn('status', ['sent', 'overdue'])->count(),

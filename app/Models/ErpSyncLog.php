@@ -13,6 +13,7 @@ class ErpSyncLog extends Model
         'records_count',
         'status',
         'error_message',
+        'created_at',
     ];
 
     public $timestamps = false;

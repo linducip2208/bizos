@@ -16,20 +16,36 @@
                         class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white sm:text-sm">
                 </div>
                 <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Group By</label>
+                    <select name="group_by"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white sm:text-sm"
+                        onchange="this.form.submit()">
+                        <option value="harian" {{ $groupBy === 'harian' ? 'selected' : '' }}>Harian</option>
+                        <option value="mingguan" {{ $groupBy === 'mingguan' ? 'selected' : '' }}>Mingguan</option>
+                        <option value="bulanan" {{ $groupBy === 'bulanan' ? 'selected' : '' }}>Bulanan</option>
+                    </select>
+                </div>
+                <div>
                     <button type="submit"
                         class="inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         Filter
                     </button>
                 </div>
-                <div>
-                    <button type="button"
-                        onclick="window.print()"
+                <div class="flex gap-2 border-l border-gray-300 pl-4 dark:border-gray-600">
+                    <a href="{{ $this->getExportPdfUrl() }}" target="_blank"
                         class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
                         <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
                         </svg>
-                        Export PDF
-                    </button>
+                        PDF
+                    </a>
+                    <a href="{{ $this->getExportCsvUrl() }}" target="_blank"
+                        class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                        <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Excel
+                    </a>
                 </div>
             </form>
         </div>

@@ -10,9 +10,11 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Concerns\HasPermissionAccess;
 
 class DocumentGenerationResource extends Resource
 {
+    use HasPermissionAccess;
     protected static ?string $model = DocumentGeneration::class;
 
     protected static ?string $label = 'Dokumen Terbit';

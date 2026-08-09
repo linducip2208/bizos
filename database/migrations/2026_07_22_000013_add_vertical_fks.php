@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -178,6 +179,10 @@ return new class extends Migration
      */
     private function hasForeignKey(string $table, string $fkName): bool
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return true;
+        }
+
         $db = Schema::getConnection()->getDatabaseName();
         $result = DB::select(
             "SELECT CONSTRAINT_NAME

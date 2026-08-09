@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -62,7 +63,9 @@ return new class extends Migration
             $table->index('folder');
             $table->index('is_read');
             $table->index('is_starred');
-            $table->fullText(['subject', 'body_text', 'from_email', 'from_name', 'to_email'], 'email_msgs_fulltext');
+            if (DB::getDriverName() === 'mysql') {
+                $table->fullText(['subject', 'body_text', 'from_email', 'from_name', 'to_email'], 'email_msgs_fulltext');
+            }
         });
 
         Schema::create('email_attachments', function (Blueprint $table) {

@@ -11,9 +11,11 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Support\Icons\Heroicon;
+use App\Filament\Concerns\HasPermissionAccess;
 
 class ApprovalRequestResource extends Resource
 {
+    use HasPermissionAccess;
     protected static ?string $model = ApprovalRequest::class;
 
     protected static ?string $label = 'Permintaan Approval';

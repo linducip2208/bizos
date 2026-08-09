@@ -262,6 +262,13 @@ class Employee extends Model
 
     public function activityTimeline()
     {
-        return $this->hasMany(ActivityTimeline::class, 'user_id', 'id');
+        return $this->hasManyThrough(
+            ActivityTimeline::class,
+            \App\Models\User::class,
+            'employee_id',
+            'user_id',
+            'id',
+            'id'
+        );
     }
 }

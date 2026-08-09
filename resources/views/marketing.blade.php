@@ -73,6 +73,21 @@
         .gradient-hero { background: linear-gradient(135deg, #312e81 0%, #4c1d95 40%, #7c3aed 70%, #6366f1 100%); }
         .glass-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); }
         .feature-card:hover { transform: translateY(-4px); transition: transform 0.2s ease; }
+
+        @keyframes scanLine { 0%{top:0} 50%{top:95%} 100%{top:0} }
+        @keyframes floatSlow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+        @keyframes fadeSlideUp { 0%{transform:translateY(40px);opacity:0} 100%{transform:translateY(0);opacity:1} }
+        @keyframes scaleIn { 0%{transform:scale(.85);opacity:0} 100%{transform:scale(1);opacity:1} }
+        @keyframes pingSlow { 0%{transform:scale(1);opacity:1} 100%{transform:scale(1.5);opacity:0} }
+
+        .animate-scan-line { animation:scanLine 2.4s ease-in-out infinite }
+        .animate-float-slow { animation:floatSlow 5s ease-in-out infinite }
+        .animate-shimmer { background:linear-gradient(90deg,transparent 25%,rgba(255,255,255,.15) 50%,transparent 75%); background-size:200% 100%; animation:shimmer 1.8s ease-in-out infinite }
+        .card-lift { transition:transform .35s,box-shadow .35s }
+        .card-lift:hover { transform:translateY(-6px);box-shadow:0 24px 48px -12px rgba(0,0,0,.18) }
+        .reveal { opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s cubic-bezier(.16,1,.3,1) }
+        .reveal.visible { opacity:1;transform:translateY(0) }
     </style>
 </head>
 <body class="bg-white text-slate-800 antialiased">
@@ -94,7 +109,9 @@
 </header>
 
 {{-- Hero --}}
-<section class="gradient-hero pt-28 pb-20 sm:pt-36 sm:pb-28 px-4">
+<section class="gradient-hero pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 relative overflow-hidden">
+    <div class="absolute top-20 left-10 w-32 h-32 bg-indigo-400/20 rounded-full blur-3xl animate-float-slow" style="animation-delay: 0s"></div>
+    <div class="absolute top-40 right-20 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2.5s"></div>
     <div class="max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-white/80 text-xs font-medium mb-6">
             <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
@@ -229,7 +246,7 @@
 
         <div class="space-y-20">
             {{-- Feature 1: HRM --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div>
                     <span class="text-indigo-600 font-bold text-sm uppercase tracking-wider">HRM</span>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-4">Manajemen SDM Lengkap</h3>
@@ -246,18 +263,18 @@
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">hrm.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/4f46e5/ffffff?text=BizOS+HRM+Dashboard" alt="BizOS HRM Dashboard" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/03-companies.png" alt="BizOS HRM Dashboard" loading="lazy"></div>
                 </div>
             </div>
 
             {{-- Feature 2: Payroll --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div class="order-2 lg:order-1 browser-mock">
                     <div class="browser-mock-header">
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">payroll.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/7c3aed/ffffff?text=BizOS+Payroll" alt="BizOS Payroll" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/74-salary-components.png" alt="BizOS Payroll" loading="lazy"></div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <span class="text-purple-600 font-bold text-sm uppercase tracking-wider">Payroll</span>
@@ -273,7 +290,7 @@
             </div>
 
             {{-- Feature 3: Finance --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div>
                     <span class="text-emerald-600 font-bold text-sm uppercase tracking-wider">Finance</span>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-4">Akuntansi Double-Entry</h3>
@@ -290,18 +307,18 @@
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">finance.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/059669/ffffff?text=BizOS+Finance" alt="BizOS Finance" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/50-coa-categories.png" alt="BizOS Finance" loading="lazy"></div>
                 </div>
             </div>
 
             {{-- Feature 4: CRM --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div class="order-2 lg:order-1 browser-mock">
                     <div class="browser-mock-header">
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">crm.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/2563eb/ffffff?text=BizOS+CRM" alt="BizOS CRM" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/78-lead-sources.png" alt="BizOS CRM" loading="lazy"></div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <span class="text-blue-600 font-bold text-sm uppercase tracking-wider">CRM</span>
@@ -317,7 +334,7 @@
             </div>
 
             {{-- Feature 5: Project --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div>
                     <span class="text-amber-600 font-bold text-sm uppercase tracking-wider">Project</span>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-4">Manajemen Proyek & Task</h3>
@@ -334,18 +351,18 @@
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">projects.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/d97706/ffffff?text=BizOS+Project+Management" alt="BizOS Project" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/97-projects.png" alt="BizOS Project" loading="lazy"></div>
                 </div>
             </div>
 
             {{-- Feature 6: POS --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div class="order-2 lg:order-1 browser-mock">
                     <div class="browser-mock-header">
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">pos.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/dc2626/ffffff?text=BizOS+Point+of+Sales" alt="BizOS POS" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/106-pos-members.png" alt="BizOS POS" loading="lazy"></div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <span class="text-red-600 font-bold text-sm uppercase tracking-wider">POS</span>
@@ -361,7 +378,7 @@
             </div>
 
             {{-- Feature 7: Collaboration --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div>
                     <span class="text-sky-600 font-bold text-sm uppercase tracking-wider">Kolaborasi</span>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-4">Kolaborasi Tim Real-Time</h3>
@@ -378,18 +395,18 @@
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">chat.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/0284c7/ffffff?text=BizOS+Collaboration" alt="BizOS Collaboration" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/113-chats.png" alt="BizOS Collaboration" loading="lazy"></div>
                 </div>
             </div>
 
             {{-- Feature 8: LMS + AI --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center reveal">
                 <div class="order-2 lg:order-1 browser-mock">
                     <div class="browser-mock-header">
                         <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                         <span class="browser-mock-url">lms.bizos.id</span>
                     </div>
-                    <div class="browser-mock-body"><img src="https://placehold.co/800x500/0891b2/ffffff?text=BizOS+LMS+%26+AI" alt="BizOS LMS + AI" loading="lazy"></div>
+                    <div class="browser-mock-body"><img src="/marketing/screens/126-ai-providers.png" alt="BizOS LMS + AI" loading="lazy"></div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <span class="text-teal-600 font-bold text-sm uppercase tracking-wider">LMS & AI</span>
@@ -415,22 +432,22 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             @php
             $screens = [
-                ['title' => 'Dashboard', 'url' => 'https://placehold.co/400x300/312e81/ffffff?text=Dashboard'],
-                ['title' => 'Karyawan', 'url' => 'https://placehold.co/400x300/4338ca/ffffff?text=Karyawan'],
-                ['title' => 'Absensi', 'url' => 'https://placehold.co/400x300/4f46e5/ffffff?text=Absensi'],
-                ['title' => 'Payroll', 'url' => 'https://placehold.co/400x300/6366f1/ffffff?text=Payroll'],
-                ['title' => 'COA & Jurnal', 'url' => 'https://placehold.co/400x300/7c3aed/ffffff?text=COA+%26+Jurnal'],
-                ['title' => 'Invoice', 'url' => 'https://placehold.co/400x300/8b5cf6/ffffff?text=Invoice'],
-                ['title' => 'CRM Pipeline', 'url' => 'https://placehold.co/400x300/a855f7/ffffff?text=CRM+Pipeline'],
-                ['title' => 'Kanban Task', 'url' => 'https://placehold.co/400x300/c084fc/ffffff?text=Kanban+Task'],
-                ['title' => 'POS Kasir', 'url' => 'https://placehold.co/400x300/d946ef/ffffff?text=POS+Kasir'],
-                ['title' => 'Chat', 'url' => 'https://placehold.co/400x300/e879f9/ffffff?text=Chat'],
-                ['title' => 'Meeting', 'url' => 'https://placehold.co/400x300/f0abfc/ffffff?text=Meeting'],
-                ['title' => 'Laporan', 'url' => 'https://placehold.co/400x300/e9d5ff/ffffff?text=Laporan'],
+                ['title' => 'Dashboard', 'url' => '/marketing/screens/02-dashboard.png'],
+                ['title' => 'Karyawan', 'url' => '/marketing/screens/16-employees.png'],
+                ['title' => 'Absensi', 'url' => '/marketing/screens/22-attendances.png'],
+                ['title' => 'Payroll', 'url' => '/marketing/screens/71-payroll-periods.png'],
+                ['title' => 'COA & Jurnal', 'url' => '/marketing/screens/48-coa.png'],
+                ['title' => 'Invoice', 'url' => '/marketing/screens/55-invoices.png'],
+                ['title' => 'CRM Pipeline', 'url' => '/marketing/screens/85-pipeline-stages.png'],
+                ['title' => 'Kanban Task', 'url' => '/marketing/screens/101-tasks.png'],
+                ['title' => 'POS Kasir', 'url' => '/marketing/screens/109-pos-transactions.png'],
+                ['title' => 'Chat', 'url' => '/marketing/screens/113-chats.png'],
+                ['title' => 'Meeting', 'url' => '/marketing/screens/115-meetings.png'],
+                ['title' => 'Laporan', 'url' => '/marketing/screens/120-laporan-bisnis.png'],
             ];
             @endphp
             @foreach($screens as $screen)
-            <div class="browser-mock">
+            <div class="browser-mock reveal">
                 <div class="browser-mock-header">
                     <span class="browser-mock-dot bg-red-400"></span><span class="browser-mock-dot bg-yellow-400"></span><span class="browser-mock-dot bg-green-400"></span>
                     <span class="browser-mock-url text-[10px]">{{ strtolower(str_replace(' ', '-', $screen['title'])) }}.bizos.id</span>
@@ -448,28 +465,28 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 text-center mb-4">Siapa yang Membutuhkan BizOS?</h2>
         <p class="text-slate-500 text-center mb-12">BizOS dirancang untuk berbagai industri dan skala bisnis</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow card-lift">
                 <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-indigo-600"><path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z"/></svg>
                 </div>
                 <h3 class="font-bold text-slate-800 mb-2">Perusahaan Menengah-Besar (100-5000+ karyawan)</h3>
                 <p class="text-sm text-slate-600 leading-relaxed">HRM untuk kelola ribuan karyawan, payroll batch processing, multi-cabang, multi-company. Struktur organisasi kompleks dengan departemen, jabatan, grade.</p>
             </div>
-            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow card-lift">
                 <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-emerald-600"><path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"/><path fill-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clip-rule="evenodd"/><path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"/></svg>
                 </div>
                 <h3 class="font-bold text-slate-800 mb-2">Finance & Accounting Firm</h3>
                 <p class="text-sm text-slate-600 leading-relaxed">Double-entry accounting, COA PSAK, PPN/PPh, AR/AP aging, budget control, aset management. Laporan keuangan lengkap untuk audit dan kepatuhan pajak.</p>
             </div>
-            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow card-lift">
                 <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-amber-600"><path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0118 9.375v9.375a3 3 0 003-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 00-.673-.05A3 3 0 0015 1.5h-1.5a3 3 0 00-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6zM13.5 3A1.5 1.5 0 0012 4.5h4.5A1.5 1.5 0 0015 3h-1.5z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V9.375zM6 12a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM6 15a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V15zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM6 18a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V18zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75z" clip-rule="evenodd"/></svg>
                 </div>
                 <h3 class="font-bold text-slate-800 mb-2">Retail & F&B</h3>
                 <p class="text-sm text-slate-600 leading-relaxed">POS dengan barcode scanner, multi-payment, shift kasir, member loyalty, voucher, inventory tracking. Integrasi langsung ke accounting & laporan penjualan.</p>
             </div>
-            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow card-lift">
                 <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-purple-600"><path d="M11.25 5.337c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.036 1.007-1.875 2.25-1.875S15 2.34 15 3.375c0 .369-.128.713-.349 1.003-.215.283-.401.604-.401.959 0 .332.278.598.61.578 1.91-.114 3.79-.342 5.632-.676a.75.75 0 01.878.645 49.808 49.808 0 01.376 5.452.75.75 0 01-.879.645c-1.842-.334-3.722-.562-5.632-.676a.606.606 0 00-.61.578c0 .355.186.676.401.959.221.29.349.634.349 1.003 0 1.036-1.007 1.875-2.25 1.875s-2.25-.84-2.25-1.875c0-.369.128-.713.349-1.003.215-.283.401-.604.401-.959 0-.332-.278-.598-.61-.578-1.91.114-3.79.342-5.632.676a.75.75 0 01-.878-.645 49.808 49.808 0 01-.376-5.452.75.75 0 01.878-.645c1.842.334 3.722.562 5.632.676.332.02.61-.246.61-.578z"/></svg>
                 </div>
@@ -632,6 +649,20 @@
         </div>
     </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+</script>
 
 </body>
 </html>

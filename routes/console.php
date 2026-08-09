@@ -40,3 +40,4 @@ Schedule::command('fieldservice:check-van-stock')->dailyAt('08:00');
 Schedule::command('email:sync-accounts')->everyFiveMinutes();
 Schedule::command('bizos:notify-overdue')->dailyAt('08:00');
 Schedule::command('license:check-expired')->dailyAt('03:00');
+Schedule::command('seo:indexnow --all')->dailyAt('02:45');

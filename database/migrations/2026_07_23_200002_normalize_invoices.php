@@ -14,12 +14,16 @@ return new class extends Migration
             $table->foreign('sales_order_id')->references('id')->on('sales_orders')->nullOnDelete();
         });
 
-        DB::statement("ALTER TABLE invoices MODIFY COLUMN invoice_type ENUM('sales', 'purchase', 'credit_note', 'debit_note', 'service', 'other') NOT NULL DEFAULT 'sales'");
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE invoices MODIFY COLUMN invoice_type ENUM('sales', 'purchase', 'credit_note', 'debit_note', 'service', 'other') NOT NULL DEFAULT 'sales'");
+        }
     }
 
     public function down(): void
     {
-        DB::statement("ALTER TABLE invoices MODIFY COLUMN invoice_type ENUM('sales', 'purchase', 'credit_note', 'debit_note') NOT NULL");
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE invoices MODIFY COLUMN invoice_type ENUM('sales', 'purchase', 'credit_note', 'debit_note') NOT NULL");
+        }
 
         Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign(['sales_order_id']);

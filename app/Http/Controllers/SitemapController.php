@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Response;
@@ -9,9 +10,53 @@ use Illuminate\Support\Facades\Cache;
 
 class SitemapController extends Controller
 {
+    const CHUNK_SIZE = 10000;
+
     public function index(): Response
     {
-        $xml = Cache::remember('sitemap.xml', 86400, function () {
+        $urls = $this->collectUrls();
+
+        if (count($urls) > self::CHUNK_SIZE) {
+            return $this->sitemapIndex($urls);
+        }
+
+        return $this->buildSitemapResponse($urls);
+    }
+
+    public function sitemapPage(int $page): Response
+    {
+        $urls = $this->collectUrls();
+        $chunks = array_chunk($urls, self::CHUNK_SIZE);
+
+        if (!isset($chunks[$page - 1])) {
+            abort(404);
+        }
+
+        return $this->buildSitemapResponse($chunks[$page - 1]);
+    }
+
+    public function robots(): Response
+    {
+        $content = "User-agent: *\n";
+        $content .= "Allow: /\$\n";
+        $content .= "Allow: /docs\n";
+        $content .= "Allow: /marketing/\n";
+        $content .= "Allow: /blog\n";
+        $content .= "Allow: /best-\n";
+        $content .= "Allow: /alternatives-to-\n";
+        $content .= "Allow: /compare/\n";
+        $content .= "Disallow: /admin\n";
+        $content .= "Disallow: /api\n";
+        $content .= "Disallow: /__pair\n";
+        $content .= "Disallow: /webhooks\n";
+        $content .= "Sitemap: /sitemap.xml\n";
+
+        return response($content, 200)->header('Content-Type', 'text/plain');
+    }
+
+    protected function collectUrls(): array
+    {
+        return Cache::remember('sitemap_urls', 86400, function () {
             $urls = [];
 
             $urls[] = $this->url(route('home'), '1.0', 'daily');
@@ -26,6 +71,22 @@ class SitemapController extends Controller
             $urls[] = $this->url(url('/compare/bizos-vs-jurnal'), '0.7', 'monthly');
             $urls[] = $this->url(url('/alternatives-to-excel-for-hr'), '0.7', 'monthly');
             $urls[] = $this->url(url('/alternatives-to-talenta'), '0.7', 'monthly');
+
+            try {
+                $blogPosts = BlogPost::published()
+                    ->select('slug', 'updated_at')
+                    ->get();
+
+                foreach ($blogPosts as $post) {
+                    $urls[] = $this->url(
+                        route('blog.show', $post->slug),
+                        '0.7',
+                        'monthly',
+                        $post->updated_at
+                    );
+                }
+            } catch (\Exception $e) {
+            }
 
             try {
                 $companies = Company::query()
@@ -62,12 +123,25 @@ class SitemapController extends Controller
             } catch (\Exception $e) {
             }
 
+            return $urls;
+        });
+    }
+
+    protected function sitemapIndex(array $urls): Response
+    {
+        $totalPages = (int) ceil(count($urls) / self::CHUNK_SIZE);
+
+        $xml = Cache::remember('sitemap_index.xml', 86400, function () use ($totalPages) {
+            $baseUrl = config('app.url');
+
             $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-            $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-            foreach ($urls as $url) {
-                $xml .= $url;
+            $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $xml .= "  <sitemap>\n";
+                $xml .= "    <loc>{$baseUrl}/sitemap/sitemap-{$i}.xml</loc>\n";
+                $xml .= "  </sitemap>\n";
             }
-            $xml .= '</urlset>';
+            $xml .= '</sitemapindex>';
 
             return $xml;
         });
@@ -75,22 +149,16 @@ class SitemapController extends Controller
         return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
-    public function robots(): Response
+    protected function buildSitemapResponse(array $urls): Response
     {
-        $content = "User-agent: *\n";
-        $content .= "Allow: /\$\n";
-        $content .= "Allow: /docs\n";
-        $content .= "Allow: /marketing/\n";
-        $content .= "Allow: /best-\n";
-        $content .= "Allow: /alternatives-to-\n";
-        $content .= "Allow: /compare/\n";
-        $content .= "Disallow: /admin\n";
-        $content .= "Disallow: /api\n";
-        $content .= "Disallow: /__pair\n";
-        $content .= "Disallow: /webhooks\n";
-        $content .= "Sitemap: /sitemap.xml\n";
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+        foreach ($urls as $url) {
+            $xml .= $url;
+        }
+        $xml .= '</urlset>';
 
-        return response($content, 200)->header('Content-Type', 'text/plain');
+        return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
     protected function url(string $loc, string $priority, string $changefreq, $lastmod = null): string

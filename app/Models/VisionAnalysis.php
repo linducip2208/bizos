@@ -12,6 +12,7 @@ class VisionAnalysis extends Model
         'prompt',
         'result',
         'model_used',
+        'created_at',
     ];
 
     public $timestamps = false;

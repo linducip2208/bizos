@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('gamification_actions', function (Blueprint $table) {
-            $table->id();
-            $table->string('key')->unique();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('base_points')->default(0);
-            $table->string('category')->nullable();
-            $table->integer('max_per_day')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('gamification_actions')) {
+            Schema::create('gamification_actions', function (Blueprint $table) {
+                $table->id();
+                $table->string('key')->unique();
+                $table->string('name');
+                $table->text('description')->nullable();
+                $table->integer('base_points')->default(0);
+                $table->string('category')->nullable();
+                $table->integer('max_per_day')->nullable();
+                $table->boolean('is_active')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void

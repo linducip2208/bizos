@@ -17,7 +17,9 @@ return new class extends Migration
             }
         });
 
-        DB::statement("ALTER TABLE `ai_knowledge_base` MODIFY `source_type` VARCHAR(100) DEFAULT 'text'");
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE `ai_knowledge_base` MODIFY `source_type` VARCHAR(100) DEFAULT 'text'");
+        }
     }
 
     public function down(): void

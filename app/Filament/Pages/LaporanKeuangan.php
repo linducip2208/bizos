@@ -31,6 +31,7 @@ class LaporanKeuangan extends Page
     public array $expenseCategoryData = [];
     public string $dateFrom;
     public string $dateTo;
+    public string $groupBy = 'bulanan';
     public ?ReportTemplate $activeTemplate = null;
     public array $availableTemplates = [];
     public string $nlgSummary = '';
@@ -40,6 +41,7 @@ class LaporanKeuangan extends Page
     {
         $this->dateFrom = request('date_from', now()->startOfYear()->format('Y-m-d'));
         $this->dateTo = request('date_to', now()->format('Y-m-d'));
+        $this->groupBy = request('group_by', 'bulanan');
 
         $this->availableTemplates = ReportTemplate::where('category', 'finance')
             ->where(function ($q) {
@@ -91,7 +93,7 @@ class LaporanKeuangan extends Page
         $service = app(ReportBuilderService::class);
 
         try {
-            $params = ['date_from' => $this->dateFrom, 'date_to' => $this->dateTo];
+            $params = ['date_from' => $this->dateFrom, 'date_to' => $this->dateTo, 'group_by' => $this->groupBy];
             $data = $service->execute($this->activeTemplate, $params);
             $chartData = $service->generateChartData($this->activeTemplate, $params);
 
@@ -157,12 +159,18 @@ class LaporanKeuangan extends Page
 
     protected function loadRevenueVsExpenseChart(array $revenueCoaIds, array $expenseCoaIds): void
     {
+        $groupFormat = match ($this->groupBy) {
+            'harian' => '%Y-%m-%d',
+            'mingguan' => '%Y-%u',
+            default => '%Y-%m',
+        };
+
         $revenueByMonth = \App\Models\JournalEntry::whereIn('coa_id', $revenueCoaIds)
             ->whereHas('journal', function ($q) {
                 $q->whereBetween('journal_date', [$this->dateFrom, $this->dateTo]);
             })
             ->join('journals', 'journal_entries.journal_id', '=', 'journals.id')
-            ->selectRaw("DATE_FORMAT(journals.journal_date, '%Y-%m') as period, SUM(journal_entries.credit) as total")
+            ->selectRaw("DATE_FORMAT(journals.journal_date, '{$groupFormat}') as period, SUM(journal_entries.credit) as total")
             ->groupBy('period')->orderBy('period')
             ->pluck('total', 'period')->toArray();
 
@@ -171,7 +179,7 @@ class LaporanKeuangan extends Page
                 $q->whereBetween('journal_date', [$this->dateFrom, $this->dateTo]);
             })
             ->join('journals', 'journal_entries.journal_id', '=', 'journals.id')
-            ->selectRaw("DATE_FORMAT(journals.journal_date, '%Y-%m') as period, SUM(journal_entries.debit) as total")
+            ->selectRaw("DATE_FORMAT(journals.journal_date, '{$groupFormat}') as period, SUM(journal_entries.debit) as total")
             ->groupBy('period')->orderBy('period')
             ->pluck('total', 'period')->toArray();
 
@@ -179,11 +187,26 @@ class LaporanKeuangan extends Page
         sort($allPeriods);
 
         $this->revenueLabels = array_map(function ($p) {
-            return \Carbon\Carbon::createFromFormat('Y-m', $p)->translatedFormat('M Y');
+            return $this->formatFinancePeriodLabel($p);
         }, $allPeriods);
 
         $this->revenueData = array_map(fn($p) => (float) ($revenueByMonth[$p] ?? 0), $allPeriods);
         $this->expenseData = array_map(fn($p) => (float) ($expenseByMonth[$p] ?? 0), $allPeriods);
+    }
+
+    protected function formatFinancePeriodLabel(string $period): string
+    {
+        if ($this->groupBy === 'bulanan') {
+            $date = \Carbon\Carbon::createFromFormat('Y-m', $period);
+            return $date->translatedFormat('M Y');
+        }
+        if ($this->groupBy === 'mingguan') {
+            $parts = explode('-', $period);
+            $year = $parts[0];
+            $week = (int) ($parts[1] ?? 1);
+            return 'Mgg ke-' . $week . ', ' . $year;
+        }
+        return $period;
     }
 
     protected function loadExpenseByCategoryChart(): void
@@ -246,5 +269,60 @@ class LaporanKeuangan extends Page
 
         $labaRugi = $totalPendapatan - $totalBeban;
         $this->pnlSummary[] = ['type' => 'total', 'label' => $labaRugi >= 0 ? 'LABA BERSIH' : 'RUGI BERSIH', 'amount' => $labaRugi];
+    }
+
+    public function getExportPdfUrl(): string
+    {
+        return route('laporan.keuangan.pdf', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function getExportCsvUrl(): string
+    {
+        return route('laporan.keuangan.csv', request()->only(['date_from', 'date_to', 'group_by', 'template_id']));
+    }
+
+    public function exportPdf()
+    {
+        $this->mount();
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.laporan-keuangan', [
+            'title' => 'Laporan Keuangan',
+            'dateFrom' => $this->dateFrom,
+            'dateTo' => $this->dateTo,
+            'groupBy' => $this->groupBy,
+            'summaryCards' => $this->cards,
+            'pnlSummary' => $this->pnlSummary,
+        ]);
+
+        return $pdf->download('laporan-keuangan-' . now()->format('Ymd') . '.pdf');
+    }
+
+    public function exportCsv()
+    {
+        $this->mount();
+
+        $filename = 'laporan-keuangan-' . now()->format('Ymd') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['Tipe', 'Keterangan', 'Jumlah']);
+
+            foreach ($this->pnlSummary as $row) {
+                fputcsv($handle, [
+                    $row['type'] ?? '',
+                    $row['label'] ?? '',
+                    $row['amount'] ?? 0,
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

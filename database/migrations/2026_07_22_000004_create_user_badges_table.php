@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('user_badges', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('badge_id')->constrained('gamification_badges')->cascadeOnDelete();
-            $table->timestamp('awarded_at')->nullable();
-            $table->json('context')->nullable();
-            $table->timestamps();
+        if (!Schema::hasTable('user_badges')) {
+            Schema::create('user_badges', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+                $table->foreignId('badge_id')->constrained('gamification_badges')->cascadeOnDelete();
+                $table->timestamp('awarded_at')->nullable();
+                $table->json('context')->nullable();
+                $table->timestamps();
 
-            $table->unique(['user_id', 'badge_id']);
-            $table->index(['user_id', 'awarded_at']);
-        });
+                $table->unique(['user_id', 'badge_id']);
+                $table->index(['user_id', 'awarded_at']);
+            });
+        }
     }
 
     public function down(): void

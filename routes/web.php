@@ -12,6 +12,8 @@ Route::get('/', function () {
 Route::get('/docs', [App\Http\Controllers\DocsController::class, 'index'])->name('docs');
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
 Route::get('/sitemap/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
+Route::get('/sitemap/sitemap-{page}.xml', [App\Http\Controllers\SitemapController::class, 'sitemapPage'])
+    ->where('page', '[0-9]+');
 Route::get('/robots.txt', [App\Http\Controllers\SitemapController::class, 'robots']);
 
 Route::get('/best-hrm-software', [App\Http\Controllers\ProgrammaticSeoController::class, 'bestHrm']);
@@ -156,6 +158,15 @@ Route::middleware('auth:web')->group(function () {
         $departmentId = $employee?->department_id;
         return view('receipt-scanner', compact('employeeId', 'departmentId'));
     })->name('receipt.scanner');
+
+    Route::prefix('admin/laporan')->name('laporan.')->group(function () {
+        Route::get('/bisnis/pdf', fn() => app(\App\Filament\Pages\LaporanBisnis::class)->exportPdf())->name('bisnis.pdf');
+        Route::get('/bisnis/csv', fn() => app(\App\Filament\Pages\LaporanBisnis::class)->exportCsv())->name('bisnis.csv');
+        Route::get('/keuangan/pdf', fn() => app(\App\Filament\Pages\LaporanKeuangan::class)->exportPdf())->name('keuangan.pdf');
+        Route::get('/keuangan/csv', fn() => app(\App\Filament\Pages\LaporanKeuangan::class)->exportCsv())->name('keuangan.csv');
+        Route::get('/operasional/pdf', fn() => app(\App\Filament\Pages\LaporanOperasional::class)->exportPdf())->name('operasional.pdf');
+        Route::get('/operasional/csv', fn() => app(\App\Filament\Pages\LaporanOperasional::class)->exportCsv())->name('operasional.csv');
+    });
 });
 
 // WhatsApp Business API webhook
@@ -171,5 +182,10 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 // BI Embed Route
 Route::get('/api/bi/embed/{token}', fn(string $token) => response()->json(app(\App\Services\AdvancedBiService::class)->getEmbedData($token)));
+
+// Blog
+Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/category/{slug}', [\App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
 
 require base_path('routes/pair-routes.php');

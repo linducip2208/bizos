@@ -10,8 +10,8 @@
                 <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-indigo-50 text-indigo-600 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-900">Portal Pelanggan</h1>
-                <p class="text-sm text-gray-500 mt-1">Masuk untuk melihat invoice dan riwayat pembayaran</p>
+                <h1 class="text-2xl font-bold text-gray-900">Portal Karyawan</h1>
+                <p class="text-sm text-gray-500 mt-1">Masuk untuk absensi, cuti, slip gaji, dan info karyawan</p>
             </div>
 
             @if ($errors->any())

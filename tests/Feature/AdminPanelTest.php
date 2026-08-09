@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -12,6 +13,7 @@ class AdminPanelTest extends TestCase
     use RefreshDatabase;
 
     protected Company $company;
+    protected Role $role;
 
     protected function setUp(): void
     {
@@ -21,6 +23,12 @@ class AdminPanelTest extends TestCase
             'name' => 'Test Company',
             'code' => 'TC',
             'slug' => 'tc',
+        ]);
+
+        $this->role = Role::create([
+            'company_id' => $this->company->id,
+            'name' => 'Admin',
+            'slug' => 'admin',
         ]);
     }
 
@@ -37,10 +45,11 @@ class AdminPanelTest extends TestCase
             'email' => 'admin@bizos.test',
             'password' => bcrypt('password'),
             'company_id' => $this->company->id,
+            'role_id' => $this->role->id,
             'is_active' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/admin');
+        $response = $this->actingAs($user)->get('/admin/home');
 
         $response->assertStatus(200);
     }
@@ -58,10 +67,11 @@ class AdminPanelTest extends TestCase
             'email' => 'admin@bizos.test',
             'password' => bcrypt('password'),
             'company_id' => $this->company->id,
+            'role_id' => $this->role->id,
             'is_active' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/admin');
+        $response = $this->actingAs($user)->get('/admin/home');
 
         $response->assertStatus(200);
         $response->assertSee('BizOS');
