@@ -23,6 +23,12 @@ class BudgetForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         TextInput::make('name')
                             ->label('Nama Anggaran')
                             ->required()

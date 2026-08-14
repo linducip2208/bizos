@@ -20,6 +20,7 @@ class PurchaseRequisition extends Model implements Approvalable
 
     protected $fillable = [
         'company_id',
+        'branch_id',
         'pr_number',
         'department_id',
         'requested_by',
@@ -39,6 +40,11 @@ class PurchaseRequisition extends Model implements Approvalable
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function department()

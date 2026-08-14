@@ -20,7 +20,7 @@ class RabDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏗️ Konstruksi';
+        return '🏭 Industry';
     }
 
     public array $projects = [];

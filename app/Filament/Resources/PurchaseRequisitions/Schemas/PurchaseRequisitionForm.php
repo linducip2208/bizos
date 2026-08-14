@@ -16,6 +16,12 @@ class PurchaseRequisitionForm
             ->components([
                 Section::make('Informasi Permintaan')
                     ->schema([
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('department_id')
                             ->label('Departemen')
                             ->relationship('department', 'name')

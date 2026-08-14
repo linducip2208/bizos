@@ -371,17 +371,31 @@ class WhatsappBusinessService
         $field = $changes['field'] ?? '';
 
         if ($field === 'messages') {
-            $this->processIncomingMessages($value);
+            $this->processIncomingMessages($value, $payload);
         } elseif ($field === 'message_template_status_update') {
             $this->processTemplateStatusUpdate($value);
         }
     }
 
-    protected function processIncomingMessages(array $value): void
+    protected function processIncomingMessages(array $value, ?array $fullPayload = null): void
     {
         $contacts = $value['contacts'] ?? [];
         $messages = $value['messages'] ?? [];
         $metadata = $value['metadata'] ?? [];
+
+        $aiService = app(WhatsappAiService::class);
+
+        if ($aiService->isAiAutoReplyEnabled() && $fullPayload) {
+            try {
+                $aiService->handleIncomingMessage($fullPayload);
+            } catch (\Exception $e) {
+                Log::error('WhatsappAiService webhook error', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ]);
+            }
+            return;
+        }
 
         foreach ($messages as $message) {
             $from = $message['from'] ?? null;

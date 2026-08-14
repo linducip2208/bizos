@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Reimbursements\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +17,20 @@ class ReimbursementForm
         return $schema
             ->columns(1)
             ->components([
+                Section::make('Unggah Struk & OCR')
+                    ->collapsible()
+                    ->schema([
+                        FileUpload::make('receipt_image_path')
+                            ->label('Upload Struk / Kwitansi')
+                            ->image()
+                            ->directory('receipts')
+                            ->maxSize(10240)
+                            ->helperText('Upload gambar struk untuk ekstraksi data otomatis dengan AI.')
+                            ->live()
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(1),
+
                 Section::make('Informasi Reimbursement')
                     ->columns(3)
                     ->schema([
@@ -48,6 +63,7 @@ class ReimbursementForm
                         Select::make('status')
                             ->label('Status')
                             ->options([
+                                'draft' => 'Draft',
                                 'pending' => 'Pending',
                                 'approved' => 'Disetujui',
                                 'rejected' => 'Ditolak',

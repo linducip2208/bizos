@@ -35,7 +35,7 @@ class DashboardLayoutResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏠 Dashboard & Reporting';
+        return '🏠 Dashboard';
     }
 
     public static function form(Schema $schema): Schema

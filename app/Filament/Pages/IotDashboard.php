@@ -24,7 +24,7 @@ class IotDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'IoT & Sensor';
+        return '🌱 ESG';
     }
 
     public array $devices = [];

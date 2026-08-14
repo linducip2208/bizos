@@ -9,6 +9,7 @@ class Payroll extends Model
     protected $fillable = [
         'period_id',
         'employee_id',
+        'branch_id',
         'gross_salary',
         'total_income_components',
         'total_deduction_components',
@@ -43,6 +44,11 @@ class Payroll extends Model
         'overtime_hours' => 'decimal:2',
         'overtime_pay' => 'decimal:2',
     ];
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 
     public function period()
     {

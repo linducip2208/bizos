@@ -8,6 +8,7 @@ class Journal extends Model
 {
     protected $fillable = [
         'company_id',
+        'branch_id',
         'journal_number',
         'journal_date',
         'journal_type',
@@ -19,6 +20,8 @@ class Journal extends Model
         'status',
         'posted_by',
         'posted_at',
+        'currency_id',
+        'exchange_rate',
     ];
 
     protected $casts = [
@@ -26,11 +29,17 @@ class Journal extends Model
         'total_debit' => 'decimal:2',
         'total_credit' => 'decimal:2',
         'posted_at' => 'datetime',
+        'exchange_rate' => 'decimal:6',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function postedBy()
@@ -51,5 +60,10 @@ class Journal extends Model
     public function assetDepreciations()
     {
         return $this->hasMany(AssetDepreciation::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }

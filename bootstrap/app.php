@@ -14,11 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\RequirePair::class,
             \App\Http\Middleware\DataScopeMiddleware::class,
         ]);
         $middleware->api(prepend: [
             \App\Http\Middleware\Api\ApiRateLimitMiddleware::class,
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            'webhooks/payment/*',
+            'webhooks/wa/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

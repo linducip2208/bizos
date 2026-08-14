@@ -23,7 +23,7 @@ class ProductVariantResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Product & Inventory';
+        return '📦 Inventory';
     }
 
     protected static ?string $label = 'Varian Produk';

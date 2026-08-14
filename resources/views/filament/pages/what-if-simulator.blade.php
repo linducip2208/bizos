@@ -3,33 +3,51 @@
         {{-- Scenario Selector --}}
         <x-filament::section>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                <x-filament::select
-                    wire:model.live="simType"
-                    label="Jenis Simulasi"
-                    :options="[
-                        'salary' => 'Kenaikan Gaji',
-                        'machine' => 'Tambah Kapasitas Mesin',
-                        'price' => 'Perubahan Harga Produk',
-                    ]"
-                />
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jenis Simulasi</label>
+                    <select wire:model.live="simType" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm">
+                        <option value="salary">Kenaikan Gaji</option>
+                        <option value="machine">Tambah Kapasitas Mesin</option>
+                        <option value="price">Perubahan Harga Produk</option>
+                    </select>
+                </div>
 
                 @if($simType === 'salary')
-                    <x-filament::input.wrapper label="Persentase Kenaikan (%)">
-                        <x-filament::input type="number" wire:model="increasePercent" min="1" max="100" step="0.5" />
-                    </x-filament::input.wrapper>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Persentase Kenaikan (%)</label>
+                        <input type="number" wire:model="increasePercent" min="1" max="100" step="0.5" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm" />
+                    </div>
                     <div></div>
                 @elseif($simType === 'machine')
                     @php $workCenters = \App\Models\WorkCenter::pluck('name', 'id')->toArray(); @endphp
-                    <x-filament::select wire:model="workCenterId" label="Work Center" :options="$workCenters" />
-                    <x-filament::input.wrapper label="Tambahan Kapasitas (unit/jam)">
-                        <x-filament::input type="number" wire:model="additionalCapacity" min="1" step="1" />
-                    </x-filament::input.wrapper>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Work Center</label>
+                        <select wire:model="workCenterId" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm">
+                            <option value="">-- Pilih --</option>
+                            @foreach($workCenters as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tambahan Kapasitas (unit/jam)</label>
+                        <input type="number" wire:model="additionalCapacity" min="1" step="1" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm" />
+                    </div>
                 @elseif($simType === 'price')
                     @php $products = \App\Models\Product::pluck('name', 'id')->toArray(); @endphp
-                    <x-filament::select wire:model="productId" label="Produk" :options="$products" />
-                    <x-filament::input.wrapper label="Harga Baru (Rp)">
-                        <x-filament::input type="number" wire:model="newPrice" min="0" step="1000" />
-                    </x-filament::input.wrapper>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Produk</label>
+                        <select wire:model="productId" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm">
+                            <option value="">-- Pilih --</option>
+                            @foreach($products as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Harga Baru (Rp)</label>
+                        <input type="number" wire:model="newPrice" min="0" step="1000" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 text-sm" />
+                    </div>
                 @endif
 
                 <x-filament::button wire:click="simulate" color="primary" icon="heroicon-o-play" class="w-full">

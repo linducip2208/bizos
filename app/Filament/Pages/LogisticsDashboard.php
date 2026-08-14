@@ -21,7 +21,7 @@ class LogisticsDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Logistik';
+        return '🏭 Industry';
     }
 
     public array $performance = [];

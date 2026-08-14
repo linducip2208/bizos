@@ -7,10 +7,11 @@
 
 const { chromium } = require('playwright');
 const path = require('path');
+const fs = require('fs');
 
-const BASE = 'http://bizos.test';
+const BASE = 'http://127.0.0.1:8765';
 const OUT_DIR = path.join(__dirname, '..', 'public', 'marketing', 'screens');
-const EMAIL = 'admin@bizos.id';
+const EMAIL = 'budi@maju.test';
 const PASSWORD = 'password';
 
 const pages = [
@@ -181,6 +182,53 @@ const pages = [
     { url: '/admin/audit-logs', file: '120-audit-logs.png', auth: true },
     { url: '/admin/system-settings', file: '121-system-settings.png', auth: true },
     { url: '/admin/integrations', file: '122-integrations.png', auth: true },
+
+    // NEW: Enterprise features (Round 2+3)
+    { url: '/admin/approval-center', file: '123-approval-center.png', auth: true },
+    { url: '/admin/contracts', file: '124-contracts.png', auth: true },
+    { url: '/admin/intercompany-transactions', file: '125-intercompany-transactions.png', auth: true },
+    { url: '/admin/budget-versions', file: '126-budget-versions.png', auth: true },
+    { url: '/admin/forecasts', file: '127-forecasts.png', auth: true },
+    { url: '/admin/scenarios', file: '128-scenarios.png', auth: true },
+    { url: '/admin/rfqs', file: '129-rfqs.png', auth: true },
+    { url: '/admin/bids', file: '130-bids.png', auth: true },
+    { url: '/admin/bid-comparison', file: '131-bid-comparison.png', auth: true },
+    { url: '/admin/three-way-matches', file: '132-three-way-matches.png', auth: true },
+    { url: '/admin/objectives', file: '133-objectives.png', auth: true },
+    { url: '/admin/okr-dashboard', file: '134-okr-dashboard.png', auth: true },
+    { url: '/admin/system-health', file: '135-system-health.png', auth: true },
+    { url: '/admin/data-governance', file: '136-data-governance.png', auth: true },
+    { url: '/admin/vendor-scorecard', file: '137-vendor-scorecard.png', auth: true },
+    { url: '/admin/cash-flow-forecast', file: '138-cash-flow-forecast.png', auth: true },
+    { url: '/admin/natural-language-query', file: '139-natural-language-query.png', auth: true },
+    { url: '/admin/pivot-table-builder', file: '140-pivot-table-builder.png', auth: true },
+    { url: '/admin/balance-sheet', file: '141-balance-sheet.png', auth: true },
+    { url: '/admin/trial-balance', file: '142-trial-balance.png', auth: true },
+    { url: '/admin/recurring-invoices', file: '143-recurring-invoices.png', auth: true },
+    { url: '/admin/printers', file: '144-printers.png', auth: true },
+    { url: '/admin/receipt-layouts', file: '145-receipt-layouts.png', auth: true },
+    { url: '/admin/barcode-label-printer', file: '146-barcode-label-printer.png', auth: true },
+    { url: '/admin/modifier-groups', file: '147-modifier-groups.png', auth: true },
+    { url: '/admin/combo-products', file: '148-combo-products.png', auth: true },
+    { url: '/admin/cash-denominations', file: '149-cash-denominations.png', auth: true },
+    { url: '/admin/service-types', file: '150-service-types.png', auth: true },
+    { url: '/admin/res-tables', file: '151-res-tables.png', auth: true },
+    { url: '/admin/kitchen-display', file: '152-kitchen-display.png', auth: true },
+    { url: '/admin/warranties', file: '153-warranties.png', auth: true },
+    { url: '/admin/warranty-claims', file: '154-warranty-claims.png', auth: true },
+    { url: '/admin/warranty-lookup', file: '155-warranty-lookup.png', auth: true },
+    { url: '/admin/customer-groups', file: '156-customer-groups.png', auth: true },
+    { url: '/admin/payment-gateway-configs', file: '157-payment-gateway-configs.png', auth: true },
+    { url: '/admin/data-import-wizard', file: '158-data-import-wizard.png', auth: true },
+    { url: '/admin/calendar-sync', file: '159-calendar-sync.png', auth: true },
+    { url: '/admin/expense-scanner', file: '160-expense-scanner.png', auth: true },
+    { url: '/admin/wa-ai-chatbot', file: '161-wa-ai-chatbot.png', auth: true },
+    { url: '/admin/discount-dashboard', file: '162-discount-dashboard.png', auth: true },
+    { url: '/admin/pos-terminal', file: '163-pos-terminal.png', auth: true },
+    { url: '/admin/dashboards/ceo', file: '164-ceo-dashboard.png', auth: true },
+    { url: '/admin/dashboards/cfo', file: '165-cfo-dashboard.png', auth: true },
+    { url: '/admin/dashboards/manager', file: '166-manager-dashboard.png', auth: true },
+    { url: '/admin/dashboards/sales', file: '167-sales-dashboard.png', auth: true },
 ];
 
 (async () => {
@@ -206,12 +254,11 @@ const pages = [
     await page.waitForTimeout(1000);
     
     // Click submit and wait for redirect
-    await Promise.all([
-        page.waitForURL('**/admin', { timeout: 15000 }).catch(() => {}),
-        page.locator('button[type="submit"]').click(),
-    ]);
+    await page.locator('button[type="submit"]').click();
     
-    await page.waitForTimeout(2000);
+    // Wait for URL to move away from /login (up to 20s)
+    await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 20000 }).catch(() => {});
+    await page.waitForTimeout(3000);
     await page.waitForLoadState('networkidle').catch(() => {});
 
     const url = page.url();
@@ -229,6 +276,12 @@ const pages = [
         const { url: pageUrl, file, auth } = entry;
         const fullUrl = `${BASE}${pageUrl}`;
         const outPath = path.join(OUT_DIR, file);
+
+        // Resume: skip already-captured screenshots
+        if (fs.existsSync(outPath)) {
+            console.log(`[SKIP] ${file} — already captured`);
+            continue;
+        }
 
         try {
             if (auth) {

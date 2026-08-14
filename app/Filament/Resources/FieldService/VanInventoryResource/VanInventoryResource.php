@@ -29,7 +29,7 @@ class VanInventoryResource extends Resource
 
     protected static ?string $pluralLabel = 'Stok Van';
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-archive-box';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cube';
 
     protected static ?int $navigationSort = 5;
 

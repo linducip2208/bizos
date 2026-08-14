@@ -12,6 +12,7 @@ class PosPayment extends Model
         'amount',
         'reference_number',
         'payment_id',
+        'payment_status',
         'paid_at',
     ];
 

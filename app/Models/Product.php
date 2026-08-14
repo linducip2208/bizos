@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,6 +25,7 @@ class Product extends Model
         'stock',
         'min_stock',
         'max_stock',
+        'warranty_id',
         'photo',
         'is_taxable',
         'tax_rate',
@@ -105,6 +107,16 @@ class Product extends Model
         return $this->hasMany(SerialNumber::class);
     }
 
+    public function warranty()
+    {
+        return $this->belongsTo(Warranty::class);
+    }
+
+    public function warrantyRegistrations()
+    {
+        return $this->hasMany(WarrantyRegistration::class);
+    }
+
     public function bom()
     {
         return $this->hasOne(BillOfMaterial::class, 'product_id')->where('is_active', true);
@@ -113,5 +125,53 @@ class Product extends Model
     public function productionOrders()
     {
         return $this->hasMany(ProductionOrder::class);
+    }
+
+    public function modifierGroups()
+    {
+        return $this->belongsToMany(ModifierGroup::class, 'product_modifiers');
+    }
+
+    public function combos()
+    {
+        return $this->hasMany(ComboProduct::class);
+    }
+
+    public function getComboPrice(): float
+    {
+        $combo = $this->combos()
+            ->with('items.componentProduct')
+            ->where('is_active', true)
+            ->first();
+
+        if (!$combo) {
+            return (float) $this->selling_price;
+        }
+
+        $total = $combo->items->sum(function ($item) {
+            return (float) ($item->componentProduct?->selling_price ?? 0) * (int) $item->quantity;
+        });
+
+        return round($total, 2);
+    }
+
+    public function scopeHasDuplicates(Builder $query): Builder
+    {
+        return $query->whereIn('id', function ($sub) {
+            $sub->selectRaw('p1.id')
+                ->from('products as p1')
+                ->join('products as p2', function ($join) {
+                    $join->on('p1.company_id', '=', 'p2.company_id')
+                        ->whereColumn('p1.id', '<', 'p2.id')
+                        ->where(function ($q) {
+                            $q->whereRaw('SOUNDEX(p1.name) = SOUNDEX(p2.name)')
+                                ->orWhere(function ($q2) {
+                                    $q2->whereNotNull('p1.code')
+                                        ->whereNotNull('p2.code')
+                                        ->whereColumn('p1.code', '=', 'p2.code');
+                                });
+                        });
+                });
+        });
     }
 }

@@ -31,7 +31,7 @@ class AiProviderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🤖 AI Assistant';
+        return '🤖 AI';
     }
 
     public static function form(Schema $schema): Schema

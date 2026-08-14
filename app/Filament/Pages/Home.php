@@ -2,6 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Pages\Dashboards\CeoDashboard;
+use App\Filament\Pages\Dashboards\CfoDashboard;
+use App\Filament\Pages\Dashboards\ManagerDashboard;
 use App\Models\ApprovalRequest;
 use App\Models\Invoice;
 use App\Models\Notification;
@@ -35,6 +38,14 @@ class Home extends Page
     public function mount(): void
     {
         $user = auth()->user();
+
+        $targetUrl = $this->resolveRoleDashboard($user?->role?->slug);
+
+        if ($targetUrl) {
+            $this->redirect($targetUrl);
+
+            return;
+        }
 
         $this->stats = [
             'pending_approvals' => ApprovalRequest::where('status', 'pending')->count(),
@@ -71,5 +82,19 @@ class Home extends Page
 
         $this->recentlyViewed = session()->get('recently_viewed', []);
         $this->favorites = session()->get('favorites', []);
+    }
+
+    protected function resolveRoleDashboard(?string $roleSlug): ?string
+    {
+        if ($roleSlug === null) {
+            return null;
+        }
+
+        return match ($roleSlug) {
+            'super-admin', 'admin' => CeoDashboard::getUrl(),
+            'finance' => CfoDashboard::getUrl(),
+            'manager' => ManagerDashboard::getUrl(),
+            default => null,
+        };
     }
 }

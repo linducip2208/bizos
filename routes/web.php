@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/locale/{locale}', function (string $locale) {
+    if (in_array($locale, config('app.available_locales', ['id', 'en']))) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
+
 Route::get('/', function () {
     if (auth()->check()) {
         return redirect('/admin');
@@ -146,6 +154,9 @@ Route::get('/wiki', [App\Http\Controllers\WikiController::class, 'index'])->name
 Route::get('/wiki/{slug}', [App\Http\Controllers\WikiController::class, 'show'])->name('wiki.show');
 
 Route::get('/landing/{slug}', [App\Http\Controllers\LandingPageController::class, 'show'])->name('landing-page.show');
+
+// Calendar iCal feed subscription (read-only)
+Route::get('/calendar/feed/{token}.ics', [App\Http\Controllers\CalendarFeedController::class, 'show'])->name('calendar.ical');
 Route::get('/email/track/open/{token}', [App\Http\Controllers\EmailTrackingController::class, 'open']);
 Route::get('/email/track/click/{token}', [App\Http\Controllers\EmailTrackingController::class, 'click']);
 
@@ -166,6 +177,9 @@ Route::middleware('auth:web')->group(function () {
         Route::get('/keuangan/csv', fn() => app(\App\Filament\Pages\LaporanKeuangan::class)->exportCsv())->name('keuangan.csv');
         Route::get('/operasional/pdf', fn() => app(\App\Filament\Pages\LaporanOperasional::class)->exportPdf())->name('operasional.pdf');
         Route::get('/operasional/csv', fn() => app(\App\Filament\Pages\LaporanOperasional::class)->exportCsv())->name('operasional.csv');
+        Route::get('/neraca/pdf', fn() => app(\App\Filament\Pages\BalanceSheet::class)->exportPdf())->name('neraca.pdf');
+        Route::get('/neraca-saldo/pdf', fn() => app(\App\Filament\Pages\TrialBalance::class)->exportPdf())->name('neraca-saldo.pdf');
+        Route::get('/neraca-saldo/csv', fn() => app(\App\Filament\Pages\TrialBalance::class)->exportCsv())->name('neraca-saldo.csv');
     });
 });
 
@@ -173,6 +187,20 @@ Route::middleware('auth:web')->group(function () {
 Route::prefix('webhooks/wa')->group(function () {
     Route::get('/', [App\Http\Controllers\Api\WhatsAppWebhookController::class, 'verify']);
     Route::post('/', [App\Http\Controllers\Api\WhatsAppWebhookController::class, 'receive']);
+});
+
+// Payment Gateway webhook callback (Midtrans / Xendit / Stripe / e-wallet)
+Route::prefix('webhooks/payment')->name('payment-gateway.')->group(function () {
+    Route::post('/{gateway}', [App\Http\Controllers\Webhook\PaymentGatewayWebhookController::class, 'handle'])
+        ->name('webhook');
+});
+
+// Payment Gateway test page (admin)
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/admin/payment-gateway-test', [App\Http\Controllers\PaymentGatewayTestController::class, 'index'])
+        ->name('payment-gateway.test');
+    Route::post('/admin/payment-gateway-test/{gateway}', [App\Http\Controllers\PaymentGatewayTestController::class, 'test'])
+        ->name('payment-gateway.test.run');
 });
 
 // No-Code Automation Studio
@@ -183,9 +211,39 @@ Route::middleware(['web', 'auth'])->group(function () {
 // BI Embed Route
 Route::get('/api/bi/embed/{token}', fn(string $token) => response()->json(app(\App\Services\AdvancedBiService::class)->getEmbedData($token)));
 
+// Approval Center routes
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/admin/approval-center/data', [\App\Filament\Pages\ApprovalCenter::class, 'getData'])->name('approval-center.data');
+    Route::post('/admin/approval-center/approve', [\App\Filament\Pages\ApprovalCenter::class, 'handleApprove'])->name('approval-center.approve');
+    Route::post('/admin/approval-center/reject', [\App\Filament\Pages\ApprovalCenter::class, 'handleReject'])->name('approval-center.reject');
+});
+
+// Natural Language Query routes
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::post('/admin/natural-language-query/run', [\App\Filament\Pages\NaturalLanguageQuery::class, 'handleQuery'])->name('nl-query.run');
+    Route::get('/admin/natural-language-query/history', [\App\Filament\Pages\NaturalLanguageQuery::class, 'getHistory'])->name('nl-query.history');
+});
+
+// Data Import Wizard routes
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/admin/import/template/{entity}', fn (string $entity) => app(\App\Filament\Pages\DataImportWizard::class)->downloadTemplate($entity))->name('import.template');
+    Route::post('/admin/import/process', fn () => app(\App\Filament\Pages\DataImportWizard::class)->processImport())->name('import.process');
+});
+
 // Blog
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [\App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
+
+/*==========================================================================
+ * Payment Links (pembayaran faktur publik via token)
+ *========================================================================*/
+Route::prefix('pay')->name('pay.')->group(function () {
+    Route::get('/{token}', [\App\Http\Controllers\PaymentLinkController::class, 'show'])->name('show');
+    Route::get('/{token}/form', [\App\Http\Controllers\PaymentLinkController::class, 'pay'])->name('form');
+    Route::get('/{token}/thank-you', [\App\Http\Controllers\PaymentLinkController::class, 'thankYou'])->name('thank-you');
+    Route::post('/{token}', [\App\Http\Controllers\PaymentLinkController::class, 'submitPayment'])->name('submit');
+    Route::post('/{token}/proof', [\App\Http\Controllers\PaymentLinkController::class, 'uploadProof'])->name('proof');
+});
 
 require base_path('routes/pair-routes.php');

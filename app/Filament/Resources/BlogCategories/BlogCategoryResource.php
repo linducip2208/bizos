@@ -19,7 +19,7 @@ class BlogCategoryResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = BlogCategory::class;
-    public static function getNavigationGroup(): string|null { return '📈 Sales & CRM'; }
+    public static function getNavigationGroup(): string|null { return '📢 Marketing'; }
     protected static ?string $label = 'Kategori Blog';
     protected static ?string $pluralLabel = 'Kategori Blog';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;

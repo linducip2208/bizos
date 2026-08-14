@@ -25,7 +25,7 @@ class MrpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Manufaktur';
+        return '🏭 Industry';
     }
 
     public array $exceptions = [];

@@ -22,7 +22,7 @@ class IntegrationHubDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Hub Integrasi';
+        return '🔗 Integrations';
     }
 
     public function mount(): void

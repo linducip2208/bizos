@@ -17,6 +17,12 @@ class PayrollForm
                 Section::make('Informasi Penggajian')
                     ->columns(2)
                     ->schema([
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('period_id')
                             ->label('Periode')
                             ->relationship('period', 'period_code')

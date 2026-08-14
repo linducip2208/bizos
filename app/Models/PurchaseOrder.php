@@ -20,6 +20,7 @@ class PurchaseOrder extends Model implements Approvalable
 
     protected $fillable = [
         'company_id',
+        'branch_id',
         'po_number',
         'supplier_id',
         'pr_id',
@@ -38,6 +39,8 @@ class PurchaseOrder extends Model implements Approvalable
         'approved_by',
         'approved_at',
         'invoice_id',
+        'currency_id',
+        'exchange_rate',
     ];
 
     protected $casts = [
@@ -49,11 +52,17 @@ class PurchaseOrder extends Model implements Approvalable
         'shipping_cost' => 'decimal:2',
         'total' => 'decimal:2',
         'approved_at' => 'datetime',
+        'exchange_rate' => 'decimal:6',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function supplier()
@@ -94,5 +103,10 @@ class PurchaseOrder extends Model implements Approvalable
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }

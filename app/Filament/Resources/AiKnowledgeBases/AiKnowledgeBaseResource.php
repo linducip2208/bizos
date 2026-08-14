@@ -23,7 +23,7 @@ class AiKnowledgeBaseResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🤖 AI Assistant';
+        return '🤖 AI';
     }
 
     protected static ?string $label = 'Knowledge Base';

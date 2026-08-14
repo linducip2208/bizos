@@ -30,7 +30,7 @@ class DocumentTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ Sistem';
+        return '⚙️ System';
     }
 
     public static function getPages(): array

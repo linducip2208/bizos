@@ -13,7 +13,9 @@ class ReportTemplate extends Model
         'description',
         'category',
         'query_type',
+        'report_type',
         'query_config',
+        'pivot_config',
         'chart_config',
         'is_system',
         'is_public',
@@ -22,6 +24,7 @@ class ReportTemplate extends Model
 
     protected $casts = [
         'query_config' => 'array',
+        'pivot_config' => 'array',
         'chart_config' => 'array',
         'is_system' => 'boolean',
         'is_public' => 'boolean',

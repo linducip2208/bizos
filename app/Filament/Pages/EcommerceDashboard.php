@@ -20,7 +20,7 @@ class EcommerceDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'E-Commerce';
+        return '🏭 Industry';
     }
 
     public array $performance = [];

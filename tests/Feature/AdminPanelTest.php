@@ -49,7 +49,7 @@ class AdminPanelTest extends TestCase
             'is_active' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/admin/home');
+        $response = $this->actingAs($user)->followingRedirects()->get('/admin/home');
 
         $response->assertStatus(200);
     }
@@ -71,7 +71,7 @@ class AdminPanelTest extends TestCase
             'is_active' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/admin/home');
+        $response = $this->actingAs($user)->followingRedirects()->get('/admin/home');
 
         $response->assertStatus(200);
         $response->assertSee('BizOS');

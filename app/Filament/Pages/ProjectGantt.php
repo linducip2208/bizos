@@ -28,7 +28,7 @@ class ProjectGantt extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📋 Project & Work';
+        return '📋 Project Management';
     }
 
     public function mount(): void

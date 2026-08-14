@@ -24,7 +24,7 @@ class PurchaseRequisitionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Product & Inventory';
+        return '📑 Procurement';
     }
 
     protected static ?string $label = 'Permintaan Pembelian';

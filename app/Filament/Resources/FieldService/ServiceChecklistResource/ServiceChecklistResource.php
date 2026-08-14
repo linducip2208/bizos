@@ -29,7 +29,7 @@ class ServiceChecklistResource extends Resource
 
     protected static ?string $pluralLabel = 'Checklist';
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-check-circle';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-list-bullet';
 
     protected static ?int $navigationSort = 6;
 

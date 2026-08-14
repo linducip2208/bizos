@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\BankReconciliation\Schemas;
 
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Placeholder;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -68,6 +69,31 @@ class BankReconciliationForm
                             ->default(0)
                             ->disabled()
                             ->inputMode('decimal'),
+                    ]),
+                Section::make('Statistik Rekonsiliasi')
+                    ->columns(4)
+                    ->visible(fn ($record) => $record !== null)
+                    ->schema([
+                        TextInput::make('auto_matched_count')
+                            ->label('Auto Matched')
+                            ->numeric()
+                            ->disabled()
+                            ->inputMode('numeric'),
+                        TextInput::make('manual_matched_count')
+                            ->label('Manual Matched')
+                            ->numeric()
+                            ->disabled()
+                            ->inputMode('numeric'),
+                        TextInput::make('unmatched_count')
+                            ->label('Unmatched')
+                            ->numeric()
+                            ->disabled()
+                            ->inputMode('numeric'),
+                        Placeholder::make('statement_file')
+                            ->label('File Statement')
+                            ->content(fn ($record) => $record?->statement_file_path
+                                ? \Illuminate\Support\Str::of($record->statement_file_path)->afterLast('/')
+                                : '—'),
                     ]),
                 Section::make('Catatan')
                     ->columns(1)

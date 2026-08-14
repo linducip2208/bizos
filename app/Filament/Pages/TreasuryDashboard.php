@@ -21,7 +21,7 @@ class TreasuryDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Treasury';
+        return '💵 Finance & Accounting';
     }
 
     public array $cashPosition = [];

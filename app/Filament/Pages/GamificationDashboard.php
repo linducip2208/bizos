@@ -21,7 +21,7 @@ class GamificationDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Gamifikasi';
+        return '🏆 Gamification';
     }
 
     public array $leaderboard = [];

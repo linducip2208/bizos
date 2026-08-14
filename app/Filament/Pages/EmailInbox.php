@@ -20,7 +20,7 @@ class EmailInbox extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Kolaborasi';
+        return '💬 Collaboration';
     }
 
     public static function canView(): bool

@@ -32,7 +32,7 @@ class PdpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Kepatuhan';
+        return '🛡️ Compliance';
     }
 
     public function mount(): void

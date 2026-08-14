@@ -34,7 +34,7 @@ class ProcessMiningDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'BPMN';
+        return '⚡ Automation';
     }
 
     public function mount(): void

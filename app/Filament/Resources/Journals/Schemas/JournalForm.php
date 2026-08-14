@@ -25,6 +25,12 @@ class JournalForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         TextInput::make('journal_number')
                             ->label('Nomor Jurnal')
                             ->required()
@@ -46,6 +52,17 @@ class JournalForm
                                 'depreciation' => 'Penyusutan',
                             ])
                             ->required(),
+                        Select::make('currency_id')
+                            ->label('Mata Uang')
+                            ->relationship('currency', 'code')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        TextInput::make('exchange_rate')
+                            ->label('Kurs')
+                            ->numeric()
+                            ->minValue(0)
+                            ->nullable(),
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->rows(3)

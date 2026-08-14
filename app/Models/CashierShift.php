@@ -50,4 +50,26 @@ class CashierShift extends Model
     {
         return $this->hasMany(PosTransaction::class, 'shift_id');
     }
+
+    public function shiftDenominations()
+    {
+        return $this->hasMany(ShiftDenomination::class, 'cashier_shift_id');
+    }
+
+    public function denominations()
+    {
+        return $this->hasManyThrough(
+            CashDenomination::class,
+            ShiftDenomination::class,
+            'cashier_shift_id',
+            'id',
+            'id',
+            'denomination_id',
+        );
+    }
+
+    public function getCashBreakdownAttribute(): array
+    {
+        return app(\App\Services\CashDenominationService::class)->getBreakdown($this->id);
+    }
 }

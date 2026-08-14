@@ -29,6 +29,14 @@ class CouponForm
                             ->searchable()
                             ->preload()
                             ->nullable(),
+                        Select::make('discount_type')
+                            ->label('Jenis Diskon')
+                            ->options([
+                                'fixed' => 'Nominal (Rp)',
+                                'percentage' => 'Persen (%)',
+                            ])
+                            ->default('fixed')
+                            ->required(),
                         TextInput::make('discount')
                             ->label('Diskon')
                             ->numeric()
@@ -39,6 +47,10 @@ class CouponForm
                             ->numeric()
                             ->prefix('Rp')
                             ->default(0),
+                        Toggle::make('auto_apply')
+                            ->label('Auto Apply')
+                            ->default(false)
+                            ->helperText('Terapkan otomatis saat memenuhi syarat'),
                         TextInput::make('max_uses')
                             ->label('Max Penggunaan')
                             ->numeric()

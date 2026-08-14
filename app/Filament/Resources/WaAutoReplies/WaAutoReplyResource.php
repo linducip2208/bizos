@@ -23,7 +23,7 @@ class WaAutoReplyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales & CRM';
+        return '📢 Marketing';
     }
 
     protected static ?string $label = 'Auto Reply WA';

@@ -19,7 +19,7 @@ class LaporanBisnis extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Laporan';
+        return '📊 Reports & Analytics';
     }
 
     public array $summaryCards = [];

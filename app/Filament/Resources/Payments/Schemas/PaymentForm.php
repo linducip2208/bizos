@@ -25,6 +25,12 @@ class PaymentForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         TextInput::make('payment_number')
                             ->label('Nomor Pembayaran')
                             ->required()
@@ -32,6 +38,17 @@ class PaymentForm
                         DatePicker::make('payment_date')
                             ->label('Tanggal Pembayaran')
                             ->required(),
+                        Select::make('currency_id')
+                            ->label('Mata Uang')
+                            ->relationship('currency', 'code')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        TextInput::make('exchange_rate')
+                            ->label('Kurs')
+                            ->numeric()
+                            ->minValue(0)
+                            ->nullable(),
                         Select::make('payment_method_id')
                             ->label('Metode Pembayaran')
                             ->relationship('paymentMethod', 'name')

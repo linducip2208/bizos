@@ -15,12 +15,16 @@ class CalendarEvent extends Model
         'is_all_day',
         'location',
         'color',
+        'external_id',
+        'external_provider',
+        'last_synced_at',
     ];
 
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
         'is_all_day' => 'boolean',
+        'last_synced_at' => 'datetime',
     ];
 
     public function calendar()

@@ -25,6 +25,12 @@ class AssetForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('category_id')
                             ->label('Kategori')
                             ->relationship('category', 'name')

@@ -28,6 +28,10 @@ class Reimbursement extends Model implements Approvalable
         'rejection_reason',
         'paid_date',
         'paid_amount',
+        'receipt_image_path',
+        'ocr_data',
+        'ocr_confidence',
+        'ocr_status',
     ];
 
     protected $casts = [
@@ -36,6 +40,9 @@ class Reimbursement extends Model implements Approvalable
         'status' => 'string',
         'paid_date' => 'date',
         'paid_amount' => 'decimal:2',
+        'ocr_data' => 'array',
+        'ocr_confidence' => 'decimal:2',
+        'ocr_status' => 'string',
     ];
 
     public function employee()
@@ -51,5 +58,43 @@ class Reimbursement extends Model implements Approvalable
     public function reimbursementAttachments()
     {
         return $this->hasMany(ReimbursementAttachment::class);
+    }
+
+    public function autoFill(): void
+    {
+        $ocrData = $this->ocr_data;
+
+        if (empty($ocrData)) {
+            return;
+        }
+
+        $updateData = [];
+
+        if (empty($this->date) && !empty($ocrData['transaction_date'])) {
+            $updateData['date'] = $ocrData['transaction_date'];
+        }
+
+        if (empty($this->amount) && !empty($ocrData['total_amount'])) {
+            $updateData['amount'] = (float) $ocrData['total_amount'];
+        }
+
+        if (empty($this->description)) {
+            $merchant = $ocrData['merchant_name'] ?? '';
+            $receipt = $ocrData['receipt_number'] ?? '';
+            $items = collect($ocrData['line_items'] ?? [])->pluck('description')->take(3)->implode(', ');
+
+            $parts = array_filter([$merchant, $receipt, $items]);
+            if (!empty($parts)) {
+                $updateData['description'] = implode(' - ', $parts);
+            }
+        }
+
+        if (empty($this->category_id) && !empty($ocrData['category_id'])) {
+            $updateData['category_id'] = $ocrData['category_id'];
+        }
+
+        if (!empty($updateData)) {
+            $this->update($updateData);
+        }
     }
 }

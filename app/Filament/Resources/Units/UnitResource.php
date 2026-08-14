@@ -19,7 +19,7 @@ class UnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Product & Inventory';
+        return '📦 Inventory';
     }
 
     protected static ?string $label = 'Satuan';

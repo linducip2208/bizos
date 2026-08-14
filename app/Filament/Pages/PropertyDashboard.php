@@ -20,7 +20,7 @@ class PropertyDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏠 Properti';
+        return '🏭 Industry';
     }
 
     public array $occupancyRate = [];

@@ -73,6 +73,12 @@ class ClientForm
                                 'prospek' => 'Prospek',
                                 'blacklist' => 'Blacklist',
                             ]),
+                        Select::make('customer_group_id')
+                            ->label('Grup Pelanggan')
+                            ->relationship('customerGroup', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         FileUpload::make('logo')
                             ->label('Logo')
                             ->image()

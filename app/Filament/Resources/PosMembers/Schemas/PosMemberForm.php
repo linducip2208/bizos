@@ -58,6 +58,12 @@ class PosMemberForm
                         Toggle::make('is_active')
                             ->label('Aktif')
                             ->default(true),
+                        Select::make('customer_group_id')
+                            ->label('Grup Pelanggan')
+                            ->relationship('customerGroup', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                     ]),
             ]);
     }

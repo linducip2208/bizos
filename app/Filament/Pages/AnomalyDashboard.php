@@ -21,7 +21,7 @@ class AnomalyDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Laporan';
+        return '📊 Reports & Analytics';
     }
 
     public array $anomalies = [];

@@ -30,7 +30,7 @@ class EsgDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'ESG';
+        return '🌱 ESG';
     }
 
     public function mount(): void

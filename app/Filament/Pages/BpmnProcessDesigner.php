@@ -29,7 +29,7 @@ class BpmnProcessDesigner extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'BPMN';
+        return '⚡ Automation';
     }
 
     public function mount(?BpmnProcess $process = null): void

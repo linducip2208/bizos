@@ -29,7 +29,7 @@ class FlightRiskDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'AI Analytics';
+        return '📊 Reports & Analytics';
     }
 
     public ?array $data = [];

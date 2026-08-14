@@ -10,6 +10,8 @@ class PaymentMethod extends Model
         'company_id',
         'name',
         'code',
+        'gateway_type',
+        'gateway_config_id',
         'is_active',
     ];
 
@@ -25,5 +27,10 @@ class PaymentMethod extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function gatewayConfig()
+    {
+        return $this->belongsTo(PaymentGatewayConfig::class, 'gateway_config_id');
     }
 }

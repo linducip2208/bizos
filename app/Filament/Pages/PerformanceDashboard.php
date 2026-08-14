@@ -30,7 +30,7 @@ class PerformanceDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'HRM';
+        return '👥 Human Capital';
     }
 
     public ?array $data = [];

@@ -34,7 +34,7 @@ class AdvancedReportBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🐞 Debug';
+        return '⚙️ System';
     }
 
     public function mount(): void

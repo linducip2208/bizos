@@ -66,6 +66,14 @@ class ProductForm
                             ->label('Stok Maksimum')
                             ->numeric()
                             ->default(0),
+                        Select::make('warranty_id')
+                            ->label('Garansi')
+                            ->relationship('warranty', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable()
+                            ->placeholder('Pilih garansi (opsional)')
+                            ->helperText('Garansi akan otomatis terdaftar saat produk terjual.'),
                         FileUpload::make('photo')
                             ->label('Foto Produk')
                             ->image()
@@ -141,6 +149,17 @@ class ProductForm
                             ->maxLength(255)
                             ->placeholder('Sejuk 15-25°C')
                             ->visible(fn ($get) => $get('is_medicine')),
+                    ]),
+                Section::make('Grup Modifier')
+                    ->columns(1)
+                    ->schema([
+                        Select::make('modifierGroups')
+                            ->label('Grup Modifier')
+                            ->relationship('modifierGroups', 'name')
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                            ->helperText('Pilih grup modifier (contoh: topping, level pedas) yang tersedia untuk produk ini.'),
                     ]),
             ]);
     }

@@ -20,6 +20,7 @@ class PosMember extends Model
         'tier',
         'total_points_earned',
         'birthday',
+        'customer_group_id',
     ];
 
     protected $casts = [
@@ -35,6 +36,11 @@ class PosMember extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function customerGroup()
+    {
+        return $this->belongsTo(CustomerGroup::class);
     }
 
     public function posTransactions()

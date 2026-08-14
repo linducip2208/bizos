@@ -2,15 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\DeliveryItem;
 use App\Models\DeliveryOrder;
 use App\Models\GoodsReceipt;
-use App\Models\GoodsReceiptItem;
 use App\Models\Product;
 use App\Models\ProductVariant;
-use App\Models\PurchaseOrderItem;
 use App\Models\StockOpname;
-use App\Models\StockOpnameItem;
 use Illuminate\Support\Facades\DB;
 
 class BarcodeService
@@ -43,29 +39,29 @@ class BarcodeService
                     ->where('barcode', $barcode)
                     ->limit(1);
             })
-            ->where('is_active', true)
-            ->first()
-            ?->load(['category', 'variants'])
+                ->where('is_active', true)
+                ->first()
+                ?->load(['category', 'variants'])
             : null;
     }
 
     public function processReceivingScan(string $barcode, int $goodsReceiptId): array
     {
         $product = $this->lookupProduct($barcode);
-        if (!$product) {
+        if (! $product) {
             return ['found' => false, 'message' => 'Produk tidak ditemukan untuk barcode ini.'];
         }
 
         $gr = GoodsReceipt::with(['items', 'purchaseOrder.items'])->find($goodsReceiptId);
-        if (!$gr) {
+        if (! $gr) {
             return ['found' => false, 'message' => 'Goods Receipt tidak ditemukan.'];
         }
 
-        $poItem = $gr->purchaseOrder?->items?->first(fn($item) => $item->product_id === $product->id);
+        $poItem = $gr->purchaseOrder?->items?->first(fn ($item) => $item->product_id === $product->id);
         $expectedQty = $poItem ? (float) $poItem->quantity : 0;
         $receivedQty = $poItem ? (float) $poItem->received_qty : 0;
 
-        $grItem = $gr->items->first(fn($item) => $item->product_id === $product->id);
+        $grItem = $gr->items->first(fn ($item) => $item->product_id === $product->id);
         $alreadyReceived = $grItem ? (float) $grItem->quantity_received : 0;
 
         return [
@@ -75,7 +71,7 @@ class BarcodeService
                 'code' => $product->code,
                 'name' => $product->name,
                 'unit' => $product->unit,
-                'photo' => $product->photo ? asset('storage/' . $product->photo) : null,
+                'photo' => $product->photo ? asset('storage/'.$product->photo) : null,
             ],
             'po_item' => $poItem ? [
                 'id' => $poItem->id,
@@ -94,18 +90,18 @@ class BarcodeService
     public function processPickScan(string $barcode, int $deliveryOrderId): array
     {
         $product = $this->lookupProduct($barcode);
-        if (!$product) {
+        if (! $product) {
             return ['found' => false, 'message' => 'Produk tidak ditemukan untuk barcode ini.'];
         }
 
         $delivery = DeliveryOrder::with(['items'])->find($deliveryOrderId);
-        if (!$delivery) {
+        if (! $delivery) {
             return ['found' => false, 'message' => 'Delivery Order tidak ditemukan.'];
         }
 
-        $deliveryItem = $delivery->items->first(fn($item) => $item->product_id === $product->id);
+        $deliveryItem = $delivery->items->first(fn ($item) => $item->product_id === $product->id);
 
-        if (!$deliveryItem) {
+        if (! $deliveryItem) {
             return [
                 'found' => true,
                 'valid' => false,
@@ -127,7 +123,7 @@ class BarcodeService
                 'code' => $product->code,
                 'name' => $product->name,
                 'unit' => $product->unit,
-                'photo' => $product->photo ? asset('storage/' . $product->photo) : null,
+                'photo' => $product->photo ? asset('storage/'.$product->photo) : null,
             ],
             'delivery_item' => [
                 'id' => $deliveryItem->id,
@@ -147,12 +143,12 @@ class BarcodeService
     public function processOpnameScan(string $barcode, int $stockOpnameId): array
     {
         $product = $this->lookupProduct($barcode);
-        if (!$product) {
+        if (! $product) {
             return ['found' => false, 'message' => 'Produk tidak ditemukan untuk barcode ini.'];
         }
 
         $stockOpname = StockOpname::with(['items', 'warehouse'])->find($stockOpnameId);
-        if (!$stockOpname) {
+        if (! $stockOpname) {
             return ['found' => false, 'message' => 'Stock Opname tidak ditemukan.'];
         }
 
@@ -170,7 +166,7 @@ class BarcodeService
                 'code' => $product->code,
                 'name' => $product->name,
                 'unit' => $product->unit,
-                'photo' => $product->photo ? asset('storage/' . $product->photo) : null,
+                'photo' => $product->photo ? asset('storage/'.$product->photo) : null,
             ],
             'opname' => [
                 'id' => $stockOpname->id,
@@ -190,13 +186,20 @@ class BarcodeService
         ];
     }
 
+    public function generateProductLabelImage(Product $product, string $format = 'code128'): string
+    {
+        return app(ProductBarcodeService::class)->generateBarcodeImage($product, $format);
+    }
+
     public function generateLabel(Product $product): array
     {
         $variants = $product->variants;
         $labels = [];
+        $barcodeService = app(ProductBarcodeService::class);
 
         $labels[] = [
             'barcode_data' => $product->code,
+            'barcode_image' => $barcodeService->generateCode128((string) $product->code),
             'product_name' => $product->name,
             'price' => (float) $product->selling_price,
             'label_format' => 'product_standard',
@@ -206,7 +209,8 @@ class BarcodeService
         foreach ($variants as $variant) {
             $labels[] = [
                 'barcode_data' => $variant->sku,
-                'product_name' => $product->name . ' - ' . $variant->name,
+                'barcode_image' => $barcodeService->generateCode128((string) $variant->sku),
+                'product_name' => $product->name.' - '.$variant->name,
                 'price' => (float) ($product->selling_price + $variant->price_adjustment),
                 'label_format' => 'variant_standard',
                 'variant' => [

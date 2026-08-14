@@ -24,6 +24,12 @@ class PosTransactionForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('shift_id')
                             ->label('Shift Kasir')
                             ->relationship('shift', 'id')
@@ -85,6 +91,31 @@ class PosTransactionForm
                             ]),
                         Textarea::make('notes')
                             ->label('Catatan')
+                            ->rows(3)
+                            ->columnSpanFull(),
+                    ]),
+                Section::make('Tipe Layanan & Pengiriman')
+                    ->columns(2)
+                    ->schema([
+                        Select::make('service_type_id')
+                            ->label('Tipe Layanan')
+                            ->relationship('serviceType', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        Select::make('service_staff_id')
+                            ->label('Pelayan / Waiter')
+                            ->relationship('serviceStaff', 'first_name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        TextInput::make('delivery_fee')
+                            ->label('Biaya Antar')
+                            ->numeric()
+                            ->prefix('Rp')
+                            ->nullable(),
+                        Textarea::make('delivery_address')
+                            ->label('Alamat Pengiriman')
                             ->rows(3)
                             ->columnSpanFull(),
                     ]),

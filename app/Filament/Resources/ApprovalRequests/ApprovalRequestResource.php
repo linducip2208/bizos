@@ -28,7 +28,7 @@ class ApprovalRequestResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation & Workflow';
+        return '⚡ Automation';
     }
 
     public static function table(Table $table): Table

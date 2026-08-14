@@ -11,6 +11,7 @@ class SalesOrder extends Model
 
     protected $fillable = [
         'company_id',
+        'branch_id',
         'so_number',
         'client_id',
         'quotation_id',
@@ -24,6 +25,8 @@ class SalesOrder extends Model
         'status',
         'notes',
         'created_by',
+        'currency_id',
+        'exchange_rate',
     ];
 
     protected $casts = [
@@ -34,11 +37,17 @@ class SalesOrder extends Model
         'total' => 'decimal:2',
         'order_date' => 'date',
         'expected_delivery' => 'date',
+        'exchange_rate' => 'decimal:6',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function client()
@@ -69,6 +78,11 @@ class SalesOrder extends Model
     public function invoice()
     {
         return $this->hasOne(Invoice::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     protected static function booted(): void

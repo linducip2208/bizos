@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,6 +26,7 @@ class Client extends Model
         'email',
         'logo',
         'status',
+        'customer_group_id',
         'notes',
     ];
 
@@ -35,6 +37,21 @@ class Client extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function customerGroup()
+    {
+        return $this->belongsTo(CustomerGroup::class);
+    }
+
+    public function getEffectiveDiscountPercent(): float
+    {
+        return (float) ($this->customerGroup?->discount_percent ?? 0);
+    }
+
+    public function getEffectivePriceListId(): ?int
+    {
+        return $this->customerGroup?->price_list_id;
     }
 
     public function clientContacts()
@@ -77,5 +94,30 @@ class Client extends Model
     public function referrals()
     {
         return $this->hasMany(Referral::class, 'referrer_client_id');
+    }
+
+    public function scopeHasDuplicates(Builder $query): Builder
+    {
+        return $query->whereIn('id', function ($sub) {
+            $sub->selectRaw('c1.id')
+                ->from('clients as c1')
+                ->join('clients as c2', function ($join) {
+                    $join->on('c1.company_id', '=', 'c2.company_id')
+                        ->whereColumn('c1.id', '<', 'c2.id')
+                        ->where(function ($q) {
+                            $q->whereRaw('SOUNDEX(c1.name) = SOUNDEX(c2.name)')
+                                ->orWhere(function ($q2) {
+                                    $q2->whereNotNull('c1.email')
+                                        ->whereNotNull('c2.email')
+                                        ->whereColumn('c1.email', '=', 'c2.email');
+                                })
+                                ->orWhere(function ($q2) {
+                                    $q2->whereNotNull('c1.phone')
+                                        ->whereNotNull('c2.phone')
+                                        ->whereRaw("REPLACE(REPLACE(REPLACE(REPLACE(c1.phone, ' ', ''), '-', ''), '(', ''), ')', '') = REPLACE(REPLACE(REPLACE(REPLACE(c2.phone, ' ', ''), '-', ''), '(', ''), ')', '')");
+                                });
+                        });
+                });
+        });
     }
 }

@@ -13,7 +13,7 @@ class FieldServiceDashboard extends Page
 {
     public static function getNavigationGroup(): ?string
     {
-        return 'Field Service';
+        return '🏭 Industry';
     }
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-bar';

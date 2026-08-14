@@ -276,6 +276,57 @@ class EnterpriseSearchService
         ];
     }
 
+    /**
+     * Integrasi dengan Natural Language Query.
+     * Dipakai sebagai fallback "general" saat pertanyaan tidak cocok dengan
+     * whitelist intent di NaturalLanguageQueryService.
+     */
+    public function naturalLanguageSearch(string $query, int $limit = 6): array
+    {
+        if (!$this->isAvailable()) {
+            return [
+                'answer_text' => null,
+                'columns' => [],
+                'data' => [],
+            ];
+        }
+
+        $results = $this->search($query, [], 1, $limit);
+
+        $columns = [
+            ['key' => 'title', 'label' => 'Judul'],
+            ['key' => 'module', 'label' => 'Modul'],
+        ];
+
+        $data = collect($results['results'] ?? [])
+            ->map(fn($r) => [
+                'title' => trim(($r['title'] ?? '') . (($r['subtitle'] ?? '') ? ' — ' . $r['subtitle'] : '')),
+                'module' => $this->getModuleNameByLabel($r['module'] ?? ''),
+                'url' => $r['url'] ?? '#',
+            ])
+            ->toArray();
+
+        return [
+            'answer_text' => null,
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    protected function getModuleNameByLabel(string $module): string
+    {
+        return match ($module) {
+            'hrm' => 'SDM / HRM',
+            'crm' => 'CRM',
+            'finance' => 'Keuangan',
+            'helpdesk' => 'Helpdesk',
+            'inventory' => 'Inventori',
+            'project' => 'Proyek',
+            'kolaborasi' => 'Kolaborasi',
+            default => ucfirst($module),
+        };
+    }
+
     public function suggest(string $prefix, int $limit = 10): array
     {
         if (mb_strlen(trim($prefix)) < 2) {

@@ -19,12 +19,14 @@ class Budget extends Model implements Approvalable
 
     protected $fillable = [
         'company_id',
+        'branch_id',
         'name',
         'fiscal_year',
         'start_date',
         'end_date',
         'department_id',
         'project_id',
+        'version_id',
         'status',
         'approved_by',
         'approved_at',
@@ -40,6 +42,11 @@ class Budget extends Model implements Approvalable
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function department()
@@ -60,5 +67,25 @@ class Budget extends Model implements Approvalable
     public function budgetItems()
     {
         return $this->hasMany(BudgetItem::class);
+    }
+
+    public function version()
+    {
+        return $this->belongsTo(BudgetVersion::class, 'version_id');
+    }
+
+    public function budgetVersions()
+    {
+        return $this->hasMany(BudgetVersion::class);
+    }
+
+    public function forecasts()
+    {
+        return $this->hasMany(Forecast::class, 'baseline_budget_id');
+    }
+
+    public function scenarios()
+    {
+        return $this->hasMany(Scenario::class, 'parent_budget_id');
     }
 }

@@ -12,16 +12,21 @@ class PosTransaction extends Model
 
     protected $fillable = [
         'company_id',
+        'branch_id',
         'shift_id',
         'receipt_number',
         'member_id',
         'cashier_id',
+        'service_type_id',
+        'service_staff_id',
         'transaction_date',
         'subtotal',
         'discount_total',
         'tax_total',
+        'delivery_fee',
         'grand_total',
         'payment_status',
+        'delivery_address',
         'notes',
         'journal_id',
     ];
@@ -31,12 +36,18 @@ class PosTransaction extends Model
         'subtotal' => 'decimal:2',
         'discount_total' => 'decimal:2',
         'tax_total' => 'decimal:2',
+        'delivery_fee' => 'decimal:2',
         'grand_total' => 'decimal:2',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function shift()
@@ -52,6 +63,16 @@ class PosTransaction extends Model
     public function cashier()
     {
         return $this->belongsTo(Employee::class, 'cashier_id');
+    }
+
+    public function serviceType()
+    {
+        return $this->belongsTo(ServiceType::class);
+    }
+
+    public function serviceStaff()
+    {
+        return $this->belongsTo(Employee::class, 'service_staff_id');
     }
 
     public function items()

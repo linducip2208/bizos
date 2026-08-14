@@ -19,6 +19,12 @@ class SalesOrderForm
                 Section::make('Informasi Sales Order')
                     ->columns(2)
                     ->schema([
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('client_id')
                             ->label('Klien')
                             ->relationship('client', 'name')
@@ -37,6 +43,17 @@ class SalesOrderForm
                             ->default(now()),
                         DatePicker::make('expected_delivery')
                             ->label('Estimasi Pengiriman')
+                            ->nullable(),
+                        Select::make('currency_id')
+                            ->label('Mata Uang')
+                            ->relationship('currency', 'code')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        TextInput::make('exchange_rate')
+                            ->label('Kurs')
+                            ->numeric()
+                            ->minValue(0)
                             ->nullable(),
                         Select::make('status')
                             ->label('Status')

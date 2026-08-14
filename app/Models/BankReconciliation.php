@@ -19,6 +19,10 @@ class BankReconciliation extends Model
         'completed_at',
         'completed_by',
         'notes',
+        'statement_file_path',
+        'auto_matched_count',
+        'manual_matched_count',
+        'unmatched_count',
     ];
 
     protected $casts = [
@@ -29,6 +33,9 @@ class BankReconciliation extends Model
         'statement_balance' => 'decimal:2',
         'difference' => 'decimal:2',
         'completed_at' => 'datetime',
+        'auto_matched_count' => 'integer',
+        'manual_matched_count' => 'integer',
+        'unmatched_count' => 'integer',
     ];
 
     public function company()

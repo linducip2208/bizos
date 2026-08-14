@@ -42,7 +42,7 @@ class BpmnProcessResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation & Workflow';
+        return '⚡ Automation';
     }
 
     public static function form(Schema $schema): Schema

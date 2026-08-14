@@ -17,6 +17,12 @@ class PurchaseOrderForm
             ->components([
                 Section::make('Informasi Pesanan')
                     ->schema([
+                        Select::make('branch_id')
+                            ->label('Cabang')
+                            ->relationship('branch', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
                         Select::make('supplier_id')
                             ->label('Supplier')
                             ->relationship('supplier', 'name')
@@ -41,6 +47,17 @@ class PurchaseOrderForm
                             ->default(now()),
                         DatePicker::make('expected_date')
                             ->label('Tanggal Diharapkan')
+                            ->nullable(),
+                        Select::make('currency_id')
+                            ->label('Mata Uang')
+                            ->relationship('currency', 'code')
+                            ->searchable()
+                            ->preload()
+                            ->nullable(),
+                        TextInput::make('exchange_rate')
+                            ->label('Kurs')
+                            ->numeric()
+                            ->minValue(0)
                             ->nullable(),
                     ])->columns(3),
 

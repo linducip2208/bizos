@@ -19,7 +19,7 @@ class HotelDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏨 Perhotelan';
+        return '🏭 Industry';
     }
 
     public array $rooms = [];

@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\Invoices\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Js;
 
 class InvoicesTable
 {
@@ -73,9 +76,40 @@ class InvoicesTable
                         'cancelled' => 'gray',
                         default => 'gray',
                     }),
+                TextColumn::make('payment_token')
+                    ->label('Link Pembayaran')
+                    ->badge()
+                    ->formatStateUsing(fn ($record) => match (true) {
+                        $record->status === 'paid' => 'Lunas',
+                        ! $record->payment_token => 'Belum dibuat',
+                        $record->isPaymentLinkExpired() => 'Kedaluwarsa',
+                        default => 'Aktif',
+                    })
+                    ->color(fn ($record) => match (true) {
+                        $record->status === 'paid' => 'success',
+                        ! $record->payment_token => 'gray',
+                        $record->isPaymentLinkExpired() => 'danger',
+                        default => 'info',
+                    }),
             ])
             ->defaultSort('invoice_date', 'desc')
             ->recordActions([
+                Action::make('copy_payment_link')
+                    ->label('Salin Link Pembayaran')
+                    ->icon('heroicon-o-link')
+                    ->color('primary')
+                    ->action(function ($record, $livewire) {
+                        $record->generatePaymentToken();
+
+                        $url = $record->getPaymentLinkUrl();
+                        $livewire->js('window.navigator.clipboard.writeText('.Js::from($url).')');
+
+                        Notification::make()
+                            ->title('Link pembayaran disalin')
+                            ->body($url)
+                            ->success()
+                            ->send();
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([

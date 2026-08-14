@@ -30,7 +30,7 @@ class OvertimeSimulator extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Alat Hitung';
+        return '🧮 Tools';
     }
 
     public ?array $data = [];

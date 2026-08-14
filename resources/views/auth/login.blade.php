@@ -155,27 +155,23 @@
                 <div class="space-y-1.5 text-stone-600 text-xs font-mono leading-relaxed">
                     <div class="flex items-center justify-between py-1 border-b border-stone-100">
                         <span class="font-bold text-stone-700">Super Admin</span>
-                        <span class="text-stone-500">admin@bizos.test / password</span>
+                        <span class="text-stone-500">budi@maju.test / password</span>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-stone-100">
-                        <span class="font-bold text-stone-700">HR Manager</span>
-                        <span class="text-stone-500">hr@bizos.test / password</span>
-                    </div>
-                    <div class="flex items-center justify-between py-1 border-b border-stone-100">
-                        <span class="font-bold text-stone-700">Finance</span>
-                        <span class="text-stone-500">finance@bizos.test / password</span>
+                        <span class="font-bold text-stone-700">Admin</span>
+                        <span class="text-stone-500">siti@maju.test / password</span>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-stone-100">
                         <span class="font-bold text-stone-700">Manager</span>
-                        <span class="text-stone-500">manager@bizos.test / password</span>
+                        <span class="text-stone-500">andi@maju.test / password</span>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-stone-100">
                         <span class="font-bold text-stone-700">Kasir</span>
-                        <span class="text-stone-500">kasir@bizos.test / password</span>
+                        <span class="text-stone-500">fitriani@maju.test / password</span>
                     </div>
                     <div class="flex items-center justify-between py-1">
                         <span class="font-bold text-stone-700">Staff</span>
-                        <span class="text-stone-500">staff@bizos.test / password</span>
+                        <span class="text-stone-500">dewi@maju.test / password</span>
                     </div>
                 </div>
             </div>

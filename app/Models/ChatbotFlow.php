@@ -13,6 +13,9 @@ class ChatbotFlow extends Model
         'trigger_keywords',
         'welcome_message',
         'fallback_message',
+        'is_ai_powered',
+        'ai_provider_id',
+        'ai_prompt_template',
         'is_active',
         'is_published',
         'published_at',
@@ -20,6 +23,7 @@ class ChatbotFlow extends Model
 
     protected $casts = [
         'trigger_keywords' => 'array',
+        'is_ai_powered' => 'boolean',
         'is_active' => 'boolean',
         'is_published' => 'boolean',
         'published_at' => 'datetime',
@@ -28,6 +32,11 @@ class ChatbotFlow extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function aiProvider()
+    {
+        return $this->belongsTo(AiProvider::class, 'ai_provider_id');
     }
 
     public function nodes()

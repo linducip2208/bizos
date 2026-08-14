@@ -8,9 +8,9 @@
 const { chromium } = require('playwright');
 const path = require('path');
 
-const BASE = 'http://bizos.test';
+const BASE = 'http://127.0.0.1:8765';
 const OUT_DIR = path.join(__dirname, '..', 'public', 'marketing', 'screens-mobile');
-const EMAIL = 'admin@bizos.id';
+const EMAIL = 'budi@maju.test';
 const PASSWORD = 'password';
 
 const pages = [
@@ -19,6 +19,9 @@ const pages = [
     { url: '/admin/attendances', file: '03-attendances.png',   auth: true },
     { url: '/admin/invoices',  file: '04-invoices.png',        auth: true },
     { url: '/admin/laporan-bisnis', file: '05-laporan-bisnis.png', auth: true },
+    { url: '/admin/pos-terminal', file: '06-pos-terminal.png', auth: true },
+    { url: '/admin/kitchen-display', file: '07-kitchen-display.png', auth: true },
+    { url: '/admin/ceo-dashboard', file: '08-ceo-dashboard.png', auth: true },
 ];
 
 (async () => {
@@ -43,12 +46,11 @@ const pages = [
 
     await page.waitForTimeout(1000);
 
-    await Promise.all([
-        page.waitForURL('**/admin', { timeout: 15000 }).catch(() => {}),
-        page.locator('button[type="submit"]').click(),
-    ]);
+    await page.click('button[type="submit"]');
 
-    await page.waitForTimeout(2000);
+    // Wait for URL to move away from /login (up to 20s)
+    await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 20000 }).catch(() => {});
+    await page.waitForTimeout(3000);
     await page.waitForLoadState('networkidle').catch(() => {});
 
     const url = page.url();

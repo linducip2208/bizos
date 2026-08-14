@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Products\Tables;
 
+use App\Filament\Pages\BarcodeLabelPrinter;
+use App\Models\Product;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -89,6 +92,11 @@ class ProductTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('cetak_label')
+                    ->label('Cetak Label')
+                    ->icon('heroicon-o-hashtag')
+                    ->color('indigo')
+                    ->url(fn (Product $record) => BarcodeLabelPrinter::getUrl(['product_id' => $record->id])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

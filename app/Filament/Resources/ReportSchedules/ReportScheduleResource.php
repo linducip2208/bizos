@@ -32,7 +32,7 @@ class ReportScheduleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏠 Dashboard & Reporting';
+        return '📊 Reports & Analytics';
     }
 
     public static function form(Schema $schema): Schema

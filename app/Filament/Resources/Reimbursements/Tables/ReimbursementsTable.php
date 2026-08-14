@@ -35,6 +35,7 @@ class ReimbursementsTable
                     ->label('Status')
                     ->badge()
                     ->formatStateUsing(fn ($state) => match ($state) {
+                        'draft' => 'Draft',
                         'pending' => 'Pending',
                         'approved' => 'Disetujui',
                         'rejected' => 'Ditolak',
@@ -42,6 +43,7 @@ class ReimbursementsTable
                         default => $state,
                     })
                     ->color(fn ($state) => match ($state) {
+                        'draft' => 'gray',
                         'pending' => 'warning',
                         'approved' => 'info',
                         'rejected' => 'danger',

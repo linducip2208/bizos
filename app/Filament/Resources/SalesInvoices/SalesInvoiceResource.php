@@ -27,7 +27,7 @@ class SalesInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales & CRM';
+        return '📈 Sales';
     }
 
     protected static ?string $label = 'Sales Invoice';

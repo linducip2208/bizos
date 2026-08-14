@@ -24,7 +24,7 @@ class PurchaseOrderItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Product & Inventory';
+        return '📑 Procurement';
     }
 
     protected static ?string $label = 'Item PO';

@@ -23,7 +23,7 @@ class MarketingAutomationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales & CRM';
+        return '📢 Marketing';
     }
 
     protected static ?string $label = 'Automation';
