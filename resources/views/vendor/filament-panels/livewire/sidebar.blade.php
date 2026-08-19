@@ -151,26 +151,17 @@
             </ul>
 
             <script>
-                var collapsedGroups = JSON.parse(
-                    localStorage.getItem('collapsedGroups'),
+                // BizOS starts every fresh page load with a compact sidebar.
+                // Users can still expand any group until the next refresh.
+                var collapsedGroups = @js(
+                    collect($navigation)
+                        ->map(fn (\Filament\Navigation\NavigationGroup $group): ?string => $group->getLabel())
+                        ->filter()
+                        ->values()
+                        ->all()
                 )
 
-                if (collapsedGroups === null || collapsedGroups === 'null') {
-                    localStorage.setItem(
-                        'collapsedGroups',
-                        JSON.stringify(@js(
-                        collect($navigation)
-                            ->filter(fn (\Filament\Navigation\NavigationGroup $group): bool => $group->isCollapsed())
-                            ->map(fn (\Filament\Navigation\NavigationGroup $group): string => $group->getLabel())
-                            ->values()
-                            ->all()
-                    )),
-                    )
-                }
-
-                collapsedGroups = JSON.parse(
-                    localStorage.getItem('collapsedGroups'),
-                )
+                localStorage.setItem('collapsedGroups', JSON.stringify(collapsedGroups))
 
                 document
                     .querySelectorAll('.fi-sidebar-group')

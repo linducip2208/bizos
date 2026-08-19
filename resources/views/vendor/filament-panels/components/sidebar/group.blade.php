@@ -14,7 +14,28 @@
 @endphp
 
 <li
-    x-data="{ label: @js($subNavigation ? "sub_navigation_{$label}" : $label) }"
+    x-data="{
+        label: @js($subNavigation ? "sub_navigation_{$label}" : $label),
+        toggleGroup() {
+            const isCurrentlyCollapsed = $store.sidebar.groupIsCollapsed(this.label)
+
+            if (isCurrentlyCollapsed) {
+                document.querySelectorAll('.fi-sidebar-group[data-group-label]').forEach((group) => {
+                    const otherLabel = group.dataset.groupLabel
+
+                    if (
+                        otherLabel &&
+                        otherLabel !== this.label &&
+                        ! $store.sidebar.groupIsCollapsed(otherLabel)
+                    ) {
+                        $store.sidebar.toggleCollapsedGroup(otherLabel)
+                    }
+                })
+            }
+
+            $store.sidebar.toggleCollapsedGroup(this.label)
+        },
+    }"
     data-group-label="{{ $subNavigation ? "sub_navigation_{$label}" : $label }}"
     x-bind:class="{ 'fi-collapsed': $store.sidebar.groupIsCollapsed(label) }"
     {{
@@ -28,7 +49,7 @@
     @if ($label)
         <div
             @if ($collapsible)
-                x-on:click="$store.sidebar.toggleCollapsedGroup(label)"
+                x-on:click="toggleGroup()"
             @endif
             @if ($sidebarCollapsible)
                 x-show="$store.sidebar.isOpen"
@@ -53,7 +74,7 @@
                     title="Buka/tutup {{ $label }}"
                     aria-label="Buka atau tutup grup {{ $label }}"
                     x-bind:aria-expanded="! $store.sidebar.groupIsCollapsed(label)"
-                    x-on:click.stop="$store.sidebar.toggleCollapsedGroup(label)"
+                    x-on:click.stop="toggleGroup()"
                 >
                     <x-heroicon-m-chevron-down class="fi-sidebar-group-chevron" aria-hidden="true" />
                 </button>
