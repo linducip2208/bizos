@@ -36,14 +36,20 @@ class Home extends Page
     public function mount(): void
     {
         $user = auth()->user();
+        $companyId = (int) $user->company_id;
+        $branchId = $user->employee?->branch_id;
+        $employeeId = $user->employee_id;
+        $myTasks = fn () => Task::query()
+            ->whereHas('project', fn ($query) => $query->where('company_id', $companyId))
+            ->when($employeeId, fn ($query) => $query->whereHas('assignees', fn ($assignees) => $assignees->whereKey($employeeId)), fn ($query) => $query->whereRaw('1 = 0'));
 
         $this->stats = [
-            'pending_approvals' => ApprovalRequest::where('status', 'pending')->count(),
-            'today_tasks' => Task::where('assigned_to', $user->id)->whereDate('due_date', now())->count(),
+            'pending_approvals' => ApprovalRequest::where('company_id', $companyId)->where('status', 'pending')->count(),
+            'today_tasks' => $myTasks()->whereDate('due_date', today())->count(),
             'unread_notifications' => Notification::where('user_id', $user->id)->whereNull('read_at')->count(),
-            'open_tickets' => Ticket::where('status', 'open')->count(),
-            'today_revenue' => Invoice::whereDate('invoice_date', now())->sum('total'),
-            'pending_invoices' => Invoice::whereIn('status', ['sent', 'overdue'])->count(),
+            'open_tickets' => Ticket::where('company_id', $companyId)->where('status', 'open')->count(),
+            'today_revenue' => Invoice::where('company_id', $companyId)->when($branchId, fn ($query) => $query->where('branch_id', $branchId))->whereDate('invoice_date', today())->sum('total'),
+            'pending_invoices' => Invoice::where('company_id', $companyId)->when($branchId, fn ($query) => $query->where('branch_id', $branchId))->whereIn('status', ['sent', 'overdue'])->count(),
         ];
 
         $this->quickActions = [
@@ -56,15 +62,16 @@ class Home extends Page
         ];
 
         $this->pendingApprovals = ApprovalRequest::with('requester')
+            ->where('company_id', $companyId)
             ->where('status', 'pending')
             ->latest()
             ->limit(5)
             ->get()
             ->toArray();
 
-        $this->todayTasks = Task::with('project')
-            ->where('assigned_to', $user->id)
-            ->whereDate('due_date', now())
+        $this->todayTasks = $myTasks()
+            ->with('project')
+            ->whereDate('due_date', today())
             ->latest()
             ->limit(5)
             ->get()

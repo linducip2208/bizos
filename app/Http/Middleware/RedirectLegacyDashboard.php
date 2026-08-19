@@ -14,7 +14,15 @@ class RedirectLegacyDashboard
         $action = $request->route()?->getActionName();
         $class = is_string($action) ? class_basename($action) : '';
 
-        if ($class === '' || in_array($class, ['CommandCenter', 'DashboardBuilder'], true) || ! str_contains($class, 'Dashboard')) {
+        if ($class === '' || in_array($class, ['CommandCenter', 'DashboardBuilder'], true)) {
+            return $next($request);
+        }
+
+        if ($class === 'Home') {
+            return redirect()->to(CommandCenter::getUrl(['tab' => 'overview']));
+        }
+
+        if (! str_contains($class, 'Dashboard')) {
             return $next($request);
         }
 
