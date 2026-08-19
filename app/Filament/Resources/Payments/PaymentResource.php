@@ -23,14 +23,14 @@ class PaymentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Pembayaran';
+    protected static ?string $label = 'Payments';
 
-    protected static ?string $pluralLabel = 'Pembayaran';
+    protected static ?string $pluralLabel = 'Payments';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHome;
 
     protected static ?int $navigationSort = 312;
 

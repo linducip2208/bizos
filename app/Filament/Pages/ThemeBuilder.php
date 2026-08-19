@@ -40,7 +40,7 @@ class ThemeBuilder extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Platform';
+        return 'System';
     }
 
     public function mount(): void

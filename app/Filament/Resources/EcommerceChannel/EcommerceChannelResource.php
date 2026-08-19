@@ -23,14 +23,14 @@ class EcommerceChannelResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Channel';
+    protected static ?string $label = 'Ecommerce Channels';
 
     protected static ?string $pluralLabel = 'Channel E-Commerce';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingStorefront;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAlt;
 
     protected static ?int $navigationSort = 1;
 

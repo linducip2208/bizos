@@ -24,21 +24,21 @@ class ScenarioResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'scenarios';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Skenario';
+    protected static ?string $label = 'Scenarios';
 
-    protected static ?string $pluralLabel = 'Skenario';
+    protected static ?string $pluralLabel = 'Scenarios';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
 
-    protected static ?int $navigationSort = 309;
+    protected static ?int $navigationSort = 329;
 
     protected static ?string $recordTitleAttribute = 'name';
 

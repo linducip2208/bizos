@@ -24,19 +24,19 @@ class IntercompanyTransactionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'intercompany-transactions';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Intercompany';
+    protected static ?string $label = 'Intercompany Transactions';
 
     protected static ?string $pluralLabel = 'Intercompany';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPlay;
 
     protected static ?int $navigationSort = 330;
 

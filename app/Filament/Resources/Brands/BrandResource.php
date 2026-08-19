@@ -19,12 +19,12 @@ class BrandResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Merek';
+    protected static ?string $label = 'Brands';
 
-    protected static ?string $pluralLabel = 'Merek';
+    protected static ?string $pluralLabel = 'Brands';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 

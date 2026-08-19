@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class IotDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cpu-chip';
 
     protected static ?int $navigationSort = 1600;
@@ -18,13 +19,13 @@ class IotDashboard extends Page
 
     protected static ?string $title = 'Dashboard IoT';
 
-    protected static ?string $navigationLabel = 'Dashboard IoT';
+    protected static ?string $navigationLabel = 'IoT Dashboard';
 
     protected static ?string $slug = 'iot-dashboard';
 
     public static function getNavigationGroup(): ?string
     {
-        return '🌱 ESG';
+        return 'Dashboard';
     }
 
     public array $devices = [];

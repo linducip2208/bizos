@@ -21,13 +21,13 @@ class VehicleFuelLogResource extends Resource
 
     protected static ?string $model = VehicleFuelLog::class;
 
-    public static function getNavigationGroup(): string|null { return '🚛 Fleet Management'; }
+    public static function getNavigationGroup(): string|null { return 'Fleet & Field Service'; }
 
     protected static ?string $label = 'Log BBM';
 
     protected static ?string $pluralLabel = 'Log BBM';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
 
     protected static ?int $navigationSort = 9;
 

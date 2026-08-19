@@ -23,16 +23,16 @@ class ReceiptLayoutResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Layout Struk';
+    protected static ?string $label = 'Receipt Layouts';
 
-    protected static ?string $pluralLabel = 'Layout Struk';
+    protected static ?string $pluralLabel = 'Receipt Layouts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPrinter;
 
-    protected static ?int $navigationSort = 607;
+    protected static ?int $navigationSort = 616;
 
     protected static ?string $recordTitleAttribute = 'name';
 

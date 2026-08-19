@@ -23,12 +23,12 @@ class JobPostingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Lowongan';
+    protected static ?string $label = 'Job Vacancies';
 
-    protected static ?string $pluralLabel = 'Lowongan';
+    protected static ?string $pluralLabel = 'Job Postings';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
 

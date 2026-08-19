@@ -19,9 +19,9 @@ class CalendarSync extends Page implements HasForms
 
     protected static ?int $navigationSort = 713;
 
-    protected static ?string $title = 'Sinkronisasi Kalender';
+    protected static ?string $title = 'Calendar Sync';
 
-    protected static ?string $navigationLabel = 'Sinkronisasi Kalender';
+    protected static ?string $navigationLabel = 'Calendar Sync';
 
     protected static ?string $slug = 'calendar-sync';
 
@@ -41,7 +41,7 @@ class CalendarSync extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
     public function mount(): void

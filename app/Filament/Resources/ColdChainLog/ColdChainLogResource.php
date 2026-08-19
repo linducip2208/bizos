@@ -24,10 +24,10 @@ class ColdChainLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Cold Chain Log';
+    protected static ?string $label = 'Cold Chain Logs';
 
     protected static ?string $pluralLabel = 'Cold Chain Log';
 

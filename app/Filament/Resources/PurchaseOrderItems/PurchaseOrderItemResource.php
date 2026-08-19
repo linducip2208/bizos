@@ -24,14 +24,14 @@ class PurchaseOrderItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'Item PO';
+    protected static ?string $label = 'Purchase Order Items';
 
     protected static ?string $pluralLabel = 'Item PO';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 106;
 

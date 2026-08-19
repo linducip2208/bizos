@@ -25,12 +25,12 @@ class PrescriptionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Resep';
+    protected static ?string $label = 'Prescriptions';
 
-    protected static ?string $pluralLabel = 'Resep';
+    protected static ?string $pluralLabel = 'Prescriptions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 

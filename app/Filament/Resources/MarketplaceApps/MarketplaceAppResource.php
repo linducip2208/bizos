@@ -21,17 +21,17 @@ class MarketplaceAppResource extends Resource
 
     protected static ?string $model = MarketplaceApp::class;
 
-    protected static ?string $label = 'Aplikasi Marketplace';
+    protected static ?string $label = 'Marketplace Apps';
 
-    protected static ?string $pluralLabel = 'Aplikasi Marketplace';
+    protected static ?string $pluralLabel = 'Marketplace Apps';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🧩 Platform';
+        return 'System';
     }
 
     public static function form(Schema $schema): Schema

@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 class MrpDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calculator';
 
     protected static ?int $navigationSort = 9;
@@ -25,7 +26,7 @@ class MrpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $exceptions = [];

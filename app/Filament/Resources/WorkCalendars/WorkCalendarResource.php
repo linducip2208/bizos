@@ -23,12 +23,12 @@ class WorkCalendarResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Kalender Kerja';
+    protected static ?string $label = 'Work Calendars';
 
-    protected static ?string $pluralLabel = 'Kalender Kerja';
+    protected static ?string $pluralLabel = 'Work Calendars';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
 

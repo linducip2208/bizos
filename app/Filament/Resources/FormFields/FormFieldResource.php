@@ -24,14 +24,14 @@ class FormFieldResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Field Formulir';
+    protected static ?string $label = 'Form Fields';
 
     protected static ?string $pluralLabel = 'Field Formulir';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
     protected static ?int $navigationSort = 708;
 

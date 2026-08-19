@@ -23,15 +23,15 @@ class ContractResource extends Resource
 
     protected static ?string $label = 'Kontrak';
 
-    protected static ?string $pluralLabel = 'Kontrak';
+    protected static ?string $pluralLabel = 'Contracts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
 
     protected static ?int $navigationSort = 12;
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
     public static function getPages(): array

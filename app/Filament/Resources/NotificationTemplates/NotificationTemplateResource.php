@@ -23,14 +23,14 @@ class NotificationTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
-    protected static ?string $label = 'Template Notifikasi';
+    protected static ?string $label = 'Notification Templates';
 
-    protected static ?string $pluralLabel = 'Template Notifikasi';
+    protected static ?string $pluralLabel = 'Notification Templates';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBellAlert;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBell;
 
     protected static ?int $navigationSort = 1005;
 

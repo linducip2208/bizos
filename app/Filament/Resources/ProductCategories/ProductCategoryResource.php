@@ -23,14 +23,14 @@ class ProductCategoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Kategori Produk';
+    protected static ?string $label = 'Product Categories';
 
-    protected static ?string $pluralLabel = 'Kategori Produk';
+    protected static ?string $pluralLabel = 'Product Categories';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
 
     protected static ?int $navigationSort = 601;
 

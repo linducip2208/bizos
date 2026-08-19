@@ -22,10 +22,10 @@ class ContractedEquipmentResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Peralatan Kontrak';
+    protected static ?string $label = 'Contracted Equipment';
 
     protected static ?string $pluralLabel = 'Peralatan Kontrak';
 

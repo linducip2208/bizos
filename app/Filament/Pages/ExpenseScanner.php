@@ -49,7 +49,7 @@ class ExpenseScanner extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
     public function form(Form $form): Form

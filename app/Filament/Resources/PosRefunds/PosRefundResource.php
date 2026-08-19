@@ -23,12 +23,12 @@ class PosRefundResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Refund POS';
+    protected static ?string $label = 'POS Refunds';
 
-    protected static ?string $pluralLabel = 'Refund POS';
+    protected static ?string $pluralLabel = 'POS Refunds';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowUturnLeft;
 

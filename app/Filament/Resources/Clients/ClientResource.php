@@ -25,14 +25,14 @@ class ClientResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Klien';
+    protected static ?string $label = 'Clients';
 
-    protected static ?string $pluralLabel = 'Klien';
+    protected static ?string $pluralLabel = 'Clients';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWallet;
 
     protected static ?int $navigationSort = 403;
 

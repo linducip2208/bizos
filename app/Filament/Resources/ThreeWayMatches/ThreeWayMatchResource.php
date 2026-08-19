@@ -23,14 +23,14 @@ class ThreeWayMatchResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
     protected static ?string $label = '3-Way Matching';
 
     protected static ?string $pluralLabel = '3-Way Matching';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckCircle;
 
     protected static ?int $navigationSort = 115;
 

@@ -28,17 +28,17 @@ class DeductionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'deductions';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Potongan';
+    protected static ?string $label = 'Deductions';
 
-    protected static ?string $pluralLabel = 'Potongan';
+    protected static ?string $pluralLabel = 'Deductions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMinusCircle;
 

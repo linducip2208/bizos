@@ -24,7 +24,7 @@ class WarrantyLookup extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
     public function search(): void

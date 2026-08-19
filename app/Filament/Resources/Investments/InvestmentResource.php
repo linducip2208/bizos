@@ -24,19 +24,19 @@ class InvestmentResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'investments';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Investasi';
+    protected static ?string $label = 'Investments';
 
-    protected static ?string $pluralLabel = 'Investasi';
+    protected static ?string $pluralLabel = 'Investments';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPlus;
 
     protected static ?int $navigationSort = 1701;
 

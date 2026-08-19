@@ -24,17 +24,17 @@ class BpjsConfigResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bpjs-configs';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Konfigurasi BPJS';
+    protected static ?string $label = 'BPJS Config';
 
-    protected static ?string $pluralLabel = 'Konfigurasi BPJS';
+    protected static ?string $pluralLabel = 'BPJS Config';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHeart;
 

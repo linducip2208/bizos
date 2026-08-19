@@ -23,10 +23,10 @@ class ProgressBillingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Tagihan Progres';
+    protected static ?string $label = 'Progress Billings';
     protected static ?string $pluralLabel = 'Tagihan Progres';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;

@@ -19,17 +19,17 @@ class MarketplaceInstallResource extends Resource
 
     protected static ?string $model = MarketplaceInstall::class;
 
-    protected static ?string $label = 'Install Aplikasi';
+    protected static ?string $label = 'Marketplace Installs';
 
     protected static ?string $pluralLabel = 'Install Aplikasi';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownCircle;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars4;
 
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🧩 Platform';
+        return 'System';
     }
 
     public static function table(Table $table): Table

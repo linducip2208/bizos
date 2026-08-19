@@ -25,19 +25,19 @@ class PayrollSimulationResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'payroll-simulations';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Simulasi Gaji';
+    protected static ?string $label = 'Payroll Simulation';
 
     protected static ?string $pluralLabel = 'Simulasi Gaji';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
 
     protected static ?int $navigationSort = 214;
 

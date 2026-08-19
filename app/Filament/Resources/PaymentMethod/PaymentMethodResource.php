@@ -24,17 +24,17 @@ class PaymentMethodResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'payment-methods';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Metode Pembayaran';
+    protected static ?string $label = 'Payment Methods';
 
-    protected static ?string $pluralLabel = 'Metode Pembayaran';
+    protected static ?string $pluralLabel = 'Payment Methods';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCreditCard;
 

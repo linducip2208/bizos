@@ -23,16 +23,16 @@ class WaterUsageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Air';
+    protected static ?string $label = 'Water Usages';
 
     protected static ?string $pluralLabel = 'Pemakaian Air';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 12;
 
     public static function form(Schema $schema): Schema
     {

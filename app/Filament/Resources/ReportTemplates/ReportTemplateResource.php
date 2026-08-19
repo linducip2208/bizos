@@ -20,9 +20,9 @@ class ReportTemplateResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = ReportTemplate::class;
 
-    protected static ?string $label = 'Template Laporan';
+    protected static ?string $label = 'Report Templates';
 
-    protected static ?string $pluralLabel = 'Template Laporan';
+    protected static ?string $pluralLabel = 'Report Templates';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
@@ -32,7 +32,7 @@ class ReportTemplateResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public static function form(Schema $schema): Schema

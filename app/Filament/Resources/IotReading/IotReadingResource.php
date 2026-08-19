@@ -22,15 +22,15 @@ class IotReadingResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'iot-readings';
+        return 'Compliance & Risk';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Pembacaan Sensor';
+    protected static ?string $label = 'IoT Readings';
 
     protected static ?string $pluralLabel = 'Pembacaan Sensor';
 

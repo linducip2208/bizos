@@ -23,10 +23,10 @@ class CanteenMenuResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Menu Kantin';
+    protected static ?string $label = 'Canteen Menus';
 
     protected static ?string $pluralLabel = 'Menu Kantin';
 

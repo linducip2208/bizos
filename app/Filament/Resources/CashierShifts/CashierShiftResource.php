@@ -23,12 +23,12 @@ class CashierShiftResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Shift Kasir';
+    protected static ?string $label = 'Cashier Shifts';
 
-    protected static ?string $pluralLabel = 'Shift Kasir';
+    protected static ?string $pluralLabel = 'Cashier Shifts';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedComputerDesktop;
 

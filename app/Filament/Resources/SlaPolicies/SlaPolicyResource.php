@@ -23,14 +23,14 @@ class SlaPolicyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
-    protected static ?string $label = 'Kebijakan SLA';
+    protected static ?string $label = 'SLA Policies';
 
-    protected static ?string $pluralLabel = 'Kebijakan SLA';
+    protected static ?string $pluralLabel = 'SLA Policies';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTurnDownLeft;
 
     protected static ?int $navigationSort = 2;
 

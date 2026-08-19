@@ -13,9 +13,9 @@ class TicketKanban extends Page
 
     protected string $view = 'filament.pages.ticket-kanban';
 
-    protected static ?string $title = 'Kanban Tiket';
+    protected static ?string $title = 'Ticket Kanban';
 
-    protected static ?string $navigationLabel = 'Kanban Tiket';
+    protected static ?string $navigationLabel = 'Ticket Kanban';
 
     protected static ?string $slug = 'ticket-kanban';
 
@@ -51,7 +51,7 @@ class TicketKanban extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
     public function mount(): void

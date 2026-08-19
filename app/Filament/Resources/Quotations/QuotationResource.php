@@ -24,16 +24,16 @@ class QuotationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Quotation';
+    protected static ?string $label = 'Quotations';
 
-    protected static ?string $pluralLabel = 'Quotation';
+    protected static ?string $pluralLabel = 'Quotations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static ?int $navigationSort = 410;
+    protected static ?int $navigationSort = 421;
 
     protected static ?string $recordTitleAttribute = 'quotation_number';
 

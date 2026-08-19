@@ -9,6 +9,7 @@ use Filament\Pages\Page;
 
 class IntegrationHubDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-link';
 
     protected static ?int $navigationSort = 6;
@@ -22,7 +23,7 @@ class IntegrationHubDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🔗 Integrations';
+        return 'Dashboard';
     }
 
     public function mount(): void

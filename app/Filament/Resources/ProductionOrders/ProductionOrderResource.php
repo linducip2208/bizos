@@ -19,14 +19,14 @@ class ProductionOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Production Order';
+    protected static ?string $label = 'Production Orders';
 
     protected static ?string $pluralLabel = 'Production Order';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAsiaAustralia;
 
     protected static ?int $navigationSort = 5;
 

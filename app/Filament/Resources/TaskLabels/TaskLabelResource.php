@@ -23,12 +23,12 @@ class TaskLabelResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Label Tugas';
+    protected static ?string $label = 'Task Labels';
 
-    protected static ?string $pluralLabel = 'Label Tugas';
+    protected static ?string $pluralLabel = 'Task Labels';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 

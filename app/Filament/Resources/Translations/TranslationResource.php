@@ -19,7 +19,12 @@ class TranslationResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = Translation::class;
-    public static function getNavigationGroup(): string|null { return '⚙️ System'; }
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'System';
+    }
+
     protected static ?string $label = 'Terjemahan';
     protected static ?string $pluralLabel = 'Terjemahan';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLanguage;

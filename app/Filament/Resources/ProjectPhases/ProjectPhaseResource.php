@@ -23,14 +23,14 @@ class ProjectPhaseResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Fase Project';
+    protected static ?string $label = 'Project Phases';
 
     protected static ?string $pluralLabel = 'Fase Project';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquaresPlus;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?int $navigationSort = 506;
 

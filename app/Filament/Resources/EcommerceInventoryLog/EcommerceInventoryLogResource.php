@@ -20,10 +20,10 @@ class EcommerceInventoryLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Log Inventori';
+    protected static ?string $label = 'Ecommerce Inventory Logs';
 
     protected static ?string $pluralLabel = 'Log Inventori';
 

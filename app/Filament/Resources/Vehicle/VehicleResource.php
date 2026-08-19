@@ -23,12 +23,12 @@ class VehicleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🚛 Fleet Management';
+        return 'Fleet & Field Service';
     }
 
     protected static ?string $label = 'Kendaraan';
 
-    protected static ?string $pluralLabel = 'Kendaraan';
+    protected static ?string $pluralLabel = 'Vehicles';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 

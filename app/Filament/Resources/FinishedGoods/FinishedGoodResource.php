@@ -22,12 +22,12 @@ class FinishedGoodResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Barang Jadi';
+    protected static ?string $label = 'Finished Goods';
 
-    protected static ?string $pluralLabel = 'Barang Jadi';
+    protected static ?string $pluralLabel = 'Finished Goods';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
 

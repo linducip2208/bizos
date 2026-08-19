@@ -19,10 +19,10 @@ class NoticeBoardResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = NoticeBoardPost::class;
-    public static function getNavigationGroup(): string|null { return '💬 Collaboration'; }
-    protected static ?string $label = 'Papan Pengumuman';
-    protected static ?string $pluralLabel = 'Papan Pengumuman';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
+    public static function getNavigationGroup(): string|null { return 'Collaboration'; }
+    protected static ?string $label = 'Notice Board';
+    protected static ?string $pluralLabel = 'Notice Board';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboard;
     protected static ?int $navigationSort = 712;
     protected static ?string $recordTitleAttribute = 'title';
     public static function form(Schema $schema): Schema { return NoticeBoardForm::configure($schema); }

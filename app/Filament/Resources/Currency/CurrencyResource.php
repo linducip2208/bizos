@@ -25,17 +25,17 @@ class CurrencyResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'currencies';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Mata Uang';
+    protected static ?string $label = 'Currencies';
 
-    protected static ?string $pluralLabel = 'Mata Uang';
+    protected static ?string $pluralLabel = 'Currencies';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 

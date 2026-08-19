@@ -24,7 +24,7 @@ class ThrCalculator extends Page implements HasForms
 
     protected static ?string $title = 'Kalkulator THR';
 
-    protected static ?string $navigationLabel = 'THR';
+    protected static ?string $navigationLabel = 'THR Calculator';
 
     protected static ?string $slug = 'thr-calculator';
 
@@ -32,7 +32,7 @@ class ThrCalculator extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '🧮 Tools';
+        return 'Tools';
     }
 
     public ?array $data = [];

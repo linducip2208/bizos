@@ -27,14 +27,14 @@ class DesignationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Penunjukan';
+    protected static ?string $label = 'Designations';
 
     protected static ?string $pluralLabel = 'Penunjukan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
     protected static ?int $navigationSort = 5;
 

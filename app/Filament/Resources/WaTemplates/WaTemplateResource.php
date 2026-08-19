@@ -23,14 +23,14 @@ class WaTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Template WA';
+    protected static ?string $label = 'WhatsApp Templates';
 
-    protected static ?string $pluralLabel = 'Template WA';
+    protected static ?string $pluralLabel = 'WA Templates';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCommandLine;
 
     protected static ?int $navigationSort = 406;
 

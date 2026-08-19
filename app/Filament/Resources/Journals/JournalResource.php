@@ -23,14 +23,14 @@ class JournalResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Jurnal';
+    protected static ?string $label = 'Journals';
 
-    protected static ?string $pluralLabel = 'Jurnal';
+    protected static ?string $pluralLabel = 'Journals';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCamera;
 
     protected static ?int $navigationSort = 310;
 

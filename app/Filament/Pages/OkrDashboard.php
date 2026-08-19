@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
 
 class OkrDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-bar';
@@ -32,7 +33,7 @@ class OkrDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏠 Dashboard';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

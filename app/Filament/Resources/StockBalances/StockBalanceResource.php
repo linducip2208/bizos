@@ -23,14 +23,14 @@ class StockBalanceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Saldo Stok';
+    protected static ?string $label = 'Stock Balances';
 
     protected static ?string $pluralLabel = 'Saldo Stok';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
     protected static ?int $navigationSort = 110;
 

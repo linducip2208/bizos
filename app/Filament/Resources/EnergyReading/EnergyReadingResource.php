@@ -22,19 +22,19 @@ class EnergyReadingResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'energy-readings';
+        return 'Compliance & Risk';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Pembacaan Energi';
+    protected static ?string $label = 'Energy Readings';
 
-    protected static ?string $pluralLabel = 'Pembacaan Energi';
+    protected static ?string $pluralLabel = 'Energy Readings';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPresentationChartLine;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAtSymbol;
 
     protected static ?int $navigationSort = 1605;
 

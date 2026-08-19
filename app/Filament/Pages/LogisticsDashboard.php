@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 
 class LogisticsDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-truck';
 
     protected static ?int $navigationSort = 900;
@@ -21,7 +22,7 @@ class LogisticsDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $performance = [];

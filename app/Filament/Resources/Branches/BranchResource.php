@@ -23,12 +23,12 @@ class BranchResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Cabang';
+    protected static ?string $label = 'Branches';
 
-    protected static ?string $pluralLabel = 'Cabang';
+    protected static ?string $pluralLabel = 'Branches';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingStorefront;
 

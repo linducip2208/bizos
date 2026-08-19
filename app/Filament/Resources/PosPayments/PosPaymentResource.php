@@ -24,14 +24,14 @@ class PosPaymentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Pembayaran POS';
+    protected static ?string $label = 'POS Payments';
 
-    protected static ?string $pluralLabel = 'Pembayaran POS';
+    protected static ?string $pluralLabel = 'POS Payments';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMusicalNote;
 
     protected static ?int $navigationSort = 610;
 

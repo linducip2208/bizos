@@ -5,68 +5,247 @@
 
 /* === SIDEBAR === */
 .fi-sidebar {
-    background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%) !important;
+    --bizos-sidebar-bg: #101a2d;
+    --bizos-sidebar-panel: #17243a;
+    --bizos-sidebar-line: rgba(148, 163, 184, 0.16);
+    --bizos-sidebar-muted: #8fa0b8;
+    --bizos-sidebar-text: #dce5f2;
+    --bizos-sidebar-accent: #38bdf8;
+    background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.09), transparent 28rem),
+        var(--bizos-sidebar-bg) !important;
+    border-right: 1px solid rgba(15, 23, 42, 0.55) !important;
+    box-shadow: 14px 0 38px rgba(15, 23, 42, 0.08) !important;
+}
+
+.fi-sidebar-header-ctn {
+    background: transparent !important;
 }
 
 .fi-sidebar-header {
-    padding: 1.5rem 1.25rem 0.75rem !important;
+    min-height: 72px !important;
+    padding: 1rem 1.1rem 0.75rem !important;
+    background: transparent !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar-header .fi-logo {
+    color: #f8fafc !important;
+}
+
+.bizos-workspace-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0.2rem 0.75rem 0.85rem;
+    padding: 0.72rem 0.75rem;
+    border: 1px solid var(--bizos-sidebar-line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.bizos-workspace-mark {
+    display: grid;
+    grid-template-columns: repeat(3, 3px);
+    align-items: end;
+    gap: 2px;
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    flex: 0 0 auto;
+    border-radius: 8px;
+    color: var(--bizos-sidebar-accent);
+    background: rgba(56, 189, 248, 0.12);
+}
+
+.bizos-workspace-mark span {
+    display: block;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.bizos-workspace-mark span:nth-child(1) { height: 45%; opacity: 0.65; }
+.bizos-workspace-mark span:nth-child(2) { height: 100%; }
+.bizos-workspace-mark span:nth-child(3) { height: 70%; opacity: 0.8; }
+
+.bizos-workspace-copy {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.bizos-workspace-eyebrow {
+    color: var(--bizos-sidebar-muted);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.bizos-workspace-copy strong {
+    overflow: hidden;
+    margin-top: 0.2rem;
+    color: #f8fafc;
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bizos-workspace-status {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #34d399;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.1);
+}
+
+.fi-sidebar-nav {
+    padding: 0.1rem 0.55rem 1.5rem !important;
+}
+
+.fi-sidebar-nav-groups {
+    gap: 0.4rem !important;
 }
 
 .fi-sidebar-item-btn {
-    border-radius: 10px !important;
-    margin: 2px 8px !important;
-    transition: all 0.2s ease !important;
-    color: rgba(255, 255, 255, 0.8) !important;
+    position: relative;
+    min-height: 38px;
+    margin: 1px 0 !important;
+    padding: 0.48rem 0.68rem !important;
+    border: 1px solid transparent;
+    border-radius: 9px !important;
+    color: var(--bizos-sidebar-text) !important;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease !important;
 }
 
 .fi-sidebar-item-btn:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(148, 163, 184, 0.09) !important;
+    border-color: rgba(148, 163, 184, 0.08) !important;
     transform: translateX(2px);
 }
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-left: 3px solid rgba(255, 255, 255, 0.8) !important;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.17), rgba(56, 189, 248, 0.07)) !important;
+    border-color: rgba(125, 211, 252, 0.2) !important;
     color: #ffffff !important;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08), 0 5px 16px rgba(2, 132, 199, 0.08);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn::before {
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: -0.58rem;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--bizos-sidebar-accent);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+    content: '';
 }
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
-    color: rgb(199, 210, 254) !important;
+    color: #7dd3fc !important;
 }
 
-.fi-sidebar-item-btn > .fi-icon {
-    color: rgba(255, 255, 255, 0.6) !important;
+.fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-item-icon {
+    width: 1.12rem !important;
+    height: 1.12rem !important;
+    color: #91a4be !important;
+    transition: color 160ms ease, transform 160ms ease;
+}
+
+.fi-sidebar-item-btn:hover > .fi-icon,
+.fi-sidebar-item-btn:hover > .fi-sidebar-item-icon {
+    color: #c7d6e8 !important;
+    transform: scale(1.04);
 }
 
 .fi-sidebar-item-btn .fi-sidebar-item-label {
-    color: rgba(255, 255, 255, 0.85) !important;
-    font-size: 0.875rem !important;
+    overflow: hidden;
+    color: inherit !important;
+    font-size: 0.79rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.005em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fi-sidebar-item.fi-active .fi-sidebar-item-label {
     color: #ffffff !important;
 }
 
-.fi-sidebar-group button {
-    border-radius: 10px !important;
-    margin: 2px 8px !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-    font-size: 0.68rem !important;
-    letter-spacing: 0.06em !important;
+.fi-sidebar-group-btn {
+    min-height: 34px;
+    margin: 0 !important;
+    padding: 0.42rem 0.55rem !important;
+    border-radius: 8px !important;
+    color: var(--bizos-sidebar-muted) !important;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease !important;
+}
+
+.fi-sidebar-group-btn:hover {
+    color: #dce5f2 !important;
+    background: rgba(148, 163, 184, 0.06) !important;
+}
+
+.fi-sidebar-group-label {
+    color: inherit !important;
+    font-size: 0.62rem !important;
+    font-weight: 750 !important;
+    letter-spacing: 0.075em !important;
     text-transform: uppercase !important;
-    font-weight: 700 !important;
 }
 
-.fi-sidebar-group button:hover {
-    color: rgba(255, 255, 255, 0.9) !important;
+.fi-sidebar-group-btn > .fi-icon {
+    width: 1rem !important;
+    height: 1rem !important;
+    color: #70849e !important;
 }
 
-.fi-sidebar-group button span {
+.fi-sidebar-group.fi-active > .fi-sidebar-group-btn {
+    color: #bfe9fb !important;
+}
+
+.fi-sidebar-group-collapse-btn {
+    width: 28px !important;
+    height: 28px !important;
+    margin-left: auto !important;
+    color: #647892 !important;
+}
+
+.fi-sidebar-group-items {
     position: relative;
+    gap: 0.08rem !important;
+    margin-top: 0.1rem !important;
+}
+
+.fi-sidebar-item-grouped-border {
+    color: rgba(100, 116, 139, 0.35) !important;
+}
+
+.fi-sidebar-item-badge-ctn .fi-badge {
+    min-width: 1.5rem;
+    justify-content: center;
+    border-radius: 999px !important;
+    font-size: 0.62rem !important;
+}
+
+.fi-sidebar-footer {
+    border-top: 1px solid var(--bizos-sidebar-line) !important;
+    background: rgba(15, 23, 42, 0.22) !important;
 }
 
 .dark .fi-sidebar {
-    background: linear-gradient(180deg, #0f0a2e 0%, #1e1b4b 100%) !important;
+    background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.08), transparent 28rem),
+        #0b1424 !important;
 }
 
 /* === TOPBAR === */
@@ -253,6 +432,17 @@
     }
     .fi-sidebar {
         width: 280px;
+    }
+    .fi-sidebar-header {
+        min-height: 64px !important;
+        padding-top: 0.75rem !important;
+    }
+    .bizos-workspace-card {
+        margin-bottom: 0.6rem;
+    }
+    .fi-sidebar-item-btn {
+        min-height: 44px;
+        font-size: 0.875rem;
     }
     .fi-login-clean {
         padding: 1rem;

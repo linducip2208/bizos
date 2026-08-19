@@ -22,13 +22,13 @@ class OnboardingChecklistResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
     protected static ?string $label = 'Checklist Onboarding';
-    protected static ?string $pluralLabel = 'Checklist Onboarding';
+    protected static ?string $pluralLabel = 'Onboarding Checklists';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAlt;
     protected static ?int $navigationSort = 124;
     protected static ?string $recordTitleAttribute = 'name';
 

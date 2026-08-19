@@ -12,9 +12,9 @@ class AdvancedReportBuilder extends Page
 
     protected string $view = 'filament.pages.advanced-report-builder';
 
-    protected static ?string $title = 'Report Builder';
+    protected static ?string $title = 'Advanced Report Builder';
 
-    protected static ?string $navigationLabel = 'Report Builder';
+    protected static ?string $navigationLabel = 'Advanced Report Builder';
 
     protected static ?string $slug = 'advanced-report-builder';
 
@@ -34,7 +34,7 @@ class AdvancedReportBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public function mount(): void

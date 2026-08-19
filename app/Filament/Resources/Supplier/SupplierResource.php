@@ -23,14 +23,14 @@ class SupplierResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'Supplier';
+    protected static ?string $label = 'Suppliers';
 
-    protected static ?string $pluralLabel = 'Supplier';
+    protected static ?string $pluralLabel = 'Suppliers';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 
     protected static ?int $navigationSort = 102;
 

@@ -12,15 +12,16 @@ use Filament\Pages\Page;
 
 class SalesForecastDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static ?int $navigationSort = 1301;
 
-    protected static ?string $title = 'Forecast Penjualan';
+    protected static ?string $title = 'Sales Forecast';
 
-    protected static ?string $navigationLabel = 'Forecast Penjualan';
+    protected static ?string $navigationLabel = 'Sales Forecast';
 
     protected static ?string $slug = 'sales-forecast';
 
@@ -28,7 +29,7 @@ class SalesForecastDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

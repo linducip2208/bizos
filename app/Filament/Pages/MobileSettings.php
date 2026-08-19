@@ -33,13 +33,13 @@ class MobileSettings extends Page implements HasTable
     use InteractsWithTable;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-device-phone-mobile';
-    protected static ?string $navigationLabel = 'Pengaturan Mobile';
+    protected static ?string $navigationLabel = 'Mobile Settings';
     protected static ?int $navigationSort = 99;
     protected static ?string $title = 'Pengaturan Mobile & PWA';
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     protected string $view = 'filament.pages.mobile-settings';

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -107,5 +109,57 @@ class BlogController extends Controller
         ];
 
         return view('blog.index', compact('posts', 'categories', 'category', 'seoMeta'));
+    }
+
+    public function feed(): Response
+    {
+        $posts = BlogPost::published()
+            ->with('category')
+            ->latest('published_at')
+            ->limit(20)
+            ->get();
+
+        $appUrl = config('app.url', url('/'));
+        $feedUrl = url('/blog/feed.xml');
+
+        $xml = new \SimpleXMLElement(
+            '<?xml version="1.0" encoding="UTF-8"?>' .
+            '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"></rss>'
+        );
+
+        $channel = $xml->addChild('channel');
+        $channel->addChild('title', 'BizOS Blog');
+        $channel->addChild('link', $appUrl);
+        $channel->addChild('description', 'Artikel terbaru dari BizOS');
+        $channel->addChild('language', 'id');
+
+        $atomLink = $channel->addChild('atom:link');
+        $atomLink->addAttribute('href', $feedUrl);
+        $atomLink->addAttribute('rel', 'self');
+        $atomLink->addAttribute('type', 'application/rss+xml');
+
+        foreach ($posts as $post) {
+            $item = $channel->addChild('item');
+            $item->addChild('title', htmlspecialchars($post->title, ENT_XML1, 'UTF-8'));
+            $item->addChild('link', $appUrl . '/blog/' . $post->slug);
+            $item->addChild('pubDate', $post->published_at->toRfc2822String());
+
+            $description = $post->excerpt ?: Str::limit(strip_tags($post->content), 300);
+            $item->addChild('description', htmlspecialchars($description, ENT_XML1, 'UTF-8'));
+
+            if ($post->category) {
+                $item->addChild('category', htmlspecialchars($post->category->name, ENT_XML1, 'UTF-8'));
+            }
+
+            $guid = $item->addChild('guid', $appUrl . '/blog/' . $post->slug);
+            $guid->addAttribute('isPermaLink', 'true');
+        }
+
+        $headers = [
+            'Content-Type' => 'application/rss+xml; charset=UTF-8',
+            'Cache-Control' => 'public, max-age=3600',
+        ];
+
+        return response($xml->asXML(), 200, $headers);
     }
 }

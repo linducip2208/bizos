@@ -24,17 +24,17 @@ class AssetDepreciationResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'asset-depreciations';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Penyusutan Aset';
+    protected static ?string $label = 'Asset Depreciations';
 
-    protected static ?string $pluralLabel = 'Penyusutan Aset';
+    protected static ?string $pluralLabel = 'Asset Depreciations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingDown;
 

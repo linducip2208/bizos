@@ -22,7 +22,7 @@ class TaxInvoiceManager extends Page implements HasForms
 
     protected static ?string $title = 'Manajer Faktur Pajak';
 
-    protected static ?string $navigationLabel = 'e-Faktur';
+    protected static ?string $navigationLabel = 'Tax Invoice Manager';
 
     protected static ?string $slug = 'tax-invoice-manager';
 
@@ -30,7 +30,7 @@ class TaxInvoiceManager extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '🧮 Tools';
+        return 'Tools';
     }
 
     public ?array $generateFormData = [];

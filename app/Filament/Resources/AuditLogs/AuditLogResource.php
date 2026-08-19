@@ -22,14 +22,14 @@ class AuditLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
-    protected static ?string $label = 'Audit Log';
+    protected static ?string $label = 'Audit Logs';
 
-    protected static ?string $pluralLabel = 'Audit Log';
+    protected static ?string $pluralLabel = 'Audit Logs';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
     protected static ?int $navigationSort = 1007;
 

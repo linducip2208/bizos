@@ -24,10 +24,10 @@ class FormSubmissionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Submit Formulir';
+    protected static ?string $label = 'Form Submissions';
 
     protected static ?string $pluralLabel = 'Submit Formulir';
 

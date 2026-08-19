@@ -96,6 +96,25 @@
             <x-filament-panels::tenant-menu />
         @endif
 
+        <div
+            @if ($isSidebarCollapsibleOnDesktop || $isSidebarFullyCollapsibleOnDesktop)
+                x-show="$store.sidebar.isOpen"
+                x-transition:enter="fi-transition-enter"
+                x-transition:enter-start="fi-transition-enter-start"
+                x-transition:enter-end="fi-transition-enter-end"
+            @endif
+            class="bizos-workspace-card"
+        >
+            <div class="bizos-workspace-mark" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="bizos-workspace-copy">
+                <span class="bizos-workspace-eyebrow">Ruang kerja aktif</span>
+                <strong>Operasional Utama</strong>
+            </div>
+            <span class="bizos-workspace-status" title="Sistem aktif"></span>
+        </div>
+
         @if (filament()->isGlobalSearchEnabled() && filament()->getGlobalSearchPosition() === \Filament\Enums\GlobalSearchPosition::Sidebar)
             <div
                 @if ($isSidebarCollapsibleOnDesktop || $isSidebarFullyCollapsibleOnDesktop)
@@ -106,7 +125,7 @@
             </div>
         @endif
 
-        <nav class="fi-sidebar-nav">
+        <nav class="fi-sidebar-nav" aria-label="Navigasi utama BizOS">
             {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_NAV_START) }}
 
             <ul class="fi-sidebar-nav-groups">

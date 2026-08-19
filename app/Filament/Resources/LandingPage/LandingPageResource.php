@@ -24,14 +24,14 @@ class LandingPageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Landing Page';
+    protected static ?string $label = 'Landing Pages';
 
-    protected static ?string $pluralLabel = 'Landing Page';
+    protected static ?string $pluralLabel = 'Landing Pages';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3;
 
     protected static ?int $navigationSort = 1302;
 

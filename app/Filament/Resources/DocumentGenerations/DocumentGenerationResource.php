@@ -21,13 +21,13 @@ class DocumentGenerationResource extends Resource
 
     protected static ?string $pluralLabel = 'Dokumen Terbit';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEye;
 
     protected static ?int $navigationSort = 1053;
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function getPages(): array

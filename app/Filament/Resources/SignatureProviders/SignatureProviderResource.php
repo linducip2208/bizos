@@ -20,7 +20,7 @@ class SignatureProviderResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = SignatureProvider::class;
 
-    protected static ?string $label = 'Provider Tanda Tangan';
+    protected static ?string $label = 'Signature Providers';
 
     protected static ?string $pluralLabel = 'Provider Tanda Tangan';
 
@@ -30,7 +30,7 @@ class SignatureProviderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
     public static function getPages(): array

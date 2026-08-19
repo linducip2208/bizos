@@ -22,17 +22,17 @@ class WorkflowResource extends Resource
 
     protected static ?string $model = Workflow::class;
 
-    protected static ?string $label = 'Workflow';
+    protected static ?string $label = 'Marketing Automations';
 
-    protected static ?string $pluralLabel = 'Workflow';
+    protected static ?string $pluralLabel = 'Workflows';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation';
+        return 'Automation';
     }
 
     public static function form(Schema $schema): Schema

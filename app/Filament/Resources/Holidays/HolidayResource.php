@@ -23,14 +23,14 @@ class HolidayResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Hari Libur';
+    protected static ?string $label = 'Holidays';
 
     protected static ?string $pluralLabel = 'Hari Libur';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEllipsisHorizontal;
 
     protected static ?int $navigationSort = 8;
 

@@ -24,14 +24,14 @@ class QualityCheckResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Quality';
     }
 
-    protected static ?string $label = 'Pemeriksaan Kualitas';
+    protected static ?string $label = 'Quality Checks';
 
-    protected static ?string $pluralLabel = 'Pemeriksaan Kualitas';
+    protected static ?string $pluralLabel = 'Quality Checks';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHandThumbDown;
 
     protected static ?int $navigationSort = 113;
 

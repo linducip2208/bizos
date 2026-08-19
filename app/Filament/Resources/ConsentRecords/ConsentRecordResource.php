@@ -19,17 +19,17 @@ class ConsentRecordResource extends Resource
 {
     protected static ?string $model = ConsentRecord::class;
 
-    protected static ?string $label = 'Catatan Persetujuan';
+    protected static ?string $label = 'Consent Records';
 
     protected static ?string $pluralLabel = 'Catatan Persetujuan';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCheck;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 9;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

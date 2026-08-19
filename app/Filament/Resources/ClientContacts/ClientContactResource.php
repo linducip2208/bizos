@@ -24,14 +24,14 @@ class ClientContactResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Kontak Klien';
+    protected static ?string $label = 'Client Contacts';
 
-    protected static ?string $pluralLabel = 'Kontak Klien';
+    protected static ?string $pluralLabel = 'Client Contacts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhone;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPencil;
 
     protected static ?int $navigationSort = 410;
 

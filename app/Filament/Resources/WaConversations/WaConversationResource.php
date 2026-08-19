@@ -23,12 +23,12 @@ class WaConversationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Percakapan WA';
+    protected static ?string $label = 'WhatsApp Conversations';
 
-    protected static ?string $pluralLabel = 'Percakapan WA';
+    protected static ?string $pluralLabel = 'WA Conversations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 

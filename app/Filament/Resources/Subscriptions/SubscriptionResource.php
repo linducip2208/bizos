@@ -23,14 +23,14 @@ class SubscriptionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💳 Billing & Licensing';
+        return 'Billing & Licensing';
     }
 
-    protected static ?string $label = 'Langganan';
+    protected static ?string $label = 'Subscriptions';
 
-    protected static ?string $pluralLabel = 'Langganan';
+    protected static ?string $pluralLabel = 'Subscriptions';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
 
     protected static ?int $navigationSort = 1009;
 

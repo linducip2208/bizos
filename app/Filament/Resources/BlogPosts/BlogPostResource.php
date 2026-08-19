@@ -19,9 +19,14 @@ class BlogPostResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = BlogPost::class;
-    public static function getNavigationGroup(): string|null { return '📢 Marketing'; }
-    protected static ?string $label = 'Post Blog';
-    protected static ?string $pluralLabel = 'Post Blog';
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'Marketing';
+    }
+
+    protected static ?string $label = 'Blog Posts';
+    protected static ?string $pluralLabel = 'Blog Posts';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
     protected static ?int $navigationSort = 1401;
     protected static ?string $recordTitleAttribute = 'title';

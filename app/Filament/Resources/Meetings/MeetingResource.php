@@ -21,9 +21,9 @@ class MeetingResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = Meeting::class;
 
-    protected static ?string $label = 'Rapat';
+    protected static ?string $label = 'Meetings';
 
-    protected static ?string $pluralLabel = 'Rapat';
+    protected static ?string $pluralLabel = 'Meetings';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedVideoCamera;
 
@@ -31,7 +31,7 @@ class MeetingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
     public static function form(Schema $schema): Schema

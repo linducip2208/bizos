@@ -19,9 +19,9 @@ class SodRuleResource extends Resource
 {
     protected static ?string $model = SodRule::class;
 
-    protected static ?string $label = 'Aturan SoD';
+    protected static ?string $label = 'SoD Rules';
 
-    protected static ?string $pluralLabel = 'Aturan SoD';
+    protected static ?string $pluralLabel = 'SoD Rules';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNoSymbol;
 
@@ -29,7 +29,7 @@ class SodRuleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

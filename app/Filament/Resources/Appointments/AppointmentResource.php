@@ -25,12 +25,12 @@ class AppointmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Janji Temu';
+    protected static ?string $label = 'Appointments';
 
-    protected static ?string $pluralLabel = 'Janji Temu';
+    protected static ?string $pluralLabel = 'Appointments';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 

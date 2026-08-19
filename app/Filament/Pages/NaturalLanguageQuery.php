@@ -11,9 +11,9 @@ class NaturalLanguageQuery extends Page
 
     protected static ?int $navigationSort = 904;
 
-    protected static ?string $title = 'Tanya BizOS';
+    protected static ?string $title = 'AI Query';
 
-    protected static ?string $navigationLabel = 'Tanya BizOS';
+    protected static ?string $navigationLabel = 'AI Query';
 
     protected static ?string $slug = 'natural-language-query';
 
@@ -25,7 +25,7 @@ class NaturalLanguageQuery extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{1F916} AI";
+        return 'AI & Intelligence';
     }
 
     public function mount(): void

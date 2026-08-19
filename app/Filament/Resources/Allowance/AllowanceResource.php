@@ -28,17 +28,17 @@ class AllowanceResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'allowances';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Tunjangan';
+    protected static ?string $label = 'Allowances';
 
-    protected static ?string $pluralLabel = 'Tunjangan';
+    protected static ?string $pluralLabel = 'Allowances';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGift;
 

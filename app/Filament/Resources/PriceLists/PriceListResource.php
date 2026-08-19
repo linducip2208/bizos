@@ -23,16 +23,16 @@ class PriceListResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Daftar Harga';
+    protected static ?string $label = 'Price Lists';
 
-    protected static ?string $pluralLabel = 'Daftar Harga';
+    protected static ?string $pluralLabel = 'Price Lists';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
-    protected static ?int $navigationSort = 414;
+    protected static ?int $navigationSort = 423;
 
     public static function form(Schema $schema): Schema
     {

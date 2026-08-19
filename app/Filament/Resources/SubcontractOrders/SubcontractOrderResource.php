@@ -19,10 +19,10 @@ class SubcontractOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Subkontrak';
+    protected static ?string $label = 'Subcontract Orders';
 
     protected static ?string $pluralLabel = 'Subkontrak';
 

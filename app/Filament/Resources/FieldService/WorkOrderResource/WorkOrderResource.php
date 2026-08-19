@@ -23,10 +23,10 @@ class WorkOrderResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Work Order';
+    protected static ?string $label = 'Work Orders';
 
     protected static ?string $pluralLabel = 'Work Order';
 

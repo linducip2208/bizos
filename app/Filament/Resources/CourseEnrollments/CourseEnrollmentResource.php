@@ -24,12 +24,12 @@ class CourseEnrollmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
-    protected static ?string $label = 'Pendaftaran Kursus';
+    protected static ?string $label = 'Course Enrollments';
 
-    protected static ?string $pluralLabel = 'Pendaftaran Kursus';
+    protected static ?string $pluralLabel = 'Course Enrollments';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserPlus;
 

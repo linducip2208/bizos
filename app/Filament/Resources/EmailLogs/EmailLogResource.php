@@ -24,12 +24,12 @@ class EmailLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Log Email';
+    protected static ?string $label = 'Email Logs';
 
-    protected static ?string $pluralLabel = 'Log Email';
+    protected static ?string $pluralLabel = 'Email Logs';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 

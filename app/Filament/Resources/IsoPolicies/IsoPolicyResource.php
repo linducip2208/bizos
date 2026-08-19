@@ -19,9 +19,9 @@ class IsoPolicyResource extends Resource
 {
     protected static ?string $model = IsoPolicy::class;
 
-    protected static ?string $label = 'Kebijakan ISO';
+    protected static ?string $label = 'ISO Policies';
 
-    protected static ?string $pluralLabel = 'Kebijakan ISO';
+    protected static ?string $pluralLabel = 'ISO Policies';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
@@ -29,7 +29,7 @@ class IsoPolicyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

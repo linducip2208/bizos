@@ -29,12 +29,12 @@ class WarrantyClaimResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
-    protected static ?string $label = 'Klaim Garansi';
+    protected static ?string $label = 'Warranty Claims';
 
-    protected static ?string $pluralLabel = 'Klaim Garansi';
+    protected static ?string $pluralLabel = 'Warranty Claims';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-wrench-screwdriver';
 

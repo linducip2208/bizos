@@ -27,7 +27,7 @@ class Client360 extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
     public function mount(): void

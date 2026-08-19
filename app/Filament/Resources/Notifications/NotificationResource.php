@@ -23,12 +23,12 @@ class NotificationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
-    protected static ?string $label = 'Notifikasi';
+    protected static ?string $label = 'Notifications';
 
-    protected static ?string $pluralLabel = 'Notifikasi';
+    protected static ?string $pluralLabel = 'Notifications';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBell;
 

@@ -25,19 +25,19 @@ class InvoicePaymentResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'invoice-payments';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Pembayaran Invoice';
+    protected static ?string $label = 'Invoice Payments';
 
-    protected static ?string $pluralLabel = 'Pembayaran Invoice';
+    protected static ?string $pluralLabel = 'Invoice Payments';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 
     protected static ?int $navigationSort = 319;
 

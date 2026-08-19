@@ -25,9 +25,9 @@ class IntegrationResource extends Resource
 
     protected static ?string $model = Integration::class;
 
-    protected static ?string $label = 'Integrasi';
+    protected static ?string $label = 'Integrations';
 
-    protected static ?string $pluralLabel = 'Integrasi';
+    protected static ?string $pluralLabel = 'Integrations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPuzzlePiece;
 
@@ -35,7 +35,7 @@ class IntegrationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
     public static function form(Schema $schema): Schema

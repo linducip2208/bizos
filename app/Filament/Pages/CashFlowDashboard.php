@@ -14,15 +14,16 @@ use Filament\Pages\Page;
 
 class CashFlowDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?int $navigationSort = 1302;
 
-    protected static ?string $title = 'Forecast Cash Flow';
+    protected static ?string $title = 'Cash Flow Dashboard';
 
-    protected static ?string $navigationLabel = 'Forecast Cash Flow';
+    protected static ?string $navigationLabel = 'Cash Flow Dashboard';
 
     protected static ?string $slug = 'cash-flow';
 
@@ -30,7 +31,7 @@ class CashFlowDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

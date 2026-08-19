@@ -23,14 +23,14 @@ class InterviewResultResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Hasil Interview';
+    protected static ?string $label = 'Interview Results';
 
     protected static ?string $pluralLabel = 'Hasil Interview';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars4;
 
     protected static ?int $navigationSort = 116;
 

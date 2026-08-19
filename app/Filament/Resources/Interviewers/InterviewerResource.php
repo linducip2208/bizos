@@ -23,14 +23,14 @@ class InterviewerResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Pewawancara';
+    protected static ?string $label = 'Interviewers';
 
     protected static ?string $pluralLabel = 'Pewawancara';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $navigationSort = 115;
 

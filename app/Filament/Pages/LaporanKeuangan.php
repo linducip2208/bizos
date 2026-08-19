@@ -15,11 +15,11 @@ class LaporanKeuangan extends Page
 
     protected string $view = 'filament.pages.laporan-keuangan';
 
-    protected static ?string $title = 'Laporan Keuangan';
+    protected static ?string $title = 'Financial Report';
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public array $cards = [];

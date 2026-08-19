@@ -23,14 +23,14 @@ class CustomerGroupResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Grup Pelanggan';
+    protected static ?string $label = 'Customer Groups';
 
-    protected static ?string $pluralLabel = 'Grup Pelanggan';
+    protected static ?string $pluralLabel = 'Customer Groups';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $navigationSort = 145;
 

@@ -23,14 +23,14 @@ class TicketTagResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
-    protected static ?string $label = 'Label Tiket';
+    protected static ?string $label = 'Ticket Tags';
 
     protected static ?string $pluralLabel = 'Label Tiket';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
     protected static ?int $navigationSort = 4;
 

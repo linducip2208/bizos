@@ -22,13 +22,13 @@ class PerformanceCycleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Siklus Performa';
+    protected static ?string $label = 'Performance Cycles';
     protected static ?string $pluralLabel = 'Siklus Performa';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRocketLaunch;
     protected static ?int $navigationSort = 128;
     protected static ?string $recordTitleAttribute = 'name';
 

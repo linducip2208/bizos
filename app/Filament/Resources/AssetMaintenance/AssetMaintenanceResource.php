@@ -24,17 +24,17 @@ class AssetMaintenanceResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'asset-maintenances';
+        return 'Maintenance';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Maintenance';
     }
 
-    protected static ?string $label = 'Pemeliharaan Aset';
+    protected static ?string $label = 'Asset Maintenance';
 
-    protected static ?string $pluralLabel = 'Pemeliharaan Aset';
+    protected static ?string $pluralLabel = 'Asset Maintenance';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrench;
 

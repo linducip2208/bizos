@@ -18,9 +18,9 @@ class ApprovalRequestResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = ApprovalRequest::class;
 
-    protected static ?string $label = 'Permintaan Approval';
+    protected static ?string $label = 'Marketing Automations';
 
-    protected static ?string $pluralLabel = 'Permintaan Approval';
+    protected static ?string $pluralLabel = 'Approval Requests';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
 
@@ -28,7 +28,7 @@ class ApprovalRequestResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation';
+        return 'Automation';
     }
 
     public static function table(Table $table): Table

@@ -23,13 +23,13 @@ class RoomBookingResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Booking';
+    protected static ?string $label = 'Room Bookings';
     protected static ?string $pluralLabel = 'Booking';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
     protected static ?int $navigationSort = 702;
 

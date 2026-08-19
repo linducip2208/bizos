@@ -23,14 +23,14 @@ class StockMovementResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Pergerakan Stok';
+    protected static ?string $label = 'Stock Movements';
 
-    protected static ?string $pluralLabel = 'Pergerakan Stok';
+    protected static ?string $pluralLabel = 'Stock Movements';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStop;
 
     protected static ?int $navigationSort = 109;
 

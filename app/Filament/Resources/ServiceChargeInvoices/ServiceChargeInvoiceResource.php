@@ -23,13 +23,13 @@ class ServiceChargeInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Tagihan IPL';
+    protected static ?string $label = 'Service Charge Invoices';
     protected static ?string $pluralLabel = 'Tagihan IPL';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCurrencyDollar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 803;
 

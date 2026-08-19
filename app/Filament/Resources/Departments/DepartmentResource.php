@@ -22,12 +22,12 @@ class DepartmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Departemen';
+    protected static ?string $label = 'Departments';
 
-    protected static ?string $pluralLabel = 'Departemen';
+    protected static ?string $pluralLabel = 'Departments';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleGroup;
 

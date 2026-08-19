@@ -19,17 +19,17 @@ class IsoAuditResource extends Resource
 {
     protected static ?string $model = IsoAudit::class;
 
-    protected static ?string $label = 'Audit ISO';
+    protected static ?string $label = 'ISO Audits';
 
-    protected static ?string $pluralLabel = 'Audit ISO';
+    protected static ?string $pluralLabel = 'ISO Audits';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFingerPrint;
 
     protected static ?int $navigationSort = 6;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

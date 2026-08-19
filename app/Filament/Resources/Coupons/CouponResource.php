@@ -23,12 +23,12 @@ class CouponResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Kupon';
+    protected static ?string $label = 'Coupons';
 
-    protected static ?string $pluralLabel = 'Kupon';
+    protected static ?string $pluralLabel = 'Coupons';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
 

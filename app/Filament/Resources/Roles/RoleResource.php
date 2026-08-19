@@ -21,7 +21,7 @@ class RoleResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = Role::class;
 
-    protected static ?string $label = 'Role';
+    protected static ?string $label = 'Roles';
 
     protected static ?string $pluralLabel = 'Role';
 
@@ -31,7 +31,7 @@ class RoleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function form(Schema $schema): Schema

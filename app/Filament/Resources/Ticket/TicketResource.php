@@ -24,14 +24,14 @@ class TicketResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎫 Support';
+        return 'Support & Service';
     }
 
-    protected static ?string $label = 'Tiket';
+    protected static ?string $label = 'Tickets';
 
-    protected static ?string $pluralLabel = 'Tiket';
+    protected static ?string $pluralLabel = 'Tickets';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
     protected static ?int $navigationSort = 3;
 

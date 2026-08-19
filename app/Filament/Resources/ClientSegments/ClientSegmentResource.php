@@ -24,10 +24,10 @@ class ClientSegmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Segment Klien';
+    protected static ?string $label = 'Client Segments';
 
     protected static ?string $pluralLabel = 'Segment Klien';
 

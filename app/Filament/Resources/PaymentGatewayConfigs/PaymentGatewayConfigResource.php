@@ -23,10 +23,10 @@ class PaymentGatewayConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
-    protected static ?string $label = 'Payment Gateway';
+    protected static ?string $label = 'Payment Gateways';
 
     protected static ?string $pluralLabel = 'Payment Gateway';
 

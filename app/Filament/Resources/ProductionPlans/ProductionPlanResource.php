@@ -19,14 +19,14 @@ class ProductionPlanResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Rencana Produksi';
+    protected static ?string $label = 'Production Plans';
 
-    protected static ?string $pluralLabel = 'Rencana Produksi';
+    protected static ?string $pluralLabel = 'Production Plans';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHandThumbUp;
 
     protected static ?int $navigationSort = 7;
 

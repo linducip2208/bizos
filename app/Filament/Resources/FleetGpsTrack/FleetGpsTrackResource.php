@@ -24,7 +24,7 @@ class FleetGpsTrackResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
     protected static ?string $label = 'GPS Tracking';
@@ -33,7 +33,7 @@ class FleetGpsTrackResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 12;
 
     protected static ?string $recordTitleAttribute = 'id';
 

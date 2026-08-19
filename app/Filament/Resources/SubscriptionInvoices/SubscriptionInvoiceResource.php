@@ -23,14 +23,14 @@ class SubscriptionInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💳 Billing & Licensing';
+        return 'Billing & Licensing';
     }
 
-    protected static ?string $label = 'Invoice Langganan';
+    protected static ?string $label = 'Subscription Invoices';
 
-    protected static ?string $pluralLabel = 'Invoice Langganan';
+    protected static ?string $pluralLabel = 'Subscription Invoices';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCurrencyDollar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 1010;
 

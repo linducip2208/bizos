@@ -24,14 +24,14 @@ class TaskAttachmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Lampiran Tugas';
+    protected static ?string $label = 'Task Attachments';
 
-    protected static ?string $pluralLabel = 'Lampiran Tugas';
+    protected static ?string $pluralLabel = 'Task Attachments';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperClip;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHandThumbDown;
 
     protected static ?int $navigationSort = 509;
 

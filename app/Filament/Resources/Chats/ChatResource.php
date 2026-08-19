@@ -23,12 +23,12 @@ class ChatResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Obrolan';
+    protected static ?string $label = 'Chats';
 
-    protected static ?string $pluralLabel = 'Obrolan';
+    protected static ?string $pluralLabel = 'Chats';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 

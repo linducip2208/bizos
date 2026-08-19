@@ -23,16 +23,16 @@ class WasteRecordResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Limbah';
+    protected static ?string $label = 'Waste Records';
 
     protected static ?string $pluralLabel = 'Catatan Limbah';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTrash;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Schema $schema): Schema
     {

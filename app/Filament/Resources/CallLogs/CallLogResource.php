@@ -24,10 +24,10 @@ class CallLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Log Panggilan';
+    protected static ?string $label = 'Call Logs';
 
     protected static ?string $pluralLabel = 'Log Panggilan';
 

@@ -23,7 +23,7 @@ class DataImportWizard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{2699}\u{FE0F} System";
+        return 'System';
     }
 
     public int $step = 1;

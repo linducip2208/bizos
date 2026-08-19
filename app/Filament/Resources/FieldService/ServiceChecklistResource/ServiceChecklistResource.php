@@ -22,10 +22,10 @@ class ServiceChecklistResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Checklist';
+    protected static ?string $label = 'Service Checklists';
 
     protected static ?string $pluralLabel = 'Checklist';
 

@@ -24,14 +24,14 @@ class LoyaltyConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Konfigurasi Loyalitas';
+    protected static ?string $label = 'Loyalty Config';
 
     protected static ?string $pluralLabel = 'Konfigurasi Loyalitas';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGift;
 
     protected static ?int $navigationSort = 612;
 

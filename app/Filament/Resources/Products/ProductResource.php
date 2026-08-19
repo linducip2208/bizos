@@ -25,14 +25,14 @@ class ProductResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Produk';
+    protected static ?string $label = 'Products';
 
-    protected static ?string $pluralLabel = 'Produk';
+    protected static ?string $pluralLabel = 'Products';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
     protected static ?int $navigationSort = 602;
 

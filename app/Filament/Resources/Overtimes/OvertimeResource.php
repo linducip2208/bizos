@@ -23,12 +23,12 @@ class OvertimeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Lembur';
+    protected static ?string $label = 'Overtime';
 
-    protected static ?string $pluralLabel = 'Lembur';
+    protected static ?string $pluralLabel = 'Overtime';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 

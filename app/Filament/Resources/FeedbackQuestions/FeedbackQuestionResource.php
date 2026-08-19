@@ -23,12 +23,12 @@ class FeedbackQuestionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Pertanyaan Feedback';
+    protected static ?string $label = 'Feedback Questions';
 
-    protected static ?string $pluralLabel = 'Pertanyaan Feedback';
+    protected static ?string $pluralLabel = 'Feedback Questions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQuestionMarkCircle;
 

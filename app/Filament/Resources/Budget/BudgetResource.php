@@ -24,19 +24,19 @@ class BudgetResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'budgets';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Anggaran';
+    protected static ?string $label = 'Budgets';
 
-    protected static ?string $pluralLabel = 'Anggaran';
+    protected static ?string $pluralLabel = 'Budgets';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartPie;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;
 
     protected static ?int $navigationSort = 306;
 

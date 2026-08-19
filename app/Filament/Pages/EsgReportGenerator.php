@@ -23,7 +23,7 @@ class EsgReportGenerator extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
     public function mount(): void

@@ -23,12 +23,12 @@ class AiConversationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🤖 AI';
+        return 'AI & Intelligence';
     }
 
-    protected static ?string $label = 'Percakapan AI';
+    protected static ?string $label = 'AI Conversations';
 
-    protected static ?string $pluralLabel = 'Percakapan AI';
+    protected static ?string $pluralLabel = 'AI Conversations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;
 

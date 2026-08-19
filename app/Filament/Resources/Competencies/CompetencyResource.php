@@ -19,9 +19,14 @@ class CompetencyResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = Competency::class;
-    public static function getNavigationGroup(): string|null { return '👥 Human Capital'; }
-    protected static ?string $label = 'Kompetensi';
-    protected static ?string $pluralLabel = 'Kompetensi';
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'Human Capital';
+    }
+
+    protected static ?string $label = 'Competencies';
+    protected static ?string $pluralLabel = 'Competencies';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
     protected static ?int $navigationSort = 131;
     protected static ?string $recordTitleAttribute = 'name';

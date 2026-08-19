@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class RabDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-bar';
 
     protected static ?int $navigationSort = 600;
@@ -20,7 +21,7 @@ class RabDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $projects = [];

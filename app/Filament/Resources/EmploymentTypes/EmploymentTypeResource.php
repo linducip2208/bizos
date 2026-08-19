@@ -23,16 +23,16 @@ class EmploymentTypeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Tipe Karyawan';
+    protected static ?string $label = 'Employment Types';
 
     protected static ?string $pluralLabel = 'Tipe Karyawan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUser;
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 8;
 
     protected static ?string $recordTitleAttribute = 'name';
 

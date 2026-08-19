@@ -23,16 +23,16 @@ class ProductVariantResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Varian Produk';
+    protected static ?string $label = 'Product Variants';
 
-    protected static ?string $pluralLabel = 'Varian Produk';
+    protected static ?string $pluralLabel = 'Product Variants';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAsiaAustralia;
 
-    protected static ?int $navigationSort = 606;
+    protected static ?int $navigationSort = 608;
 
     protected static ?string $recordTitleAttribute = 'name';
 

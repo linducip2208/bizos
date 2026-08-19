@@ -19,17 +19,17 @@ class IsoRiskResource extends Resource
 {
     protected static ?string $model = IsoRisk::class;
 
-    protected static ?string $label = 'Risiko ISO';
+    protected static ?string $label = 'ISO Risks';
 
-    protected static ?string $pluralLabel = 'Risiko ISO';
+    protected static ?string $pluralLabel = 'ISO Risks';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedExclamationTriangle;
 
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

@@ -19,12 +19,12 @@ class ActivityTimelineResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
-    protected static ?string $label = 'Aktivitas';
+    protected static ?string $label = 'Activity Timeline';
 
-    protected static ?string $pluralLabel = 'Aktivitas';
+    protected static ?string $pluralLabel = 'Activities';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 

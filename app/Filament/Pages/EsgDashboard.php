@@ -11,6 +11,7 @@ use Filament\Pages\Page;
 
 class EsgDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-globe-alt';
 
     protected static ?int $navigationSort = 0;
@@ -30,7 +31,7 @@ class EsgDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🌱 ESG';
+        return 'Dashboard';
     }
 
     public function mount(): void

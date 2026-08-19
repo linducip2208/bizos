@@ -28,15 +28,15 @@ class BonusResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bonuses';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Bonus';
+    protected static ?string $label = 'Bonuses';
 
     protected static ?string $pluralLabel = 'Bonus';
 

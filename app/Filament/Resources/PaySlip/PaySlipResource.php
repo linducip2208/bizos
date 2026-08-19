@@ -24,17 +24,17 @@ class PaySlipResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'pay-slips';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Slip Gaji';
+    protected static ?string $label = 'Payslips';
 
-    protected static ?string $pluralLabel = 'Slip Gaji';
+    protected static ?string $pluralLabel = 'Pay Slips';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentArrowDown;
 

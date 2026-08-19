@@ -24,17 +24,17 @@ class BankFacilityResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bank-facilities';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Fasilitas Bank';
+    protected static ?string $label = 'Bank Facilities';
 
-    protected static ?string $pluralLabel = 'Fasilitas Bank';
+    protected static ?string $pluralLabel = 'Bank Facilities';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 

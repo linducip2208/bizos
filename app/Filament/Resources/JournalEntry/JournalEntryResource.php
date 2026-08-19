@@ -24,21 +24,21 @@ class JournalEntryResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'journal-entries';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Entri Jurnal';
+    protected static ?string $label = 'Journal Entries';
 
-    protected static ?string $pluralLabel = 'Entri Jurnal';
+    protected static ?string $pluralLabel = 'Journal Entries';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3;
 
-    protected static ?int $navigationSort = 308;
+    protected static ?int $navigationSort = 328;
 
     protected static ?string $recordTitleAttribute = 'description';
 

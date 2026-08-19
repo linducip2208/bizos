@@ -23,13 +23,13 @@ class ProjectSiteInventoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
     protected static ?string $label = 'Inventaris Site';
     protected static ?string $pluralLabel = 'Inventaris Site';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedServerStack;
 
     protected static ?int $navigationSort = 603;
 

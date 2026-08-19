@@ -23,10 +23,10 @@ class SalesReturnResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Return Penjualan';
+    protected static ?string $label = 'Sales Returns';
 
     protected static ?string $pluralLabel = 'Return Penjualan';
 

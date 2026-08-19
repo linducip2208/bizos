@@ -29,7 +29,7 @@ class DataGovernance extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public function mount(MasterDataService $service): void

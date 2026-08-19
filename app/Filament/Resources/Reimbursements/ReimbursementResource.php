@@ -23,14 +23,14 @@ class ReimbursementResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Reimbursement';
+    protected static ?string $label = 'Reimbursements';
 
-    protected static ?string $pluralLabel = 'Reimbursement';
+    protected static ?string $pluralLabel = 'Reimbursements';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShare;
 
     protected static ?int $navigationSort = 112;
 

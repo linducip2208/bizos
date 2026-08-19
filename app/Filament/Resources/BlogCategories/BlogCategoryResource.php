@@ -19,10 +19,15 @@ class BlogCategoryResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = BlogCategory::class;
-    public static function getNavigationGroup(): string|null { return '📢 Marketing'; }
-    protected static ?string $label = 'Kategori Blog';
+
+    public static function getNavigationGroup(): string|null
+    {
+        return 'Marketing';
+    }
+
+    protected static ?string $label = 'Blog Categories';
     protected static ?string $pluralLabel = 'Kategori Blog';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTurnLeftUp;
     protected static ?int $navigationSort = 1400;
     protected static ?string $recordTitleAttribute = 'name';
     public static function form(Schema $schema): Schema { return BlogCategoryForm::configure($schema); }

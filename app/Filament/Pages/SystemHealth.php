@@ -24,7 +24,7 @@ class SystemHealth extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public function mount(SystemHealthService $service): void

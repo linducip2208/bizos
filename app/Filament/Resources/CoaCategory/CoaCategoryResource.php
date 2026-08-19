@@ -24,17 +24,17 @@ class CoaCategoryResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'coa-categories';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Kategori COA';
+    protected static ?string $label = 'COA Categories';
 
-    protected static ?string $pluralLabel = 'Kategori COA';
+    protected static ?string $pluralLabel = 'COA Categories';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
 

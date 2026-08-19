@@ -32,12 +32,12 @@ class PermissionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'permissions';
+        return 'System';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function form(Schema $schema): Schema

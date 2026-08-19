@@ -24,19 +24,19 @@ class PayrollResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'payrolls';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Penggajian';
+    protected static ?string $label = 'Payrolls';
 
     protected static ?string $pluralLabel = 'Penggajian';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
     protected static ?int $navigationSort = 204;
 

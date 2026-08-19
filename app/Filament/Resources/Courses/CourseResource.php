@@ -21,17 +21,17 @@ class CourseResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = Course::class;
 
-    protected static ?string $label = 'Kursus';
+    protected static ?string $label = 'Courses';
 
-    protected static ?string $pluralLabel = 'Kursus';
+    protected static ?string $pluralLabel = 'Courses';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownOnSquare;
 
     protected static ?int $navigationSort = 801;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
     public static function form(Schema $schema): Schema

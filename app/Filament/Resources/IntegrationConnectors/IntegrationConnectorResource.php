@@ -23,14 +23,14 @@ class IntegrationConnectorResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
-    protected static ?string $label = 'Konektor';
+    protected static ?string $label = 'Integration Connectors';
 
-    protected static ?string $pluralLabel = 'Konektor Integrasi';
+    protected static ?string $pluralLabel = 'Integration Connectors';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPuzzlePiece;
 
     protected static ?int $navigationSort = 7;
 

@@ -20,9 +20,9 @@ class ApprovalWorkflowResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = ApprovalWorkflow::class;
 
-    protected static ?string $label = 'Approval Workflow';
+    protected static ?string $label = 'Marketing Automations';
 
-    protected static ?string $pluralLabel = 'Approval Workflow';
+    protected static ?string $pluralLabel = 'Approval Workflows';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
 
@@ -32,7 +32,7 @@ class ApprovalWorkflowResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation';
+        return 'Automation';
     }
 
     public static function form(Schema $schema): Schema

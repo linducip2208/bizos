@@ -22,11 +22,11 @@ class KpiIndicatorResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Indikator KPI';
-    protected static ?string $pluralLabel = 'Indikator KPI';
+    protected static ?string $label = 'KPI Indicators';
+    protected static ?string $pluralLabel = 'KPI Indicators';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
     protected static ?int $navigationSort = 127;

@@ -15,11 +15,11 @@ class LaporanOperasional extends Page
 
     protected string $view = 'filament.pages.laporan-operasional';
 
-    protected static ?string $title = 'Laporan Operasional';
+    protected static ?string $title = 'Operational Report';
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public array $cards = [];

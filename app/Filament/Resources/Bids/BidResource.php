@@ -23,12 +23,12 @@ class BidResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'Penawaran';
+    protected static ?string $label = 'Bids';
 
-    protected static ?string $pluralLabel = 'Penawaran';
+    protected static ?string $pluralLabel = 'Bids';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCheck;
 

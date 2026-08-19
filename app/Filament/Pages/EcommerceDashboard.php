@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 
 class EcommerceDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?int $navigationSort = 950;
@@ -20,7 +21,7 @@ class EcommerceDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $performance = [];

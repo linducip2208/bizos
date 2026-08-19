@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class AnomalyDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shield-exclamation';
 
     protected static ?int $navigationSort = 1201;
@@ -15,13 +16,13 @@ class AnomalyDashboard extends Page
 
     protected static ?string $title = 'Dashboard Anomali';
 
-    protected static ?string $navigationLabel = 'Anomali';
+    protected static ?string $navigationLabel = 'Anomaly Dashboard';
 
     protected static ?string $slug = 'anomaly-dashboard';
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public array $anomalies = [];

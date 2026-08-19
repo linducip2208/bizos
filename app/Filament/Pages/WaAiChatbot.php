@@ -26,7 +26,7 @@ class WaAiChatbot extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
     public array $providers = [];

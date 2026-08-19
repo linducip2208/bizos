@@ -26,15 +26,15 @@ class ObjectiveResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'objectives';
+        return 'Human Capital';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'OKR';
+    protected static ?string $label = 'Objectives (OKR)';
 
     protected static ?string $pluralLabel = 'OKR';
 

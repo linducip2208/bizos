@@ -21,9 +21,9 @@ class ModifierGroupResource extends Resource
 
     protected static ?string $model = ModifierGroup::class;
 
-    protected static ?string $label = 'Grup Modifier';
+    protected static ?string $label = 'Modifier Groups';
 
-    protected static ?string $pluralLabel = 'Grup Modifier';
+    protected static ?string $pluralLabel = 'Modifier Groups';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPlusCircle;
 
@@ -33,7 +33,7 @@ class ModifierGroupResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
     public static function form(Schema $schema): Schema

@@ -25,12 +25,12 @@ class LabOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Order Lab';
+    protected static ?string $label = 'Lab Orders';
 
-    protected static ?string $pluralLabel = 'Order Lab';
+    protected static ?string $pluralLabel = 'Lab Orders';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
 

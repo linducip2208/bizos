@@ -23,11 +23,11 @@ class RoomResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Kamar';
-    protected static ?string $pluralLabel = 'Kamar';
+    protected static ?string $label = 'Rooms';
+    protected static ?string $pluralLabel = 'Rooms';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHomeModern;
 

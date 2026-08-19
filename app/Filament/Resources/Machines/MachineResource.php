@@ -19,12 +19,12 @@ class MachineResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Mesin';
+    protected static ?string $label = 'Machines';
 
-    protected static ?string $pluralLabel = 'Mesin';
+    protected static ?string $pluralLabel = 'Machines';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 

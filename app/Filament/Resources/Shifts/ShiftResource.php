@@ -23,14 +23,14 @@ class ShiftResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Shift';
+    protected static ?string $label = 'Shifts';
 
-    protected static ?string $pluralLabel = 'Shift';
+    protected static ?string $pluralLabel = 'Shifts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;
 
     protected static ?int $navigationSort = 101;
 

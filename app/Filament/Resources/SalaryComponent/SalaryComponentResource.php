@@ -24,19 +24,19 @@ class SalaryComponentResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'salary-components';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
     protected static ?string $label = 'Komponen Gaji';
 
-    protected static ?string $pluralLabel = 'Komponen Gaji';
+    protected static ?string $pluralLabel = 'Salary Components';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
     protected static ?int $navigationSort = 201;
 

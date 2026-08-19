@@ -20,9 +20,9 @@ class DataBreachResource extends Resource
 {
     protected static ?string $model = DataBreach::class;
 
-    protected static ?string $label = 'Pelanggaran Data';
+    protected static ?string $label = 'Data Breaches';
 
-    protected static ?string $pluralLabel = 'Pelanggaran Data';
+    protected static ?string $pluralLabel = 'Data Breaches';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedExclamationTriangle;
 
@@ -30,7 +30,7 @@ class DataBreachResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

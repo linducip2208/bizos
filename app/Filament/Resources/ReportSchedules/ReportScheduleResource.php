@@ -20,11 +20,11 @@ class ReportScheduleResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = ReportSchedule::class;
 
-    protected static ?string $label = 'Jadwal Laporan';
+    protected static ?string $label = 'Report Schedules';
 
-    protected static ?string $pluralLabel = 'Jadwal Laporan';
+    protected static ?string $pluralLabel = 'Report Schedules';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTopRightOnSquare;
 
     protected static ?int $navigationSort = 1111;
 
@@ -32,7 +32,7 @@ class ReportScheduleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public static function form(Schema $schema): Schema

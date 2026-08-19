@@ -23,13 +23,13 @@ class RabItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Item RAB';
-    protected static ?string $pluralLabel = 'Item RAB';
+    protected static ?string $label = 'RAB Items';
+    protected static ?string $pluralLabel = 'RAB Items';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSwatch;
 
     protected static ?int $navigationSort = 601;
 

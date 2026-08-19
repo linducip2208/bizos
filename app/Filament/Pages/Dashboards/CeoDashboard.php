@@ -13,6 +13,7 @@ use Filament\Pages\Page;
 
 class CeoDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?int $navigationSort = 5;
@@ -27,7 +28,7 @@ class CeoDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{1F3E0} Dashboard";
+        return 'Dashboard';
     }
 
     public array $revenueCurrent = [];

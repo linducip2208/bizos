@@ -24,14 +24,14 @@ class WaBlastLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Log Blast WA';
+    protected static ?string $label = 'WhatsApp Blast Logs';
 
     protected static ?string $pluralLabel = 'Log Blast WA';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
 
     protected static ?int $navigationSort = 412;
 

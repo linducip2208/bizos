@@ -22,16 +22,16 @@ class WasteLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Waste Log';
+    protected static ?string $label = 'Waste Logs';
 
     protected static ?string $pluralLabel = 'Waste Log';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTrash;
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $recordTitleAttribute = 'id';
 

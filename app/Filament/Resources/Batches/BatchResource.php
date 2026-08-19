@@ -19,12 +19,12 @@ class BatchResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Batch';
+    protected static ?string $label = 'Batches';
 
-    protected static ?string $pluralLabel = 'Batch';
+    protected static ?string $pluralLabel = 'Batches';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 

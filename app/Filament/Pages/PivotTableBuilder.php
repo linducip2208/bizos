@@ -34,7 +34,7 @@ class PivotTableBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public function mount(): void

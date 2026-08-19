@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class PropertyDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-pie';
 
     protected static ?int $navigationSort = 800;
@@ -20,7 +21,7 @@ class PropertyDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $occupancyRate = [];

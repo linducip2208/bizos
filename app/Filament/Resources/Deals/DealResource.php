@@ -24,12 +24,12 @@ class DealResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Deal';
+    protected static ?string $label = 'Deals';
 
-    protected static ?string $pluralLabel = 'Deal';
+    protected static ?string $pluralLabel = 'Deals';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHandRaised;
 

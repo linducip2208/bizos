@@ -24,14 +24,14 @@ class MeetingAttendeeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Peserta Rapat';
+    protected static ?string $label = 'Meeting Attendees';
 
-    protected static ?string $pluralLabel = 'Peserta Rapat';
+    protected static ?string $pluralLabel = 'Meeting Attendees';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCamera;
 
     protected static ?int $navigationSort = 705;
 

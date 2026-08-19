@@ -6,6 +6,7 @@ use Filament\Pages\Page;
 
 class BlockchainDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-link';
 
     protected static ?int $navigationSort = 1401;
@@ -14,7 +15,7 @@ class BlockchainDashboard extends Page
 
     protected static ?string $title = 'Dashboard Blockchain';
 
-    protected static ?string $navigationLabel = 'Blockchain';
+    protected static ?string $navigationLabel = 'Blockchain Dashboard';
 
     protected static ?string $slug = 'blockchain-dashboard';
 
@@ -26,7 +27,7 @@ class BlockchainDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🛡️ Compliance';
+        return 'Dashboard';
     }
 
     public function mount(): void

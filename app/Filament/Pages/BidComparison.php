@@ -18,7 +18,7 @@ class BidComparison extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
     public ?int $rfqId = null;

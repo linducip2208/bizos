@@ -20,16 +20,16 @@ class ProductionQcCheckResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'QC Check';
+    protected static ?string $label = 'Production QC Checks';
 
     protected static ?string $pluralLabel = 'QC Check';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckCircle;
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 14;
 
     protected static ?string $recordTitleAttribute = 'parameter';
 

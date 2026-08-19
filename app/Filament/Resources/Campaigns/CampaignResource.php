@@ -23,14 +23,14 @@ class CampaignResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Kampanye';
+    protected static ?string $label = 'Campaigns';
 
-    protected static ?string $pluralLabel = 'Kampanye';
+    protected static ?string $pluralLabel = 'Campaigns';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPresentationChartLine;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowUpCircle;
 
     protected static ?int $navigationSort = 421;
 

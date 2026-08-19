@@ -23,10 +23,10 @@ class PosVoucherResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Voucher';
+    protected static ?string $label = 'Vouchers';
 
     protected static ?string $pluralLabel = 'Voucher';
 

@@ -27,7 +27,7 @@ class BarcodeLabelPrinter extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
     public ?array $data = [];

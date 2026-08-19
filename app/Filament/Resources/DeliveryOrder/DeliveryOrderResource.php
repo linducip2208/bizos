@@ -23,14 +23,14 @@ class DeliveryOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Fleet & Field Service';
     }
 
-    protected static ?string $label = 'Surat Jalan';
+    protected static ?string $label = 'Delivery Orders';
 
     protected static ?string $pluralLabel = 'Surat Jalan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTv;
 
     protected static ?int $navigationSort = 1;
 

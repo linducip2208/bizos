@@ -23,15 +23,15 @@ class IotAlertResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'iot-alerts';
+        return 'Compliance & Risk';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Alert Sensor';
+    protected static ?string $label = 'IoT Alerts';
 
     protected static ?string $pluralLabel = 'Alert Sensor';
 

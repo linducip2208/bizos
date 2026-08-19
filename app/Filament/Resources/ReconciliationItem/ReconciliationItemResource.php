@@ -23,19 +23,19 @@ class ReconciliationItemResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'reconciliation-items';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Item Rekonsiliasi';
+    protected static ?string $label = 'Reconciliation Items';
 
-    protected static ?string $pluralLabel = 'Item Rekonsiliasi';
+    protected static ?string $pluralLabel = 'Reconciliation Items';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedListBullet;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTableCells;
 
     protected static ?int $navigationSort = 325;
 

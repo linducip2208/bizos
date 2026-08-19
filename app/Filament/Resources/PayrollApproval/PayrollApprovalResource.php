@@ -28,19 +28,19 @@ class PayrollApprovalResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'payroll-approvals';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Persetujuan Gaji';
+    protected static ?string $label = 'Payroll Approvals';
 
     protected static ?string $pluralLabel = 'Persetujuan Gaji';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckCircle;
 
     protected static ?int $navigationSort = 213;
 

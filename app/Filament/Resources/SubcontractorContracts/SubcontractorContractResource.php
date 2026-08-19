@@ -23,13 +23,13 @@ class SubcontractorContractResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Kontrak Subkon';
+    protected static ?string $label = 'Subcontractor Contracts';
     protected static ?string $pluralLabel = 'Kontrak Subkon';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
 
     protected static ?int $navigationSort = 605;
 

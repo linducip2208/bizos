@@ -13,7 +13,7 @@ class FieldServiceDashboard extends Page
 {
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-bar';
@@ -100,6 +100,6 @@ class FieldServiceDashboard extends Page
 
     public static function shouldRegisterNavigation(): bool
     {
-        return true;
+        return false;
     }
 }

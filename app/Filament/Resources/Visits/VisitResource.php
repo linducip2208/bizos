@@ -23,12 +23,12 @@ class VisitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Kunjungan';
+    protected static ?string $label = 'Visits';
 
-    protected static ?string $pluralLabel = 'Kunjungan';
+    protected static ?string $pluralLabel = 'Visits';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 

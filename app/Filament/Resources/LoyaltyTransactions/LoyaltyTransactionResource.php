@@ -21,14 +21,14 @@ class LoyaltyTransactionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Transaksi Loyalitas';
+    protected static ?string $label = 'Loyalty Transactions';
 
     protected static ?string $pluralLabel = 'Transaksi Loyalitas';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
 
     protected static ?int $navigationSort = 613;
 

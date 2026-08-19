@@ -24,16 +24,16 @@ class SalesOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Sales Order';
+    protected static ?string $label = 'Sales Orders';
 
     protected static ?string $pluralLabel = 'Sales Order';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static ?int $navigationSort = 411;
+    protected static ?int $navigationSort = 422;
 
     protected static ?string $recordTitleAttribute = 'so_number';
 

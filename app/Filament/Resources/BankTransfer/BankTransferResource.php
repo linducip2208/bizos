@@ -25,17 +25,17 @@ class BankTransferResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bank-transfers';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Transfer Bank';
+    protected static ?string $label = 'Bank Transfers';
 
-    protected static ?string $pluralLabel = 'Transfer Bank';
+    protected static ?string $pluralLabel = 'Bank Transfers';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowRightStartOnRectangle;
 

@@ -24,17 +24,17 @@ class TaxTransactionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'tax-transactions';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Transaksi Pajak';
+    protected static ?string $label = 'Tax Transactions';
 
-    protected static ?string $pluralLabel = 'Transaksi Pajak';
+    protected static ?string $pluralLabel = 'Tax Transactions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
 

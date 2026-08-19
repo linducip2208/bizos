@@ -19,14 +19,14 @@ class UnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Satuan';
+    protected static ?string $label = 'Units';
 
-    protected static ?string $pluralLabel = 'Satuan';
+    protected static ?string $pluralLabel = 'Units';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTableCells;
 
     protected static ?int $navigationSort = 2;
 

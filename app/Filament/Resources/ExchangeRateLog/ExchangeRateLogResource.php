@@ -23,15 +23,15 @@ class ExchangeRateLogResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'exchange-rate-logs';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Riwayat Kurs';
+    protected static ?string $label = 'Exchange Rate Logs';
 
     protected static ?string $pluralLabel = 'Riwayat Kurs';
 

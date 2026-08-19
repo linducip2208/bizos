@@ -20,12 +20,12 @@ class BomItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Item BOM';
+    protected static ?string $label = 'BOM Items';
 
-    protected static ?string $pluralLabel = 'Item BOM';
+    protected static ?string $pluralLabel = 'BOM Items';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
 

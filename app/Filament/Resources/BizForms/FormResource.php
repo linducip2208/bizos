@@ -22,9 +22,9 @@ class FormResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = FormModel::class;
 
-    protected static ?string $label = 'Formulir';
+    protected static ?string $label = 'Forms';
 
-    protected static ?string $pluralLabel = 'Formulir';
+    protected static ?string $pluralLabel = 'Forms';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
@@ -32,12 +32,12 @@ class FormResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'forms';
+        return 'Tools';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
     public static function form(Schema $schema): Schema

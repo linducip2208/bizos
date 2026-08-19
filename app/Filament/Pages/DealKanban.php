@@ -14,9 +14,9 @@ class DealKanban extends Page
 
     protected string $view = 'filament.pages.deal-kanban';
 
-    protected static ?string $title = 'Kanban Deal';
+    protected static ?string $title = 'Deal Kanban';
 
-    protected static ?string $navigationLabel = 'Kanban Deal';
+    protected static ?string $navigationLabel = 'Deal Kanban';
 
     protected static ?string $slug = 'deal-kanban';
 
@@ -24,7 +24,7 @@ class DealKanban extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
     public function mount(): void

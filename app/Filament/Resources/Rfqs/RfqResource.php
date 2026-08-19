@@ -23,16 +23,16 @@ class RfqResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'RFQ';
+    protected static ?string $label = 'RFQs';
 
-    protected static ?string $pluralLabel = 'RFQ';
+    protected static ?string $pluralLabel = 'RFQs';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentMagnifyingGlass;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static ?int $navigationSort = 107;
+    protected static ?int $navigationSort = 110;
 
     protected static ?string $recordTitleAttribute = 'rfq_number';
 

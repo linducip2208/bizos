@@ -23,14 +23,14 @@ class ReferralResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Referral';
+    protected static ?string $label = 'Referrals';
 
-    protected static ?string $pluralLabel = 'Referral';
+    protected static ?string $pluralLabel = 'Referrals';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboard;
 
     protected static ?int $navigationSort = 418;
 

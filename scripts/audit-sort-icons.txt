@@ -1,0 +1,543 @@
+==============================================================================================================
+NAVIGATION SORT & ICON AUDIT REPORT — BizOS
+Generated: 2026-08-19 17:42:43
+Total Resources: 307
+Total Groups: 26
+==============================================================================================================
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: AI & Intelligence (4 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=415    icon=Heroicon::OutlinedInformationCircle               ChatbotFlowResource
+  sort=901    icon=Heroicon::OutlinedCog6Tooth                       AiProviderResource
+  sort=902    icon=Heroicon::OutlinedChatBubbleBottomCenterText      AiConversationResource
+  sort=903    icon=Heroicon::OutlinedBookOpen                        AiKnowledgeBaseResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Automation (5 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedPaintBrush                      BpmnProcessResource
+  sort=2      icon=Heroicon::OutlinedQueueList                       BpmnProcessInstanceResource
+  sort=3      icon=Heroicon::OutlinedArrowPathRoundedSquare          WorkflowResource
+  sort=1050   icon=Heroicon::OutlinedArrowPathRoundedSquare          ApprovalWorkflowResource
+  sort=1051   icon=Heroicon::OutlinedClipboardDocumentCheck          ApprovalRequestResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedArrowPathRoundedSquare" (2x): WorkflowResource, ApprovalWorkflowResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Billing & Licensing (5 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=10     icon=Heroicon::OutlinedArrowTurnDownLeft               LicenseResource
+  sort=1008   icon=Heroicon::OutlinedRocketLaunch                    SubscriptionPlanResource
+  sort=1009   icon=Heroicon::OutlinedCheckBadge                      SubscriptionResource
+  sort=1010   icon=Heroicon::OutlinedDocumentText                    SubscriptionInvoiceResource
+  sort=1011   icon=Heroicon::OutlinedBanknotes                       SubscriptionPaymentResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Collaboration (12 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=701    icon=Heroicon::OutlinedVideoCamera                     MeetingResource
+  sort=702    icon=Heroicon::OutlinedCalendar                        CalendarResource
+  sort=703    icon=Heroicon::OutlinedDocumentText                    FormResource
+  sort=704    icon=Heroicon::OutlinedChatBubbleLeftRight             ChatResource
+  sort=705    icon=Heroicon::OutlinedCamera                          MeetingAttendeeResource
+  sort=706    icon=Heroicon::OutlinedDocumentText                    MeetingMinuteResource
+  sort=707    icon=Heroicon::OutlinedDocument                        CalendarEventResource
+  sort=708    icon=Heroicon::OutlinedClipboardDocumentList           FormFieldResource
+  sort=709    icon=Heroicon::OutlinedInboxArrowDown                  FormSubmissionResource
+  sort=710    icon=Heroicon::OutlinedFolder                          WikiCategoryResource
+  sort=711    icon=Heroicon::OutlinedBookmark                        WikiPageResource
+  sort=712    icon=Heroicon::OutlinedClipboard                       NoticeBoardResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedDocumentText" (2x): FormResource, MeetingMinuteResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Compliance & Risk (18 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedLink                            BlockchainTransactionResource
+  sort=2      icon=Heroicon::OutlinedExclamationTriangle             DataBreachResource
+  sort=3      icon=Heroicon::OutlinedShieldExclamation               DpiaAssessmentResource
+  sort=4      icon=Heroicon::OutlinedExclamationTriangle             IsoRiskResource
+  sort=5      icon=Heroicon::OutlinedBugAnt                          IsoIncidentResource
+  sort=6      icon=Heroicon::OutlinedFingerPrint                     IsoAuditResource
+  sort=7      icon=Heroicon::OutlinedDocumentText                    IsoPolicyResource
+  sort=8      icon=Heroicon::OutlinedNoSymbol                        SodRuleResource
+  sort=9      icon=Heroicon::OutlinedDocumentCheck                   ConsentRecordResource
+  sort=10     icon=Heroicon::OutlinedTrash                           WasteRecordResource
+  sort=11     icon=Heroicon::OutlinedLink                            ProductBlockchainEventResource
+  sort=12     icon=Heroicon::OutlinedBeaker                          WaterUsageResource
+  sort=13     icon=Heroicon::OutlinedFlag                            EsgTargetResource
+  sort=1601   icon=Heroicon::OutlinedMagnifyingGlass                 IotDeviceResource
+  sort=1602   icon=Heroicon::OutlinedChartBar                        IotReadingResource
+  sort=1603   icon=Heroicon::OutlinedBellAlert                       IotAlertResource
+  sort=1604   icon=Heroicon::OutlinedBolt                            EnergyMeterResource
+  sort=1605   icon=Heroicon::OutlinedAtSymbol                        EnergyReadingResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedLink" (2x): BlockchainTransactionResource, ProductBlockchainEventResource
+     "Heroicon::OutlinedExclamationTriangle" (2x): DataBreachResource, IsoRiskResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Dashboard (1 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1112   icon=Heroicon::OutlinedSquares2x2                      DashboardLayoutResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Finance & Accounting (32 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=301    icon=Heroicon::OutlinedFolder                          CoaCategoryResource
+  sort=302    icon=Heroicon::OutlinedFolder                          CoaResource
+  sort=303    icon=Heroicon::OutlinedCreditCard                      PaymentMethodResource
+  sort=304    icon=Heroicon::OutlinedCalculator                      TaxConfigResource
+  sort=305    icon=Heroicon::OutlinedCpuChip                         AssetCategoryResource
+  sort=306    icon=Heroicon::OutlinedArchiveBox                      BudgetResource
+  sort=307    icon=Heroicon::OutlinedDocumentDuplicate               BudgetVersionResource
+  sort=308    icon=Heroicon::OutlinedArrowDownCircle                 ForecastResource
+  sort=309    icon=Heroicon::OutlinedDocumentText                    InvoiceItemResource
+  sort=310    icon=Heroicon::OutlinedCamera                          JournalResource
+  sort=311    icon=Heroicon::OutlinedDocumentCurrencyDollar          InvoiceResource
+  sort=312    icon=Heroicon::OutlinedHome                            PaymentResource
+  sort=313    icon=Heroicon::OutlinedCube                            AssetResource
+  sort=314    icon=Heroicon::OutlinedListBullet                      BudgetItemResource
+  sort=315    icon=Heroicon::OutlinedReceiptPercent                  TaxTransactionResource
+  sort=316    icon=Heroicon::OutlinedArrowTrendingDown               AssetDepreciationResource
+  sort=317    icon=Heroicon::OutlinedArrowsRightLeft                 AssetMutationResource
+  sort=318    icon=Heroicon::OutlinedEllipsisVertical                RecurringInvoiceResource
+  sort=319    icon=Heroicon::OutlinedBanknotes                       InvoicePaymentResource
+  sort=320    icon=Heroicon::OutlinedCurrencyDollar                  CurrencyResource
+  sort=321    icon=Heroicon::OutlinedArrowTrendingUp                 ExchangeRateLogResource
+  sort=322    icon=Heroicon::OutlinedBuildingLibrary                 BankAccountResource
+  sort=323    icon=Heroicon::OutlinedBanknotes                       BankTransactionResource
+  sort=324    icon=Heroicon::OutlinedScale                           BankReconciliationResource
+  sort=325    icon=Heroicon::OutlinedTableCells                      ReconciliationItemResource
+  sort=326    icon=Heroicon::OutlinedArrowRightStartOnRectangle      BankTransferResource
+  sort=327    icon=Heroicon::OutlinedCalculator                      CoaBalanceResource
+  sort=328    icon=Heroicon::OutlinedBars3                           JournalEntryResource
+  sort=329    icon=Heroicon::OutlinedBeaker                          ScenarioResource
+  sort=330    icon=Heroicon::OutlinedPlay                            IntercompanyTransactionResource
+  sort=1701   icon=Heroicon::OutlinedPlus                            InvestmentResource
+  sort=1702   icon=Heroicon::OutlinedBuildingOffice2                 BankFacilityResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedFolder" (2x): CoaCategoryResource, CoaResource
+     "Heroicon::OutlinedCalculator" (2x): TaxConfigResource, CoaBalanceResource
+     "Heroicon::OutlinedBanknotes" (2x): InvoicePaymentResource, BankTransactionResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Fleet & Field Service (5 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedTv                              DeliveryOrderResource
+  sort=8      icon=Heroicon::OutlinedTruck                           VehicleResource
+  sort=9      icon=Heroicon::OutlinedBolt                            VehicleFuelLogResource
+  sort=10     icon=Heroicon::OutlinedWrench                          VehicleMaintenanceLogResource
+  sort=11     icon=Heroicon::OutlinedUserGroup                       VehicleAssignmentResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Human Capital (37 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=heroicon-o-star                                   GamificationBadgeResource
+  sort=2      icon=heroicon-o-gift                                   RewardResource
+  sort=3      icon=heroicon-o-flag                                   ChallengeResource
+  sort=7      icon=Heroicon::OutlinedAtSymbol                        EmployeeResource
+  sort=8      icon=Heroicon::OutlinedUser                            EmploymentTypeResource
+  sort=101    icon=Heroicon::OutlinedArchiveBox                      ShiftResource
+  sort=102    icon=Heroicon::OutlinedEllipsisVertical                LeaveTypeResource
+  sort=103    icon=Heroicon::OutlinedFolder                          ReimbursementCategoryResource
+  sort=104    icon=Heroicon::OutlinedNewspaper                       JobPostingResource
+  sort=105    icon=Heroicon::OutlinedArrowPathRoundedSquare          FeedbackCycleResource
+  sort=106    icon=Heroicon::OutlinedMegaphone                       AnnouncementResource
+  sort=107    icon=Heroicon::OutlinedClipboardDocumentList           AttendanceResource
+  sort=108    icon=Heroicon::OutlinedCheck                           AttendanceConfigResource
+  sort=109    icon=Heroicon::OutlinedWifi                            WifiAccessPointResource
+  sort=110    icon=Heroicon::OutlinedCalendarDays                    LeaveResource
+  sort=111    icon=Heroicon::OutlinedClock                           OvertimeResource
+  sort=112    icon=Heroicon::OutlinedShare                           ReimbursementResource
+  sort=113    icon=Heroicon::OutlinedIdentification                  InterviewResource
+  sort=114    icon=Heroicon::OutlinedUserCircle                      CandidateResource
+  sort=115    icon=Heroicon::OutlinedUserGroup                       InterviewerResource
+  sort=116    icon=Heroicon::OutlinedBars4                           InterviewResultResource
+  sort=117    icon=Heroicon::OutlinedQuestionMarkCircle              FeedbackQuestionResource
+  sort=118    icon=Heroicon::OutlinedPhoto                           FeedbackReviewerResource
+  sort=119    icon=Heroicon::OutlinedChatBubbleLeftRight             FeedbackAnswerResource
+  sort=120    icon=Heroicon::OutlinedShoppingCart                    CanteenMenuResource
+  sort=121    icon=Heroicon::OutlinedPaperClip                       CanteenOrderResource
+  sort=122    icon=Heroicon::OutlinedListBullet                      CanteenOrderItemResource
+  sort=123    icon=Heroicon::OutlinedMapPin                          VisitResource
+  sort=124    icon=Heroicon::OutlinedGlobeAlt                        OnboardingChecklistResource
+  sort=125    icon=Heroicon::OutlinedPrinter                         OffboardingChecklistResource
+  sort=126    icon=Heroicon::OutlinedPresentationChartBar            KpiTemplateResource
+  sort=127    icon=Heroicon::OutlinedChartBar                        KpiIndicatorResource
+  sort=128    icon=Heroicon::OutlinedRocketLaunch                    PerformanceCycleResource
+  sort=129    icon=Heroicon::OutlinedArrowDownOnSquare               PerformanceReviewResource
+  sort=130    icon=Heroicon::OutlinedArrowTrendingUp                 SuccessionPlanResource
+  sort=131    icon=Heroicon::OutlinedAcademicCap                     CompetencyResource
+  sort=132    icon=Heroicon::OutlinedFlag                            ObjectiveResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Industry (22 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedGlobeAlt                        EcommerceChannelResource
+  sort=2      icon=Heroicon::OutlinedShoppingBag                     EcommerceOrderResource
+  sort=8      icon=Heroicon::OutlinedTruck                           SubcontractOrderResource
+  sort=601    icon=Heroicon::OutlinedSwatch                          RabItemResource
+  sort=602    icon=Heroicon::OutlinedBanknotes                       ProgressBillingResource
+  sort=604    icon=Heroicon::OutlinedCubeTransparent                 DailySiteReportResource
+  sort=605    icon=Heroicon::OutlinedDocumentDuplicate               SubcontractorContractResource
+  sort=701    icon=Heroicon::OutlinedHomeModern                      RoomResource
+  sort=702    icon=Heroicon::OutlinedCalendarDays                    RoomBookingResource
+  sort=703    icon=Heroicon::OutlinedSparkles                        HotelServiceResource
+  sort=704    icon=Heroicon::OutlinedReceiptPercent                  GuestFolioResource
+  sort=801    icon=Heroicon::OutlinedHomeModern                      PropertyUnitResource
+  sort=802    icon=Heroicon::OutlinedDocumentDuplicate               TenancyContractResource
+  sort=803    icon=Heroicon::OutlinedDocumentText                    ServiceChargeInvoiceResource
+  sort=804    icon=Heroicon::OutlinedWrench                          MaintenanceRequestResource
+  sort=1001   icon=Heroicon::OutlinedUser                            PatientResource
+  sort=1002   icon=Heroicon::OutlinedCalendarDays                    AppointmentResource
+  sort=1003   icon=Heroicon::OutlinedPower                           MedicalRecordResource
+  sort=1004   icon=Heroicon::OutlinedDocumentText                    PrescriptionResource
+  sort=1005   icon=Heroicon::OutlinedShieldCheck                     BpjsClaimResource
+  sort=1006   icon=Heroicon::OutlinedBeaker                          LabOrderResource
+  sort=1007   icon=Heroicon::OutlinedDocumentMagnifyingGlass         LabResultResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedDocumentDuplicate" (2x): SubcontractorContractResource, TenancyContractResource
+     "Heroicon::OutlinedHomeModern" (2x): RoomResource, PropertyUnitResource
+     "Heroicon::OutlinedCalendarDays" (2x): RoomBookingResource, AppointmentResource
+     "Heroicon::OutlinedDocumentText" (2x): ServiceChargeInvoiceResource, PrescriptionResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Integrations (9 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedKey                             ApiKeyResource
+  sort=2      icon=Heroicon::OutlinedMusicalNote                     WebhookResource
+  sort=4      icon=Heroicon::OutlinedPencilSquare                    SignatureProviderResource
+  sort=5      icon=Heroicon::OutlinedGlobeAlt                        SmsGatewayResource
+  sort=6      icon=Heroicon::OutlinedEnvelope                        SmsLogResource
+  sort=7      icon=Heroicon::OutlinedPuzzlePiece                     IntegrationConnectorResource
+  sort=8      icon=Heroicon::OutlinedCreditCard                      VirtualAccountResource
+  sort=9      icon=Heroicon::OutlinedCreditCard                      PaymentGatewayConfigResource
+  sort=1004   icon=Heroicon::OutlinedPuzzlePiece                     IntegrationResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedPuzzlePiece" (2x): IntegrationConnectorResource, IntegrationResource
+     "Heroicon::OutlinedCreditCard" (2x): VirtualAccountResource, PaymentGatewayConfigResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Inventory & Warehouse (16 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedTag                             BrandResource
+  sort=2      icon=Heroicon::OutlinedTableCells                      UnitResource
+  sort=4      icon=Heroicon::OutlinedCube                            BatchResource
+  sort=5      icon=Heroicon::OutlinedServerStack                     SerialNumberResource
+  sort=101    icon=Heroicon::OutlinedBuildingOffice2                 WarehouseResource
+  sort=109    icon=Heroicon::OutlinedStop                            StockMovementResource
+  sort=110    icon=Heroicon::OutlinedCube                            StockBalanceResource
+  sort=111    icon=Heroicon::OutlinedArchiveBox                      StockOpnameResource
+  sort=112    icon=Heroicon::OutlinedClipboardDocumentList           StockOpnameItemResource
+  sort=114    icon=Heroicon::OutlinedChartPie                        AbcClassificationResource
+  sort=601    icon=Heroicon::OutlinedFolder                          ProductCategoryResource
+  sort=602    icon=Heroicon::OutlinedCube                            ProductResource
+  sort=606    icon=Heroicon::OutlinedPlusCircle                      ModifierGroupResource
+  sort=607    icon=Heroicon::OutlinedSquare3Stack3d                  ComboProductResource
+  sort=608    icon=Heroicon::OutlinedGlobeAsiaAustralia              ProductVariantResource
+  sort=610    icon=heroicon-o-shield-check                           WarrantyResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedCube" (3x): BatchResource, StockBalanceResource, ProductResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Learning (7 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=801    icon=Heroicon::OutlinedArrowDownOnSquare               CourseResource
+  sort=802    icon=Heroicon::OutlinedHandThumbUp                     QuizResource
+  sort=803    icon=Heroicon::OutlinedSquares2x2                      CourseModuleResource
+  sort=804    icon=Heroicon::OutlinedBattery100                      CourseLessonResource
+  sort=805    icon=Heroicon::OutlinedUserPlus                        CourseEnrollmentResource
+  sort=806    icon=Heroicon::OutlinedQuestionMarkCircle              QuizQuestionResource
+  sort=807    icon=Heroicon::OutlinedAcademicCap                     CertificateResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Maintenance (1 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=318    icon=Heroicon::OutlinedWrench                          AssetMaintenanceResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Manufacturing (16 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedSquaresPlus                     BillOfMaterialResource
+  sort=2      icon=Heroicon::OutlinedQueueList                       BomItemResource
+  sort=3      icon=Heroicon::OutlinedSun                             ColdChainLogResource
+  sort=4      icon=Heroicon::OutlinedClipboardDocument               EcommerceInventoryLogResource
+  sort=5      icon=Heroicon::OutlinedGlobeAsiaAustralia              ProductionOrderResource
+  sort=6      icon=Heroicon::OutlinedWrenchScrewdriver               MachineResource
+  sort=7      icon=Heroicon::OutlinedHandThumbUp                     ProductionPlanResource
+  sort=8      icon=Heroicon::OutlinedCheckBadge                      FinishedGoodResource
+  sort=9      icon=Heroicon::OutlinedTruck                           DeliveryItemResource
+  sort=10     icon=Heroicon::OutlinedShoppingBag                     EcommerceOrderItemResource
+  sort=11     icon=Heroicon::OutlinedNoSymbol                        WorkCenterResource
+  sort=12     icon=Heroicon::OutlinedMapPin                          FleetGpsTrackResource
+  sort=13     icon=Heroicon::OutlinedArrowPathRoundedSquare          RoutingOperationResource
+  sort=14     icon=Heroicon::OutlinedCheckCircle                     ProductionQcCheckResource
+  sort=15     icon=Heroicon::OutlinedTrash                           WasteLogResource
+  sort=603    icon=Heroicon::OutlinedServerStack                     ProjectSiteInventoryResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Marketing (12 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=406    icon=Heroicon::OutlinedCommandLine                     WaTemplateResource
+  sort=407    icon=Heroicon::OutlinedPaperAirplane                   WaBlastCampaignResource
+  sort=408    icon=Heroicon::OutlinedChatBubbleBottomCenterText      WaAutoReplyResource
+  sort=412    icon=Heroicon::OutlinedHashtag                         WaBlastLogResource
+  sort=413    icon=Heroicon::OutlinedChatBubbleLeftRight             WaConversationResource
+  sort=421    icon=Heroicon::OutlinedArrowUpCircle                   CampaignResource
+  sort=422    icon=Heroicon::OutlinedCog                             MarketingAutomationResource
+  sort=1301   icon=Heroicon::OutlinedEnvelope                        EmailCampaignResource
+  sort=1302   icon=Heroicon::OutlinedBars3                           LandingPageResource
+  sort=1303   icon=Heroicon::OutlinedArrowTrendingUp                 LeadScoreResource
+  sort=1400   icon=Heroicon::OutlinedArrowTurnLeftUp                 BlogCategoryResource
+  sort=1401   icon=Heroicon::OutlinedDocumentText                    BlogPostResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Organization (12 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedWindow                          CompanyResource
+  sort=2      icon=Heroicon::OutlinedBuildingStorefront              BranchResource
+  sort=3      icon=Heroicon::OutlinedRectangleGroup                  DepartmentResource
+  sort=4      icon=Heroicon::OutlinedBuildingOffice                  BusinessUnitResource
+  sort=5      icon=Heroicon::OutlinedBriefcase                       DesignationResource
+  sort=6      icon=Heroicon::OutlinedArrowTrendingUp                 GradeResource
+  sort=7      icon=Heroicon::OutlinedBriefcase                       PositionResource
+  sort=8      icon=Heroicon::OutlinedEllipsisHorizontal              HolidayResource
+  sort=9      icon=Heroicon::OutlinedCalendar                        WorkCalendarResource
+  sort=10     icon=Heroicon::OutlinedRectangleGroup                  DivisionResource
+  sort=11     icon=Heroicon::OutlinedRectangleGroup                  SectionResource
+  sort=12     icon=Heroicon::OutlinedDocumentDuplicate               ContractResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedRectangleGroup" (3x): DepartmentResource, DivisionResource, SectionResource
+     "Heroicon::OutlinedBriefcase" (2x): DesignationResource, PositionResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: POS & Retail (15 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=602    icon=heroicon-o-cube                                   ServiceTypeResource
+  sort=603    icon=Heroicon::OutlinedBanknotes                       CashDenominationResource
+  sort=604    icon=Heroicon::OutlinedTicket                          PosVoucherResource
+  sort=605    icon=Heroicon::OutlinedComputerDesktop                 CashierShiftResource
+  sort=606    icon=Heroicon::OutlinedHashtag                         PrinterResource
+  sort=607    icon=Heroicon::OutlinedPercentBadge                    ProductDiscountResource
+  sort=608    icon=Heroicon::OutlinedReceiptPercent                  PosTransactionResource
+  sort=609    icon=Heroicon::OutlinedDocumentText                    PosTransactionItemResource
+  sort=610    icon=Heroicon::OutlinedMusicalNote                     PosPaymentResource
+  sort=611    icon=Heroicon::OutlinedArrowUturnLeft                  PosRefundResource
+  sort=612    icon=Heroicon::OutlinedGift                            LoyaltyConfigResource
+  sort=613    icon=Heroicon::OutlinedStar                            LoyaltyTransactionResource
+  sort=614    icon=Heroicon::OutlinedUserGroup                       PosMemberResource
+  sort=615    icon=heroicon-o-rectangle-stack                        ResTableResource
+  sort=616    icon=Heroicon::OutlinedPrinter                         ReceiptLayoutResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Payroll (14 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=201    icon=Heroicon::OutlinedCurrencyDollar                  SalaryComponentResource
+  sort=202    icon=Heroicon::OutlinedCalendar                        PayrollPeriodResource
+  sort=203    icon=Heroicon::OutlinedCurrencyDollar                  EmployeeSalaryComponentResource
+  sort=204    icon=Heroicon::OutlinedCurrencyDollar                  PayrollResource
+  sort=205    icon=Heroicon::OutlinedDocumentText                    PayrollItemResource
+  sort=206    icon=Heroicon::OutlinedDocumentArrowDown               PaySlipResource
+  sort=207    icon=Heroicon::OutlinedCalculator                      Pph21ConfigResource
+  sort=208    icon=Heroicon::OutlinedHeart                           BpjsConfigResource
+  sort=209    icon=Heroicon::OutlinedSwatch                          ThrConfigResource
+  sort=210    icon=Heroicon::OutlinedGift                            AllowanceResource
+  sort=211    icon=Heroicon::OutlinedMinusCircle                     DeductionResource
+  sort=212    icon=Heroicon::OutlinedStar                            BonusResource
+  sort=213    icon=Heroicon::OutlinedCheckCircle                     PayrollApprovalResource
+  sort=214    icon=Heroicon::OutlinedCalculator                      PayrollSimulationResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedCurrencyDollar" (3x): SalaryComponentResource, EmployeeSalaryComponentResource, PayrollResource
+     "Heroicon::OutlinedCalculator" (2x): Pph21ConfigResource, PayrollSimulationResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Procurement (10 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=102    icon=Heroicon::OutlinedBuildingOffice2                 SupplierResource
+  sort=103    icon=Heroicon::OutlinedDocumentText                    PurchaseRequisitionResource
+  sort=104    icon=Heroicon::OutlinedDocumentText                    PurchaseRequisitionItemResource
+  sort=105    icon=Heroicon::OutlinedDocumentText                    PurchaseOrderResource
+  sort=106    icon=Heroicon::OutlinedDocumentText                    PurchaseOrderItemResource
+  sort=107    icon=Heroicon::OutlinedDocumentCheck                   GoodsReceiptResource
+  sort=108    icon=Heroicon::OutlinedDocumentCheck                   BidResource
+  sort=109    icon=Heroicon::OutlinedEyeSlash                        GoodsReceiptItemResource
+  sort=110    icon=Heroicon::OutlinedDocumentText                    RfqResource
+  sort=115    icon=Heroicon::OutlinedCheckCircle                     ThreeWayMatchResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedDocumentText" (5x): PurchaseRequisitionResource, PurchaseRequisitionItemResource, PurchaseOrderResource, PurchaseOrderItemResource, RfqResource
+     "Heroicon::OutlinedDocumentCheck" (2x): GoodsReceiptResource, BidResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Projects & Operations (11 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=501    icon=Heroicon::OutlinedBriefcase                       ProjectResource
+  sort=502    icon=Heroicon::OutlinedClipboardDocumentCheck          TaskResource
+  sort=503    icon=Heroicon::OutlinedFlag                            MilestoneResource
+  sort=504    icon=Heroicon::OutlinedTag                             TaskLabelResource
+  sort=505    icon=Heroicon::OutlinedArchiveBox                      TimesheetResource
+  sort=506    icon=Heroicon::OutlinedRectangleStack                  ProjectPhaseResource
+  sort=507    icon=Heroicon::OutlinedUsers                           ProjectMemberResource
+  sort=508    icon=Heroicon::OutlinedChatBubbleOvalLeft              TaskCommentResource
+  sort=509    icon=Heroicon::OutlinedHandThumbDown                   TaskAttachmentResource
+  sort=510    icon=Heroicon::OutlinedClock                           TimesheetEntryResource
+  sort=511    icon=Heroicon::OutlinedRocketLaunch                    SprintResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Quality (1 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=113    icon=Heroicon::OutlinedHandThumbDown                   QualityCheckResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Reports & Analytics (3 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1110   icon=Heroicon::OutlinedDocumentText                    ReportTemplateResource
+  sort=1111   icon=Heroicon::OutlinedArrowTopRightOnSquare           ReportScheduleResource
+  sort=1113   icon=Heroicon::OutlinedPresentationChartLine           AdvancedReportResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Sales & CRM (21 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=145    icon=Heroicon::OutlinedUserGroup                       CustomerGroupResource
+  sort=401    icon=Heroicon::OutlinedFunnel                          LeadSourceResource
+  sort=402    icon=Heroicon::OutlinedUserGroup                       LeadResource
+  sort=403    icon=Heroicon::OutlinedWallet                          ClientResource
+  sort=404    icon=Heroicon::OutlinedViewColumns                     PipelineStageResource
+  sort=405    icon=Heroicon::OutlinedHandRaised                      DealResource
+  sort=409    icon=Heroicon::OutlinedArrowTopRightOnSquare           LeadActivityResource
+  sort=410    icon=Heroicon::OutlinedPencil                          ClientContactResource
+  sort=411    icon=Heroicon::OutlinedUsers                           ClientSegmentResource
+  sort=412    icon=Heroicon::OutlinedDocumentText                    SalesInvoiceResource
+  sort=413    icon=Heroicon::OutlinedArrowUturnLeft                  SalesReturnResource
+  sort=414    icon=Heroicon::OutlinedCurrencyDollar                  CommissionSlabResource
+  sort=415    icon=Heroicon::OutlinedFlag                            SalesTargetResource
+  sort=416    icon=Heroicon::OutlinedCommandLine                     PromotionResource
+  sort=417    icon=Heroicon::OutlinedTicket                          CouponResource
+  sort=418    icon=Heroicon::OutlinedClipboard                       ReferralResource
+  sort=419    icon=Heroicon::OutlinedPhone                           CallLogResource
+  sort=420    icon=Heroicon::OutlinedEnvelope                        EmailLogResource
+  sort=421    icon=Heroicon::OutlinedDocumentText                    QuotationResource
+  sort=422    icon=Heroicon::OutlinedDocumentText                    SalesOrderResource
+  sort=423    icon=Heroicon::OutlinedCurrencyDollar                  PriceListResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedUserGroup" (2x): CustomerGroupResource, LeadResource
+     "Heroicon::OutlinedDocumentText" (3x): SalesInvoiceResource, QuotationResource, SalesOrderResource
+     "Heroicon::OutlinedCurrencyDollar" (2x): CommissionSlabResource, PriceListResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: Support & Service (5 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedFolder                          TicketCategoryResource
+  sort=2      icon=Heroicon::OutlinedArrowTurnDownLeft               SlaPolicyResource
+  sort=3      icon=Heroicon::OutlinedChatBubbleLeftRight             TicketResource
+  sort=4      icon=Heroicon::OutlinedTag                             TicketTagResource
+  sort=6      icon=heroicon-o-wrench-screwdriver                     WarrantyClaimResource
+
+--------------------------------------------------------------------------------------------------------------
+GROUP: System (13 resources)
+--------------------------------------------------------------------------------------------------------------
+  sort=1      icon=Heroicon::OutlinedClock                           ActivityTimelineResource
+  sort=2      icon=Heroicon::OutlinedBars4                           MarketplaceInstallResource
+  sort=3      icon=Heroicon::OutlinedShoppingBag                     MarketplaceAppResource
+  sort=447    icon=Heroicon::OutlinedArrowPath                       DataMergeLogResource
+  sort=1001   icon=Heroicon::OutlinedShieldCheck                     RoleResource
+  sort=1002   icon=Heroicon::OutlinedLockClosed                      PermissionResource
+  sort=1003   icon=Heroicon::OutlinedCog6Tooth                       SystemSettingResource
+  sort=1005   icon=Heroicon::OutlinedBell                            NotificationTemplateResource
+  sort=1006   icon=Heroicon::OutlinedBell                            NotificationResource
+  sort=1007   icon=Heroicon::OutlinedTag                             AuditLogResource
+  sort=1052   icon=Heroicon::OutlinedDocumentText                    DocumentTemplateResource
+  sort=1053   icon=Heroicon::OutlinedEye                             DocumentGenerationResource
+  sort=1054   icon=Heroicon::OutlinedLanguage                        TranslationResource
+
+  ** DUPLICATE ICONS IN THIS GROUP:
+     "Heroicon::OutlinedBell" (2x): NotificationTemplateResource, NotificationResource
+
+==============================================================================================================
+SUMMARY
+==============================================================================================================
+Total Resources: 307
+Total Groups: 26
+Groups with duplicate icons: 24
+Resources with NULL/0 sort: 0
+Resources with no group: 0
+==============================================================================================================
+
+==============================================================================================================
+SORT NUMBER COLLISIONS PER GROUP (same sort value used by multiple resources):
+==============================================================================================================
+
+==============================================================================================================
+GLOBAL SORT COLLISIONS (same sort number used in different groups):
+==============================================================================================================
+  sort=1 used 11 times: Automation / BpmnProcessResource  |  Compliance & Risk / BlockchainTransactionResource  |  Fleet & Field Service / DeliveryOrderResource  |  Human Capital / GamificationBadgeResource  |  Industry / EcommerceChannelResource  |  Integrations / ApiKeyResource  |  Inventory & Warehouse / BrandResource  |  Manufacturing / BillOfMaterialResource  |  Organization / CompanyResource  |  Support & Service / TicketCategoryResource  |  System / ActivityTimelineResource
+  sort=2 used 10 times: Automation / BpmnProcessInstanceResource  |  Compliance & Risk / DataBreachResource  |  Human Capital / RewardResource  |  Industry / EcommerceOrderResource  |  Integrations / WebhookResource  |  Inventory & Warehouse / UnitResource  |  Manufacturing / BomItemResource  |  Organization / BranchResource  |  Support & Service / SlaPolicyResource  |  System / MarketplaceInstallResource
+  sort=3 used 7 times: Automation / WorkflowResource  |  Compliance & Risk / DpiaAssessmentResource  |  Human Capital / ChallengeResource  |  Manufacturing / ColdChainLogResource  |  Organization / DepartmentResource  |  Support & Service / TicketResource  |  System / MarketplaceAppResource
+  sort=4 used 6 times: Compliance & Risk / IsoRiskResource  |  Integrations / SignatureProviderResource  |  Inventory & Warehouse / BatchResource  |  Manufacturing / EcommerceInventoryLogResource  |  Organization / BusinessUnitResource  |  Support & Service / TicketTagResource
+  sort=5 used 5 times: Compliance & Risk / IsoIncidentResource  |  Integrations / SmsGatewayResource  |  Inventory & Warehouse / SerialNumberResource  |  Manufacturing / ProductionOrderResource  |  Organization / DesignationResource
+  sort=6 used 5 times: Compliance & Risk / IsoAuditResource  |  Integrations / SmsLogResource  |  Manufacturing / MachineResource  |  Organization / GradeResource  |  Support & Service / WarrantyClaimResource
+  sort=7 used 5 times: Compliance & Risk / IsoPolicyResource  |  Human Capital / EmployeeResource  |  Integrations / IntegrationConnectorResource  |  Manufacturing / ProductionPlanResource  |  Organization / PositionResource
+  sort=8 used 7 times: Compliance & Risk / SodRuleResource  |  Fleet & Field Service / VehicleResource  |  Human Capital / EmploymentTypeResource  |  Industry / SubcontractOrderResource  |  Integrations / VirtualAccountResource  |  Manufacturing / FinishedGoodResource  |  Organization / HolidayResource
+  sort=9 used 5 times: Compliance & Risk / ConsentRecordResource  |  Fleet & Field Service / VehicleFuelLogResource  |  Integrations / PaymentGatewayConfigResource  |  Manufacturing / DeliveryItemResource  |  Organization / WorkCalendarResource
+  sort=10 used 5 times: Billing & Licensing / LicenseResource  |  Compliance & Risk / WasteRecordResource  |  Fleet & Field Service / VehicleMaintenanceLogResource  |  Manufacturing / EcommerceOrderItemResource  |  Organization / DivisionResource
+  sort=11 used 4 times: Compliance & Risk / ProductBlockchainEventResource  |  Fleet & Field Service / VehicleAssignmentResource  |  Manufacturing / WorkCenterResource  |  Organization / SectionResource
+  sort=12 used 3 times: Compliance & Risk / WaterUsageResource  |  Manufacturing / FleetGpsTrackResource  |  Organization / ContractResource
+  sort=13 used 2 times: Compliance & Risk / EsgTargetResource  |  Manufacturing / RoutingOperationResource
+  sort=101 used 2 times: Human Capital / ShiftResource  |  Inventory & Warehouse / WarehouseResource
+  sort=102 used 2 times: Human Capital / LeaveTypeResource  |  Procurement / SupplierResource
+  sort=103 used 2 times: Human Capital / ReimbursementCategoryResource  |  Procurement / PurchaseRequisitionResource
+  sort=104 used 2 times: Human Capital / JobPostingResource  |  Procurement / PurchaseRequisitionItemResource
+  sort=105 used 2 times: Human Capital / FeedbackCycleResource  |  Procurement / PurchaseOrderResource
+  sort=106 used 2 times: Human Capital / AnnouncementResource  |  Procurement / PurchaseOrderItemResource
+  sort=107 used 2 times: Human Capital / AttendanceResource  |  Procurement / GoodsReceiptResource
+  sort=108 used 2 times: Human Capital / AttendanceConfigResource  |  Procurement / BidResource
+  sort=109 used 3 times: Human Capital / WifiAccessPointResource  |  Inventory & Warehouse / StockMovementResource  |  Procurement / GoodsReceiptItemResource
+  sort=110 used 3 times: Human Capital / LeaveResource  |  Inventory & Warehouse / StockBalanceResource  |  Procurement / RfqResource
+  sort=111 used 2 times: Human Capital / OvertimeResource  |  Inventory & Warehouse / StockOpnameResource
+  sort=112 used 2 times: Human Capital / ReimbursementResource  |  Inventory & Warehouse / StockOpnameItemResource
+  sort=113 used 2 times: Human Capital / InterviewResource  |  Quality / QualityCheckResource
+  sort=114 used 2 times: Human Capital / CandidateResource  |  Inventory & Warehouse / AbcClassificationResource
+  sort=115 used 2 times: Human Capital / InterviewerResource  |  Procurement / ThreeWayMatchResource
+  sort=318 used 2 times: Finance & Accounting / RecurringInvoiceResource  |  Maintenance / AssetMaintenanceResource
+  sort=412 used 2 times: Marketing / WaBlastLogResource  |  Sales & CRM / SalesInvoiceResource
+  sort=413 used 2 times: Marketing / WaConversationResource  |  Sales & CRM / SalesReturnResource
+  sort=415 used 2 times: AI & Intelligence / ChatbotFlowResource  |  Sales & CRM / SalesTargetResource
+  sort=421 used 2 times: Marketing / CampaignResource  |  Sales & CRM / QuotationResource
+  sort=422 used 2 times: Marketing / MarketingAutomationResource  |  Sales & CRM / SalesOrderResource
+  sort=601 used 2 times: Industry / RabItemResource  |  Inventory & Warehouse / ProductCategoryResource
+  sort=602 used 3 times: Industry / ProgressBillingResource  |  Inventory & Warehouse / ProductResource  |  POS & Retail / ServiceTypeResource
+  sort=603 used 2 times: Manufacturing / ProjectSiteInventoryResource  |  POS & Retail / CashDenominationResource
+  sort=604 used 2 times: Industry / DailySiteReportResource  |  POS & Retail / PosVoucherResource
+  sort=605 used 2 times: Industry / SubcontractorContractResource  |  POS & Retail / CashierShiftResource
+  sort=606 used 2 times: Inventory & Warehouse / ModifierGroupResource  |  POS & Retail / PrinterResource
+  sort=607 used 2 times: Inventory & Warehouse / ComboProductResource  |  POS & Retail / ProductDiscountResource
+  sort=608 used 2 times: Inventory & Warehouse / ProductVariantResource  |  POS & Retail / PosTransactionResource
+  sort=610 used 2 times: Inventory & Warehouse / WarrantyResource  |  POS & Retail / PosPaymentResource
+  sort=701 used 2 times: Collaboration / MeetingResource  |  Industry / RoomResource
+  sort=702 used 2 times: Collaboration / CalendarResource  |  Industry / RoomBookingResource
+  sort=703 used 2 times: Collaboration / FormResource  |  Industry / HotelServiceResource
+  sort=704 used 2 times: Collaboration / ChatResource  |  Industry / GuestFolioResource
+  sort=801 used 2 times: Industry / PropertyUnitResource  |  Learning / CourseResource
+  sort=802 used 2 times: Industry / TenancyContractResource  |  Learning / QuizResource
+  sort=803 used 2 times: Industry / ServiceChargeInvoiceResource  |  Learning / CourseModuleResource
+  sort=804 used 2 times: Industry / MaintenanceRequestResource  |  Learning / CourseLessonResource
+  sort=1001 used 2 times: Industry / PatientResource  |  System / RoleResource
+  sort=1002 used 2 times: Industry / AppointmentResource  |  System / PermissionResource
+  sort=1003 used 2 times: Industry / MedicalRecordResource  |  System / SystemSettingResource
+  sort=1004 used 2 times: Industry / PrescriptionResource  |  Integrations / IntegrationResource
+  sort=1005 used 2 times: Industry / BpjsClaimResource  |  System / NotificationTemplateResource
+  sort=1006 used 2 times: Industry / LabOrderResource  |  System / NotificationResource
+  sort=1007 used 2 times: Industry / LabResultResource  |  System / AuditLogResource
+
+END OF REPORT

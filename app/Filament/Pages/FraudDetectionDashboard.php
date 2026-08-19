@@ -11,15 +11,16 @@ use Filament\Pages\Page;
 
 class FraudDetectionDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shield-check';
 
     protected static ?int $navigationSort = 1304;
 
-    protected static ?string $title = 'Deteksi Fraud';
+    protected static ?string $title = 'Fraud Detection';
 
-    protected static ?string $navigationLabel = 'Deteksi Fraud';
+    protected static ?string $navigationLabel = 'Fraud Detection';
 
     protected static ?string $slug = 'fraud-detection';
 
@@ -27,7 +28,7 @@ class FraudDetectionDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

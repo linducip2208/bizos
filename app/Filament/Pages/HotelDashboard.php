@@ -9,6 +9,7 @@ use Filament\Pages\Page;
 
 class HotelDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
 
     protected static ?int $navigationSort = 700;
@@ -19,7 +20,7 @@ class HotelDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏭 Industry';
+        return 'Dashboard';
     }
 
     public array $rooms = [];

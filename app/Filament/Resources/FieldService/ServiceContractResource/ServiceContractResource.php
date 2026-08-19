@@ -22,10 +22,10 @@ class ServiceContractResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Kontrak Layanan';
+    protected static ?string $label = 'Service Contracts';
 
     protected static ?string $pluralLabel = 'Kontrak Layanan';
 

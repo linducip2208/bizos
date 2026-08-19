@@ -19,10 +19,10 @@ class SuccessionPlanResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = SuccessionPlan::class;
-    public static function getNavigationGroup(): string|null { return '👥 Human Capital'; }
-    protected static ?string $label = 'Rencana Suksesi';
+    public static function getNavigationGroup(): string|null { return 'Human Capital'; }
+    protected static ?string $label = 'Succession Plans';
     protected static ?string $pluralLabel = 'Rencana Suksesi';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
     protected static ?int $navigationSort = 130;
     protected static ?string $recordTitleAttribute = 'id';
     public static function form(Schema $schema): Schema { return SuccessionPlanForm::configure($schema); }

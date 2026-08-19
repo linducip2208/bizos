@@ -232,6 +232,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 // Blog
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/feed.xml', [\App\Http\Controllers\BlogController::class, 'feed'])->name('blog.feed');
 Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [\App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
 

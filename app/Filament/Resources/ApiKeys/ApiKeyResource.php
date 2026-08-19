@@ -22,9 +22,9 @@ class ApiKeyResource extends Resource
 
     protected static ?string $model = ApiKey::class;
 
-    protected static ?string $label = 'Kunci API';
+    protected static ?string $label = 'API Keys';
 
-    protected static ?string $pluralLabel = 'Kunci API';
+    protected static ?string $pluralLabel = 'API Keys';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedKey;
 
@@ -32,7 +32,7 @@ class ApiKeyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
     public static function form(Schema $schema): Schema

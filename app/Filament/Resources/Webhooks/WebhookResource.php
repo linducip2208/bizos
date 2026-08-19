@@ -22,17 +22,17 @@ class WebhookResource extends Resource
 
     protected static ?string $model = Webhook::class;
 
-    protected static ?string $label = 'Webhook';
+    protected static ?string $label = 'Webhooks';
 
-    protected static ?string $pluralLabel = 'Webhook';
+    protected static ?string $pluralLabel = 'Webhooks';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMusicalNote;
 
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
     public static function form(Schema $schema): Schema

@@ -23,10 +23,10 @@ class CashDenominationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Pecahan Uang';
+    protected static ?string $label = 'Cash Denominations';
 
     protected static ?string $pluralLabel = 'Pecahan Uang';
 

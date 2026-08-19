@@ -24,19 +24,19 @@ class ThrConfigResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'thr-configs';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Konfigurasi THR';
+    protected static ?string $label = 'THR Config';
 
-    protected static ?string $pluralLabel = 'Konfigurasi THR';
+    protected static ?string $pluralLabel = 'THR Config';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGift;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSwatch;
 
     protected static ?int $navigationSort = 209;
 

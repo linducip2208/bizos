@@ -21,9 +21,9 @@ class CalendarResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = Calendar::class;
 
-    protected static ?string $label = 'Kalender';
+    protected static ?string $label = 'Calendars';
 
-    protected static ?string $pluralLabel = 'Kalender';
+    protected static ?string $pluralLabel = 'Calendars';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
 
@@ -31,7 +31,7 @@ class CalendarResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
     public static function form(Schema $schema): Schema

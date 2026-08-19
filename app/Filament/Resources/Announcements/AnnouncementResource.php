@@ -23,12 +23,12 @@ class AnnouncementResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Pengumuman';
+    protected static ?string $label = 'Announcements';
 
-    protected static ?string $pluralLabel = 'Pengumuman';
+    protected static ?string $pluralLabel = 'Announcements';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
 

@@ -7,6 +7,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
+use Filament\Support\Icons\Heroicon;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -72,33 +73,105 @@ class AdminPanelProvider extends PanelProvider
                 \App\Http\Middleware\ThemeMiddleware::class,
             ])
             ->navigationGroups([
-                NavigationGroup::make("\u{1F3E0} Dashboard")->collapsed(false),
-                NavigationGroup::make("\u{1F3E2} Organisasi")->collapsed(false),
-                NavigationGroup::make("\u{1F69B} Fleet Management")->collapsed(true),
-                NavigationGroup::make("\u{1F465} Human Capital")->collapsed(false),
-                NavigationGroup::make("\u{1F4B0} Payroll")->collapsed(false),
-                NavigationGroup::make("\u{1F4B5} Finance & Accounting")->collapsed(false),
-                NavigationGroup::make("\u{1F4D1} Procurement")->collapsed(true),
-                NavigationGroup::make("\u{1F4E6} Inventory")->collapsed(false),
-                NavigationGroup::make("\u{1F4C8} Sales")->collapsed(true),
-                NavigationGroup::make("\u{1F4E2} Marketing")->collapsed(true),
-                NavigationGroup::make("\u{1F4CB} Project Management")->collapsed(true),
-                NavigationGroup::make("\u{1F4AC} Collaboration")->collapsed(true),
-                NavigationGroup::make("\u{1F6D2} POS & Retail")->collapsed(true),
-                NavigationGroup::make("\u{1F393} Learning")->collapsed(true),
-                NavigationGroup::make("\u{1F3C6} Gamification")->collapsed(true),
-                NavigationGroup::make("\u{1F3AB} Support")->collapsed(true),
-                NavigationGroup::make("\u{1F916} AI")->collapsed(true),
-                NavigationGroup::make("\u26A1 Automation")->collapsed(true),
-                NavigationGroup::make("\u{1F517} Integrations")->collapsed(true),
-                NavigationGroup::make("\u{1F3ED} Industry")->collapsed(true),
-                NavigationGroup::make("\u{1F331} ESG")->collapsed(true),
-                NavigationGroup::make("\u{1F6E1}\uFE0F Compliance")->collapsed(true),
-                NavigationGroup::make("\u{1F4B3} Billing & Licensing")->collapsed(true),
-                NavigationGroup::make("\u{1F9E9} Platform")->collapsed(true),
-                NavigationGroup::make("\u{1F4CA} Reports & Analytics")->collapsed(true),
-                NavigationGroup::make("\u{1F9EE} Tools")->collapsed(true),
-                NavigationGroup::make("\u2699\uFE0F System")->collapsed(true),
+                // ── Dashboard ──
+                NavigationGroup::make('Dashboard')
+                    ->icon(Heroicon::OutlinedHome)
+                    ->collapsed(false),
+
+                // ── Core ERP ──
+                NavigationGroup::make('Organization')
+                    ->icon(Heroicon::OutlinedBuildingOffice2)
+                    ->collapsed(false),
+                NavigationGroup::make('Human Capital')
+                    ->icon(Heroicon::OutlinedUsers)
+                    ->collapsed(false),
+                NavigationGroup::make('Payroll')
+                    ->icon(Heroicon::OutlinedBanknotes)
+                    ->collapsed(false),
+                NavigationGroup::make('Finance & Accounting')
+                    ->icon(Heroicon::OutlinedCalculator)
+                    ->collapsed(false),
+                NavigationGroup::make('Sales & CRM')
+                    ->icon(Heroicon::OutlinedChartBar)
+                    ->collapsed(false),
+                NavigationGroup::make('Procurement')
+                    ->icon(Heroicon::OutlinedShoppingCart)
+                    ->collapsed(true),
+                NavigationGroup::make('Inventory & Warehouse')
+                    ->icon(Heroicon::OutlinedCube)
+                    ->collapsed(false),
+                NavigationGroup::make('POS & Retail')
+                    ->icon(Heroicon::OutlinedShoppingBag)
+                    ->collapsed(true),
+                NavigationGroup::make('Projects & Operations')
+                    ->icon(Heroicon::OutlinedClipboardDocumentList)
+                    ->collapsed(true),
+
+                // ── Operations ──
+                NavigationGroup::make('Fleet & Field Service')
+                    ->icon(Heroicon::OutlinedTruck)
+                    ->collapsed(true),
+                NavigationGroup::make('Manufacturing')
+                    ->icon(Heroicon::OutlinedWrenchScrewdriver)
+                    ->collapsed(true),
+                NavigationGroup::make('Maintenance')
+                    ->icon(Heroicon::OutlinedWrench)
+                    ->collapsed(true),
+                NavigationGroup::make('Quality')
+                    ->icon(Heroicon::OutlinedCheckBadge)
+                    ->collapsed(true),
+
+                // ── Engagement ──
+                NavigationGroup::make('Marketing')
+                    ->icon(Heroicon::OutlinedMegaphone)
+                    ->collapsed(true),
+                NavigationGroup::make('Collaboration')
+                    ->icon(Heroicon::OutlinedChatBubbleLeftRight)
+                    ->collapsed(true),
+                NavigationGroup::make('Learning')
+                    ->icon(Heroicon::OutlinedAcademicCap)
+                    ->collapsed(true),
+                NavigationGroup::make('Support & Service')
+                    ->icon(Heroicon::OutlinedTicket)
+                    ->collapsed(true),
+
+                // ── Intelligence ──
+                NavigationGroup::make('AI & Intelligence')
+                    ->icon(Heroicon::OutlinedSparkles)
+                    ->collapsed(true),
+                NavigationGroup::make('Automation')
+                    ->icon(Heroicon::OutlinedBolt)
+                    ->collapsed(true),
+                NavigationGroup::make('Reports & Analytics')
+                    ->icon(Heroicon::OutlinedChartPie)
+                    ->collapsed(true),
+
+                // ── Platform ──
+                NavigationGroup::make('Documents & Contracts')
+                    ->icon(Heroicon::OutlinedDocumentText)
+                    ->collapsed(true),
+                NavigationGroup::make('Compliance & Risk')
+                    ->icon(Heroicon::OutlinedShieldCheck)
+                    ->collapsed(true),
+                NavigationGroup::make('Billing & Licensing')
+                    ->icon(Heroicon::OutlinedKey)
+                    ->collapsed(true),
+                NavigationGroup::make('Integrations')
+                    ->icon(Heroicon::OutlinedLink)
+                    ->collapsed(true),
+                NavigationGroup::make('System')
+                    ->icon(Heroicon::OutlinedCog6Tooth)
+                    ->collapsed(true),
+
+                // ── Industry ──
+                NavigationGroup::make('Industry')
+                    ->icon(Heroicon::OutlinedBuildingOffice2)
+                    ->collapsed(true),
+
+                // ── Tools ──
+                NavigationGroup::make('Tools')
+                    ->icon(Heroicon::OutlinedWrench)
+                    ->collapsed(true),
             ])
             ->renderHook(
                 'panels::topbar.start',

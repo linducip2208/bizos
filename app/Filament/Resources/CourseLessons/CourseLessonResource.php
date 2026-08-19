@@ -24,14 +24,14 @@ class CourseLessonResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
-    protected static ?string $label = 'Pelajaran';
+    protected static ?string $label = 'Course Lessons';
 
     protected static ?string $pluralLabel = 'Pelajaran';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBattery100;
 
     protected static ?int $navigationSort = 804;
 

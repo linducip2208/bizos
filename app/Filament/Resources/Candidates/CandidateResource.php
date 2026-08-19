@@ -23,12 +23,12 @@ class CandidateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Kandidat';
+    protected static ?string $label = 'Candidates';
 
-    protected static ?string $pluralLabel = 'Kandidat';
+    protected static ?string $pluralLabel = 'Candidates';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;
 

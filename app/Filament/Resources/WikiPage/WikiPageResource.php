@@ -19,10 +19,10 @@ class WikiPageResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = WikiPage::class;
-    public static function getNavigationGroup(): string|null { return '💬 Collaboration'; }
-    protected static ?string $label = 'Halaman Wiki';
+    public static function getNavigationGroup(): string|null { return 'Collaboration'; }
+    protected static ?string $label = 'Wiki Pages';
     protected static ?string $pluralLabel = 'Halaman Wiki';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;
     protected static ?int $navigationSort = 711;
     protected static ?string $recordTitleAttribute = 'title';
     public static function form(Schema $schema): Schema { return WikiPageForm::configure($schema); }

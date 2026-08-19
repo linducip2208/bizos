@@ -14,15 +14,16 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentClassifierDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-magnifying-glass';
 
     protected static ?int $navigationSort = 1305;
 
-    protected static ?string $title = 'Klasifikasi Dokumen';
+    protected static ?string $title = 'Document Classifier';
 
-    protected static ?string $navigationLabel = 'Klasifikasi Dokumen';
+    protected static ?string $navigationLabel = 'Document Classifier';
 
     protected static ?string $slug = 'document-classifier';
 
@@ -30,7 +31,7 @@ class DocumentClassifierDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

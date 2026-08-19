@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class CohortAnalysisDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-table-cells';
 
     protected static ?int $navigationSort = 1202;
@@ -15,13 +16,13 @@ class CohortAnalysisDashboard extends Page
 
     protected static ?string $title = 'Analisis Kohort';
 
-    protected static ?string $navigationLabel = 'Kohort';
+    protected static ?string $navigationLabel = 'Cohort Analysis';
 
     protected static ?string $slug = 'cohort-analysis';
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public array $employeeCohort = [];

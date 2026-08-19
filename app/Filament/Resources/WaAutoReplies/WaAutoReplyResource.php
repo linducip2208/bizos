@@ -23,14 +23,14 @@ class WaAutoReplyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Auto Reply WA';
+    protected static ?string $label = 'WhatsApp Auto Replies';
 
     protected static ?string $pluralLabel = 'Auto Reply WA';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowUturnLeft;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;
 
     protected static ?int $navigationSort = 408;
 

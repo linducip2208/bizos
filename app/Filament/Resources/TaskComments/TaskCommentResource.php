@@ -24,12 +24,12 @@ class TaskCommentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Komentar Tugas';
+    protected static ?string $label = 'Task Comments';
 
-    protected static ?string $pluralLabel = 'Komentar Tugas';
+    protected static ?string $pluralLabel = 'Task Comments';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleOvalLeft;
 

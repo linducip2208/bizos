@@ -12,9 +12,9 @@ class CashFlowForecast extends Page
 
     protected static ?int $navigationSort = 336;
 
-    protected static ?string $title = 'Proyeksi Arus Kas';
+    protected static ?string $title = 'Cash Flow Forecast';
 
-    protected static ?string $navigationLabel = 'Proyeksi Arus Kas';
+    protected static ?string $navigationLabel = 'Cash Flow Forecast';
 
     protected static ?string $slug = 'cash-flow-forecast';
 
@@ -22,7 +22,7 @@ class CashFlowForecast extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
     public int $days = 90;

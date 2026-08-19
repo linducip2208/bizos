@@ -25,17 +25,17 @@ class BankReconciliationResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bank-reconciliations';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Rekonsiliasi Bank';
+    protected static ?string $label = 'Bank Reconciliations';
 
-    protected static ?string $pluralLabel = 'Rekonsiliasi Bank';
+    protected static ?string $pluralLabel = 'Bank Reconciliations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
 

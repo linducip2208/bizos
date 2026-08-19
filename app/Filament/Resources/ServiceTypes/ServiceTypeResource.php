@@ -28,12 +28,12 @@ class ServiceTypeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Tipe Layanan';
+    protected static ?string $label = 'Service Types';
 
-    protected static ?string $pluralLabel = 'Tipe Layanan';
+    protected static ?string $pluralLabel = 'Service Types';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cube';
 

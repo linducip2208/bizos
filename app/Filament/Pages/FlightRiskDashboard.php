@@ -13,15 +13,16 @@ use Filament\Pages\Page;
 
 class FlightRiskDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?int $navigationSort = 1303;
 
-    protected static ?string $title = 'Risiko Turnover';
+    protected static ?string $title = 'Flight Risk Dashboard';
 
-    protected static ?string $navigationLabel = 'Risiko Turnover';
+    protected static ?string $navigationLabel = 'Flight Risk Dashboard';
 
     protected static ?string $slug = 'flight-risk';
 
@@ -29,7 +30,7 @@ class FlightRiskDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

@@ -24,17 +24,17 @@ class EnergyMeterResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'energy-meters';
+        return 'Compliance & Risk';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Meter Energi';
+    protected static ?string $label = 'Energy Meters';
 
-    protected static ?string $pluralLabel = 'Meter Energi';
+    protected static ?string $pluralLabel = 'Energy Meters';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
 

@@ -24,14 +24,14 @@ class CommissionSlabResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Komisi Slab';
+    protected static ?string $label = 'Commission Slabs';
 
     protected static ?string $pluralLabel = 'Komisi Slab';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
     protected static ?int $navigationSort = 414;
 

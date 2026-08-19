@@ -27,14 +27,14 @@ class SalesInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Sales Invoice';
+    protected static ?string $label = 'Sales Invoices';
 
     protected static ?string $pluralLabel = 'Sales Invoice';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCurrencyDollar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 412;
 

@@ -24,19 +24,19 @@ class TaxConfigResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'tax-configs';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Konfigurasi Pajak';
+    protected static ?string $label = 'Tax Config';
 
-    protected static ?string $pluralLabel = 'Konfigurasi Pajak';
+    protected static ?string $pluralLabel = 'Tax Config';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
 
     protected static ?int $navigationSort = 304;
 

@@ -23,13 +23,13 @@ class MaintenanceRequestResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Permintaan Perbaikan';
+    protected static ?string $label = 'Maintenance Requests';
     protected static ?string $pluralLabel = 'Permintaan Perbaikan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrench;
 
     protected static ?int $navigationSort = 804;
 

@@ -23,14 +23,14 @@ class ProjectMemberResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Anggota Project';
+    protected static ?string $label = 'Project Members';
 
     protected static ?string $pluralLabel = 'Anggota Project';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     protected static ?int $navigationSort = 507;
 

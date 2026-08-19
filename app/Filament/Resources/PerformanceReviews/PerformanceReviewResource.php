@@ -22,13 +22,13 @@ class PerformanceReviewResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Review Performa';
+    protected static ?string $label = 'Performance Reviews';
     protected static ?string $pluralLabel = 'Review Performa';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownOnSquare;
     protected static ?int $navigationSort = 129;
     protected static ?string $recordTitleAttribute = 'id';
 

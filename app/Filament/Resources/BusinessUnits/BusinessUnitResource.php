@@ -23,12 +23,12 @@ class BusinessUnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Unit Bisnis';
+    protected static ?string $label = 'Business Units';
 
-    protected static ?string $pluralLabel = 'Unit Bisnis';
+    protected static ?string $pluralLabel = 'Business Units';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
 

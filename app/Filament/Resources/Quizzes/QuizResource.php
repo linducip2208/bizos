@@ -21,17 +21,17 @@ class QuizResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = Quiz::class;
 
-    protected static ?string $label = 'Kuis';
+    protected static ?string $label = 'Quizzes';
 
-    protected static ?string $pluralLabel = 'Kuis';
+    protected static ?string $pluralLabel = 'Quizzes';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQuestionMarkCircle;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHandThumbUp;
 
     protected static ?int $navigationSort = 802;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
     public static function form(Schema $schema): Schema

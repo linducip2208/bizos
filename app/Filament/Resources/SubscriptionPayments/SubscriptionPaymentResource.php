@@ -23,12 +23,12 @@ class SubscriptionPaymentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💳 Billing & Licensing';
+        return 'Billing & Licensing';
     }
 
-    protected static ?string $label = 'Pembayaran Langganan';
+    protected static ?string $label = 'Subscription Payments';
 
-    protected static ?string $pluralLabel = 'Pembayaran Langganan';
+    protected static ?string $pluralLabel = 'Subscription Payments';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 

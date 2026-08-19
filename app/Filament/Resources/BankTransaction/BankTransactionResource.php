@@ -25,17 +25,17 @@ class BankTransactionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bank-transactions';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Transaksi Bank';
+    protected static ?string $label = 'Bank Transactions';
 
-    protected static ?string $pluralLabel = 'Transaksi Bank';
+    protected static ?string $pluralLabel = 'Bank Transactions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 

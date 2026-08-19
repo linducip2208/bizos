@@ -19,16 +19,16 @@ class RoutingOperationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Routing Operasi';
+    protected static ?string $label = 'Routing Operations';
 
     protected static ?string $pluralLabel = 'Routing Operasi';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $recordTitleAttribute = 'operation_name';
 

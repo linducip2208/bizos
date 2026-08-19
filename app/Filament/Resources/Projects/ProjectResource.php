@@ -30,14 +30,14 @@ class ProjectResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Proyek';
+    protected static ?string $label = 'Projects';
 
-    protected static ?string $pluralLabel = 'Proyek';
+    protected static ?string $pluralLabel = 'Projects';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
     protected static ?int $navigationSort = 501;
 

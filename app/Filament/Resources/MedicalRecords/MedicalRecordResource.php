@@ -25,14 +25,14 @@ class MedicalRecordResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Rekam Medis';
+    protected static ?string $label = 'Medical Records';
 
-    protected static ?string $pluralLabel = 'Rekam Medis';
+    protected static ?string $pluralLabel = 'Medical Records';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPower;
 
     protected static ?int $navigationSort = 1003;
 

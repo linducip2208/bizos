@@ -23,16 +23,16 @@ class PosMemberResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Member';
+    protected static ?string $label = 'POS Members';
 
     protected static ?string $pluralLabel = 'Member';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static ?int $navigationSort = 603;
+    protected static ?int $navigationSort = 614;
 
     protected static ?string $recordTitleAttribute = 'name';
 

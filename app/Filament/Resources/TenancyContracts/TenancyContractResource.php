@@ -23,13 +23,13 @@ class TenancyContractResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Kontrak Sewa';
-    protected static ?string $pluralLabel = 'Kontrak Sewa';
+    protected static ?string $label = 'Tenancy Contracts';
+    protected static ?string $pluralLabel = 'Tenancy Contracts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
 
     protected static ?int $navigationSort = 802;
 

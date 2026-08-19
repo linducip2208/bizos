@@ -28,16 +28,16 @@ class ResTableResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Meja';
+    protected static ?string $label = 'Tables';
 
     protected static ?string $pluralLabel = 'Meja';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 604;
+    protected static ?int $navigationSort = 615;
 
     protected static ?string $recordTitleAttribute = 'name';
 

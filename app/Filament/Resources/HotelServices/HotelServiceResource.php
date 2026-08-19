@@ -23,10 +23,10 @@ class HotelServiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Layanan';
+    protected static ?string $label = 'Hotel Services';
     protected static ?string $pluralLabel = 'Layanan';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSparkles;

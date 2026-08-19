@@ -30,11 +30,11 @@ class BpmnProcessResource extends Resource
 
     protected static ?string $model = BpmnProcess::class;
 
-    protected static ?string $label = 'Proses BPMN';
+    protected static ?string $label = 'BPMN Processes';
 
     protected static ?string $pluralLabel = 'Proses BPMN';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaintBrush;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -42,7 +42,7 @@ class BpmnProcessResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation';
+        return 'Automation';
     }
 
     public static function form(Schema $schema): Schema
@@ -62,7 +62,7 @@ class BpmnProcessResource extends Resource
                             'Procurement' => 'Procurement',
                             'Sales' => 'Sales',
                             'Helpdesk' => 'Helpdesk',
-                            'Project' => 'Project',
+                            'Projects & Operations' => 'Projects & Operations',
                             'Manufacturing' => 'Manufacturing',
                             'Logistik' => 'Logistik',
                         ])

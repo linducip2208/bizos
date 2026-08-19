@@ -23,16 +23,16 @@ class EsgTargetResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Target';
+    protected static ?string $label = 'ESG Targets';
 
-    protected static ?string $pluralLabel = 'Target ESG';
+    protected static ?string $pluralLabel = 'ESG Targets';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 13;
 
     public static function form(Schema $schema): Schema
     {

@@ -19,7 +19,7 @@ class DpiaAssessmentResource extends Resource
 {
     protected static ?string $model = DpiaAssessment::class;
 
-    protected static ?string $label = 'DPIA';
+    protected static ?string $label = 'DPIA Assessments';
 
     protected static ?string $pluralLabel = 'DPIA';
 
@@ -29,7 +29,7 @@ class DpiaAssessmentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

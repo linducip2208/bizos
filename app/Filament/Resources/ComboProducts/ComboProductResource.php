@@ -21,11 +21,11 @@ class ComboProductResource extends Resource
 
     protected static ?string $model = ComboProduct::class;
 
-    protected static ?string $label = 'Produk Kombo';
+    protected static ?string $label = 'Combo Products';
 
     protected static ?string $pluralLabel = 'Produk Kombo';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquaresPlus;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquare3Stack3d;
 
     protected static ?int $navigationSort = 607;
 
@@ -33,7 +33,7 @@ class ComboProductResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
     public static function form(Schema $schema): Schema

@@ -24,21 +24,21 @@ class CoaBalanceResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'coa-balances';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Saldo COA';
+    protected static ?string $label = 'COA Balances';
 
-    protected static ?string $pluralLabel = 'Saldo COA';
+    protected static ?string $pluralLabel = 'COA Balances';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
 
-    protected static ?int $navigationSort = 307;
+    protected static ?int $navigationSort = 327;
 
     protected static ?string $recordTitleAttribute = 'id';
 

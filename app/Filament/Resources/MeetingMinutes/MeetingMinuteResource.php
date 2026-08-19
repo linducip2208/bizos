@@ -24,10 +24,10 @@ class MeetingMinuteResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Notula Rapat';
+    protected static ?string $label = 'Meeting Minutes';
 
     protected static ?string $pluralLabel = 'Notula Rapat';
 

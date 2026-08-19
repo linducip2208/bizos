@@ -25,12 +25,12 @@ class BpjsClaimResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Klaim BPJS';
+    protected static ?string $label = 'BPJS Claims';
 
-    protected static ?string $pluralLabel = 'Klaim BPJS';
+    protected static ?string $pluralLabel = 'BPJS Claims';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldCheck;
 

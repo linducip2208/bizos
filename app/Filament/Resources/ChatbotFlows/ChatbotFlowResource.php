@@ -23,14 +23,14 @@ class ChatbotFlowResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'AI & Intelligence';
     }
 
-    protected static ?string $label = 'Chatbot Flow';
+    protected static ?string $label = 'Chatbot Flows';
 
     protected static ?string $pluralLabel = 'Chatbot Flow';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCpuChip;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInformationCircle;
 
     protected static ?int $navigationSort = 415;
 

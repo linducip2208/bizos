@@ -23,12 +23,12 @@ class SubscriptionPlanResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💳 Billing & Licensing';
+        return 'Billing & Licensing';
     }
 
-    protected static ?string $label = 'Paket Langganan';
+    protected static ?string $label = 'Subscription Plans';
 
-    protected static ?string $pluralLabel = 'Paket Langganan';
+    protected static ?string $pluralLabel = 'Subscription Plans';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRocketLaunch;
 

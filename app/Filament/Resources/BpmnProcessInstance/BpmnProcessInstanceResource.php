@@ -22,7 +22,7 @@ class BpmnProcessInstanceResource extends Resource
 
     protected static ?string $model = BpmnProcessInstance::class;
 
-    protected static ?string $label = 'Instance BPMN';
+    protected static ?string $label = 'Marketing Automations';
 
     protected static ?string $pluralLabel = 'Instance BPMN';
 
@@ -34,7 +34,7 @@ class BpmnProcessInstanceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚡ Automation';
+        return 'Automation';
     }
 
     public static function form(Schema $schema): Schema
@@ -81,7 +81,7 @@ class BpmnProcessInstanceResource extends Resource
                 ViewAction::make(),
                 Action::make('slaStatus')
                     ->label('SLA')
-                    ->icon(Heroicon::OutlinedClock)
+                    ->icon(Heroicon::OutlinedQueueList)
                     ->action(function (BpmnProcessInstance $record) {
                         $sla = app(\App\Services\BpmnService::class)->getSlaStatus($record->id);
                         \Filament\Notifications\Notification::make()

@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class IsoDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shield-exclamation';
 
     protected static ?int $navigationSort = 101;
@@ -33,7 +34,7 @@ class IsoDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🛡️ Compliance';
+        return 'Dashboard';
     }
 
     public function mount(): void

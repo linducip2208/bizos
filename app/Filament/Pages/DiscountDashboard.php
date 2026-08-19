@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class DiscountDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
     protected static ?int $navigationSort = 145;
@@ -20,7 +21,7 @@ class DiscountDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📢 Marketing';
+        return 'Dashboard';
     }
 
     public array $activePromotions = [];

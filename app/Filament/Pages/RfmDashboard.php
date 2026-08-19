@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class RfmDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?int $navigationSort = 1204;
@@ -21,7 +22,7 @@ class RfmDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public array $rfmData = [];

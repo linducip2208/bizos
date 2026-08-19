@@ -23,14 +23,14 @@ class FeedbackCycleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Siklus Feedback';
+    protected static ?string $label = 'Feedback Cycles';
 
-    protected static ?string $pluralLabel = 'Siklus Feedback';
+    protected static ?string $pluralLabel = 'Feedback Cycles';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPathRoundedSquare;
 
     protected static ?int $navigationSort = 105;
 

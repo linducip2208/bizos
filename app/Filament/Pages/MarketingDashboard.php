@@ -12,6 +12,7 @@ use Filament\Pages\Page;
 
 class MarketingDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?int $navigationSort = 1300;
@@ -22,7 +23,7 @@ class MarketingDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📢 Marketing';
+        return 'Dashboard';
     }
 
     public array $campaignStats = [];

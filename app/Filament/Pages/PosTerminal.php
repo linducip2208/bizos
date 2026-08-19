@@ -105,7 +105,7 @@ class PosTerminal extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
     public function getMaxContentWidth(): Width|string|null

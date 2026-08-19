@@ -25,19 +25,19 @@ class InvoiceItemResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'invoice-items';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Item Invoice';
+    protected static ?string $label = 'Invoice Items';
 
-    protected static ?string $pluralLabel = 'Item Invoice';
+    protected static ?string $pluralLabel = 'Invoice Items';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedListBullet;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 309;
 

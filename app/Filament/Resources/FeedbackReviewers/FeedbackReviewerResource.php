@@ -23,14 +23,14 @@ class FeedbackReviewerResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Reviewer Feedback';
+    protected static ?string $label = 'Feedback Reviewers';
 
-    protected static ?string $pluralLabel = 'Reviewer Feedback';
+    protected static ?string $pluralLabel = 'Feedback Reviewers';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static ?int $navigationSort = 118;
 

@@ -25,14 +25,14 @@ class PatientResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Pasien';
+    protected static ?string $label = 'Patients';
 
-    protected static ?string $pluralLabel = 'Pasien';
+    protected static ?string $pluralLabel = 'Patients';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUser;
 
     protected static ?int $navigationSort = 1001;
 

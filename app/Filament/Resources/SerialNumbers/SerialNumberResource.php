@@ -19,14 +19,14 @@ class SerialNumberResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Nomor Seri';
+    protected static ?string $label = 'Serial Numbers';
 
-    protected static ?string $pluralLabel = 'Nomor Seri';
+    protected static ?string $pluralLabel = 'Serial Numbers';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedServerStack;
 
     protected static ?int $navigationSort = 5;
 

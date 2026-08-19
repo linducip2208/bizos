@@ -19,6 +19,11 @@ class SearchAnalytics extends Page
 
     protected static ?string $slug = 'search-analytics';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Reports & Analytics';
+    }
+
     public array $analytics = [];
     public string $period = '7d';
     public array $topQueries = [];

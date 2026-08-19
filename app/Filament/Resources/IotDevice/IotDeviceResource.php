@@ -24,19 +24,19 @@ class IotDeviceResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'iot-devices';
+        return 'Compliance & Risk';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '🌱 ESG';
+        return 'Compliance & Risk';
     }
 
-    protected static ?string $label = 'Perangkat IoT';
+    protected static ?string $label = 'IoT Devices';
 
-    protected static ?string $pluralLabel = 'Perangkat IoT';
+    protected static ?string $pluralLabel = 'IoT Devices';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCpuChip;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMagnifyingGlass;
 
     protected static ?int $navigationSort = 1601;
 

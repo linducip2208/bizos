@@ -8,6 +8,7 @@ use Filament\Pages\Page;
 
 class ProcessMiningDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar-square';
 
     protected static ?int $navigationSort = 4;
@@ -34,7 +35,7 @@ class ProcessMiningDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚡ Automation';
+        return 'Dashboard';
     }
 
     public function mount(): void

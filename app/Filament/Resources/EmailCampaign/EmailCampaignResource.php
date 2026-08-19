@@ -24,12 +24,12 @@ class EmailCampaignResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Kampanye Email';
+    protected static ?string $label = 'Email Campaigns';
 
-    protected static ?string $pluralLabel = 'Kampanye Email';
+    protected static ?string $pluralLabel = 'Email Campaigns';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 

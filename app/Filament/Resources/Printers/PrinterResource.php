@@ -23,14 +23,14 @@ class PrinterResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Printer';
+    protected static ?string $label = 'Printers';
 
-    protected static ?string $pluralLabel = 'Printer';
+    protected static ?string $pluralLabel = 'Printers';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPrinter;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
 
     protected static ?int $navigationSort = 606;
 

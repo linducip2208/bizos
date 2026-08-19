@@ -21,10 +21,10 @@ class RewardResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏆 Gamification';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Reward';
+    protected static ?string $label = 'Rewards';
 
     protected static ?string $pluralLabel = 'Reward';
 

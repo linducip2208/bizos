@@ -24,15 +24,15 @@ class PayrollPeriodResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'payroll-periods';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Periode Gaji';
+    protected static ?string $label = 'Payroll Periods';
 
     protected static ?string $pluralLabel = 'Periode Gaji';
 

@@ -15,11 +15,11 @@ class LaporanBisnis extends Page
 
     protected string $view = 'filament.pages.laporan-bisnis';
 
-    protected static ?string $title = 'Laporan Bisnis';
+    protected static ?string $title = 'Business Report';
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public array $summaryCards = [];

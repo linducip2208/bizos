@@ -23,13 +23,13 @@ class PropertyUnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Unit Properti';
-    protected static ?string $pluralLabel = 'Unit Properti';
+    protected static ?string $label = 'Property Units';
+    protected static ?string $pluralLabel = 'Property Units';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHomeModern;
 
     protected static ?int $navigationSort = 801;
 

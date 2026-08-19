@@ -22,10 +22,10 @@ class TechnicianVanResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Van Teknisi';
+    protected static ?string $label = 'Technician Vans';
 
     protected static ?string $pluralLabel = 'Van Teknisi';
 

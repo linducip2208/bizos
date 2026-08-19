@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class GamificationDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-trophy';
 
     protected static ?int $navigationSort = 1;
@@ -21,7 +22,7 @@ class GamificationDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏆 Gamification';
+        return 'Dashboard';
     }
 
     public array $leaderboard = [];

@@ -24,17 +24,17 @@ class BudgetVersionResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'budget-versions';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Versi Anggaran';
+    protected static ?string $label = 'Budget Versions';
 
-    protected static ?string $pluralLabel = 'Versi Anggaran';
+    protected static ?string $pluralLabel = 'Budget Versions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
 

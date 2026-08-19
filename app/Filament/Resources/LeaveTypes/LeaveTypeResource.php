@@ -23,14 +23,14 @@ class LeaveTypeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Tipe Cuti';
+    protected static ?string $label = 'Leave Types';
 
     protected static ?string $pluralLabel = 'Tipe Cuti';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEllipsisVertical;
 
     protected static ?int $navigationSort = 102;
 

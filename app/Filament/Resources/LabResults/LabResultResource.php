@@ -25,12 +25,12 @@ class LabResultResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Hasil Lab';
+    protected static ?string $label = 'Lab Results';
 
-    protected static ?string $pluralLabel = 'Hasil Lab';
+    protected static ?string $pluralLabel = 'Lab Results';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentMagnifyingGlass;
 

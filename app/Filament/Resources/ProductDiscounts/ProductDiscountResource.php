@@ -23,14 +23,14 @@ class ProductDiscountResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Diskon Produk';
+    protected static ?string $label = 'Product Discounts';
 
-    protected static ?string $pluralLabel = 'Diskon Produk';
+    protected static ?string $pluralLabel = 'Product Discounts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPercentBadge;
 
     protected static ?int $navigationSort = 607;
 

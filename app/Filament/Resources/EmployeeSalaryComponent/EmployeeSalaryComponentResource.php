@@ -24,17 +24,17 @@ class EmployeeSalaryComponentResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'employee-salary-components';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Komponen Gaji Karyawan';
+    protected static ?string $label = 'Employee Salary Components';
 
-    protected static ?string $pluralLabel = 'Komponen Gaji Karyawan';
+    protected static ?string $pluralLabel = 'Employee Salary Components';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 

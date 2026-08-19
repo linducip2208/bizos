@@ -22,7 +22,7 @@ class DocumentTemplateResource extends Resource
 
     protected static ?string $label = 'Template Dokumen';
 
-    protected static ?string $pluralLabel = 'Template Dokumen';
+    protected static ?string $pluralLabel = 'Document Templates';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
@@ -30,7 +30,7 @@ class DocumentTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function getPages(): array

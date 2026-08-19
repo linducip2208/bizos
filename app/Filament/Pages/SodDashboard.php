@@ -9,6 +9,7 @@ use Filament\Pages\Page;
 
 class SodDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-no-symbol';
 
     protected static ?int $navigationSort = 102;
@@ -30,7 +31,7 @@ class SodDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🛡️ Compliance';
+        return 'Dashboard';
     }
 
     public function mount(): void

@@ -24,19 +24,19 @@ class CoaResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'coas';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'COA';
+    protected static ?string $label = 'Chart of Accounts';
 
-    protected static ?string $pluralLabel = 'COA';
+    protected static ?string $pluralLabel = 'Chart of Accounts';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
 
     protected static ?int $navigationSort = 302;
 

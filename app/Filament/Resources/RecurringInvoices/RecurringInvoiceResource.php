@@ -23,16 +23,16 @@ class RecurringInvoiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Invoice Berulang';
+    protected static ?string $label = 'Recurring Invoices';
 
     protected static ?string $pluralLabel = 'Invoice Berulang';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEllipsisVertical;
 
-    protected static ?int $navigationSort = 314;
+    protected static ?int $navigationSort = 318;
 
     public static function form(Schema $schema): Schema
     {

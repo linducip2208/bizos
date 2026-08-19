@@ -23,7 +23,7 @@ class DashboardLayoutResource extends Resource
 
     protected static ?string $model = DashboardLayout::class;
 
-    protected static ?string $label = 'Dashboard Layout';
+    protected static ?string $label = 'Dashboard Layouts';
 
     protected static ?string $pluralLabel = 'Dashboard Layout';
 
@@ -35,7 +35,7 @@ class DashboardLayoutResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '🏠 Dashboard';
+        return 'Dashboard';
     }
 
     public static function form(Schema $schema): Schema

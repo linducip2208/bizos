@@ -23,14 +23,14 @@ class PromotionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Promosi';
+    protected static ?string $label = 'Promotions';
 
-    protected static ?string $pluralLabel = 'Promosi';
+    protected static ?string $pluralLabel = 'Promotions';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCommandLine;
 
     protected static ?int $navigationSort = 416;
 

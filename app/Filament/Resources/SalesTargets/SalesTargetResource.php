@@ -23,14 +23,14 @@ class SalesTargetResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Target Penjualan';
+    protected static ?string $label = 'Sales Targets';
 
-    protected static ?string $pluralLabel = 'Target Penjualan';
+    protected static ?string $pluralLabel = 'Sales Targets';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 
     protected static ?int $navigationSort = 415;
 

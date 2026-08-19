@@ -24,14 +24,14 @@ class StockOpnameItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Item Opname';
+    protected static ?string $label = 'Stock Opname Items';
 
     protected static ?string $pluralLabel = 'Item Opname';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentMagnifyingGlass;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
     protected static ?int $navigationSort = 112;
 

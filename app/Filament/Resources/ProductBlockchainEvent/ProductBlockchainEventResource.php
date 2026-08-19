@@ -21,17 +21,17 @@ class ProductBlockchainEventResource extends Resource
 
     protected static ?string $model = ProductBlockchainEvent::class;
 
-    protected static ?string $label = 'Event Supply Chain';
+    protected static ?string $label = 'Supply Chain Events';
 
     protected static ?string $pluralLabel = 'Event Supply Chain';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 11;
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔷 Blockchain';
+        return 'Compliance & Risk';
     }
 
     public static function form(Schema $schema): Schema

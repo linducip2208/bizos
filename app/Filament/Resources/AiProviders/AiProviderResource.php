@@ -21,9 +21,9 @@ class AiProviderResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = AiProvider::class;
 
-    protected static ?string $label = 'Provider AI';
+    protected static ?string $label = 'AI Providers';
 
-    protected static ?string $pluralLabel = 'Provider AI';
+    protected static ?string $pluralLabel = 'AI Providers';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
@@ -31,7 +31,7 @@ class AiProviderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🤖 AI';
+        return 'AI & Intelligence';
     }
 
     public static function form(Schema $schema): Schema

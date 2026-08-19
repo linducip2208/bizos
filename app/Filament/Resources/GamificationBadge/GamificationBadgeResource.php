@@ -21,12 +21,12 @@ class GamificationBadgeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏆 Gamification';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Badge';
+    protected static ?string $label = 'Badges';
 
-    protected static ?string $pluralLabel = 'Badge';
+    protected static ?string $pluralLabel = 'Badges';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-star';
 

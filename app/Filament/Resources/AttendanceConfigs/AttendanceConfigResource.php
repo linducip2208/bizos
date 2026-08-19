@@ -23,14 +23,14 @@ class AttendanceConfigResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Konfigurasi Absensi';
+    protected static ?string $label = 'Attendance Config';
 
-    protected static ?string $pluralLabel = 'Konfigurasi Absensi';
+    protected static ?string $pluralLabel = 'Attendance Config';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheck;
 
     protected static ?int $navigationSort = 108;
 

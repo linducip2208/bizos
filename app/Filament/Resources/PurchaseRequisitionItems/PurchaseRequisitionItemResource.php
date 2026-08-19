@@ -24,10 +24,10 @@ class PurchaseRequisitionItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'Item PR';
+    protected static ?string $label = 'Purchase Requisition Items';
 
     protected static ?string $pluralLabel = 'Item PR';
 

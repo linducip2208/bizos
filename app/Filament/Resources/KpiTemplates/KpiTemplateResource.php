@@ -22,11 +22,11 @@ class KpiTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Template KPI';
-    protected static ?string $pluralLabel = 'Template KPI';
+    protected static ?string $label = 'KPI Templates';
+    protected static ?string $pluralLabel = 'KPI Templates';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPresentationChartBar;
     protected static ?int $navigationSort = 126;

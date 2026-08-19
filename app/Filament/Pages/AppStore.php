@@ -36,7 +36,7 @@ class AppStore extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Platform';
+        return 'System';
     }
 
     protected function getHeaderActions(): array

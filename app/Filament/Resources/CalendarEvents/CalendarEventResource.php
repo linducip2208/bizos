@@ -23,14 +23,14 @@ class CalendarEventResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💬 Collaboration';
+        return 'Collaboration';
     }
 
-    protected static ?string $label = 'Acara Kalender';
+    protected static ?string $label = 'Calendar Events';
 
     protected static ?string $pluralLabel = 'Acara Kalender';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocument;
 
     protected static ?int $navigationSort = 707;
 

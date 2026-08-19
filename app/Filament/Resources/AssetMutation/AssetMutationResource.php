@@ -24,17 +24,17 @@ class AssetMutationResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'asset-mutations';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Mutasi Aset';
+    protected static ?string $label = 'Asset Mutations';
 
-    protected static ?string $pluralLabel = 'Mutasi Aset';
+    protected static ?string $pluralLabel = 'Asset Mutations';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
 

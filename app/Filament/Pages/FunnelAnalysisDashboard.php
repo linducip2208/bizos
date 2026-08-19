@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class FunnelAnalysisDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-funnel';
 
     protected static ?int $navigationSort = 1203;
@@ -21,7 +22,7 @@ class FunnelAnalysisDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public array $recruitmentFunnel = [];

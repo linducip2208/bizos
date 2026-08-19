@@ -23,12 +23,12 @@ class VirtualAccountResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔗 Integrations';
+        return 'Integrations';
     }
 
-    protected static ?string $label = 'Virtual Account';
+    protected static ?string $label = 'Virtual Accounts';
 
-    protected static ?string $pluralLabel = 'Virtual Account';
+    protected static ?string $pluralLabel = 'Virtual Accounts';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCreditCard;
 

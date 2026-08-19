@@ -23,12 +23,12 @@ class WarehouseResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Gudang';
+    protected static ?string $label = 'Warehouses';
 
-    protected static ?string $pluralLabel = 'Gudang';
+    protected static ?string $pluralLabel = 'Warehouses';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 

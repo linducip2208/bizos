@@ -24,16 +24,16 @@ class GoodsReceiptItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
-    protected static ?string $label = 'Item Penerimaan';
+    protected static ?string $label = 'Goods Receipt Items';
 
     protected static ?string $pluralLabel = 'Item Penerimaan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEyeSlash;
 
-    protected static ?int $navigationSort = 108;
+    protected static ?int $navigationSort = 109;
 
     protected static ?string $recordTitleAttribute = 'item_name';
 

@@ -23,14 +23,14 @@ class GradeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Grade';
+    protected static ?string $label = 'Grades';
 
-    protected static ?string $pluralLabel = 'Grade';
+    protected static ?string $pluralLabel = 'Grades';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedScale;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
 
     protected static ?int $navigationSort = 6;
 

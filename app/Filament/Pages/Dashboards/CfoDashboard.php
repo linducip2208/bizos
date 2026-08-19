@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class CfoDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?int $navigationSort = 6;
@@ -26,7 +27,7 @@ class CfoDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{1F3E0} Dashboard";
+        return 'Dashboard';
     }
 
     public float $revenueThisMonth = 0;

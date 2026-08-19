@@ -23,14 +23,14 @@ class TimesheetEntryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Entri Timesheet';
+    protected static ?string $label = 'Timesheet Entries';
 
-    protected static ?string $pluralLabel = 'Entri Timesheet';
+    protected static ?string $pluralLabel = 'Timesheet Entries';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedListBullet;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 
     protected static ?int $navigationSort = 510;
 

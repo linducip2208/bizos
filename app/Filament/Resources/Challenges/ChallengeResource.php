@@ -21,12 +21,12 @@ class ChallengeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏆 Gamification';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Tantangan';
+    protected static ?string $label = 'Challenges';
 
-    protected static ?string $pluralLabel = 'Tantangan';
+    protected static ?string $pluralLabel = 'Challenges';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-flag';
 

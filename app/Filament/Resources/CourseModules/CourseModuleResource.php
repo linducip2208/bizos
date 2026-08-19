@@ -24,12 +24,12 @@ class CourseModuleResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
-    protected static ?string $label = 'Modul Kursus';
+    protected static ?string $label = 'Course Modules';
 
-    protected static ?string $pluralLabel = 'Modul Kursus';
+    protected static ?string $pluralLabel = 'Course Modules';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 

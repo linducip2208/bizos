@@ -23,14 +23,14 @@ class LeadActivityResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Aktivitas Lead';
+    protected static ?string $label = 'Lead Activities';
 
-    protected static ?string $pluralLabel = 'Aktivitas Lead';
+    protected static ?string $pluralLabel = 'Lead Activities';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTopRightOnSquare;
 
     protected static ?int $navigationSort = 409;
 

@@ -23,14 +23,14 @@ class PipelineStageResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📈 Sales';
+        return 'Sales & CRM';
     }
 
-    protected static ?string $label = 'Tahap Pipeline';
+    protected static ?string $label = 'Pipeline Stages';
 
     protected static ?string $pluralLabel = 'Tahap Pipeline';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedViewColumns;
 
     protected static ?int $navigationSort = 404;
 

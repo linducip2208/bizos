@@ -12,6 +12,7 @@ use Filament\Pages\Page;
 
 class ManagerDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?int $navigationSort = 7;
@@ -26,7 +27,7 @@ class ManagerDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{1F3E0} Dashboard";
+        return 'Dashboard';
     }
 
     public int $attendanceToday = 0;

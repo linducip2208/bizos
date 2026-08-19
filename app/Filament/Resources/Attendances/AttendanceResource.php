@@ -23,12 +23,12 @@ class AttendanceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Absensi';
+    protected static ?string $label = 'Attendance';
 
-    protected static ?string $pluralLabel = 'Absensi';
+    protected static ?string $pluralLabel = 'Attendance';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 

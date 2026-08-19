@@ -24,16 +24,16 @@ class EcommerceOrderItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Item Pesanan';
+    protected static ?string $label = 'Ecommerce Order Items';
 
     protected static ?string $pluralLabel = 'Item Pesanan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedListBullet;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $recordTitleAttribute = 'product_name';
 

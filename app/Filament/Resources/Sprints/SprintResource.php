@@ -24,14 +24,14 @@ class SprintResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Sprint';
+    protected static ?string $label = 'Sprints';
 
-    protected static ?string $pluralLabel = 'Sprint';
+    protected static ?string $pluralLabel = 'Sprints';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBolt;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRocketLaunch;
 
     protected static ?int $navigationSort = 511;
 

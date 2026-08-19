@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class DashboardBuilder extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-squares-plus';
 
     protected static ?int $navigationSort = 1113;
@@ -20,7 +21,7 @@ class DashboardBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📊 Reports & Analytics';
+        return 'Dashboard';
     }
 
     public array $dashboardLayout = [];

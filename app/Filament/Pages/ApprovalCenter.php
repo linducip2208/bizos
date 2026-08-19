@@ -26,7 +26,7 @@ class ApprovalCenter extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return "\u{1F3E0} Dashboard";
+        return 'Automation';
     }
 
     public static function getNavigationBadge(): ?string

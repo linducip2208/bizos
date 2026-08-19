@@ -23,10 +23,10 @@ class WifiAccessPointResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Titik Akses WiFi';
+    protected static ?string $label = 'WiFi Access Points';
 
     protected static ?string $pluralLabel = 'Titik Akses WiFi';
 

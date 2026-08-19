@@ -21,17 +21,17 @@ class SystemSettingResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = SystemSetting::class;
 
-    protected static ?string $label = 'Pengaturan';
+    protected static ?string $label = 'System Settings';
 
     protected static ?string $pluralLabel = 'Pengaturan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     protected static ?int $navigationSort = 1003;
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function form(Schema $schema): Schema

@@ -24,19 +24,19 @@ class Pph21ConfigResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'pph21-configs';
+        return 'Payroll';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💰 Payroll';
+        return 'Payroll';
     }
 
-    protected static ?string $label = 'Konfigurasi PPh 21';
+    protected static ?string $label = 'PPh 21 Config';
 
     protected static ?string $pluralLabel = 'Konfigurasi PPh 21';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalculator;
 
     protected static ?int $navigationSort = 207;
 

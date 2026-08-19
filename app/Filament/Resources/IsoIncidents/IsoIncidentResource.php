@@ -19,9 +19,9 @@ class IsoIncidentResource extends Resource
 {
     protected static ?string $model = IsoIncident::class;
 
-    protected static ?string $label = 'Insiden ISO';
+    protected static ?string $label = 'ISO Incidents';
 
-    protected static ?string $pluralLabel = 'Insiden ISO';
+    protected static ?string $pluralLabel = 'ISO Incidents';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBugAnt;
 
@@ -29,7 +29,7 @@ class IsoIncidentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛡️ Compliance';
+        return 'Compliance & Risk';
     }
 
     public static function getPages(): array

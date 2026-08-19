@@ -23,13 +23,13 @@ class DailySiteReportResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Laporan Harian';
+    protected static ?string $label = 'Daily Site Reports';
     protected static ?string $pluralLabel = 'Laporan Harian';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCubeTransparent;
 
     protected static ?int $navigationSort = 604;
 

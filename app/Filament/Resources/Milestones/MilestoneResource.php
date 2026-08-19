@@ -23,12 +23,12 @@ class MilestoneResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Milestone';
+    protected static ?string $label = 'Milestones';
 
-    protected static ?string $pluralLabel = 'Milestone';
+    protected static ?string $pluralLabel = 'Milestones';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 

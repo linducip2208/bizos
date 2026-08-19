@@ -23,10 +23,10 @@ class WaBlastCampaignResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Kampanye Blast WA';
+    protected static ?string $label = 'WhatsApp Blast Campaigns';
 
     protected static ?string $pluralLabel = 'Kampanye Blast WA';
 

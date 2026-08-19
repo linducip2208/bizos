@@ -22,10 +22,10 @@ class VanInventoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return '?? Industri';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Stok Van';
+    protected static ?string $label = 'Van Inventories';
 
     protected static ?string $pluralLabel = 'Stok Van';
 

@@ -21,12 +21,12 @@ class AbcClassificationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Klasifikasi ABC';
+    protected static ?string $label = 'ABC Classifications';
 
-    protected static ?string $pluralLabel = 'Klasifikasi ABC';
+    protected static ?string $pluralLabel = 'ABC Classifications';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartPie;
 

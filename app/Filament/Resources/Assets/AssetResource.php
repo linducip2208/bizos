@@ -23,14 +23,14 @@ class AssetResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Aset';
+    protected static ?string $label = 'Assets';
 
-    protected static ?string $pluralLabel = 'Aset';
+    protected static ?string $pluralLabel = 'Assets';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCpuChip;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
     protected static ?int $navigationSort = 313;
 

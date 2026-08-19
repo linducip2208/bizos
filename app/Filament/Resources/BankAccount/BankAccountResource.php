@@ -25,17 +25,17 @@ class BankAccountResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'bank-accounts';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Rekening Bank';
+    protected static ?string $label = 'Bank Accounts';
 
-    protected static ?string $pluralLabel = 'Rekening Bank';
+    protected static ?string $pluralLabel = 'Bank Accounts';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingLibrary;
 

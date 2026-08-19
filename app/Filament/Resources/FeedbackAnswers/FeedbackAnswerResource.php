@@ -23,14 +23,14 @@ class FeedbackAnswerResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Jawaban Feedback';
+    protected static ?string $label = 'Feedback Answers';
 
-    protected static ?string $pluralLabel = 'Jawaban Feedback';
+    protected static ?string $pluralLabel = 'Feedback Answers';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCheck;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
     protected static ?int $navigationSort = 119;
 

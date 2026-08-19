@@ -22,12 +22,12 @@ class CertificateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🎓 Learning';
+        return 'Learning';
     }
 
-    protected static ?string $label = 'Sertifikat';
+    protected static ?string $label = 'Certificates';
 
-    protected static ?string $pluralLabel = 'Sertifikat';
+    protected static ?string $pluralLabel = 'Certificates';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
 

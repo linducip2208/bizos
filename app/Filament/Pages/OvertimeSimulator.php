@@ -22,7 +22,7 @@ class OvertimeSimulator extends Page implements HasForms
 
     protected static ?string $title = 'Simulator Lembur';
 
-    protected static ?string $navigationLabel = 'Lembur';
+    protected static ?string $navigationLabel = 'Overtime Simulator';
 
     protected static ?string $slug = 'overtime-simulator';
 
@@ -30,7 +30,7 @@ class OvertimeSimulator extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '🧮 Tools';
+        return 'Tools';
     }
 
     public ?array $data = [];

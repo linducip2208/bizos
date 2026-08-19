@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 
 class PerformanceDashboard extends Page implements HasForms
 {
+    protected static bool $shouldRegisterNavigation = false;
     use InteractsWithForms;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar-square';
@@ -22,7 +23,7 @@ class PerformanceDashboard extends Page implements HasForms
 
     protected static ?string $title = 'Dashboard Performa';
 
-    protected static ?string $navigationLabel = 'Dashboard Performa';
+    protected static ?string $navigationLabel = 'Performance Dashboard';
 
     protected static ?string $slug = 'performance-dashboard';
 
@@ -30,7 +31,7 @@ class PerformanceDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '👥 Human Capital';
+        return 'Dashboard';
     }
 
     public ?array $data = [];

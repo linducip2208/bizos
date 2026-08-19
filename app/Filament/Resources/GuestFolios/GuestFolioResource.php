@@ -23,11 +23,11 @@ class GuestFolioResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Industry';
     }
 
-    protected static ?string $label = 'Folio Tamu';
-    protected static ?string $pluralLabel = 'Folio Tamu';
+    protected static ?string $label = 'Guest Folios';
+    protected static ?string $pluralLabel = 'Guest Folios';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
 

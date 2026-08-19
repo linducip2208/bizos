@@ -24,14 +24,14 @@ class PosTransactionItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🛒 POS & Retail';
+        return 'POS & Retail';
     }
 
-    protected static ?string $label = 'Item Transaksi POS';
+    protected static ?string $label = 'POS Transaction Items';
 
-    protected static ?string $pluralLabel = 'Item Transaksi POS';
+    protected static ?string $pluralLabel = 'POS Transaction Items';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQueueList;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?int $navigationSort = 609;
 

@@ -23,16 +23,16 @@ class PositionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Jabatan';
+    protected static ?string $label = 'Positions';
 
-    protected static ?string $pluralLabel = 'Jabatan';
+    protected static ?string $pluralLabel = 'Positions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $recordTitleAttribute = 'name';
 

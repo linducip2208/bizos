@@ -19,7 +19,7 @@ class AdvancedReportResource extends Resource
 
     protected static ?string $model = AdvancedReport::class;
 
-    protected static ?string $label = 'Advanced Report';
+    protected static ?string $label = 'Advanced Reports';
 
     protected static ?string $pluralLabel = 'Advanced Report';
 
@@ -29,7 +29,7 @@ class AdvancedReportResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📊 Reports & Analytics';
+        return 'Reports & Analytics';
     }
 
     public static function table(Table $table): Table

@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 
 class TreasuryDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?int $navigationSort = 1700;
@@ -21,7 +22,7 @@ class TreasuryDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '💵 Finance & Accounting';
+        return 'Dashboard';
     }
 
     public array $cashPosition = [];

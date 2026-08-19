@@ -28,14 +28,14 @@ class CompanyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Organization';
     }
 
-    protected static ?string $label = 'Perusahaan';
+    protected static ?string $label = 'Companies';
 
     protected static ?string $pluralLabel = 'Perusahaan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWindow;
 
     protected static ?int $navigationSort = 1;
 

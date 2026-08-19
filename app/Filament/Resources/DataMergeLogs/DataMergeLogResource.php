@@ -20,7 +20,7 @@ class DataMergeLogResource extends Resource
 
     protected static ?string $model = DataMergeLog::class;
 
-    protected static ?string $label = 'Log Penggabungan Data';
+    protected static ?string $label = 'Data Merge Logs';
 
     protected static ?string $pluralLabel = 'Log Penggabungan Data';
 
@@ -30,7 +30,7 @@ class DataMergeLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public static function form(Schema $schema): Schema

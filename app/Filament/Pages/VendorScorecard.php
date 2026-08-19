@@ -17,7 +17,7 @@ class VendorScorecard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '📑 Procurement';
+        return 'Procurement';
     }
 
     public array $scorecards = [];

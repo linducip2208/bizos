@@ -24,17 +24,17 @@ class AssetCategoryResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'asset-categories';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Kategori Aset';
+    protected static ?string $label = 'Asset Categories';
 
-    protected static ?string $pluralLabel = 'Kategori Aset';
+    protected static ?string $pluralLabel = 'Asset Categories';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCpuChip;
 

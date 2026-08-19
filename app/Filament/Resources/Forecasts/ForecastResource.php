@@ -24,19 +24,19 @@ class ForecastResource extends Resource
 
     public static function getSlug(?Panel $panel = null): string
     {
-        return 'forecasts';
+        return 'Finance & Accounting';
     }
 
     public static function getNavigationGroup(): string|null
     {
-        return '💵 Finance & Accounting';
+        return 'Finance & Accounting';
     }
 
-    protected static ?string $label = 'Forecast';
+    protected static ?string $label = 'Forecasts';
 
     protected static ?string $pluralLabel = 'Forecast';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownCircle;
 
     protected static ?int $navigationSort = 308;
 

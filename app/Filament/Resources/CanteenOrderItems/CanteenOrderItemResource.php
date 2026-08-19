@@ -24,10 +24,10 @@ class CanteenOrderItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '👥 Human Capital';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Item Pesanan Kantin';
+    protected static ?string $label = 'Canteen Order Items';
 
     protected static ?string $pluralLabel = 'Item Pesanan Kantin';
 

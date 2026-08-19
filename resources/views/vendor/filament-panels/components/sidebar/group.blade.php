@@ -181,14 +181,9 @@
                 $itemUrl = $item->getUrl();
                 $itemExtraAttributes = $item->getExtraAttributeBag();
 
-                if ($icon) {
-                    if ($hasDropdown || (blank($itemIcon) && blank($itemActiveIcon))) {
-                        $itemIcon = null;
-                        $itemActiveIcon = null;
-                    } else {
-                        throw new \Exception('Navigation group [' . $label . '] has an icon but one or more of its items also have icons. Either the group or its items can have icons, but not both. This is to ensure a proper user experience.');
-                    }
-                }
+                // BizOS intentionally displays icons at both navigation levels:
+                // the group icon identifies the business area, while every item
+                // icon makes long ERP menus faster to scan.
             @endphp
 
             <x-filament-panels::sidebar.item

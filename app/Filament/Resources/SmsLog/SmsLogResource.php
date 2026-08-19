@@ -16,10 +16,10 @@ class SmsLogResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = SmsLog::class;
-    public static function getNavigationGroup(): string|null { return '🔗 Integrations'; }
-    protected static ?string $label = 'Log SMS';
-    protected static ?string $pluralLabel = 'Log SMS';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInboxArrowDown;
+    public static function getNavigationGroup(): string|null { return 'Integrations'; }
+    protected static ?string $label = 'SMS Logs';
+    protected static ?string $pluralLabel = 'SMS Logs';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
     protected static ?int $navigationSort = 6;
     protected static ?string $recordTitleAttribute = 'recipient';
     public static function form(Schema $schema): Schema { return $schema; }

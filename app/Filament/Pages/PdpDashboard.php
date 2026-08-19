@@ -10,6 +10,7 @@ use Filament\Pages\Page;
 
 class PdpDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shield-check';
 
     protected static ?int $navigationSort = 100;
@@ -32,7 +33,7 @@ class PdpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '🛡️ Compliance';
+        return 'Dashboard';
     }
 
     public function mount(): void

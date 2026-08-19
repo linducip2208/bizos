@@ -25,12 +25,12 @@ class TaskResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📋 Project Management';
+        return 'Projects & Operations';
     }
 
-    protected static ?string $label = 'Tugas';
+    protected static ?string $label = 'Tasks';
 
-    protected static ?string $pluralLabel = 'Tugas';
+    protected static ?string $pluralLabel = 'Tasks';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
 

@@ -24,7 +24,7 @@ class BackupManager extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return '⚙️ System';
+        return 'System';
     }
 
     public function mount(BackupService $backupService): void

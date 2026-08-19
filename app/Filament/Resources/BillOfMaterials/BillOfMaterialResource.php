@@ -19,12 +19,12 @@ class BillOfMaterialResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Bill of Material';
+    protected static ?string $label = 'Bills of Materials';
 
-    protected static ?string $pluralLabel = 'Bill of Material';
+    protected static ?string $pluralLabel = 'Bills of Material';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquaresPlus;
 

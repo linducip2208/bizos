@@ -22,7 +22,7 @@ class Pph21Calculator extends Page implements HasForms
 
     protected static ?string $title = 'Kalkulator PPh 21 TER';
 
-    protected static ?string $navigationLabel = 'PPh 21 TER';
+    protected static ?string $navigationLabel = 'PPh 21 Calculator';
 
     protected static ?string $slug = 'pph21-calculator';
 
@@ -30,7 +30,7 @@ class Pph21Calculator extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return '🧮 Tools';
+        return 'Tools';
     }
 
     public ?array $data = [];

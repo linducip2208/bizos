@@ -33,14 +33,14 @@ class EmployeeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏢 Organisasi';
+        return 'Human Capital';
     }
 
-    protected static ?string $label = 'Karyawan';
+    protected static ?string $label = 'Employees';
 
-    protected static ?string $pluralLabel = 'Karyawan';
+    protected static ?string $pluralLabel = 'Employees';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAtSymbol;
 
     protected static ?int $navigationSort = 7;
 

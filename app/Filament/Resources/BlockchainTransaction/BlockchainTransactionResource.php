@@ -21,9 +21,9 @@ class BlockchainTransactionResource extends Resource
 
     protected static ?string $model = BlockchainTransaction::class;
 
-    protected static ?string $label = 'Transaksi Blockchain';
+    protected static ?string $label = 'Blockchain Transactions';
 
-    protected static ?string $pluralLabel = 'Transaksi Blockchain';
+    protected static ?string $pluralLabel = 'Blockchain Transactions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
 
@@ -31,7 +31,7 @@ class BlockchainTransactionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🔷 Blockchain';
+        return 'Compliance & Risk';
     }
 
     public static function form(Schema $schema): Schema

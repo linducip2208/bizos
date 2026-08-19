@@ -21,14 +21,14 @@ class LeadScoreResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📢 Marketing';
+        return 'Marketing';
     }
 
-    protected static ?string $label = 'Skor Lead';
+    protected static ?string $label = 'Lead Scores';
 
-    protected static ?string $pluralLabel = 'Skor Lead';
+    protected static ?string $pluralLabel = 'Lead Scores';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTrendingUp;
 
     protected static ?int $navigationSort = 1303;
 

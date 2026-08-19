@@ -29,12 +29,12 @@ class WarrantyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '📦 Inventory';
+        return 'Inventory & Warehouse';
     }
 
-    protected static ?string $label = 'Garansi';
+    protected static ?string $label = 'Warranties';
 
-    protected static ?string $pluralLabel = 'Garansi';
+    protected static ?string $pluralLabel = 'Warranties';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-shield-check';
 

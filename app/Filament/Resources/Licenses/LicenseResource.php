@@ -23,14 +23,14 @@ class LicenseResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '💳 Billing & Licensing';
+        return 'Billing & Licensing';
     }
 
-    protected static ?string $label = 'Lisensi';
+    protected static ?string $label = 'Licenses';
 
-    protected static ?string $pluralLabel = 'Lisensi';
+    protected static ?string $pluralLabel = 'Licenses';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedKey;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTurnDownLeft;
 
     protected static ?int $navigationSort = 10;
 

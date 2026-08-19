@@ -24,16 +24,16 @@ class DeliveryItemResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return '🏭 Industry';
+        return 'Manufacturing';
     }
 
-    protected static ?string $label = 'Item Pengiriman';
+    protected static ?string $label = 'Delivery Items';
 
-    protected static ?string $pluralLabel = 'Item Pengiriman';
+    protected static ?string $pluralLabel = 'Delivery Items';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $recordTitleAttribute = 'id';
 
