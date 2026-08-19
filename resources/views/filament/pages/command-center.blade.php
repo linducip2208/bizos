@@ -23,6 +23,7 @@
                 <label><span>Perbandingan</span><select wire:model="filters.comparison_period"><option value="previous_period">Periode sebelumnya</option><option value="previous_year">Tahun sebelumnya</option></select></label>
                 <label><span>Mata uang</span><select wire:model="filters.currency">@foreach($this->filterOptions['currencies'] as $code)<option value="{{ $code }}">{{ $code }}</option>@endforeach</select></label>
                 <button type="button" wire:click="applyFilters" class="cc-apply">Terapkan filter</button>
+                <button type="button" wire:click="resetFilters" class="cc-button" title="Kembali ke cakupan default">Reset filter</button>
             </div>
         </section>
 

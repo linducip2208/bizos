@@ -47,15 +47,16 @@
             </span>
 
             @if ($collapsible)
-                <x-filament::icon-button
-                    color="gray"
-                    :icon="\Filament\Support\Icons\Heroicon::ChevronUp"
-                    :icon-alias="\Filament\View\PanelsIconAlias::SIDEBAR_GROUP_COLLAPSE_BUTTON"
-                    :label="$label"
+                <button
+                    type="button"
+                    class="fi-sidebar-group-collapse-btn"
+                    title="Buka/tutup {{ $label }}"
+                    aria-label="Buka atau tutup grup {{ $label }}"
                     x-bind:aria-expanded="! $store.sidebar.groupIsCollapsed(label)"
                     x-on:click.stop="$store.sidebar.toggleCollapsedGroup(label)"
-                    class="fi-sidebar-group-collapse-btn"
-                />
+                >
+                    <x-heroicon-m-chevron-down class="fi-sidebar-group-chevron" aria-hidden="true" />
+                </button>
             @endif
         </div>
     @endif

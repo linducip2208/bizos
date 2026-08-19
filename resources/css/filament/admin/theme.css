@@ -214,10 +214,34 @@
 }
 
 .fi-sidebar-group-collapse-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
     width: 28px !important;
     height: 28px !important;
     margin-left: auto !important;
+    border: 1px solid rgba(148, 163, 184, 0.12) !important;
+    border-radius: 7px !important;
+    background: rgba(148, 163, 184, 0.06) !important;
     color: #647892 !important;
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease !important;
+}
+
+.fi-sidebar-group-collapse-btn:hover {
+    color: #dce5f2 !important;
+    border-color: rgba(125, 211, 252, 0.24) !important;
+    background: rgba(56, 189, 248, 0.1) !important;
+}
+
+.fi-sidebar-group-chevron {
+    width: 0.95rem !important;
+    height: 0.95rem !important;
+    transition: transform 200ms cubic-bezier(.16, 1, .3, 1) !important;
+}
+
+.fi-sidebar-group.fi-collapsed .fi-sidebar-group-chevron {
+    transform: rotate(-90deg);
 }
 
 .fi-sidebar-group-items {

@@ -30,6 +30,7 @@ use Throwable;
 
 class CommandCenter extends Page
 {
+    private const PREFERENCE_VERSION = 2;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-command-line';
     protected static ?string $navigationLabel = 'Dashboard';
     protected static ?string $title = 'Dashboard Command Center';
@@ -68,7 +69,10 @@ class CommandCenter extends Page
         /** @var User $user */
         $user = auth()->user();
         $preferences = $user->dashboard_preferences ?? [];
-        $this->filters = array_merge($this->defaultFilters($user), $preferences['filters'] ?? []);
+        $savedFilters = ($preferences['version'] ?? 0) >= self::PREFERENCE_VERSION
+            ? ($preferences['filters'] ?? [])
+            : [];
+        $this->filters = array_merge($this->defaultFilters($user), $savedFilters);
         $this->availableTabs = $this->authorizedTabs($user);
         $preferredTab = request()->query('tab', $preferences['default_tab'] ?? $this->defaultTab($user));
         $this->activeTab = array_key_exists($preferredTab, $this->availableTabs)
@@ -93,6 +97,15 @@ class CommandCenter extends Page
 
     public function refreshDashboard(DashboardContext $context): void
     {
+        $this->loadActiveTab($context);
+    }
+
+    public function resetFilters(DashboardContext $context): void
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $this->filters = $this->defaultFilters($user);
+        $this->persistPreferences();
         $this->loadActiveTab($context);
     }
 
@@ -220,11 +233,13 @@ class CommandCenter extends Page
 
     protected function defaultFilters(User $user): array
     {
+        $companyWide = in_array($user->role?->slug, ['super-admin', 'admin', 'owner', 'director', 'cfo'], true);
+
         return [
             'company_id' => $user->company_id,
-            'branch_id' => $user->employee?->branch_id,
+            'branch_id' => $companyWide ? null : $user->employee?->branch_id,
             'business_unit_id' => null,
-            'department_id' => $user->employee?->department_id,
+            'department_id' => $companyWide ? null : $user->employee?->department_id,
             'project_id' => null,
             'date_from' => now()->startOfMonth()->toDateString(),
             'date_to' => now()->toDateString(),
@@ -238,6 +253,7 @@ class CommandCenter extends Page
         /** @var User $user */
         $user = auth()->user();
         $user->forceFill(['dashboard_preferences' => [
+            'version' => self::PREFERENCE_VERSION,
             'default_tab' => $this->activeTab,
             'filters' => $this->filters,
         ]])->save();
