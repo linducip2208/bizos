@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\RequirePair;
 use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
@@ -18,6 +19,9 @@ class AdminPanelTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // This suite verifies panel authentication/authorization, not license pairing.
+        $this->withoutMiddleware(RequirePair::class);
 
         $this->company = Company::factory()->create([
             'name' => 'Test Company',
@@ -56,9 +60,9 @@ class AdminPanelTest extends TestCase
 
     public function test_guest_cannot_access_dashboard(): void
     {
-        $response = $this->get('/admin');
+        $response = $this->followingRedirects()->get('/admin');
 
-        $response->assertRedirect('/admin/login');
+        $response->assertOk()->assertSee('Masuk');
     }
 
     public function test_dashboard_contains_bizos_brand(): void
@@ -86,7 +90,7 @@ class AdminPanelTest extends TestCase
             'is_active' => false,
         ]);
 
-        $response = $this->actingAs($user)->get('/admin');
+        $response = $this->actingAs($user)->followingRedirects()->get('/admin');
 
         $response->assertStatus(403);
     }

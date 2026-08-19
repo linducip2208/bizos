@@ -19,7 +19,7 @@ class WikiPageResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = WikiPage::class;
-    public static function getNavigationGroup(): string|null { return 'Collaboration'; }
+    public static function getNavigationGroup(): string|null { return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value; }
     protected static ?string $label = 'Wiki Pages';
     protected static ?string $pluralLabel = 'Halaman Wiki';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;

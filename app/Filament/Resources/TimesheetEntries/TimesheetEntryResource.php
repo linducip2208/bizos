@@ -18,12 +18,13 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class TimesheetEntryResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
     use HasPermissionAccess;
     protected static ?string $model = TimesheetEntry::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Projects & Operations';
+        return \App\Filament\Navigation\NavigationGroup::PROJECTS->value;
     }
 
     protected static ?string $label = 'Timesheet Entries';

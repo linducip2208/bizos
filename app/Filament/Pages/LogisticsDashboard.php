@@ -9,6 +9,7 @@ use App\Services\LogisticsService;
 use Filament\Pages\Page;
 use Illuminate\Support\Collection;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class LogisticsDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -22,7 +23,7 @@ class LogisticsDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $performance = [];

@@ -16,7 +16,7 @@ class SmsLogResource extends Resource
 {
     use HasPermissionAccess;
     protected static ?string $model = SmsLog::class;
-    public static function getNavigationGroup(): string|null { return 'Integrations'; }
+    public static function getNavigationGroup(): string|null { return \App\Filament\Navigation\NavigationGroup::SYSTEM->value; }
     protected static ?string $label = 'SMS Logs';
     protected static ?string $pluralLabel = 'SMS Logs';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;

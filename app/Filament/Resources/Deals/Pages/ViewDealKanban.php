@@ -172,7 +172,7 @@ class ViewDealKanban extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'CRM';
+        return \App\Filament\Navigation\NavigationGroup::SALES->value;
     }
 
     public static function shouldRegisterNavigation(array $parameters = []): bool

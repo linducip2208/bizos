@@ -11,6 +11,7 @@ use App\Models\PipelineStage;
 use App\Models\SalesOrder;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class SalesDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -28,7 +29,7 @@ class SalesDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public float $pipelineValue = 0;

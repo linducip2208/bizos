@@ -22,7 +22,7 @@ class CashFlowForecast extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Finance & Accounting';
+        return \App\Filament\Navigation\NavigationGroup::FINANCE->value;
     }
 
     public int $days = 90;

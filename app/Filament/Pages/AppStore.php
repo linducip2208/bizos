@@ -36,7 +36,7 @@ class AppStore extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     protected function getHeaderActions(): array

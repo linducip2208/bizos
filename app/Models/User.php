@@ -26,6 +26,7 @@ class User extends Authenticatable implements FilamentUser
         'employee_id',
         'company_id',
         'role_id',
+        'dashboard_preferences',
     ];
 
     protected $hidden = [
@@ -40,6 +41,7 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
             'is_active' => 'boolean',
             'last_login_at' => 'datetime',
+            'dashboard_preferences' => 'array',
         ];
     }
 

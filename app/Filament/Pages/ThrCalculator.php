@@ -32,7 +32,7 @@ class ThrCalculator extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Tools';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public ?array $data = [];

@@ -24,7 +24,7 @@ class QualityCheckResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Quality';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Quality Checks';

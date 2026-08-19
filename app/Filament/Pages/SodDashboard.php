@@ -7,6 +7,7 @@ use App\Models\SodConflict;
 use App\Models\User;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class SodDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -31,7 +32,7 @@ class SodDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public function mount(): void

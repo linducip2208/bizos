@@ -23,7 +23,7 @@ class BusinessUnitResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Organization';
+        return \App\Filament\Navigation\NavigationGroup::ORGANIZATION->value;
     }
 
     protected static ?string $label = 'Business Units';

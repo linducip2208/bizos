@@ -11,6 +11,21 @@ class DashboardBuilderService
 {
     protected array $widgetLibrary = [];
 
+    protected array $widgetPermissions = [
+        'revenue_chart' => ['finance.view', 'report.view'],
+        'attendance_stats' => ['employee.view'],
+        'project_health' => ['project.view'],
+        'ticket_queue' => ['dashboard'],
+        'payroll_summary' => ['payroll.view'],
+        'sales_pipeline' => ['client.view'],
+        'lead_conversion' => ['client.view'],
+        'task_overview' => ['project.view'],
+        'recent_activities' => ['settings.manage', 'report.view'],
+        'my_tasks' => ['dashboard'],
+        'my_attendance' => ['dashboard'],
+        'approval_pending' => ['dashboard'],
+    ];
+
     public function __construct()
     {
         $this->widgetLibrary = [
@@ -349,9 +364,13 @@ class DashboardBuilderService
             return collect();
         }
 
+        $user = User::query()->with('role.permissions')->find($userId);
+
         return DashboardWidget::where('user_id', $userId)
             ->orderBy('sort_order')
-            ->get();
+            ->get()
+            ->filter(fn (DashboardWidget $widget) => $this->canUseWidget($user, $widget->widget_type))
+            ->values();
     }
 
     public function addWidget(array $config): DashboardWidget
@@ -374,6 +393,14 @@ class DashboardBuilderService
     public function removeWidget(DashboardWidget $widget): void
     {
         $widget->delete();
+    }
+
+    public function resetToRoleDefault(int $userId): void
+    {
+        DashboardWidget::query()->where('user_id', $userId)->delete();
+        DashboardLayout::query()->where('user_id', $userId)->delete();
+        $this->createDefaultLayout($userId);
+        $this->seedRoleBasedWidgets($userId);
     }
 
     public function updateWidgetConfig(DashboardWidget $widget, array $config): void
@@ -427,5 +454,16 @@ class DashboardBuilderService
             ],
             'is_default' => true,
         ]);
+    }
+
+    private function canUseWidget(?User $user, string $widgetType): bool
+    {
+        if (! $user) {
+            return false;
+        }
+
+        $required = $this->widgetPermissions[$widgetType] ?? ['dashboard'];
+
+        return $user->role?->slug === 'super-admin' || $user->hasAnyPermission($required);
     }
 }

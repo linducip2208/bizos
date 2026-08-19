@@ -23,7 +23,7 @@ class HotelServiceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Industry';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Hotel Services';

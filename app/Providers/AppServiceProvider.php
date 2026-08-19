@@ -7,12 +7,18 @@ use App\Models\Budget;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Invoice;
+use App\Models\Journal;
 use App\Models\Leave;
 use App\Models\Overtime;
 use App\Models\Product;
+use App\Models\Payment;
 use App\Models\Project;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequisition;
+use App\Models\SalesOrder;
+use App\Models\Deal;
+use App\Models\StockBalance;
+use App\Observers\DashboardCacheObserver;
 use App\Models\Reimbursement;
 use App\Models\Task;
 use App\Models\Ticket;
@@ -69,6 +75,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerActivityLogging();
         $this->registerModelEventListeners();
+        $this->registerDashboardCacheInvalidation();
     }
 
     protected function registerActivityLogging(): void
@@ -205,5 +212,23 @@ class AppServiceProvider extends ServiceProvider
                 $notifTrigger->onTicketAssigned($ticket);
             }
         });
+    }
+
+    protected function registerDashboardCacheInvalidation(): void
+    {
+        foreach ([
+            Invoice::class,
+            Journal::class,
+            Payment::class,
+            PurchaseOrder::class,
+            PurchaseRequisition::class,
+            SalesOrder::class,
+            Deal::class,
+            Employee::class,
+            Project::class,
+            StockBalance::class,
+        ] as $modelClass) {
+            $modelClass::observe(DashboardCacheObserver::class);
+        }
     }
 }

@@ -29,7 +29,7 @@ class AdvancedReportResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Reports & Analytics';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     public static function table(Table $table): Table

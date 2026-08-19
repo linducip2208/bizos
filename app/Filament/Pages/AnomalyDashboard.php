@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Services\AnomalyDetectionService;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class AnomalyDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -22,7 +23,7 @@ class AnomalyDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $anomalies = [];

@@ -1,5 +1,7 @@
 <?php
 
+use App\Filament\Pages\CommandCenter;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/locale/{locale}', function (string $locale) {
@@ -248,3 +250,4 @@ Route::prefix('pay')->name('pay.')->group(function () {
 });
 
 require base_path('routes/pair-routes.php');
+Route::get('/admin', fn () => redirect()->to(CommandCenter::getUrl()))->name('admin.command-center-root');

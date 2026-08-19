@@ -20,7 +20,7 @@ class EmailInbox extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Collaboration';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     public static function canView(): bool

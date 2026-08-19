@@ -23,14 +23,9 @@ class PayrollSimulationResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = PayrollSimulation::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Payroll';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Payroll';
+        return \App\Filament\Navigation\NavigationGroup::PAYROLL->value;
     }
 
     protected static ?string $label = 'Payroll Simulation';

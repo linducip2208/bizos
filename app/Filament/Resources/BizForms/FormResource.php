@@ -30,14 +30,9 @@ class FormResource extends Resource
 
     protected static ?int $navigationSort = 703;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Tools';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Collaboration';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     public static function form(Schema $schema): Schema

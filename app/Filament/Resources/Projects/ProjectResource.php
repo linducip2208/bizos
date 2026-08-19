@@ -30,7 +30,7 @@ class ProjectResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Projects & Operations';
+        return \App\Filament\Navigation\NavigationGroup::PROJECTS->value;
     }
 
     protected static ?string $label = 'Projects';

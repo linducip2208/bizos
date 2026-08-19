@@ -200,7 +200,7 @@ class ViewClient360 extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'CRM';
+        return \App\Filament\Navigation\NavigationGroup::SALES->value;
     }
 
     protected function getViewData(): array

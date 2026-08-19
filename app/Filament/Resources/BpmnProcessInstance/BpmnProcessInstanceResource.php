@@ -34,7 +34,7 @@ class BpmnProcessInstanceResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Automation';
+        return \App\Filament\Navigation\NavigationGroup::AUTOMATION->value;
     }
 
     public static function form(Schema $schema): Schema

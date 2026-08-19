@@ -17,7 +17,7 @@ class VendorScorecard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Procurement';
+        return \App\Filament\Navigation\NavigationGroup::PROCUREMENT->value;
     }
 
     public array $scorecards = [];

@@ -1,0 +1,5 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><style>body{font-family:DejaVu Sans,sans-serif;color:#172033;font-size:12px}h1{font-size:22px;margin-bottom:4px}.meta{color:#64748b;margin-bottom:24px}.grid{width:100%;border-collapse:collapse}.grid td{width:33%;border:1px solid #dbe3ec;padding:14px;vertical-align:top}.label{color:#64748b;font-size:10px;text-transform:uppercase}.value{font-size:18px;font-weight:bold;margin-top:8px}</style></head><body>
+<h1>BizOS Dashboard Command Center</h1><div class="meta">Periode {{ $filter->dateFrom->format('d/m/Y') }}–{{ $filter->dateTo->format('d/m/Y') }} · Company #{{ $filter->companyId }}</div>
+@php $rows = $data['kpis'] ?? $data['cards'] ?? $data['signals'] ?? []; @endphp
+<table class="grid">@foreach(array_chunk($rows, 3) as $chunk)<tr>@foreach($chunk as $row)<td><div class="label">{{ $row['label'] ?? '-' }}</div><div class="value">{{ ($row['format'] ?? '') === 'currency' ? 'Rp '.number_format((float)($row['value'] ?? 0),0,',','.') : number_format((float)($row['value'] ?? 0),0,',','.') }}</div></td>@endforeach @for($i=count($chunk);$i<3;$i++)<td></td>@endfor</tr>@endforeach</table>
+</body></html>

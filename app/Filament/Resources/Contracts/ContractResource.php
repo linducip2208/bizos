@@ -31,7 +31,7 @@ class ContractResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Organization';
+        return \App\Filament\Navigation\NavigationGroup::ORGANIZATION->value;
     }
 
     public static function getPages(): array

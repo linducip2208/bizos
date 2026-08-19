@@ -9,11 +9,12 @@ use App\Models\ServiceContract;
 use App\Models\Employee;
 use App\Services\FieldServiceService;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class FieldServiceDashboard extends Page
 {
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-bar';

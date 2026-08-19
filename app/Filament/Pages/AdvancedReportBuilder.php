@@ -34,7 +34,7 @@ class AdvancedReportBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public function mount(): void

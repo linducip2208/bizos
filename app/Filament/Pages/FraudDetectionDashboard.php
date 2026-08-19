@@ -9,6 +9,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class FraudDetectionDashboard extends Page implements HasForms
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -28,7 +29,7 @@ class FraudDetectionDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public ?array $data = [];

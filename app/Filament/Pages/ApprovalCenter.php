@@ -26,7 +26,7 @@ class ApprovalCenter extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Automation';
+        return \App\Filament\Navigation\NavigationGroup::AUTOMATION->value;
     }
 
     public static function getNavigationBadge(): ?string

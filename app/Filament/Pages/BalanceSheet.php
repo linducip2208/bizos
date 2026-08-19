@@ -18,7 +18,7 @@ class BalanceSheet extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Reports & Analytics';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     public string $asOfDate;

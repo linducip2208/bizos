@@ -24,7 +24,7 @@ class WaBlastLogResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Marketing';
+        return \App\Filament\Navigation\NavigationGroup::SALES->value;
     }
 
     protected static ?string $label = 'WhatsApp Blast Logs';

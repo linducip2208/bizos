@@ -22,14 +22,9 @@ class ThrConfigResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = ThrConfig::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Payroll';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Payroll';
+        return \App\Filament\Navigation\NavigationGroup::PAYROLL->value;
     }
 
     protected static ?string $label = 'THR Config';

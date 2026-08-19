@@ -23,7 +23,7 @@ class DeliveryOrderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Fleet & Field Service';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Delivery Orders';

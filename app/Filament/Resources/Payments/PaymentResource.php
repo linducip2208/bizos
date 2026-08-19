@@ -23,7 +23,7 @@ class PaymentResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Finance & Accounting';
+        return \App\Filament\Navigation\NavigationGroup::FINANCE->value;
     }
 
     protected static ?string $label = 'Payments';

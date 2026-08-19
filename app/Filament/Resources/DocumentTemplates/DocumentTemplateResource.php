@@ -30,7 +30,7 @@ class DocumentTemplateResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public static function getPages(): array

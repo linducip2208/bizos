@@ -18,12 +18,13 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class FeedbackReviewerResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
     use HasPermissionAccess;
     protected static ?string $model = FeedbackReviewer::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Human Capital';
+        return \App\Filament\Navigation\NavigationGroup::HUMAN_CAPITAL->value;
     }
 
     protected static ?string $label = 'Feedback Reviewers';

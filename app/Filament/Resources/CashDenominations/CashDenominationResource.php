@@ -23,7 +23,7 @@ class CashDenominationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'POS & Retail';
+        return \App\Filament\Navigation\NavigationGroup::COMMERCE->value;
     }
 
     protected static ?string $label = 'Cash Denominations';

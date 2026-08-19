@@ -32,7 +32,7 @@ class ReportScheduleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Reports & Analytics';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     public static function form(Schema $schema): Schema

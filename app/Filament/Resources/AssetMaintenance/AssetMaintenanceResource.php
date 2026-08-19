@@ -22,14 +22,9 @@ class AssetMaintenanceResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = AssetMaintenance::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Maintenance';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Maintenance';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Asset Maintenance';

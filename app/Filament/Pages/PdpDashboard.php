@@ -8,6 +8,7 @@ use App\Models\DpiaAssessment;
 use App\Models\DataErasureLog;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class PdpDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -33,7 +34,7 @@ class PdpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public function mount(): void

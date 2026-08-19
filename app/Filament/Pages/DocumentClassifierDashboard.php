@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Storage;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class DocumentClassifierDashboard extends Page implements HasForms
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -31,7 +32,7 @@ class DocumentClassifierDashboard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public ?array $data = [];

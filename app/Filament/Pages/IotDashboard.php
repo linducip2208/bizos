@@ -8,6 +8,7 @@ use App\Models\EnergyMeter;
 use App\Services\IotService;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class IotDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -25,7 +26,7 @@ class IotDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $devices = [];

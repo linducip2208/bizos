@@ -32,7 +32,7 @@ class ApiKeyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Integrations';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public static function form(Schema $schema): Schema

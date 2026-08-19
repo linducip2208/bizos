@@ -23,7 +23,7 @@ class SubscriptionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Billing & Licensing';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     protected static ?string $label = 'Subscriptions';

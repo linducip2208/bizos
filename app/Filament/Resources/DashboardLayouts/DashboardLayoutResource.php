@@ -35,7 +35,7 @@ class DashboardLayoutResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public static function form(Schema $schema): Schema

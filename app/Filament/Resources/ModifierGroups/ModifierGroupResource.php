@@ -33,7 +33,7 @@ class ModifierGroupResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Inventory & Warehouse';
+        return \App\Filament\Navigation\NavigationGroup::INVENTORY->value;
     }
 
     public static function form(Schema $schema): Schema

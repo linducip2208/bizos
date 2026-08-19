@@ -23,7 +23,7 @@ class DataImportWizard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public int $step = 1;

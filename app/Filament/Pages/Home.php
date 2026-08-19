@@ -11,6 +11,7 @@ use Filament\Pages\Page;
 
 class Home extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
 
     protected static ?int $navigationSort = 0;
@@ -29,7 +30,7 @@ class Home extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public function mount(): void

@@ -24,7 +24,7 @@ class MeetingMinuteResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Collaboration';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     protected static ?string $label = 'Meeting Minutes';

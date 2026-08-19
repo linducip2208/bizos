@@ -24,7 +24,7 @@ class CourseLessonResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Learning';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     protected static ?string $label = 'Course Lessons';

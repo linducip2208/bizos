@@ -25,7 +25,7 @@ class ClientResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Sales & CRM';
+        return \App\Filament\Navigation\NavigationGroup::SALES->value;
     }
 
     protected static ?string $label = 'Clients';

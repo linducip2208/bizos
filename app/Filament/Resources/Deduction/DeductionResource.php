@@ -26,14 +26,9 @@ class DeductionResource extends Resource
 
     protected static ?string $model = Deduction::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Payroll';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Payroll';
+        return \App\Filament\Navigation\NavigationGroup::PAYROLL->value;
     }
 
     protected static ?string $label = 'Deductions';

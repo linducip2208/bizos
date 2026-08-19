@@ -21,7 +21,7 @@ class VehicleFuelLogResource extends Resource
 
     protected static ?string $model = VehicleFuelLog::class;
 
-    public static function getNavigationGroup(): string|null { return 'Fleet & Field Service'; }
+    public static function getNavigationGroup(): string|null { return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value; }
 
     protected static ?string $label = 'Log BBM';
 

@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class MrpDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -26,7 +27,7 @@ class MrpDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $exceptions = [];

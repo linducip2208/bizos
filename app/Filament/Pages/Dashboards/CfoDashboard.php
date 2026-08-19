@@ -10,6 +10,7 @@ use App\Models\Payment;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class CfoDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -27,7 +28,7 @@ class CfoDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public float $revenueThisMonth = 0;

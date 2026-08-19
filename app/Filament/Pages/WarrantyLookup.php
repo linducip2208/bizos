@@ -24,7 +24,7 @@ class WarrantyLookup extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Support & Service';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     public function search(): void

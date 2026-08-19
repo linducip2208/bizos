@@ -35,7 +35,7 @@ class BankReconciliationWizard extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Finance & Accounting';
+        return \App\Filament\Navigation\NavigationGroup::FINANCE->value;
     }
 
     public ?array $data = [];

@@ -21,7 +21,7 @@ class KitchenDisplay extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'POS & Retail';
+        return \App\Filament\Navigation\NavigationGroup::COMMERCE->value;
     }
 
     public function getMaxContentWidth(): Width|string|null

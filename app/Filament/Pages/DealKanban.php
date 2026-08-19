@@ -24,7 +24,7 @@ class DealKanban extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Sales & CRM';
+        return \App\Filament\Navigation\NavigationGroup::SALES->value;
     }
 
     public function mount(): void

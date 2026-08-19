@@ -23,7 +23,7 @@ class EsgReportGenerator extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Compliance & Risk';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     public function mount(): void

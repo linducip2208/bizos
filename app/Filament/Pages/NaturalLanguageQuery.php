@@ -25,7 +25,7 @@ class NaturalLanguageQuery extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'AI & Intelligence';
+        return \App\Filament\Navigation\NavigationGroup::AUTOMATION->value;
     }
 
     public function mount(): void

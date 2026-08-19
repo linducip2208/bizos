@@ -39,7 +39,7 @@ class MobileSettings extends Page implements HasTable
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     protected string $view = 'filament.pages.mobile-settings';

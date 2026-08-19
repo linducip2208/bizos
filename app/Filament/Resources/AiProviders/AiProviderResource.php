@@ -31,7 +31,7 @@ class AiProviderResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'AI & Intelligence';
+        return \App\Filament\Navigation\NavigationGroup::AUTOMATION->value;
     }
 
     public static function form(Schema $schema): Schema

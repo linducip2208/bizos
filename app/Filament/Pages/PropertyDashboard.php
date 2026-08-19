@@ -8,6 +8,7 @@ use App\Models\ServiceChargeInvoice;
 use App\Services\PropertyService;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class PropertyDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -21,7 +22,7 @@ class PropertyDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $occupancyRate = [];

@@ -23,7 +23,7 @@ class ProjectSiteInventoryResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Manufacturing';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Inventaris Site';

@@ -27,7 +27,7 @@ class BarcodeLabelPrinter extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Inventory & Warehouse';
+        return \App\Filament\Navigation\NavigationGroup::INVENTORY->value;
     }
 
     public ?array $data = [];

@@ -19,17 +19,13 @@ use Filament\Tables\Table;
 use App\Filament\Concerns\HasPermissionAccess;
 class JournalEntryResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
     use HasPermissionAccess;
     protected static ?string $model = JournalEntry::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Finance & Accounting';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Finance & Accounting';
+        return \App\Filament\Navigation\NavigationGroup::FINANCE->value;
     }
 
     protected static ?string $label = 'Journal Entries';

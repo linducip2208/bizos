@@ -29,7 +29,7 @@ class ProjectSprints extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Projects & Operations';
+        return \App\Filament\Navigation\NavigationGroup::PROJECTS->value;
     }
 
     public function mount(): void

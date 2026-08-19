@@ -22,14 +22,9 @@ class CoaCategoryResource extends Resource
     use HasPermissionAccess;
     protected static ?string $model = CoaCategory::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Finance & Accounting';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Finance & Accounting';
+        return \App\Filament\Navigation\NavigationGroup::FINANCE->value;
     }
 
     protected static ?string $label = 'COA Categories';

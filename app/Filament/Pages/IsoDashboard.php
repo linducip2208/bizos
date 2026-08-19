@@ -8,6 +8,7 @@ use App\Models\IsoAudit;
 use App\Models\IsoPolicy;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class IsoDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -34,7 +35,7 @@ class IsoDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public function mount(): void

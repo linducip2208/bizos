@@ -23,7 +23,7 @@ class ProductVariantResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Inventory & Warehouse';
+        return \App\Filament\Navigation\NavigationGroup::INVENTORY->value;
     }
 
     protected static ?string $label = 'Product Variants';

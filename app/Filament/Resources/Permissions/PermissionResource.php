@@ -30,14 +30,9 @@ class PermissionResource extends Resource
 
     protected static ?int $navigationSort = 1002;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'System';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'System';
+        return \App\Filament\Navigation\NavigationGroup::SYSTEM->value;
     }
 
     public static function form(Schema $schema): Schema

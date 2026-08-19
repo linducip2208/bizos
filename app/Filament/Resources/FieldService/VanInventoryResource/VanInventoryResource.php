@@ -22,7 +22,7 @@ class VanInventoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Industry';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'Van Inventories';

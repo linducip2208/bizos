@@ -21,13 +21,20 @@ class DashboardBuilder extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $dashboardLayout = [];
     public array $widgets = [];
     public array $widgetData = [];
     public array $availableTemplates = [];
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+
+        return $user?->hasPermission('dashboard') || $user?->hasPermission('settings.manage');
+    }
 
     public function mount(): void
     {
@@ -72,7 +79,10 @@ class DashboardBuilder extends Page
             $config = $widget['config'] ?? [];
 
             if (!empty($config['report_template_id'])) {
-                $template = ReportTemplate::find($config['report_template_id']);
+                $template = ReportTemplate::query()
+                    ->whereKey($config['report_template_id'])
+                    ->where(fn ($query) => $query->where('is_public', true)->orWhere('company_id', auth()->user()->company_id))
+                    ->first();
                 if ($template) {
                     try {
                         $params = $config['params'] ?? [];
@@ -189,6 +199,20 @@ class DashboardBuilder extends Page
             ->map(fn($w) => $w->toArray())->toArray();
 
         $this->loadWidgetData();
+    }
+
+    public function togglePin(int $widgetId): void
+    {
+        $widget = DashboardWidget::query()->where('user_id', auth()->id())->findOrFail($widgetId);
+        $widget->update(['is_pinned' => ! $widget->is_pinned]);
+        $this->mount();
+    }
+
+    public function resetToRoleDefault(): void
+    {
+        app(DashboardBuilderService::class)->resetToRoleDefault(auth()->id());
+        $this->mount();
+        $this->dispatch('notify', type: 'success', message: 'Layout dikembalikan ke default role.');
     }
 
     public function saveLayout(): void

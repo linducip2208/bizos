@@ -23,7 +23,7 @@ class EmploymentTypeResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Human Capital';
+        return \App\Filament\Navigation\NavigationGroup::HUMAN_CAPITAL->value;
     }
 
     protected static ?string $label = 'Employment Types';

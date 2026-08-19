@@ -17,13 +17,14 @@ use Filament\Tables\Table;
 
 class RabItemResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
     use HasPermissionAccess;
 
     protected static ?string $model = RabItem::class;
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Industry';
+        return \App\Filament\Navigation\NavigationGroup::OPERATIONS->value;
     }
 
     protected static ?string $label = 'RAB Items';

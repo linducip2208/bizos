@@ -148,6 +148,6 @@ class ViewProjectGantt extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Project';
+        return \App\Filament\Navigation\NavigationGroup::PROJECTS->value;
     }
 }

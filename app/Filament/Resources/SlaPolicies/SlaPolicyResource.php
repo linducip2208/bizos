@@ -23,7 +23,7 @@ class SlaPolicyResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Support & Service';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     protected static ?string $label = 'SLA Policies';

@@ -23,7 +23,7 @@ class AiConversationResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'AI & Intelligence';
+        return \App\Filament\Navigation\NavigationGroup::AUTOMATION->value;
     }
 
     protected static ?string $label = 'AI Conversations';

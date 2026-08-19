@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Navigation\NavigationGroup as NavigationGroupDefinition;
+use App\Filament\Pages\CommandCenter;
+use App\Http\Middleware\RedirectLegacyDashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -42,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarWidth('15.5rem')
             ->collapsedSidebarWidth('4rem')
             ->topbar(true)
+            ->homeUrl(fn (): string => CommandCenter::getUrl())
             ->globalSearch(true)
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
@@ -72,107 +76,16 @@ class AdminPanelProvider extends PanelProvider
                 \App\Http\Middleware\TrackRecentlyViewed::class,
                 \App\Http\Middleware\ThemeMiddleware::class,
             ])
-            ->navigationGroups([
-                // ── Dashboard ──
-                NavigationGroup::make('Dashboard')
-                    ->icon(Heroicon::OutlinedHome)
-                    ->collapsed(false),
-
-                // ── Core ERP ──
-                NavigationGroup::make('Organization')
-                    ->icon(Heroicon::OutlinedBuildingOffice2)
-                    ->collapsed(false),
-                NavigationGroup::make('Human Capital')
-                    ->icon(Heroicon::OutlinedUsers)
-                    ->collapsed(false),
-                NavigationGroup::make('Payroll')
-                    ->icon(Heroicon::OutlinedBanknotes)
-                    ->collapsed(false),
-                NavigationGroup::make('Finance & Accounting')
-                    ->icon(Heroicon::OutlinedCalculator)
-                    ->collapsed(false),
-                NavigationGroup::make('Sales & CRM')
-                    ->icon(Heroicon::OutlinedChartBar)
-                    ->collapsed(false),
-                NavigationGroup::make('Procurement')
-                    ->icon(Heroicon::OutlinedShoppingCart)
-                    ->collapsed(true),
-                NavigationGroup::make('Inventory & Warehouse')
-                    ->icon(Heroicon::OutlinedCube)
-                    ->collapsed(false),
-                NavigationGroup::make('POS & Retail')
-                    ->icon(Heroicon::OutlinedShoppingBag)
-                    ->collapsed(true),
-                NavigationGroup::make('Projects & Operations')
-                    ->icon(Heroicon::OutlinedClipboardDocumentList)
-                    ->collapsed(true),
-
-                // ── Operations ──
-                NavigationGroup::make('Fleet & Field Service')
-                    ->icon(Heroicon::OutlinedTruck)
-                    ->collapsed(true),
-                NavigationGroup::make('Manufacturing')
-                    ->icon(Heroicon::OutlinedWrenchScrewdriver)
-                    ->collapsed(true),
-                NavigationGroup::make('Maintenance')
-                    ->icon(Heroicon::OutlinedWrench)
-                    ->collapsed(true),
-                NavigationGroup::make('Quality')
-                    ->icon(Heroicon::OutlinedCheckBadge)
-                    ->collapsed(true),
-
-                // ── Engagement ──
-                NavigationGroup::make('Marketing')
-                    ->icon(Heroicon::OutlinedMegaphone)
-                    ->collapsed(true),
-                NavigationGroup::make('Collaboration')
-                    ->icon(Heroicon::OutlinedChatBubbleLeftRight)
-                    ->collapsed(true),
-                NavigationGroup::make('Learning')
-                    ->icon(Heroicon::OutlinedAcademicCap)
-                    ->collapsed(true),
-                NavigationGroup::make('Support & Service')
-                    ->icon(Heroicon::OutlinedTicket)
-                    ->collapsed(true),
-
-                // ── Intelligence ──
-                NavigationGroup::make('AI & Intelligence')
-                    ->icon(Heroicon::OutlinedSparkles)
-                    ->collapsed(true),
-                NavigationGroup::make('Automation')
-                    ->icon(Heroicon::OutlinedBolt)
-                    ->collapsed(true),
-                NavigationGroup::make('Reports & Analytics')
-                    ->icon(Heroicon::OutlinedChartPie)
-                    ->collapsed(true),
-
-                // ── Platform ──
-                NavigationGroup::make('Documents & Contracts')
-                    ->icon(Heroicon::OutlinedDocumentText)
-                    ->collapsed(true),
-                NavigationGroup::make('Compliance & Risk')
-                    ->icon(Heroicon::OutlinedShieldCheck)
-                    ->collapsed(true),
-                NavigationGroup::make('Billing & Licensing')
-                    ->icon(Heroicon::OutlinedKey)
-                    ->collapsed(true),
-                NavigationGroup::make('Integrations')
-                    ->icon(Heroicon::OutlinedLink)
-                    ->collapsed(true),
-                NavigationGroup::make('System')
-                    ->icon(Heroicon::OutlinedCog6Tooth)
-                    ->collapsed(true),
-
-                // ── Industry ──
-                NavigationGroup::make('Industry')
-                    ->icon(Heroicon::OutlinedBuildingOffice2)
-                    ->collapsed(true),
-
-                // ── Tools ──
-                NavigationGroup::make('Tools')
-                    ->icon(Heroicon::OutlinedWrench)
-                    ->collapsed(true),
-            ])
+            ->navigationGroups(array_map(
+                fn (NavigationGroupDefinition $group): \Filament\Navigation\NavigationGroup => \Filament\Navigation\NavigationGroup::make($group->value)
+                    ->icon($group->icon())
+                    ->collapsed(! in_array($group, [
+                        NavigationGroupDefinition::DASHBOARD,
+                        NavigationGroupDefinition::ORGANIZATION,
+                        NavigationGroupDefinition::HUMAN_CAPITAL,
+                    ], true)),
+                NavigationGroupDefinition::ordered(),
+            ))
             ->renderHook(
                 'panels::topbar.start',
                 fn (): string => view('filament.hooks.app-switcher-trigger')->render(),
@@ -191,6 +104,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->authMiddleware([
                 Authenticate::class,
+                RedirectLegacyDashboard::class,
             ]);
     }
 }

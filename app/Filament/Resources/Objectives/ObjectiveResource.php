@@ -24,14 +24,9 @@ class ObjectiveResource extends Resource
 
     protected static ?string $slug = 'objectives';
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Human Capital';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Human Capital';
+        return \App\Filament\Navigation\NavigationGroup::HUMAN_CAPITAL->value;
     }
 
     protected static ?string $label = 'Objectives (OKR)';

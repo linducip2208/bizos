@@ -8,6 +8,7 @@ use App\Models\RabItem;
 use App\Services\ConstructionService;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class RabDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -21,7 +22,7 @@ class RabDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $projects = [];

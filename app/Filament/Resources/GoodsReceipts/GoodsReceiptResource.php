@@ -24,7 +24,7 @@ class GoodsReceiptResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Procurement';
+        return \App\Filament\Navigation\NavigationGroup::PROCUREMENT->value;
     }
 
     protected static ?string $label = 'Goods Receipts';

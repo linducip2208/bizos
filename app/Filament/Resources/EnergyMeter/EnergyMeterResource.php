@@ -22,14 +22,9 @@ class EnergyMeterResource extends Resource
 
     protected static ?string $model = EnergyMeter::class;
 
-    public static function getSlug(?Panel $panel = null): string
-    {
-        return 'Compliance & Risk';
-    }
-
     public static function getNavigationGroup(): string|null
     {
-        return 'Compliance & Risk';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     protected static ?string $label = 'Energy Meters';

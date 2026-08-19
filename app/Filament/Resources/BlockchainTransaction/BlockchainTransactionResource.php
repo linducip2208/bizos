@@ -31,7 +31,7 @@ class BlockchainTransactionResource extends Resource
 
     public static function getNavigationGroup(): string|null
     {
-        return 'Compliance & Risk';
+        return \App\Filament\Navigation\NavigationGroup::REPORTS->value;
     }
 
     public static function form(Schema $schema): Schema

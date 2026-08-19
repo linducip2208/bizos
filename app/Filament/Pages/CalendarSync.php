@@ -41,7 +41,7 @@ class CalendarSync extends Page implements HasForms
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Collaboration';
+        return \App\Filament\Navigation\NavigationGroup::COLLABORATION->value;
     }
 
     public function mount(): void

@@ -10,6 +10,7 @@ use App\Services\LeadScoringService;
 use Carbon\Carbon;
 use Filament\Pages\Page;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class MarketingDashboard extends Page
 {
     protected static bool $shouldRegisterNavigation = false;
@@ -23,7 +24,7 @@ class MarketingDashboard extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 
     public array $campaignStats = [];

@@ -18,12 +18,13 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 
+/** @deprecated Use CommandCenter with the matching tab; the legacy URL is preserved by redirect middleware. */
 class TenantDashboard extends Page implements HasTable
 {
     use InteractsWithTable;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
-    protected static string|\UnitEnum|null $navigationGroup = 'System';
+
     protected static ?int $navigationSort = 905;
     protected static ?string $title = 'Dashboard Tenant';
     protected static ?string $navigationLabel = 'Dashboard Tenant';
@@ -237,6 +238,6 @@ class TenantDashboard extends Page implements HasTable
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Dashboard';
+        return \App\Filament\Navigation\NavigationGroup::DASHBOARD->value;
     }
 }
